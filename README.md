@@ -1,4 +1,6 @@
-"Web-Development" 
+# Project : NEWSPAPER
+# @Author: Trần Trung Tín, Nguyễn Nhật An, Nguyễn Mai Huy Hoàng, Mai Đức Kiên
+
 # 1. Setup library
 **Create npm project**
 ```
