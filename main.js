@@ -25,6 +25,12 @@ app.get('/', (req,res) => {
     res.render('homepage');
 })
 
+app.get('/admin',(req,res) => {
+    res.render('admin', {
+        layout: false,
+    });
+})
+
 
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:3000');
