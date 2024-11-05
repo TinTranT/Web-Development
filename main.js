@@ -35,9 +35,9 @@ app.get('/admin',(req,res) => {
             { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
         ],
         userDropdownButtons: [
-            { label: 'Subscriber', url: '/admin/subscriber', icon: 'bi bi-person-check' },
-            { label: 'Writer', url: '/admin/writer', icon: 'bi bi-journal-text' },
-            { label: 'Editor', url: '/admin/editor', icon: 'bi bi-pencil' }
+            { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check' },
+            { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' },
+            { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil' }
         ]
     });
 })
@@ -46,8 +46,8 @@ app.get('/editor',(req,res) => {
     res.render('editor', {
         layout: false,
         Buttons: [
-            { label: 'your info', url: '/admin/dashboard', icon: 'bi bi-file-earmark' },
-            { label: 'Draft Article', url: '/admin/users', icon: 'bi bi-archive' },
+            { label: 'your info', url: '/editor/info', icon: 'bi bi-file-earmark' },
+            { label: 'Draft Article', url: '/editor/draft', icon: 'bi bi-archive' },
         ]
     });
 })
