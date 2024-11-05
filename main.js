@@ -15,7 +15,7 @@ app.set('views', './views');
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Serve static files from the "public" directory
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 app.get('/test', function(req,res){ 
     res.sendFile(__dirname+'/test.html');
