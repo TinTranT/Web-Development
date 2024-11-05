@@ -10,10 +10,21 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
+
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Serve static files from the "public" directory
+app.use(express.static(__dirname + '/public'));
+
 app.get('/test', function(req,res){ 
     res.sendFile(__dirname+'/test.html');
 })
+
+app.get('/', (req,res) => {
+    res.render('homepage');
+})
+
 
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:3000');
