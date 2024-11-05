@@ -6,6 +6,7 @@ const app = express();
 
 app.engine('hbs', engine({
     extname: 'hbs',
+    partialsDir: './views/partials'
 }));
 app.set('view engine', 'hbs');
 app.set('views', './views');
@@ -28,6 +29,26 @@ app.get('/', (req,res) => {
 app.get('/admin',(req,res) => {
     res.render('admin', {
         layout: false,
+        Buttons: [
+            { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
+            { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
+            { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
+        ],
+        userDropdownButtons: [
+            { label: 'Subscriber', url: '/admin/subscriber', icon: 'bi bi-person-check' },
+            { label: 'Writer', url: '/admin/writer', icon: 'bi bi-journal-text' },
+            { label: 'Editor', url: '/admin/editor', icon: 'bi bi-pencil' }
+        ]
+    });
+})
+
+app.get('/editor',(req,res) => {
+    res.render('editor', {
+        layout: false,
+        Buttons: [
+            { label: 'your info', url: '/admin/dashboard', icon: 'bi bi-file-earmark' },
+            { label: 'Draft Article', url: '/admin/users', icon: 'bi bi-archive' },
+        ]
     });
 })
 
