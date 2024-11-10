@@ -17,169 +17,177 @@
 
 <body>
     <div class="container">
-
         {{!-- Navbar --}}
 
         <nav class="navbar navbar-expand-lg navbar-light top-navbar">
-            <img src="imgs/newspaper.png" alt="newspaper" width="100px" height="100px">
+            <img src="/imgs/newspaper.png" alt="newspaper" width="100px" height="100px">
             <a class="logo navbar-brand" href="#"><strong style="color: #393939;">Insight</strong> News</a>
         </nav>
 
         <nav class="navbar navbar-expand-lg navbar-light bottom-navbar">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler button-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse div-nav" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+
+                    <li class="nav-item active big-screen shift-right">
+                        <a class="nav-link text-white bold-content" href="#">Home <span
+                                class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right " href="#" role="button">
                             International
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">America</a>
-                            <a class="dropdown-item" href="#">Asia</a>
+                        <div class="dropdown-menu dropdown-bigscreen">
+                            <a class="dropdown-item bold-content" href="#">America</a>
+                            <a class="dropdown-item bold-content" href="#">Asia</a>
                             {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Africa</a>
-                            <a class="dropdown-item" href="#">Europe</a>
-                            <a class="dropdown-item" href="#">Australia</a>
+                            <a class="dropdown-item bold-content" href="#">Africa</a>
+                            <a class="dropdown-item bold-content" href="#">Europe</a>
+                            <a class="dropdown-item bold-content" href="#">Australia</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
                             Sports
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Football</a>
-                            <a class="dropdown-item" href="#">Badminton</a>
+                        <div class="dropdown-menu dropdown-bigscreen">
+                            <a class="dropdown-item bold-content" href="#">Football</a>
+                            <a class="dropdown-item bold-content" href="#">Badminton</a>
                             {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Cycling</a>
-                            <a class="dropdown-item" href="#">Tennis</a>
-                            <a class="dropdown-item" href="#">Athletics</a>
+                            <a class="dropdown-item bold-content" href="#">Cycling</a>
+                            <a class="dropdown-item bold-content" href="#">Tennis</a>
+                            <a class="dropdown-item bold-content" href="#">Athletics</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right " href="#" role="button">
                             Education
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Admission</a>
-                            <a class="dropdown-item" href="#">Study Abroad</a>
+                        <div class="dropdown-menu dropdown-bigscreen">
+                            <a class="dropdown-item bold-content" href="#">Admission</a>
+                            <a class="dropdown-item bold-content" href="#">Study Abroad</a>
                             {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item bold-content" href="#">English</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
                             Business
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Stock market</a>
-                            <a class="dropdown-item" href="#">Company</a>
+                        <div class="dropdown-menu dropdown-bigscreen">
+                            <a class="dropdown-item bold-content" href="#">Stock market</a>
+                            <a class="dropdown-item bold-content" href="#">Company</a>
                             {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">NetZero</a>
+                            <a class="dropdown-item bold-content" href="#">NetZero</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
                             Entertainment
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Movies</a>
-                            <a class="dropdown-item" href="#">Television</a>
+                        <div class="dropdown-menu dropdown-bigscreen">
+                            <a class="dropdown-item bold-content" href="#">Movies</a>
+                            <a class="dropdown-item bold-content" href="#">Television</a>
                             {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Celebrity</a>
+                            <a class="dropdown-item bold-content" href="#">Celebrity</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Technology
+                    <li class="nav-item dropdown change-nav-item-big nav-item-father-six big-screen">
+                        <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
+                            More
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Innovate</a>
-                            <a class="dropdown-item" href="#">Innovaties cities</a>
-                            {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Work Transformed</a>
-                            <a class="dropdown-item" href="#">Mission: ahead</a>
+                        <div class="dropdown-menu son-menu-father-six">
+
+
+                            {{!-- <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                role="button">Technology</a>
+                            <div class="dropdown-menu son-menu-six">
+                                <a class="dropdown-item bold-content" href="#">Innovate</a>
+                                <a class="dropdown-item bold-content" href="#">Innovaties cities</a>
+                                <a class="dropdown-item bold-content" href="#">Work Transformed</a>
+                                <a class="dropdown-item bold-content" href="#">Mission: ahead</a>
+                            </div> --}}
+                            <div class="nav-item dropright son-son-menu-father-six">
+                                <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                    role="button">Technology</a>
+                                <div class="dropdown-menu son-menu-six">
+                                    <a class="dropdown-item bold-content" href="#">Innovate</a>
+                                    <a class="dropdown-item bold-content" href="#">Innovaties cities</a>
+                                    <a class="dropdown-item bold-content" href="#">Work Transformed</a>
+                                    <a class="dropdown-item bold-content" href="#">Mission: ahead</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropright son-son-menu-father-six">
+                                <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                    role="button">
+                                    Health
+                                </a>
+                                <div class="dropdown-menu son-menu-six">
+                                    <a class="dropdown-item bold-content" href="#">Food</a>
+                                    <a class="dropdown-item bold-content" href="#">Fitness</a>
+                                    {{!-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item bold-content" href="#">Sleep</a>
+                                    <a class="dropdown-item bold-content" href="#">Mindfulness</a>
+                                    <a class="dropdown-item bold-content" href="#">Relationship</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropright son-son-menu-father-six">
+                                <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                    role="button">
+                                    Laws
+                                </a>
+                                <div class="dropdown-menu son-menu-six">
+                                    <a class="dropdown-item bold-content" href="#">Case files</a>
+                                    <a class="dropdown-item bold-content" href="#">Consulting</a>
+                                    {{!-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item bold-content" href="#">Blog</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropright son-son-menu-father-six">
+                                <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                    role="button">
+                                    Lifestyle
+                                </a>
+                                <div class="dropdown-menu son-menu-six">
+                                    <a class="dropdown-item bold-content" href="#">Home</a>
+                                    <a class="dropdown-item bold-content" href="#">Life Lesson</a>
+                                    {{!-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item bold-content" href="#">Cooking</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropright son-son-menu-father-six">
+                                <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
+                                    role="button">
+                                    Travel
+                                </a>
+                                <div class="dropdown-menu son-menu-six">
+                                    <a class="dropdown-item bold-content" href="#">Destination</a>
+                                    <a class="dropdown-item bold-content" href="#">Cuisine</a>
+                                    {{!-- <div class="dropdown-divider"></div> --}}
+                                    <a class="dropdown-item bold-content" href="#">Footprints</a>
+                                    <a class="dropdown-item bold-content" href="#">Blog</a>
+                                </div>
+                            </div>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Health
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Food</a>
-                            <a class="dropdown-item" href="#">Fitness</a>
-                            {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Sleep</a>
-                            <a class="dropdown-item" href="#">Mindfulness</a>
-                            <a class="dropdown-item" href="#">Relationship</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Laws
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Case files</a>
-                            <a class="dropdown-item" href="#">Consulting</a>
-                            {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Blog</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Lifestyle
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Home</a>
-                            <a class="dropdown-item" href="#">Life Lesson</a>
-                            {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Cooking</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Travel
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Destination</a>
-                            <a class="dropdown-item" href="#">Cuisine</a>
-                            {{!-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="#">Footprints</a>
-                            <a class="dropdown-item" href="#">Blog</a>
-                        </div>
-                    </li>
+
                     {{!-- <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
                     </li> --}}
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
+            {{!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form> --}}
         </nav>
-
         {{{body}}}
-
-
         {{!-- Footer --}}
-        <!--footer starts from here-->
         <footer class="footer">
             <div class="container bottom_border">
                 <div class="row">
@@ -326,10 +334,9 @@
             </div>
             <div class="container">
                 <!--foote_bottom_ul_amrc ends here-->
-                <p class="text-center">Copyright @2017 | Designed With by <a href="#">Insight News</a></p>
+                <p class="text-center">Copyright @2024 | Designed by <a href="#">Insight News Team</a></p>
                 <!--social_footer_ul ends here-->
             </div>
-
         </footer>
     </div>
 
@@ -344,6 +351,80 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
+    <script>
+        function toggleDropdownAttributes() {
+            //console.log(1);
+            //const dropdownLink = document.getElementById("first");
+            const dropdownLinks = document.querySelectorAll(".nav-item .nav-link");
+            const preventdropdownitems = document.querySelectorAll(".nav-item .dropdown-menu");
+            const dropdownLinksLevel3 = document.querySelectorAll(".son-son-menu-father-six .son-menu-six");
+            const dropdownLinksfather3 = document.querySelectorAll(".son-son-menu-father-six .son-a-menu-father-six")
+
+            if (window.matchMedia("(max-width: 991px)").matches) {
+                const dropdowns = document.querySelectorAll(".son-son-menu-father-six")
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove("dropright");
+                    dropdown.classList.add("dropdown");
+                });
+                preventdropdownitems.forEach(preventdropdownitem => {
+                    preventdropdownitem.addEventListener("click", (event) => {
+                        event.stopPropagation();
+                    })
+                })
+            }
+            else {
+                dropdownLinks.forEach(link => {
+                    link.removeAttribute("data-toggle", "dropdown");
+                    link.removeAttribute("aria-expanded", "false");
+                    link.removeAttribute("aria-expanded", "true");
+                })
+                const elements = document.querySelectorAll('.show');
+                elements.forEach(element => { element.classList.remove('show'); });
+                const dropdowns = document.querySelectorAll(".son-son-menu-father-six")
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove("dropdown");
+                    dropdown.classList.add("dropright");
+                });
+            }
+
+
+
+            dropdownLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                    if (window.matchMedia("(max-width: 991px)").matches) {
+                        link.setAttribute("data-toggle", "dropdown");
+
+                        link.setAttribute("aria-expanded", "false");
+                    }
+                    else {
+                        link.removeAttribute("data-toggle", "dropdown");
+                        link.removeAttribute("aria-expanded", "false");
+                        link.removeAttribute("aria-expanded", "true");
+                        const elements = document.querySelectorAll('.show');
+                        elements.forEach(element => { element.classList.remove('show'); });
+                    }
+                });
+            });
+
+
+
+
+        }
+
+        // Kiểm tra khi tải trang và khi thay đổi kích thước cửa sổ
+        window.addEventListener("load", toggleDropdownAttributes);
+        window.addEventListener("resize", toggleDropdownAttributes);
+
+    </script>
 </body>
 
 </html>
+
+
+{{!-- if(window.matchMedia("(max-width: 991px)").matches)
+{
+dropdownLinks.forEach( link => {
+link.setAttribute("data-toggle", "dropdown");
+link.setAttribute("aria-expanded", "false");
+});
+} --}}
