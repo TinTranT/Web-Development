@@ -41,7 +41,7 @@ app.use(express.static('public'));
 
 app.get('/', (req,res) => {
     res.render('homepage', {
-        layout: 'admin',
+        layout: 'main',
         Buttons: [
             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
