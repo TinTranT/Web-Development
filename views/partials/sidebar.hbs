@@ -1,0 +1,78 @@
+<aside id="sidebar" class="{{#if expand}}expand{{/if}}">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="bi bi-grid-fill"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="#">INSIGHT NEWS</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        {{#each buttons}}
+        <a href="{{this.url}}" class="sidebar-link">
+            <i class="{{this.icon}}"></i>
+            <span>{{this.label}}</span>
+        </a>
+        {{/each}}
+
+        <!-- Dropdown for Users -->
+        {{#if userDropdownButtons}}
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-toggle="collapse" data-target="#auth"
+                aria-expanded="false" aria-controls="auth">
+                <i class="bi bi-person"></i>
+                <span>Users</span>
+            </a>
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                {{#each userDropdownButtons}}
+                <li class="sidebar-item">
+                    <a href="{{this.url}}" class="sidebar-link">
+                        <i class="{{this.icon}}"></i>
+                        {{this.label}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/if}}
+    </ul>
+    <div class="sidebar-footer">
+        <a href="#" class="sidebar-link">
+            <i class="lni lni-exit"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+{{!-- <script>
+    const expand = document.querySelector(".toggle-btn");
+
+    expand.addEventListener("click", function () {
+        document.querySelector("#sidebar").classList.toggle("expand");
+    });
+</script> --}}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.querySelector(".toggle-btn");
+        const sidebar = document.querySelector("#sidebar");
+
+        // Hàm kiểm tra kích thước màn hình và tự động thu hẹp sidebar nếu nhỏ hơn 768px
+        function checkScreenSize() {
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove("expand");
+            }
+        }
+
+        // Thêm sự kiện click cho nút toggle để mở rộng/thu hẹp sidebar
+        if (toggleButton && sidebar) {
+            toggleButton.addEventListener("click", function () {
+                sidebar.classList.toggle("expand");
+            });
+        }
+
+        // Kiểm tra kích thước màn hình khi tải trang và khi thay đổi kích thước
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+    });
+</script>
