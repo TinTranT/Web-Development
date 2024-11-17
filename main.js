@@ -5,6 +5,7 @@ import { engine } from 'express-handlebars';
 import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
+import newsRouter from './routes/news.route.js';
 const app = express();
 
 let check = false
@@ -39,7 +40,20 @@ app.use(express.static('public'));
 // })
 
 app.get('/', (req,res) => {
-    res.render('homepage');
+    res.render('homepage', {
+        layout: 'main',
+        Buttons: [
+            { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
+            { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
+            { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' },
+            { label: 'User', url:'/admin/user', icon: 'bi bi-person',id:'1'}
+        ],
+        DropdownButtons: [
+            { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check', id:'1'},
+            { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' ,id:'1'},
+            { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil',id:'1' }
+        ]
+    });
 })
 
 // app.get('/admin',(req,res) => {
@@ -87,6 +101,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/admin',adminRouter);
 app.use('/editor',editorRouter)
 app.use('/reporter',reporterRouter)
+app.use('/news',newsRouter)
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }

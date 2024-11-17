@@ -2,45 +2,45 @@
     max-width: 95%;
 }
 
-.navbar {
+.header .navbar {
     display: inline-block;
     width: 100%;
 
 }
 
-.navbar-light .navbar-brand.logo {
+.header .navbar-light .navbar-brand.logo {
     color: #F65050 !important;
 }
 
-.logo {
+.header .logo {
     /* color: #F65050; */
     color: var(--color-gray);
 }
 
-.bottom-navbar {
+.header .bottom-navbar {
     background-color: var(--color-blue);
 
 }
 
-.bottom-navbar li {
+.header .bottom-navbar li {
     /* color: white !important; */
     color: var(--color-blue) !important;
 }
 
 
-.nav-item {
+.header .nav-item {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.change-nav-item-big:hover {
+.header .change-nav-item-big:hover {
     background-color: coral;
     cursor: pointer;
 
 }
 
-.bold-content:hover {
+.header .bold-content:hover {
     font-weight: bold;
 }
 
@@ -66,88 +66,88 @@
     justify-content: space-between;
 } */
 @media screen and (max-width: 991px) {
-    .nav-item {
+    .header .nav-item {
         display: flex;
         justify-content: flex-start;
     }
 
-    .dropdown-bigscreen {
+    .header .dropdown-bigscreen {
         background-color: var(--color-blue);
         width: 100%;
         border: none;
         border-radius: 0;
     }
 
-    .nav-item-father {
+    .header .nav-item-father {
         display: inline-block;
     }
 
-    .dropdown-bigscreen .dropdown-item {
+    .header .dropdown-bigscreen .dropdown-item {
         color: white;
         background-color: var(--color-blue);
 
     }
 
-    .dropdown-bigscreen .dropdown-item:hover {
+    .header .dropdown-bigscreen .dropdown-item:hover {
         text-decoration: underline;
         font-weight: bold;
         background-color: initial;
     }
 
-    .bottom-navbar {
+    .header .bottom-navbar {
         padding: 0;
     }
 
-    .button-toggler {
+    .header .button-toggler {
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: 5px;
     }
 
-    .shift-right {
+    .header .shift-right {
         margin: 0 10px;
     }
 
-    .big-screen {
+    .header .big-screen {
         padding: 0;
     }
 
-    .nav-item-father-six {
+    .header .nav-item-father-six {
         display: inline-block;
     }
 
-    .son-menu-father-six {
+    .header .son-menu-father-six {
         background-color: var(--color-blue);
         border-radius: 0;
         border: none;
     }
 
-    .son-son-menu-father-six .son-a-menu-father-six {
+    .header .son-son-menu-father-six .son-a-menu-father-six {
         color: white !important;
         margin-left: 10px;
     }
 
-    .son-son-menu-father-six .son-a-menu-father-six:hover {
+    .header .son-son-menu-father-six .son-a-menu-father-six:hover {
         font-weight: bold;
     }
 
-    .son-son-menu-father-six:hover .son-menu-six {
+    .header .son-son-menu-father-six:hover .son-menu-six {
         display: block;
         background-color: var(--color-blue);
         border-radius: 0;
         border: none;
     }
 
-    .son-son-menu-father-six {
+    .header .son-son-menu-father-six {
 
         display: block;
     }
 
-    .son-menu-six .dropdown-item {
+    .header .son-menu-six .dropdown-item {
         color: white;
     }
 
-    .son-menu-six .dropdown-item:hover {
+    .header .son-menu-six .dropdown-item:hover {
         text-decoration: underline;
         cursor: pointer;
         font-weight: bold;
@@ -155,7 +155,7 @@
         background-color: initial;
     }
 
-    .son-menu-six .dropdown-item {
+    .header .son-menu-six .dropdown-item {
         background-color: var(--color-blue);
     }
 
@@ -176,47 +176,47 @@
 }
 
 @media screen and (min-width: 992px) {
-    .bottom-navbar {
+    .header .bottom-navbar {
         display: flex;
         justify-content: space-around;
         padding: 0
     }
 
-    .nav-item-father:hover .dropdown-menu {
+    .header .nav-item-father:hover .dropdown-menu {
         display: block;
     }
 
-    .dropdown-menu {
+    .header .dropdown-menu {
         background-color: var(--color-blue);
 
     }
 
-    .nav-item-father-six:hover .son-menu-father-six {
+    .header .nav-item-father-six:hover .son-menu-father-six {
         display: block;
     }
 
-    .son-son-menu-father-six:hover .son-menu-six {
+    .header .son-son-menu-father-six:hover .son-menu-six {
         display: block;
     }
 
-    .inline-text:hover {
+    .header .inline-text:hover {
         font-weight: bold;
     }
 
-    .inline-text {
+    .header .inline-text {
         color: white !important;
     }
 
-    .div-nav {
+    .header .div-nav {
         max-width: 720px;
     }
 
-    .dropdown-item {
+    .header .dropdown-item {
         color: white !important;
         background-color: var(--color-blue) !important;
     }
 
-    .dropdown-item:hover {
+    .header .dropdown-item:hover {
         text-decoration: underline;
         cursor: pointer;
         font-size: bold;
@@ -225,7 +225,7 @@
 
     }
 
-    .navbar-nav {
+    .header .navbar-nav {
         min-height: 76px;
     }
 
