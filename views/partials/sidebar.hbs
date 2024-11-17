@@ -8,7 +8,7 @@
         </div>
     </div>
     <ul class="sidebar-nav">
-        {{#each buttons}}
+        {{!-- {{#each buttons}}
         <a href="{{this.url}}" class="sidebar-link">
             <i class="{{this.icon}}"></i>
             <span>{{this.label}}</span>
@@ -34,7 +34,45 @@
                 {{/each}}
             </ul>
         </li>
-        {{/if}}
+        {{/if}} --}}
+        {{#each Buttons}}
+        {{setVar false}}
+        <li class="sidebar-item">
+            {{#each ../DropdownButtons}}
+                {{#if (isEqual ../this.id this.id)}}
+                    {{setVar true}}
+                {{/if}}
+            {{/each}}
+
+            {{#if (getVar)}}
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-toggle="collapse" data-target="#auth{{this.id}}"
+                aria-expanded="false" aria-controls="auth{{this.id}}">
+                <i class={{this.icon}}></i>
+                <span>{{this.label}}</span>
+            </a>
+            <ul id="auth{{this.id}}" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                {{#each ../DropdownButtons}}
+                {{#if (isEqual ../this.id this.id)}}
+                    <li class="sidebar-item">
+                        <a href="{{this.url}}" class="sidebar-link">
+                            <i class="{{this.icon}}"></i>
+                            {{this.label}}
+                        </a>
+                    </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+            {{else}}
+            <a href="{{this.url}}" class="sidebar-link">
+                <i class={{this.icon}}></i>
+                <span>{{this.label}}</span>
+            </a>
+            {{/if}}
+        </li>
+        
+        {{/each}}
+
+
     </ul>
     <div class="sidebar-footer">
         <a href="#" class="sidebar-link">
