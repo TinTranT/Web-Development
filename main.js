@@ -5,6 +5,7 @@ import { engine } from 'express-handlebars';
 import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
+import newsRouter from './routes/news.route.js';
 const app = express();
 
 let check = false
@@ -87,6 +88,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/admin',adminRouter);
 app.use('/editor',editorRouter)
 app.use('/reporter',reporterRouter)
+app.use('/news',newsRouter)
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }
