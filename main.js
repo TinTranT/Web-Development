@@ -34,9 +34,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
-app.get('/test', function(req,res){ 
-    res.sendFile(__dirname+'/test.html');
-})
+// app.get('/test', function(req,res){ 
+//     res.sendFile(__dirname+'/test.html');
+// })
 
 app.get('/', (req,res) => {
     res.render('homepage');
@@ -88,6 +88,6 @@ app.use('/admin',adminRouter);
 app.use('/editor',editorRouter)
 app.use('/reporter',reporterRouter)
 function serverStartedHandler() {
-    console.log('Server is listening on http://localhost:3000');
+    console.log('Server is listening on http://localhost:5555');
 }
-app.listen(3000, serverStartedHandler);
+app.listen(5555, serverStartedHandler);
