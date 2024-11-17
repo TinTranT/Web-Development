@@ -231,6 +231,12 @@
 
 }
 
+@media (max-width: 600px) {
+    .footer .bottom_border {
+        display: none;
+    }
+}
+
 .footer {
     background-color: rgb(28, 36, 49);
     color: #d1cfd9;
