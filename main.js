@@ -1,5 +1,5 @@
 import express from 'express';
-import {dirname} from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
 import reporterRouter from './routes/reporter.route.js';
@@ -12,7 +12,7 @@ let check = false
 app.engine('hbs', engine({
     extname: 'hbs',
     partialsDir: './views/partials',
-    helpers:{
+    helpers: {
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
@@ -20,7 +20,7 @@ app.engine('hbs', engine({
             check = value1;
             return '';
         },
-        getVar: function(){
+        getVar: function () {
             return check;
         }
     }
@@ -35,11 +35,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
+app.use('/static', express.static('static'));
+
 // app.get('/test', function(req,res){ 
 //     res.sendFile(__dirname+'/test.html');
 // })
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.render('homepage');
 })
 
@@ -85,10 +87,10 @@ app.get('/', (req,res) => {
 
 // })
 app.use(express.urlencoded({ extended: true }));
-app.use('/admin',adminRouter);
-app.use('/editor',editorRouter)
-app.use('/reporter',reporterRouter)
-app.use('/news',newsRouter)
+app.use('/admin', adminRouter);
+app.use('/editor', editorRouter)
+app.use('/reporter', reporterRouter)
+app.use('/news', newsRouter)
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }
