@@ -1,0 +1,160 @@
+<style>
+    .featurednews .content {
+        display: flex;
+        height: auto;
+    }
+
+    .featurednews .taba {
+        background-color: aquamarine;
+        width: 65%;
+        margin-right: 20px;
+    }
+
+
+
+
+    .featurednews .tabb {
+        width: calc(100% - 65% - 20px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .featurednews .tabb .card-img-overlay {
+        padding: 10px;
+    }
+
+    .featurednews .tabb .small-item .card-title {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    .featurednews .tabb .small-item .card-text {
+        font-size: 12px;
+    }
+
+    .featurednews .small-item {
+        background-color: hotpink;
+        margin-bottom: 10px;
+        height: 31%;
+    }
+
+    .featurednews .small-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .featurednews .card {
+        height: 100%;
+    }
+
+    .featurednews .card .card-img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .featurednews .card .card-img-overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .featurednews .card .badge {
+        width: 100px;
+        align-self: flex-start;
+    }
+
+    @media screen and (max-width: 960px) {
+        .featurednews .content {
+            display: block;
+        }
+
+        .featurednews .taba {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .featurednews .tabb {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featurednews .tabb .card-img-overlay {
+            padding: 10px;
+        }
+
+        .featurednews .tabb .small-item {
+            height: 200px;
+            width: 100%;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .featurednews .tabb .small-item:last-child {
+            margin-right: 0;
+        }
+    }
+    
+</style>
+
+
+<div class="featurednews my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="content">
+                <div class="taba">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="/imgs/cat-9169528_1920.jpg" alt="Card image">
+                        <div class="card-img-overlay">
+                            <span class="badge badge-primary mb-2">Business</span>
+                            <div class="item-title">
+                                <h4 class="card-title">After All Is Said And Done, More Is Done</h4>
+                                <p class="card-text">Craig Bator — 27 Dec 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabb">
+                    <div class="small-item">
+                        <div class="card bg-dark text-white">
+                            <img class="card-img" src="/imgs/dogs-9172481_1280.jpg" alt="Card image">
+                            <div class="card-img-overlay">
+                                <span class="badge badge-primary mb-2">Business</span>
+                                <div class="item-title">
+                                    <h4 class="card-title">After All Is Said And Done, More Is Done</h4>
+                                    <p class="card-text">Craig Bator — 27 Dec 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-item">
+                        <div class="card bg-dark text-white">
+                            <img class="card-img" src="/imgs/cat-9169528_1920.jpg" alt="Card image">
+                            <div class="card-img-overlay">
+                                <span class="badge badge-primary mb-2">Business</span>
+                                <div class="item-title">
+                                    <h4 class="card-title">After All Is Said And Done, More Is Done</h4>
+                                    <p class="card-text">Craig Bator — 27 Dec 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-item">
+                        <div class="card bg-dark text-white">
+                            <img class="card-img" src="/imgs/cat-9169528_1920.jpg" alt="Card image">
+                            <div class="card-img-overlay">
+                                <span class="badge badge-primary mb-2">Business</span>
+                                <div class="item-title">
+                                    <h4 class="card-title">After All Is Said And Done, More Is Done</h4>
+                                    <p class="card-text">Craig Bator — 27 Dec 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
