@@ -2,6 +2,7 @@
     .featurednews .content {
         display: flex;
         height: auto;
+        max-height: 500px;
     }
 
     .featurednews .taba {
@@ -65,6 +66,10 @@
     }
 
     @media screen and (max-width: 960px) {
+   .featurednews .content {
+        max-height: none;
+    }
+
         .featurednews .content {
             display: block;
         }
@@ -93,14 +98,14 @@
         }
 
         .featurednews .tabb .small-item:last-child {
-            margin-right: 0;
+            margin-bottom: 0;
         }
     }
     
 </style>
 
 
-<div class="featurednews my-5">
+<div class="featurednews my-4">
     <div class="row">
         <div class="col-12">
             <div class="content">
