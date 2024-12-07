@@ -231,6 +231,12 @@
 
 }
 
+.hotnews .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media (max-width: 600px) {
     .footer .bottom_border {
         display: none;

@@ -1,8 +1,11 @@
-<div class="card">
+<form action="" method="post">
+    <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         News
     </h4>
-    <div class="dropdown">
+    
+    <div class="card-body">
+        <div class="dropdown d-flex justify-content-end mb-3">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
             Search News
         </button>
@@ -12,23 +15,23 @@
             <button class="dropdown-item text-warning" type="submit">Not approved yet</button>
             <button class="dropdown-item text-danger" type="submit">Rejected</button>
         </div>
-    </div>
-    <div class="card-body">
+        </div>
         <div class="row">
             <div class="col-sm-6 mb-3">
-                <div class="card">
-                    <img class="card-img-left" src="/static/imgs/sp/{{ProID}}/main.jpg" alt="{{ProName}}">
-                    <div class="card-body">
-                        <h5 class="card-title">How Donald Trump is laying the groundwork to dispute the election results – again.</h5>
-                        <p class="card-text">Donald Trump is re-using his 2020 playbook to baselessly.</p>
-                        <p class="card-text"> November 3,2024</p> 
-                        <h5 class="card-text">Jeremy Herb</h5>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
+                <div class="card" style="min-height: 650px">
+                    <img class="card-img-top "  src="/static/imgs/sp/1/111.jpg" alt="HII">
+                <div class="card-body">
+                    <h5 class="card-title">How Donald Trump is laying the groundwork to dispute the election results – again.</h5>
+                    <p class="card-text">Donald Trump is re-using his 2020 playbook to baselessly.</p>
+                    <p class="card-text"> November 3,2024</p>
+                    <h5 class="card-text">Jeremy Herb</h5>
+                </div>
+
+                 <div class="card-footer text-muted d-flex justify-content-between">
+                        {{!-- <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
                             <i class="bi bi-eye-fill"></i>
                             View Details
-                        </a>
+                        </a> --}}
                         <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                     Action
@@ -40,25 +43,31 @@
                                     <button class="dropdown-item text-danger" type="submit">Rejected</button>
                                 </div>
                         </div>
+                        <a href="/reporter/news" class="btn btn-outline-info">
+                            <i class="bi bi-check2"></i>
+                            Edit
+                        </a>
                         
-                    </div>
+                 </div>
+
                 </div>
+                
 
             </div>
             <div class="col-sm-6 mb-3">
-                <div class="card">
-                    <img class="card-img-left" src="/static/imgs/sp/{{ProID}}/main.jpg" alt="{{ProName}}">
+                <div class="card" style="min-height: 650px">
+                    <img class="card-img-top" src="/static/imgs/sp/2/222.jpg" alt="HIII">
                     <div class="card-body">
                         <h5 class="card-title">Israel has long wanted to dismantle the UN’s Palestinian refugee agency. The consequences could be disastrous for all.</h5>
                         <p class="card-text">JerusalemCNN — Benjamin Netanyahu sat down for his regular cabinet meeting and had some words for a new ally – and an old enemy.</p>
                         <p class="card-text"> November 3,2024</p> 
                         <h5 class="card-text">Mick Krever</h5>
                     </div>
-                    <div class="card-footer text-muted">
-                        <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
+                    <div class="card-footer text-muted d-flex justify-content-between">
+                        {{!-- <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
                             <i class="bi bi-eye-fill"></i>
                             View Details
-                        </a>
+                        </a> --}}
                         <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                     Action
@@ -70,7 +79,10 @@
                                     <button class="dropdown-item text-danger" type="submit">Rejected</button>
                                 </div>
                         </div>
-                        
+                        <a href="/reporter/news" class="btn btn-outline-info" disabled aria-label="Close">
+                            <i class="bi bi-check2"></i>
+                            Edit
+                        </a>
                     </div>
                 </div>
 
@@ -80,4 +92,8 @@
     <div class="card-footer text-muted">
         Footer
     </div>
+</div>
+
+</form>
+
 

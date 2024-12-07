@@ -34,6 +34,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
+app.use('/static', express.static('static'))
 
 app.use('/static', express.static('static'));
 
