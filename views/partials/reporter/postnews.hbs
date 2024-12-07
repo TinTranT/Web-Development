@@ -1,32 +1,127 @@
-<!-- Place the first <script> tag in your HTML's <head> -->
-<script src="https://cdn.tiny.cloud/1/qarhnipiiwb4exy4pinmivc2ggho7ryv9ihpjo699ui3y06q/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<form action="" method="post">
+  <div class="card">
+  <div class="card-header">
+    <h4>Edit New Post</h4>
+  </div>
+  <div class="card-body">
 
-<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <div class="row">
+      <div class="col-sm-8 overflow-auto">
+        <label for="title" class="form-label d-block">Title New</label>
+        <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3">
+        
+        <label for="basic-url" class="form-label">Tag URL</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+          <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+        </div>
+        
+        
+        
+        
+        <div id="toolbar-container">
+          <span class="ql-formats">
+            <select class="ql-font"></select>
+            <select class="ql-size"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+            <button class="ql-strike"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-script" value="sub"></button>
+            <button class="ql-script" value="super"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-header" value="1"></button>
+            <button class="ql-header" value="2"></button>
+            <button class="ql-blockquote"></button>
+            <button class="ql-code-block"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+            <button class="ql-indent" value="-1"></button>
+            <button class="ql-indent" value="+1"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-direction" value="rtl"></button>
+            <select class="ql-align"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-link"></button>
+            <button class="ql-image"></button>
+            <button class="ql-video"></button>
+            <button class="ql-formula"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-clean"></button>
+          </span>
+        </div>
+        <div id="editor" class="h-100">
+        </div>
+      </div>
+      <div class="col-md-4">
+         <div>
+          <h5>
+            public
+          </h5>
+          Status <Span>Draft</Span> 
+          Visible <span>Public</span>
+          Date <span></span>
+         </div>
+        <div>
+          <h5>
+            Category
+          </h5>
+          <input type="checkbox" id="nocategory" name="nocategory">
+          <label for="nocategory">Uncategoried</label>
+          <label for="category">Category</label>
+          <input type="text" id="category">
+          <label for="allcategory">All Category</label>
+          <select name="categories" id="categories">
+            <option value="economic">Kinh tế</option>
+            <option value="sport">Thể thao</option>
+            <option value="science">Khoa học</option>
+          </select>
+        
+        </div>
+      </div>
+
+    </div>
+
+   
+
+  </div>
+  <div class="card-footer text-muted d-flex justify-content-end">
+    <button type="submit" class="btn btn-outline-primary mr-3">
+      <i class="bi bi-check2"></i>
+       Save
+    </button>
+     <button type="submit" class="btn btn-outline-success">
+      <i class="bi bi-check2"></i>
+       Create
+    </button>
+    
+  </div>
+</div>
+</form>
+
+
+<!-- Initialize Quill editor -->
 <script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: [
-      // Core editing features
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-      // Your account includes a free trial of TinyMCE premium features
-      // Try the most popular premium features until Nov 17, 2024:
-      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
-      // Early access to document converters
-      'importword', 'exportword', 'exportpdf'
-    ],
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-    exportpdf_converter_options: { 'format': 'Letter', 'margin_top': '1in', 'margin_right': '1in', 'margin_bottom': '1in', 'margin_left': '1in' },
-    exportword_converter_options: { 'document': { 'size': 'Letter' } },
-    importword_converter_options: { 'formatting': { 'styles': 'inline', 'resets': 'inline',	'defaults': 'inline', } },
+  const quill = new Quill('#editor', {
+    modules: {
+      syntax: true,
+      toolbar: '#toolbar-container',
+    },
+    placeholder: 'Compose an epic...',
+    theme: 'snow',
   });
 </script>
-<textarea>
-  Welcome to TinyMCE!
-</textarea>
