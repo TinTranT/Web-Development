@@ -1,3 +1,15 @@
+<style>
+    .submit-button {
+        background-color: var(--color-red);
+        color: #fff;
+        font-weight: 600;
+        transition: .5s;
+    }
+    .submit-button:hover {
+        background-color: var(--color-red-dark);
+        color: #fff;
+    }
+</style>
 <div class="bg-light rounded p-4">
     <h4 class="mb-4">Comments</h4>
     <div class="p-4 bg-white rounded mb-4">
@@ -39,18 +51,15 @@
     <h4 class="mb-4">Leave A Comment</h4>
     <form action="#">
         <div class="row g-4">
-            <div class="col-lg-6">
-                <input type="text" class="form-control py-3" placeholder="Full Name">
-            </div>
-            <div class="col-lg-6">
-                <input type="email" class="form-control py-3" placeholder="Email Address">
+            <div class="col-12">
+            
             </div>
             <div class="col-12">
                 <textarea class="form-control" name="textarea" id="" cols="30" rows="7"
                     placeholder="Write Your Comment Here"></textarea>
             </div>
             <div class="col-12">
-                <button class="form-control btn btn-primary py-3" type="button">Submit Now</button>
+                <button class="submit-button form-control btn py-3" type="button">Submit Now</button>
             </div>
         </div>
     </form>
