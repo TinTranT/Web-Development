@@ -237,6 +237,7 @@
     align-items: center;
 }
 
+/*** Footer Start ***/
 @media (max-width: 600px) {
     .footer .bottom_border {
         display: none;
@@ -262,3 +263,5 @@
 .footer li {
     list-style: none;
 }
+
+/*** Footer End ***/
