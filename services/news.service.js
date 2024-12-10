@@ -19,5 +19,8 @@ export default {
                 { column: 'PublishDate', order: 'desc' }
             ])
             .limit(4);
+    },
+    findbyId(id) {
+        return db('news').where('NewsID', id).first();
     }
 }
