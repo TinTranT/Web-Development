@@ -1,6 +1,3 @@
-CREATE DATABASE OnlineNewspaperDB;
-USE OnlineNewspaperDB;
-
 -- Account table
 
 CREATE TABLE Account (
@@ -39,9 +36,7 @@ CREATE TABLE News (
     CatID INT,
     PremiumFlag BOOLEAN DEFAULT FALSE,
     Status INT NOT NULL,
-    ViewCount INT DEFAULT 0,
-    FOREIGN KEY (WriterID) REFERENCES Account(Id),
-    FOREIGN KEY (CatID) REFERENCES Category(CatID)
+    ViewCount INT DEFAULT 0
 );
 
 -- Insert sample data into the `news` table
