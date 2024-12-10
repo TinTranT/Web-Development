@@ -128,19 +128,21 @@
         <div class="col-12">
             <div class="content">
                 <div class="taba">
+                    {{#if this.featuredNews.[0]}}
                     <div class="card bg-dark text-white">
-                        <img class="card-img" src="/imgs/cat-9169528_1920.jpg" alt="Card image">
+                        <img class="card-img" src="{{this.featuredNews.[0].Thumbnail}}" alt="Card image">
                         <div class="card-img-overlay">
                             <span class="badge bg-primary mb-2">Business</span>
                             <div class="item-title">
-                                <h4 class="card-title">After All Is Said And Done, More Is Done</h4>
-                                <p class="card-text">Craig Bator — 27 Dec 2020</p>
+                                <h4 class="card-title">{{this.featuredNews.[0].Title}}</h4>
+                                <p class="card-text">{{this.featuredNews.[0].PublishDate}}</p>
                             </div>
                         </div>
                     </div>
+                    {{/if}}
                 </div>
                 <div class="tabb">
-                    <div class="small-item">
+                    {{!-- <div class="small-item">
                         <div class="card bg-dark text-white">
                             <img class="card-img" src="/imgs/dogs-9172481_1280.jpg" alt="Card image">
                             <div class="card-img-overlay">
@@ -175,7 +177,25 @@
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
+                    {{#each this.featuredNews}}
+                    {{#if @index}}
+                    {{#if (and (greater @index 0) (lower @index 4))}}
+                    <div class="small-item">
+                        <div class="card bg-dark text-white">
+                            <img class="card-img" src="{{Thumbnail}}" alt="Card image">
+                            <div class="card-img-overlay">
+                                <span class="badge bg-primary mb-2">Business</span>
+                                <div class="item-title">
+                                    <h4 class="card-title">{{Title}}</h4>
+                                    <p class="card-text">{{PublishDate}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/each}}
                 </div>
             </div>
         </div>

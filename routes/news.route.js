@@ -1,4 +1,6 @@
 import express from 'express';
+import newsService from '../services/news.service.js';
+
 const router = express.Router();
 
 router.get('/details', (req, res) => {
@@ -9,7 +11,7 @@ router.get('/details', (req, res) => {
 
 router.get('/category', (req, res) => {
     res.render('vwNews/news-category', {
-
+        
     });
 });
 
