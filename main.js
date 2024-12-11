@@ -6,6 +6,10 @@ import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
 import newsRouter from './routes/news.route.js';
+
+import newsService from './services/news.service.js';
+import categoriesService from './services/category.service.js';
+
 const app = express();
 
 let check = false
@@ -22,7 +26,17 @@ app.engine('hbs', engine({
         },
         getVar: function () {
             return check;
-        }
+        },
+        greater: function (value1, value2) {
+            return value1 > value2;
+        },
+        lower: function (value1, value2) {
+            return value1 < value2;
+        },
+        and: function (value1, value2) {
+            return value1 && value2;
+        },
+
     }
 }));
 app.set('view engine', 'hbs');
@@ -42,9 +56,19 @@ app.use('/static', express.static('static'));
 //     res.sendFile(__dirname+'/test.html');
 // })
 
-app.get('/', (req, res) => {
+//middleware
+app.use(async (req, res, next) => {
+    const listNews = await newsService.findall();
+    res.locals.lcListNews = listNews;
+    next();
+});
+
+app.get('/', async (req, res) => {
+    const featuredNews = await newsService.featuredNews();
+    // console.log(featuredNews);
     res.render('homepage', {
         layout: 'main',
+        featuredNews: featuredNews,
         Buttons: [
             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
