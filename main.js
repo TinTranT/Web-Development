@@ -9,14 +9,26 @@ import newsRouter from './routes/news.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
+import session from 'express-session';
+import {isAuth} from './middleware/auth.mdw.js';
+import hbs_section from 'express-handlebars-sections';
 
 const app = express();
 
 let check = false
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'SECRET_KEY',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
+
 app.engine('hbs', engine({
     extname: 'hbs',
     partialsDir: './views/partials',
     helpers: {
+        section: hbs_section(),
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
@@ -39,6 +51,17 @@ app.engine('hbs', engine({
 
     }
 }));
+
+//middleware user
+app.use(async function(req, res, next) {
+    if(req.session.auth === undefined){
+        req.session.auth = false;
+    }
+    res.locals.auth = req.session.auth;
+    res.locals.authUser = req.session.authUser;
+    next()
+
+})
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
