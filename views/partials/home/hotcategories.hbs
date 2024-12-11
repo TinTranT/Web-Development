@@ -99,16 +99,19 @@
         margin-right: 20px;
         position: relative;
     }
+
     .hotcategories .inner-box .inner-image img {
         height: 160px;
         width: 180px;
         object-fit: cover;
     }
+
     .hotcategories .inner-box .inner-image .inner-badge {
         position: absolute;
         top: 8px;
         left: 8px;
     }
+
     .hotcategories .inner-box .inner-content .inner-title {
         font-size: 15px;
         margin-bottom: 25px;
@@ -127,15 +130,17 @@
                             <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-all" type="button" role="tab">All</button>
                         </li>
+                        {{#each hotCategoriesParent}}
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-business-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-business" type="button" role="tab">Business</button>
+                            <button class="nav-link" id="pills-{{ParentName}}-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-{{ParentName}}" type="button" role="tab">{{ParentName}}</button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-sport-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-sport" type="button" role="tab">Sport</button>
-                        </li>
+                        {{/each}}
                         {{!-- <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-international-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-international" type="button" role="tab">International</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled"
                                 aria-selected="false" disabled>Disabled</button>
@@ -161,51 +166,24 @@
                                         aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
-                                            class="d-block w-100" alt="...">
+                                    {{#each hotCategories}}
+                                    {{#if (lower @index 3)}}
+                                    <div class="carousel-item {{#if @first}}active{{/if}}">
+                                        <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <div class="inner-caption">
                                                 <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
+                                                    <span class="badge text-bg-primary">{{this.CatName}}</span>
                                                 </div>
                                                 <div class="inner-content">
-                                                    <h5>First slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
+                                                    <h5>{{this.Title}}</h5>
+                                                    <p>{{this.Abstract}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item">
-                                        <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Second slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Third slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{/if}}
+                                    {{/each}}
                                 </div>
                                 <button class="carousel-control-prev " type="button" data-bs-target="#carouselAll"
                                     data-bs-slide="prev">
@@ -221,23 +199,25 @@
                         </div>
                     </div>
                     <div class="row">
+                        {{#each hotCategories}}
+                        {{#if (and (greater @index 2) (lower @index 6))}}
                         <div class="col-xl-4">
                             <div class="inner-box">
-                                <div class="inner-image ">
-                                    <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
-                                        alt="" >
+                                <div class="inner-image">
+                                    <img src="{{this.Thumbnail}}" alt="">
                                     <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
+                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
                                     </div>
                                 </div>
                                 <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
+                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                    <h5 class="inner-description">{{this.Title}}</h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4">
+                        {{/if}}
+                        {{/each}}
+                        {{!-- <div class="col-xl-4">
                             <div class="inner-box">
                                 <div class="inner-image">
                                     <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
@@ -252,26 +232,10 @@
                                         elit</h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="https://image.plo.vn/w1000/Uploaded/2024/vowklqmx/2024_11_06/ket-qua-bau-cu-tong-thong-my-se-anh-huong-ra-sao-den-chau-a-va-viet-nam-4128.jpg.webp"
-                                        alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
-                                    </div>
-                                </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
-                                </div>
-                            </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
-                <div class="tab-pane " id="pills-business" role="tabpanel" tabindex="0">
+                {{!-- <div class="tab-pane " id="pills-business" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
                             <div id="carouselBusiness" class="carousel slide" data-bs-ride="carousel">
@@ -394,7 +358,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane " id="pills-sport" role="tabpanel" tabindex="0">
+                <div class="tab-pane " id="pills-Sport" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
                             <div id="carouselSport" class="carousel slide" data-bs-ride="carousel">
@@ -516,7 +480,136 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+                {{#each hotCategoriesParent}}
+                <div class="tab-pane " id="pills-{{ParentName}}" role="tabpanel" tabindex="0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="carousel{{ParentName}}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators button-carousel">
+                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    {{#each hotCategories}}
+                                    {{#if (equal this.CatParentName ../ParentName)}}
+                                    <div class="carousel-item {{#if @first}}active{{/if}}">
+                                        <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <div class="inner-caption">
+                                                <div class="inner-badge">
+                                                    <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                                </div>
+                                                <div class="inner-content">
+                                                    <h5>{{this.Title}}</h5>
+                                                    <p>{{this.Abstract}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                    {{/each}}
+                                    {{!-- <div class="carousel-item active">
+                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+                                            class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <div class="inner-caption">
+                                                <div class="inner-badge">
+                                                    <span class="badge text-bg-primary">Primary</span>
+                                                </div>
+                                                <div class="inner-content">
+                                                    <h5>First slide label</h5>
+                                                    <p>Some representative placeholder content for the first slide.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+                                            class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <div class="inner-caption">
+                                                <div class="inner-badge">
+                                                    <span class="badge text-bg-primary">Primary</span>
+                                                </div>
+                                                <div class="inner-content">
+                                                    <h5>Second slide label</h5>
+                                                    <p>Some representative placeholder content for the first slide.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+                                            class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <div class="inner-caption">
+                                                <div class="inner-badge">
+                                                    <span class="badge text-bg-primary">Primary</span>
+                                                </div>
+                                                <div class="inner-content">
+                                                    <h5>Third slide label</h5>
+                                                    <p>Some representative placeholder content for the first slide.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carousel{{ParentName}}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carousel{{ParentName}}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{#each hotCategories}}
+                        {{#if (equal this.CatParentName ../ParentName)}}
+                        <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="{{this.Thumbnail}}" alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                    <h5 class="inner-description">{{this.Title}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{/each}}
+                        {{!-- <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+                                        alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">Primary</span>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
+                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit</h5>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
                 </div>
+                {{/each}}
                 {{!-- <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
                     aria-labelledby="pills-disabled-tab" tabindex="0">...
                 </div> --}}
