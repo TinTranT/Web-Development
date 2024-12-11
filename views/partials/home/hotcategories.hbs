@@ -153,7 +153,7 @@
     <div class="row">
         <div class="col-12">
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane  show active" id="pills-all" role="tabpanel" tabindex="0">
+                <div class="tab-pane show active" id="pills-all" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
                             <div id="carouselAll" class="carousel slide" data-bs-ride="carousel">
@@ -166,7 +166,7 @@
                                         aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    {{#each hotCategories}}
+                                    {{#each hotCategoriesNews}}
                                     {{#if (lower @index 3)}}
                                     <div class="carousel-item {{#if @first}}active{{/if}}">
                                         <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        {{#each hotCategories}}
+                        {{#each hotCategoriesNews}}
                         {{#if (and (greater @index 2) (lower @index 6))}}
                         <div class="col-xl-4">
                             <div class="inner-box">
@@ -358,7 +358,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane " id="pills-Sport" role="tabpanel" tabindex="0">
+                <div class="tab-pane " id="pills-sport" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
                             <div id="carouselSport" class="carousel slide" data-bs-ride="carousel">
@@ -495,9 +495,10 @@
                                         aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    {{#each hotCategories}}
-                                    {{#if (equal this.CatParentName ../ParentName)}}
-                                    <div class="carousel-item {{#if @first}}active{{/if}}">
+                                    {{#each hotCategoriesNews}}
+                                    {{#if (and (equal this.CatParentName ../ParentName) (lower @index 3))}}
+                                    <div
+                                        class="carousel-item {{#if (and @first (equal this.CatParentName ../ParentName))}}active{{/if}}">
                                         <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <div class="inner-caption">
@@ -573,7 +574,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        {{#each hotCategories}}
+                        {{#each hotCategoriesNews}}
                         {{#if (equal this.CatParentName ../ParentName)}}
                         <div class="col-xl-4">
                             <div class="inner-box">

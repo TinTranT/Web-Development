@@ -38,7 +38,7 @@ export default {
     },
     async hotCategories() {
         const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
 
         return db('news')
             .join('Category', 'news.CatID', 'Category.CatID')
@@ -53,7 +53,7 @@ export default {
     },
     async hotCategoriesParent() {
         const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
 
         return db('news')
             .join('Category', 'news.CatID', 'Category.CatID')
@@ -66,7 +66,7 @@ export default {
             .where('news.PublishDate', '>=', sevenDaysAgo)
             .groupBy('ParentCat.CatID', 'ParentCat.CatName')
             .orderBy('NewsCount', 'desc')
-            .limit(5);  // Get top 5 hot parent categories
+            .limit(10);  // Get top 5 hot parent categories
     },
     findbyId(id) {
         return db('news').where('NewsID', id).first();

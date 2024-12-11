@@ -86,16 +86,15 @@ app.get('/', async (req, res) => {
     const featuredNews = await newsService.featuredNews();
     const hotNews = await newsService.hotNews();
     const latestNews = await newsService.latestNews();
-    const hotCategories = await newsService.hotCategories();
+    const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    console.log(hotCategories);
-    console.log(hotCategoriesParent);
+    // console.log(featuredNews);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
         hotNews: hotNews,
         latestNews: latestNews,
-        hotCategories: hotCategories,
+        hotCategoriesNews: hotCategoriesNews,
         hotCategoriesParent: hotCategoriesParent,
         Buttons: [
             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
