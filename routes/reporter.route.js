@@ -47,7 +47,7 @@ router.get('/category&tag',function(req,res){
     })
     
 })
-router.get('/news',async function(req,res){
+router.get('/news', async function(req,res){
     const list = await categoryService.findall();
     console.log(list);
 
