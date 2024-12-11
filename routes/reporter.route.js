@@ -1,9 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import categoryService from '../services/category.service.js';
+
 const router = express.Router();
-
-
 
 router.use(function (req, res, next) {
     res.locals.items = [
@@ -51,15 +50,20 @@ router.get('/category&tag', function (req, res) {
     })
 
 })
-router.get('/news', async function(req,res){
-    const list = await categoryService.findall();
-    console.log(list);
 
-    res.render('vwReporter/mainreporter',{
-        layout: 'user',
-        categories: list
-    })
-})
+router.get('/news', async function(req,res){
+    try {
+        const list = await categoryService.findall();
+        console.log(list);
+        res.render('vwReporter/mainreporter',{
+            layout: 'user',
+            categories: list
+        });
+    } catch(err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 router.post('/news',  function(req, res){
 
