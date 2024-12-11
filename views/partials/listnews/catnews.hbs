@@ -8,6 +8,23 @@
         min-height: 300px;
         /* Adjust the height as needed */
     }
+
+    .article {
+        position: relative;
+    }
+
+    .container-link {
+        display: block;
+    }
+
+    .container-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 </style>
 <div class="catnews">
     <div class="row">
@@ -17,115 +34,51 @@
             </div>
         </div>
     </div>
-    <div class="row my-4">
-        <div class="col-md-3">
-            <div class="card-body">
-                <img src="/static/imgs/hotnews/trump1.jpg" class="img-fluid" alt="Img Dead"
-                    style="width: 350px; height: 250px;">
-            </div>
-        </div>
-        <div class="col-md-8" style="border-bottom: 1px solid #727272;">
-            <div class="card-body">
-                <a class="card-title" href="#">Trump’s Cabinet Picks, Panned in Washington, Thrill Many of His
-                    Voters</a>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos praesentium beatae
-                    quae a, expedita
-                    cumque voluptates esse voluptas eligendi fugit saepe obcaecati, distinctio quidem maxime quia
-                    tempore possimus, fuga deserunt!</p>
-                <p class="card-text">13 Apr 2022 | America</p>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="card-body">
-                <p class="card-text">1 Day ago</p>
-            </div>
-        </div>
+    {{#if this.empty}}
+    <div class="container">
+        <p>Không có dữ liệu</p>
     </div>
-    <div class="row my-3">
-        <div class="col-md-3">
-            <div class="card-body">
-                <img src="/static/imgs/hotnews/trump1.jpg" class="img-fluid" alt="Img Dead"
-                    style="width: 350px; height: 250px;">
+    {{else}}
+    <div class="container">
+
+        {{#each this.news}}
+        <div class="article row my-3">
+            <div class="col-md-3">
+                <div class="card-body">
+                    <img src="{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
+                </div>
+            </div>
+            <div class="col-md-8" style="border-bottom: 1px solid #727272;">
+                <div class="card-body">
+                    <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
+                    <p class="card-text">{{Abstract}}</p>
+                    <p class="card-text">by Nguyễn Văn A</p>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="card-body">
+                    <p class="card-text">{{timeAgo PublishDate}}</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-8" style="border-bottom: 1px solid #727272;">
-            <div class="card-body">
-                <a class="card-title" href="#">Trump’s Cabinet Picks, Panned in Washington, Thrill Many of His
-                    Voters</a>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos praesentium beatae
-                    quae a, expedita
-                    cumque voluptates esse voluptas eligendi fugit saepe obcaecati, distinctio quidem maxime quia
-                    tempore possimus, fuga deserunt!</p>
-                <p class="card-text">13 Apr 2022 | America</p>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="card-body">
-                <p class="card-text">1 Day ago</p>
-            </div>
-        </div>
+        {{/each}}
+
+
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <div class="row my-3">
-        <div class="col-md-3">
-            <div class="card-body">
-                <img src="/static/imgs/hotnews/trump1.jpg" class="img-fluid" alt="Img Dead"
-                    style="width: 350px; height: 250px;">
-            </div>
-        </div>
-        <div class="col-md-8" style="border-bottom: 1px solid #727272;">
-            <div class="card-body">
-                <a class="card-title" href="#">Trump’s Cabinet Picks, Panned in Washington, Thrill Many of His
-                    Voters</a>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos praesentium beatae
-                    quae a, expedita
-                    cumque voluptates esse voluptas eligendi fugit saepe obcaecati, distinctio quidem maxime quia
-                    tempore possimus, fuga deserunt!</p>
-                <p class="card-text">13 Apr 2022 | America</p>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="card-body">
-                <p class="card-text">1 Day ago</p>
-            </div>
-        </div>
-    </div>
-    <div class="row my-3">
-        <div class="col-md-3">
-            <div class="card-body">
-                <img src="/static/imgs/hotnews/trump1.jpg" class="img-fluid" alt="Img Dead"
-                    style="width: 350px; height: 250px;">
-            </div>
-        </div>
-        <div class="col-md-8" style="border-bottom: 1px solid #727272;">
-            <div class="card-body">
-                <a class="card-title" href="#">Trump’s Cabinet Picks, Panned in Washington, Thrill Many of His
-                    Voters</a>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos praesentium beatae
-                    quae a, expedita
-                    cumque voluptates esse voluptas eligendi fugit saepe obcaecati, distinctio quidem maxime quia
-                    tempore possimus, fuga deserunt!</p>
-                <p class="card-text">13 Apr 2022 | America</p>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <div class="card-body">
-                <p class="card-text">1 Day ago</p>
-            </div>
-        </div>
-    </div>
-    <nav aria-label="...">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+    {{/if}}
 </div>

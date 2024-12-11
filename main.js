@@ -48,6 +48,25 @@ app.engine('hbs', engine({
         and: function (value1, value2) {
             return value1 && value2;
         },
+        timeAgo: function (value) {
+            const now = new Date();
+            const past = new Date(value);
+            const diff = now - past;
+            const diffInMinutes = Math.floor(diff / (1000 * 60));
+            const diffInHours = Math.floor(diff / (1000 * 60 * 60));
+            const diffInDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const diffInMonths = Math.floor(diffInDays / 30);
+        
+            if (diffInMinutes < 60) {
+                return `${diffInMinutes} minutes ago`;
+            } else if (diffInHours < 24) {
+                return `${diffInHours} hours ago`;
+            } else if (diffInDays < 30) {
+                return `${diffInDays} days ago`;
+            } else {
+                return `${diffInMonths} months ago`;
+            }
+        }
 
     }
 }));

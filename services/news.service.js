@@ -22,5 +22,12 @@ export default {
     },
     findbyId(id) {
         return db('news').where('NewsID', id).first();
+    },
+    countByCatId(id) {
+        return db('news').where('CatID', id).count('* as total').first();
+    },
+    findPageByCatId(id, limit, offset) {
+        return db('news').where('CatID', id).limit(limit).offset(offset);
     }
+
 }

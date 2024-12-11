@@ -1,78 +1,187 @@
-<aside id="sidebar" class="{{#if expand}}expand{{/if}}">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    ::after,
+    ::before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .wrapper {
+        display: flex;
+    }
+
+    .main {
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.35s ease-in-out;
+        background-color: #fafbfe;
+    }
+
+    #sidebar {
+        width: 70px;
+        min-width: 70px;
+        z-index: 1000;
+        transition: all .25s ease-in-out;
+        background-color: var(--color-red);
+        display: flex;
+        flex-direction: column;
+    }
+
+    #sidebar.expand {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    .toggle-btn {
+        background-color: transparent;
+        cursor: pointer;
+        border: 0;
+        padding: 1rem 1.5rem;
+    }
+
+    .toggle-btn i {
+        font-size: 1.5rem;
+        color: #FFF;
+    }
+
+    .sidebar-logo {
+        margin: auto 0;
+    }
+
+    .sidebar-logo a {
+        color: #FFF;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    #sidebar:not(.expand) .sidebar-logo,
+    #sidebar:not(.expand) a.sidebar-link span {
+        display: none;
+    }
+
+    .sidebar-nav {
+        padding: 2rem 0;
+        flex: 1 1 auto;
+    }
+
+    a.sidebar-link {
+        padding: .625rem 1.625rem;
+        color: #FFF;
+        display: block;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        border-left: 3px solid transparent;
+    }
+
+    .sidebar-link i {
+        font-size: 1.1rem;
+        margin-right: .75rem;
+    }
+
+    a.sidebar-link:hover {
+        background-color: rgba(255, 255, 255, .075);
+        border-left: 3px solid #3b7ddd;
+    }
+
+    .sidebar-item {
+        position: relative;
+    }
+
+    #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+        position: absolute;
+        top: 0;
+        left: 70px;
+        background-color: #0e2238;
+        padding: 0;
+        min-width: 15rem;
+        display: none;
+    }
+
+    #sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+        display: block;
+        max-height: 15em;
+        width: 100%;
+        opacity: 1;
+    }
+
+    #sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+        border: solid;
+        border-width: 0 .075rem .075rem 0;
+        content: "";
+        display: inline-block;
+        padding: 2px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.4rem;
+        transform: rotate(-135deg);
+        transition: all .2s ease-out;
+    }
+
+    #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+        transform: rotate(45deg);
+        transition: all .2s ease-out;
+    }
+</style>
+<aside id="sidebar">
     <div class="d-flex">
         <button class="toggle-btn" type="button">
-            <i class="bi bi-grid-fill"></i>
+            <i class="bi bi-grid"></i>
         </button>
         <div class="sidebar-logo">
-            <a href="#">INSIGHT NEWS</a>
+            <a href="#">CodzSword</a>
         </div>
     </div>
     <ul class="sidebar-nav">
-        {{!-- {{#each buttons}}
-        <a href="{{this.url}}" class="sidebar-link">
-            <i class="{{this.icon}}"></i>
-            <span>{{this.label}}</span>
-        </a>
-        {{/each}}
-
-        <!-- Dropdown for Users -->
-        {{#if userDropdownButtons}}
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-toggle="collapse" data-target="#auth"
-                aria-expanded="false" aria-controls="auth">
-                <i class="bi bi-person"></i>
-                <span>Users</span>
+        {{#each items}}
+        {{#if isDropdown}}
+        <!-- Dropdown item -->
+        <li class="sidebar-item has-dropdown">
+            <a href="#" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#dropdown-{{@index}}"
+                aria-expanded="false" aria-controls="dropdown-{{@index}}">
+                <i class="{{icon}}"></i>
+                <span>{{label}}</span>
             </a>
-            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
-                {{#each userDropdownButtons}}
+            <ul id="dropdown-{{@index}}" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                {{#each options}}
                 <li class="sidebar-item">
-                    <a href="{{this.url}}" class="sidebar-link">
-                        <i class="{{this.icon}}"></i>
-                        {{this.label}}
+                    <a href="{{url}}" class="sidebar-link">
+                        <i class="{{icon}}"></i>
+                        <span>{{label}}</span>
                     </a>
                 </li>
                 {{/each}}
             </ul>
         </li>
-        {{/if}} --}}
-        {{#each Buttons}}
-        {{setVar false}}
+        {{else}}
+        <!-- Single button item -->
         <li class="sidebar-item">
-            {{#each ../DropdownButtons}}
-                {{#if (isEqual ../this.id this.id)}}
-                    {{setVar true}}
-                {{/if}}
-            {{/each}}
-
-            {{#if (getVar)}}
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-toggle="collapse" data-target="#auth{{this.id}}"
-                aria-expanded="false" aria-controls="auth{{this.id}}">
-                <i class={{this.icon}}></i>
-                <span>{{this.label}}</span>
+            <a href="{{url}}" class="sidebar-link">
+                <i class="{{icon}}"></i>
+                <span>{{label}}</span>
             </a>
-            <ul id="auth{{this.id}}" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
-                {{#each ../DropdownButtons}}
-                {{#if (isEqual ../this.id this.id)}}
-                    <li class="sidebar-item">
-                        <a href="{{this.url}}" class="sidebar-link">
-                            <i class="{{this.icon}}"></i>
-                            {{this.label}}
-                        </a>
-                    </li>
-                {{/if}}
-                {{/each}}
-            </ul>
-            {{else}}
-            <a href="{{this.url}}" class="sidebar-link">
-                <i class={{this.icon}}></i>
-                <span>{{this.label}}</span>
-            </a>
-            {{/if}}
         </li>
-        
+        {{/if}}
         {{/each}}
-
-
     </ul>
     <div class="sidebar-footer">
         <a href="#" class="sidebar-link">
@@ -82,35 +191,11 @@
     </div>
 </aside>
 
-{{!-- <script>
-    const expand = document.querySelector(".toggle-btn");
+<script>
+    const hamBurger = document.querySelector(".toggle-btn");
 
-    expand.addEventListener("click", function () {
+    hamBurger.addEventListener("click", function () {
         document.querySelector("#sidebar").classList.toggle("expand");
     });
-</script> --}}
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.querySelector(".toggle-btn");
-        const sidebar = document.querySelector("#sidebar");
-
-        // Hàm kiểm tra kích thước màn hình và tự động thu hẹp sidebar nếu nhỏ hơn 768px
-        function checkScreenSize() {
-            if (window.innerWidth < 768) {
-                sidebar.classList.remove("expand");
-            }
-        }
-
-        // Thêm sự kiện click cho nút toggle để mở rộng/thu hẹp sidebar
-        if (toggleButton && sidebar) {
-            toggleButton.addEventListener("click", function () {
-                sidebar.classList.toggle("expand");
-            });
-        }
-
-        // Kiểm tra kích thước màn hình khi tải trang và khi thay đổi kích thước
-        checkScreenSize();
-        window.addEventListener("resize", checkScreenSize);
-    });
 </script>
