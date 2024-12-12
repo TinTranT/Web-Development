@@ -55,6 +55,18 @@ app.engine('hbs', engine({
         slice: function (array, start, end) {
             if (!array) return [];
             return array.slice(start, end);
+        },
+        filterCategories1: function (items, categoryName, options) {
+            if (!items) return '';
+            const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(0, 3);
+            const result = filteredItems.map(item => options.fn(item)).join('');
+            return result;
+        },
+        filterCategories2: function (items, categoryName, options) {
+            if (!items) return '';
+            const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(3, 6);
+            const result = filteredItems.map(item => options.fn(item)).join('');
+            return result;
         }
     }
 }));
@@ -88,7 +100,7 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    // console.log(featuredNews);
+    console.log(hotCategoriesNews);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,

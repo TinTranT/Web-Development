@@ -235,71 +235,152 @@
                         </div> --}}
                     </div>
                 </div>
-                {{!-- <div class="tab-pane " id="pills-business" role="tabpanel" tabindex="0">
+                <div class="tab-pane " id="pills-International" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
-                            <div id="carouselBusiness" class="carousel slide" data-bs-ride="carousel">
+                            <div id="carouselInternational" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators button-carousel">
-                                    <button type="button" data-bs-target="#carouselBusiness" data-bs-slide-to="0"
+                                    <button type="button" data-bs-target="#carouselInternational" data-bs-slide-to="0"
                                         class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselBusiness" data-bs-slide-to="1"
+                                    <button type="button" data-bs-target="#carouselInternational" data-bs-slide-to="1"
                                         aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselBusiness" data-bs-slide-to="2"
+                                    <button type="button" data-bs-target="#carouselInternational" data-bs-slide-to="2"
                                         aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
+                                    {{#filterCategories1 hotCategoriesNews "International"}}
                                     <div class="carousel-item active">
-                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                            class="d-block w-100" alt="...">
+                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                         <div class="carousel-caption d-none d-md-block">
                                             <div class="inner-caption">
                                                 <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
+                                                    <span class="badge text-bg-primary">{{CatName}}</span>
                                                 </div>
                                                 <div class="inner-content">
-                                                    <h5>First slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
+                                                    <h5>{{Title}}</h5>
+                                                    <p>{{Abstract}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item">
-                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Second slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Third slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    {{/filterCategories1}}
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselInternational" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselInternational" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{#filterCategories2 hotCategoriesNews "International"}}
+                        <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="{{this.Thumbnail}}" alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
                                     </div>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselBusiness"
+                                <div class="inner-content">
+                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                    <h5 class="inner-description">{{this.Title}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        {{/filterCategories2}}
+                        {{!-- <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
+                                        alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">Primary</span>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
+                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
+                                        alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">Primary</span>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
+                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="inner-box">
+                                <div class="inner-image">
+                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
+                                        alt="">
+                                    <div class="inner-badge">
+                                        <span class="badge text-bg-primary">Primary</span>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
+                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit</h5>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+                <div class="tab-pane " id="pills-Sports" role="tabpanel" tabindex="0">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="carouselSports" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators button-carousel">
+                                    <button type="button" data-bs-target="#carouselSports" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselSports" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselSports" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    {{#filterCategories1 hotCategoriesNews "Sports"}}
+                                    <div class="carousel-item active">
+                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <div class="inner-caption">
+                                                <div class="inner-badge">
+                                                    <span class="badge text-bg-primary">{{CatName}}</span>
+                                                </div>
+                                                <div class="inner-content">
+                                                    <h5>{{Title}}</h5>
+                                                    <p>{{Abstract}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/filterCategories1}}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselSports"
                                     data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselBusiness"
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselSports"
                                     data-bs-slide="next">
                                     <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
@@ -308,57 +389,25 @@
                         </div>
                     </div>
                     <div class="row">
+                        {{#filterCategories2 hotCategoriesNews "Sports"}}
                         <div class="col-xl-4">
                             <div class="inner-box">
                                 <div class="inner-image">
-                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                        alt="">
+                                    <img src="{{this.Thumbnail}}" alt="">
                                     <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
+                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
                                     </div>
                                 </div>
                                 <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
+                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                    <h5 class="inner-description">{{this.Title}}</h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                        alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
-                                    </div>
-                                </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
-                                        alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
-                                    </div>
-                                </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
-                                </div>
-                            </div>
-                        </div>
+                        {{/filterCategories2}}
                     </div>
                 </div>
-                <div class="tab-pane " id="pills-sport" role="tabpanel" tabindex="0">
+                {{!-- <div class="tab-pane " id="pills-sport" role="tabpanel" tabindex="0">
                     <div class="row">
                         <div class="col-12">
                             <div id="carouselSport" class="carousel slide" data-bs-ride="carousel">
@@ -481,136 +530,7 @@
                         </div>
                     </div>
                 </div> --}}
-                {{#each hotCategoriesParent}}
-                <div class="tab-pane " id="pills-{{ParentName}}" role="tabpanel" tabindex="0">
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="carousel{{ParentName}}" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators button-carousel">
-                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="0"
-                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carousel{{ParentName}}" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    {{#each hotCategoriesNews}}
-                                    {{#if (and (equal this.CatParentName ../ParentName) (lower @index 3))}}
-                                    <div
-                                        class="carousel-item {{#if (and @first (equal this.CatParentName ../ParentName))}}active{{/if}}">
-                                        <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{this.CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{this.Title}}</h5>
-                                                    <p>{{this.Abstract}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{/if}}
-                                    {{/each}}
-                                    {{!-- <div class="carousel-item active">
-                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>First slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Second slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
-                                            class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">Primary</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>Third slide label</h5>
-                                                    <p>Some representative placeholder content for the first slide.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carousel{{ParentName}}" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carousel{{ParentName}}" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        {{#each hotCategoriesNews}}
-                        {{#if (equal this.CatParentName ../ParentName)}}
-                        <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
-                                    </div>
-                                </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
-                        </div>
-                        {{/if}}
-                        {{/each}}
-                        {{!-- <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
-                                        alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">Primary</span>
-                                    </div>
-                                </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nhat An Nguyen - 27 Dec 2024</p>
-                                    <h5 class="inner-description">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit</h5>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-                {{/each}}
+
                 {{!-- <div class="tab-pane fade" id="pills-disabled" role="tabpanel"
                     aria-labelledby="pills-disabled-tab" tabindex="0">...
                 </div> --}}
