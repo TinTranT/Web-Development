@@ -28,6 +28,18 @@ export default {
     },
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
-    }
+    },
+    countByTagId(id) {
+        return db('newstag').where('TagID', id).count('* as total').first();
+    },
+    findPageByTagId(tagId, limit, offset) {
+        return db('news')
+        .join('newstag', 'news.NewsID', 'newstag.NewsID')
+        .where('newstag.TagID', tagId)
+        .select('news.*') // Chỉ lấy thông tin từ bảng news
+        .orderBy('news.PublishDate', 'desc')
+        .limit(limit)
+        .offset(offset);
+    },
 
 }
