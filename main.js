@@ -9,6 +9,7 @@ import newsRouter from './routes/news.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
+import { equal } from 'assert';
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.engine('hbs', engine({
         getVar: function () {
             return check;
         },
+        equal: function (value1, value2) {
+            return value1 === value2;
+        },
         greater: function (value1, value2) {
             return value1 > value2;
         },
@@ -44,7 +48,7 @@ app.engine('hbs', engine({
             const diffInHours = Math.floor(diff / (1000 * 60 * 60));
             const diffInDays = Math.floor(diff / (1000 * 60 * 60 * 24));
             const diffInMonths = Math.floor(diffInDays / 30);
-        
+
             if (diffInMinutes < 60) {
                 return `${diffInMinutes} minutes ago`;
             } else if (diffInHours < 24) {
@@ -54,8 +58,35 @@ app.engine('hbs', engine({
             } else {
                 return `${diffInMonths} months ago`;
             }
+        },
+        or: function (value1, value2) {
+            return value1 || value2;
+        },
+        mod: function (value1, value2) {
+            return value1 % value2;
+        },
+        add: function (value1, value2) {
+            return value1 + value2;
+        },
+        length: function (value) {
+            return value.length;
+        },
+        slice: function (array, start, end) {
+            if (!array) return [];
+            return array.slice(start, end);
+        },
+        filterCategories1: function (items, categoryName, options) {
+            if (!items) return '';
+            const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(0, 3);
+            const result = filteredItems.map(item => options.fn(item)).join('');
+            return result;
+        },
+        filterCategories2: function (items, categoryName, options) {
+            if (!items) return '';
+            const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(3, 6);
+            const result = filteredItems.map(item => options.fn(item)).join('');
+            return result;
         }
-
     }
 }));
 app.set('view engine', 'hbs');
@@ -84,10 +115,18 @@ app.use(async (req, res, next) => {
 
 app.get('/', async (req, res) => {
     const featuredNews = await newsService.featuredNews();
-    // console.log(featuredNews);
+    const hotNews = await newsService.hotNews();
+    const latestNews = await newsService.latestNews();
+    const hotCategoriesNews = await newsService.hotCategories();
+    const hotCategoriesParent = await newsService.hotCategoriesParent();
+    // console.log(hotCategoriesParent);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
+        hotNews: hotNews,
+        latestNews: latestNews,
+        hotCategoriesNews: hotCategoriesNews,
+        hotCategoriesParent: hotCategoriesParent,
         Buttons: [
             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
