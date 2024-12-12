@@ -2,6 +2,21 @@
     .text-uppercase {
         font-size: 14px;
     }
+    .relatednews {
+        position: relative;
+    }
+    .container-link {
+        display: block;
+    }
+
+    .container-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 </style>
 <div class="row g-4">
     <div class="col-12">
@@ -10,20 +25,18 @@
             <div class="row g-4">
                 {{#each this.relatedNews}}
                 {{#if @first}}
-                <div class="col-12">
-                    <div class="rounded overflow-hidden">
+                <div class="col-12 relatednews">
+                    <div class="rounded overflow-hidden my-4">
                         <img src="{{Thumbnail}}" class="img-fluid rounded img-zoomin w-100" alt="">
                     </div>
-                </div>
-                <div class="col-12">
                     <div class="d-flex flex-column">
-                        <a href="#" class="h4 mb-2">{{Title}}</a>
+                        <a href="/news/details?id={{NewsID}}" class="h4 mb-2 container-link">{{Title}}</a>
                         <p class="fs-5 mb-0"><i class="fa fa-clock">{{formatDate PublishDate}}</i> </p>
                         <p class="fs-5 mb-0"><i class="fa fa-eye">by Nguyễn Văn A</i></p>
                     </div>
                 </div>
                 {{else}}
-                <div class="col-12">
+                <div class="col-12 relatednews">
                     <div class="row g-4 align-items-center">
                         <div class="col-5">
                             <div class="overflow-hidden rounded">
@@ -32,7 +45,7 @@
                         </div>
                         <div class="col-7">
                             <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">{{Title}}</a>
+                                <a href="/news/details?id={{NewsID}}" class="h6 container-link">{{Title}}</a>
                                 <small><i class="fa fa-clock"> {{formatDate PublishDate}}</i> </small>
                                 <small><i class="fa fa-eye">by Nguyễn Văn A</i></small>
                             </div>
