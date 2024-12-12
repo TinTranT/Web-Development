@@ -2,6 +2,7 @@ import express from 'express';
 import newsService from '../services/news.service.js';
 import categoryService from '../services/category.service.js';
 import tagService from '../services/tag.service.js';
+import commentService from '../services/comment.service.js';
 
 const router = express.Router();
 
@@ -11,12 +12,14 @@ router.get('/details', async (req, res) => {
     const category = await categoryService.findbyNewsId(id);
     const taglist = await tagService.findByNewsId(id);
     const relatednews = await newsService.relatedNews(id);
+    const commentlist = await commentService.findbyNewId(id);
     
     res.render('vwNews/news-detail.hbs', {
         category: category,
         news: news,
         taglist: taglist,
         relatedNews: relatednews,
+        commentList: commentlist,
     });
 });
 

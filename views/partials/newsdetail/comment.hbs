@@ -5,6 +5,7 @@
         font-weight: 600;
         transition: .5s;
     }
+
     .submit-button:hover {
         background-color: var(--color-red-dark);
         color: #fff;
@@ -12,47 +13,29 @@
 </style>
 <div class="bg-light rounded p-4">
     <h4 class="mb-4">Comments</h4>
+    {{#each this.commentList}}
     <div class="p-4 bg-white rounded mb-4">
         <div class="row g-4">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <h5>James Boreego</h5>
-                    <a href="#" class="link-hover text-body fs-6"><i class="fas fa-long-arrow-alt-right me-1"></i>
-                        Reply</a>
+                    <h5>{{ReaderName}}</h5>
                 </div>
-                <small class="text-body d-block mb-3"><i class="fas fa-calendar-alt me-1"></i> Dec 9, 2024</small>
-                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy Lorem Ipsum has been the industry's standard dummy type and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic
+                <small class="text-body d-block mb-3"><i class="fas fa-calendar-alt me-1"></i> {{formatDate Date}}</small>
+                <p class="mb-0">
+                    {{Content}}
                 </p>
             </div>
         </div>
     </div>
-    <div class="p-4 bg-white rounded mb-0">
-        <div class="row g-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <h5>James Boreego</h5>
-                    <a href="#" class="link-hover text-body fs-6"><i class="fas fa-long-arrow-alt-right me-1"></i>
-                        Reply</a>
-                </div>
-                <small class="text-body d-block mb-3"><i class="fas fa-calendar-alt me-1"></i> Dec 9, 2024</small>
-                <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy Lorem Ipsum has been the industry's standard dummy type and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic
-                </p>
-            </div>
-        </div>
-    </div>
+    {{/each}}
+
 </div>
 <div class="bg-light rounded p-4 my-4">
     <h4 class="mb-4">Leave A Comment</h4>
     <form action="#">
         <div class="row g-4">
             <div class="col-12">
-            
+
             </div>
             <div class="col-12">
                 <textarea class="form-control" name="textarea" id="" cols="30" rows="7"

@@ -1,10 +1,10 @@
 <div class="d-flex justify-content-between">
-    <a href="#" class="text-dark link-hover me-3">
+    <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-3">
         <span class="badge bg-primary">
             {{this.category.CatName}}
         </span>
     </a>
-    <a href="#" class="text-dark link-hover">{{formatDate this.news.PublishDate}}</a>
+    <p class="text-dark">{{formatDate this.news.PublishDate}}</p>
 </div>
 <div class="mb-4">
     <a href="#" class="h1 display-5">{{this.news.Title}}</a>
@@ -24,7 +24,7 @@
             </li>
             {{#each this.taglist}}
             <li class="nav-item mb-3">
-                <a class="d-flex py-2 bg-light rounded-pill active me-2" data-bs-toggle="pill" href="">
+                <a class="d-flex py-2 bg-light rounded-pill active me-2" href="/news/byTag?id={{TagID}}">
                     <span class="text-dark" style="width: 100px;">{{TagName}}</span>
                 </a>
             </li>
@@ -36,29 +36,6 @@
             <i class="btn fab bi-twitter  btn btn-square rounded-circle b border text-dark me-2"></i>
             <i class="btn fab bi bi-instagram  btn btn-square rounded-circle  border text-dark me-2"></i>
             <i class="btn fab bi bi-linkedin btn btn-square rounded-circle  border text-dark"></i>
-        </div>
-    </div>
-</div>
-<div class="bg-light rounded my-4 p-4">
-    <h4 class="mb-4">You Might Also Like</h4>
-    <div class="row g-4">
-        <div class="col-lg-6">
-            <div class="d-flex align-items-center p-3 bg-white rounded">
-                <img src="img/chatGPT.jpg" class="img-fluid rounded" alt="">
-                <div class="ms-3">
-                    <a href="#" class="h5 mb-2">Lorem Ipsum is simply dummy text of the printing</a>
-                    <p class="text-dark mt-3 mb-0 me-3"><i class="fa fa-clock"></i> 06 minute read</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="d-flex align-items-center p-3 bg-white rounded">
-                <img src="img/chatGPT-1.jpg" class="img-fluid rounded" alt="">
-                <div class="ms-3">
-                    <a href="#" class="h5 mb-2">Lorem Ipsum is simply dummy text of the printing</a>
-                    <p class="text-dark mt-3 mb-0 me-3"><i class="fa fa-clock"></i> 06 minute read</p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
