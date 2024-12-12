@@ -4,6 +4,9 @@ import hbs_sections from 'express-handlebars-sections';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
+
+import { format } from 'date-fns';
+
 import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
@@ -99,7 +102,11 @@ app.engine('hbs', engine({
             return result;
         },
         section: hbs_sections()
+    },
+    formatDate: function (value) {
+        return format(value, 'dd/MM/yyyy');
     }
+}
 }));
 app.set('view engine', 'hbs');
 app.set('views', './views');
