@@ -41,5 +41,11 @@ export default {
         .limit(limit)
         .offset(offset);
     },
+    relatedNews(id) {
+        return db('news')
+            .where('NewsID', '<>', id)
+            .orderBy('PublishDate', 'desc')
+            .limit(5);
+    }
 
 }

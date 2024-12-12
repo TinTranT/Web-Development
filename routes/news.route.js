@@ -8,8 +8,15 @@ const router = express.Router();
 router.get('/details', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
+    const category = await categoryService.findbyNewsId(id);
+    const taglist = await tagService.findByNewsId(id);
+    const relatednews = await newsService.relatedNews(id);
+    
     res.render('vwNews/news-detail.hbs', {
+        category: category,
         news: news,
+        taglist: taglist,
+        relatedNews: relatednews,
     });
 });
 
@@ -47,6 +54,7 @@ router.get('/byCat', async (req, res) => {
     });
 });
 
+//danh sách sản phẩm theo tag
 router.get('/byTag', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const limit = 4;
@@ -80,3 +88,6 @@ router.get('/byTag', async (req, res) => {
 });
 
 export default router;
+
+
+

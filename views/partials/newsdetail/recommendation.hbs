@@ -8,114 +8,39 @@
         <div class="p-3 rounded border">
             <h4 class="my-4">Bài viết cùng chuyên mục</h4>
             <div class="row g-4">
+                {{#each this.relatedNews}}
+                {{#if @first}}
                 <div class="col-12">
                     <div class="rounded overflow-hidden">
-                        <img src="/imgs/news-3.jpg" class="img-fluid rounded img-zoomin w-100" alt="">
+                        <img src="{{Thumbnail}}" class="img-fluid rounded img-zoomin w-100" alt="">
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-column">
-                        <a href="#" class="h4 mb-2">Get the best speak market, news.</a>
-                        <p class="fs-5 mb-0"><i class="fa fa-clock"> 06 minute read</i> </p>
-                        <p class="fs-5 mb-0"><i class="fa fa-eye"> 3.5k Views</i></p>
+                        <a href="#" class="h4 mb-2">{{Title}}</a>
+                        <p class="fs-5 mb-0"><i class="fa fa-clock">{{formatDate PublishDate}}</i> </p>
+                        <p class="fs-5 mb-0"><i class="fa fa-eye">by Nguyễn Văn A</i></p>
                     </div>
                 </div>
+                {{else}}
                 <div class="col-12">
                     <div class="row g-4 align-items-center">
                         <div class="col-5">
                             <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-3.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
+                                <img src="{{Thumbnail}}" class="img-zoomin img-fluid rounded w-100" alt="">
                             </div>
                         </div>
                         <div class="col-7">
                             <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
+                                <a href="#" class="h6">{{Title}}</a>
+                                <small><i class="fa fa-clock"> {{formatDate PublishDate}}</i> </small>
+                                <small><i class="fa fa-eye">by Nguyễn Văn A</i></small>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-5">
-                            <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-4.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-5">
-                            <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-5.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-5">
-                            <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-6.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-5">
-                            <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-7.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="row g-4 align-items-center">
-                        <div class="col-5">
-                            <div class="overflow-hidden rounded">
-                                <img src="/imgs/news-7.jpg" class="img-zoomin img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="features-content d-flex flex-column">
-                                <a href="#" class="h6">Get the best speak market, news.</a>
-                                <small><i class="fa fa-clock"> 06 minute read</i> </small>
-                                <small><i class="fa fa-eye"> 3.5k Views</i></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{/if}}
+                {{/each}}
             </div>
             <div class="row g-4 my-4">
                 <div class="col-lg-12">

@@ -2,6 +2,9 @@ import express from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
+
+import {format} from 'date-fns';
+
 import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
@@ -54,6 +57,9 @@ app.engine('hbs', engine({
             } else {
                 return `${diffInMonths} months ago`;
             }
+        },
+        formatDate: function (value) { 
+            return format(value,'dd/MM/yyyy');
         }
 
     }

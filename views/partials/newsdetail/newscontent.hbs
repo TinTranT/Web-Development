@@ -1,5 +1,9 @@
 <div class="d-flex justify-content-between">
-    <a href="#" class="text-dark link-hover me-3"><span class="badge bg-primary">Business</span></a>
+    <a href="#" class="text-dark link-hover me-3">
+        <span class="badge bg-primary">
+            {{this.category.CatName}}
+        </span>
+    </a>
     <a href="#" class="text-dark link-hover">{{this.news.PublishDate}}</a>
 </div>
 <div class="mb-4">
@@ -18,21 +22,13 @@
             <li class="nav-item mb-3">
                 <h5 class="mt-2 me-3 mb-0">Tags:</h5>
             </li>
+            {{#each this.taglist}}
             <li class="nav-item mb-3">
                 <a class="d-flex py-2 bg-light rounded-pill active me-2" data-bs-toggle="pill" href="">
-                    <span class="text-dark" style="width: 100px;">Sports</span>
+                    <span class="text-dark" style="width: 100px;">{{TagName}}</span>
                 </a>
             </li>
-            <li class="nav-item mb-3">
-                <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="">
-                    <span class="text-dark" style="width: 100px;">Magazine</span>
-                </a>
-            </li>
-            <li class="nav-item mb-3">
-                <a class="d-flex py-2 bg-light rounded-pill me-2" data-bs-toggle="pill" href="">
-                    <span class="text-dark" style="width: 100px;">Politics</span>
-                </a>
-            </li>
+            {{/each}}
         </ul>
         <div class="d-flex align-items-center">
             <h5 class="mb-0 me-3">Share:</h5>
