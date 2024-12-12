@@ -1,4 +1,6 @@
 import express from 'express';
+import session from 'express-session';
+import hbs_sections from 'express-handlebars-sections';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
@@ -6,12 +8,21 @@ import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
 import newsRouter from './routes/news.route.js';
+import accountRouter from './routes/account.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
 import { equal } from 'assert';
 
 const app = express();
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'SECRET_KEY',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {}
+}))
 
 let check = false
 app.engine('hbs', engine({
@@ -86,7 +97,8 @@ app.engine('hbs', engine({
             const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(3, 6);
             const result = filteredItems.map(item => options.fn(item)).join('');
             return result;
-        }
+        },
+        section: hbs_sections()
     }
 }));
 app.set('view engine', 'hbs');
@@ -100,7 +112,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static('public'));
 app.use('/static', express.static('static'))
 
-app.use('/static', express.static('static'));
+// Load Account's session
+app.use(async function (req, res, next) {
+    if (req.session.auth === null || req.session.auth === undefined) {
+        req.session.auth = false;
+    }
+
+    res.locals.auth = req.session.auth;
+    res.locals.authAccount = req.session.authAccount;
+    next();
+});
 
 // app.get('/test', function(req,res){ 
 //     res.sendFile(__dirname+'/test.html');
@@ -184,9 +205,10 @@ app.get('/', async (req, res) => {
 // })
 app.use(express.urlencoded({ extended: true }));
 app.use('/admin', adminRouter);
-app.use('/editor', editorRouter)
-app.use('/reporter', reporterRouter)
-app.use('/news', newsRouter)
+app.use('/editor', editorRouter);
+app.use('/reporter', reporterRouter);
+app.use('/news', newsRouter);
+app.use('/account', accountRouter);
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }
