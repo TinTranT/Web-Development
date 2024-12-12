@@ -1,38 +1,172 @@
-
-        {{!-- sidebar --}}
-        {{!-- {{> sidebar expand=true buttons=Buttons}} --}}
-        {{!-- main --}}
-{{{_sections.css}}}
 <div class="main">
-            <nav class="navbar navbar-expand px-4 py-3">
-                <form action="#" class="d-none d-sm-inline-block">
+    <main class="px-3 py-4 h-100">
+        <div class="">
+            <div class="mb-3">
+                <h3 class="fw-bold fs-4 mb-3">Writer Dashboard</h3>
+                <div class="container">
+                    <canvas id="myChart"></canvas>
+                </div>
 
-        </form>
-        <div class="navbar-collapse collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                        <img src="/imgs/account.png" class="avatar img-fluid" alt="">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end rounded">
+                <script>
+                    let myChart = document.getElementById('myChart').getContext('2d');
+                    // Global Options
+                    Chart.defaults.font.family = 'Lato';
+                    Chart.defaults.font.size = 18;
+                    Chart.defaults.color = '#777';
 
+                    let massPopChart = new Chart(myChart, {
+                        type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                        data: {
+                            labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+                            datasets: [{
+                                label: 'Population',
+                                data: [
+                                    617594,
+                                    181045,
+                                    153060,
+                                    106519,
+                                    105162,
+                                    95072
+                                ],
+                                //backgroundColor:'green',
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.6)',
+                                    'rgba(54, 162, 235, 0.6)',
+                                    'rgba(255, 206, 86, 0.6)',
+                                    'rgba(75, 192, 192, 0.6)',
+                                    'rgba(153, 102, 255, 0.6)',
+                                    'rgba(255, 159, 64, 0.6)',
+                                    'rgba(255, 99, 132, 0.6)'
+                                ],
+                                borderWidth: 1,
+                                borderColor: '#777',
+                                hoverBorderWidth: 3,
+                                hoverBorderColor: '#000'
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Largest Cities In Massachusetts',
+                                fontSize: 25
+                            },
+                            legend: {
+                                display: true,
+                                position: 'right',
+                                labels: {
+                                    fontColor: '#000'
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 50,
+                                    right: 0,
+                                    bottom: 0,
+                                    top: 0
+                                }
+                            },
+                            tooltips: {
+                                enabled: true
+                            }
+                        }
+                    });
+                </script>
+
+
+                {{!-- <div class="row">
+                    <div class="col-12 col-md-4 ">
+                        <div class="card border-0">
+                            <div class="card-body py-4">
+                                <h5 class="mb-2 fw-bold">
+                                    Memebers Progress
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    $72,540
+                                </p>
+                                <div class="mb-0">
+                                    <span class="badge text-success me-2">
+                                        +9.0%
+                                    </span>
+                                    <span class=" fw-bold">
+                                        Since Last Month
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card  border-0">
+                            <div class="card-body py-4">
+                                <h5 class="mb-2 fw-bold">
+                                    Memebers Progress
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    $72,540
+                                </p>
+                                <div class="mb-0">
+                                    <span class="badge text-success me-2">
+                                        +9.0%
+                                    </span>
+                                    <span class="fw-bold">
+                                        Since Last Month
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card border-0">
+                            <div class="card-body py-4">
+                                <h5 class="mb-2 fw-bold">
+                                    Memebers Progress
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    $72,540
+                                </p>
+                                <div class="mb-0">
+                                    <span class="badge text-success me-2">
+                                        +9.0%
+                                    </span>
+                                    <span class="fw-bold">
+                                        Since Last Month
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <h3 class="fw-bold fs-4 my-3">News</h3>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="highlight">
+                                    <th scope="col">TH</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Money</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>How Donald Trump is laying the groundwork to dispute the election results –
+                                        again.</td>
+                                    <td>160</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Israel has long wanted to dismantle the UN’s Palestinian refugee agency. The
+                                        consequences could be disastrous for all.</td>
+                                    <td>200</td>
+                                    <td>$300</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-    <main class="content px-3 py-4 h-100">
-
-        {{#if (isEqual currentPath "/reporter/category&tag")}}
-        {{>reporter/listnews}}
-        {{else}}
-        {{#if (isEqual currentPath "/reporter/news")}}
-        {{>reporter/postnews}}
-        {{else}}
-        {{>reporter/adminreporter}}
-        {{/if}}
-        {{/if}}
     </main>
-
-</div>
 </div>

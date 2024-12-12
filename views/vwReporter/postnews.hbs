@@ -1,0 +1,82 @@
+{{!-- {{#section 'css'}}
+
+
+{{/section}}
+
+{{#section 'js'}}
+
+{{/section}} --}}
+
+<form action="" method="post">
+  <div class="card">
+    <div class="card-header">
+      <h4>Edit New Post</h4>
+    </div>
+    <div class="card-body">
+
+      <div class="row">
+        <div class="col-sm-12 overflow-auto">
+          <label for="title" class="form-label d-block">Title New</label>
+          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title">
+
+          <label for="basic-url" class="form-label">Tag URL</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="urls">
+          </div>
+
+          <div class="form-group">
+            <label for="fulMain">Thumnail</label>
+            <input type="file" name="fulMain" id="fulMain" multiple>
+          </div>
+
+
+          <textarea id="summernote" name="editordata" class="h-100"></textarea>
+
+          <div class="form-group">
+            <input type="checkbox" id="nocategory" name="nocategory">
+            <label for="nocategory">Uncategoried</label>
+          </div>
+          <div class="form-group">
+            <label for="allcategory">All Category</label>
+            <select name="categories" id="categories">
+              {{#each this.categories}}
+              <option value="{{this.CatID}}">{{this.CatName}}</option>
+              {{/each}}
+            </select>
+
+          </div>
+        </div>
+        {{!-- <div class="col-md-4">
+          <div>
+            <h5>
+              public
+            </h5>
+            Status <Span>Draft</Span>
+            Visible <span>Public</span>
+            Date <span></span>
+          </div>
+          <div>
+            <h5>
+              Category
+            </h5>
+
+
+
+          </div>
+        </div> --}}
+
+      </div>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-primary mr-3">
+        <i class="bi bi-check2"></i>
+        Save
+      </button>
+      <button type="submit" class="btn btn-outline-success">
+        <i class="bi bi-check2"></i>
+        Create
+      </button>
+    </div>
+  </div>
+</form>
