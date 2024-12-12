@@ -17,8 +17,16 @@
   $('#frmRegister').on('submit', function (e) {
     e.preventDefault();
     const email = $('#txtEmail').val();
+    const password = $('#txtPassword').val();
+    const confirm_password = $('#txtConfirmPassword').val();
+
     if (email.length === 0) {
       alert('Email is required');
+      return;
+    }
+
+    if (password !== confirm_password) {
+      alert('Password and Confirm Password do not match');
       return;
     }
 

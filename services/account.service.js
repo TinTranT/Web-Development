@@ -7,5 +7,11 @@ export default {
 
     add(entity) {
         return db('account').insert(entity);
+    },
+
+    updatePassword(entity) {
+        return db('account')
+            .where('Id', entity.Id)
+            .update({ Password: entity.Password });
     }
 }

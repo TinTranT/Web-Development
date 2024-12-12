@@ -29,11 +29,20 @@ router.post('/register', async function (req, res) {
 
 router.get('/is-available', async function (req, res) {
     const email = req.query.email;
-    const user = await accountService.findByEmail(email);
-    if (!user) {
-        return res.json(true);
+    if (!email) {
+        // Use for Update Password
+        const user = req.session.authUser;
+        const old_password = req.query.old_password;
+        if (bcrypt.compareSync(old_password, user.Password)) {
+            return res.json(true);
+        }
+    } else {
+        // Use for Register
+        const user = await accountService.findByEmail(email);
+        if (!user) {
+            return res.json(true);
+        }
     }
-
     res.json(false);
 });
 
@@ -78,7 +87,17 @@ router.get('/update-password', isAuth, function (req, res) {
     });
 });
 
-router.post('/logout', isAuth, function (req, res) {
+router.post('/update-password', isAuth, async function (req, res) {
+    const hash_password = bcrypt.hashSync(req.body.raw_password, 8);
+    const entity = {
+        Id: req.session.authUser.Id,
+        Password: hash_password
+    }
+    await accountService.updatePassword(entity);
+    res.redirect('/account/profile');
+});
+
+router.get('/logout', isAuth, function (req, res) {
     req.session.auth = false;
     req.session.authUser = null;
     req.session.retUrl = null;
