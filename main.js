@@ -101,12 +101,11 @@ app.engine('hbs', engine({
             const result = filteredItems.map(item => options.fn(item)).join('');
             return result;
         },
-        section: hbs_sections()
-    },
-    formatDate: function (value) {
-        return format(value, 'dd/MM/yyyy');
+        section: hbs_sections(),
+        formatDate: function (value) {
+            return format(value, 'dd/MM/yyyy');
+        }
     }
-}
 }));
 app.set('view engine', 'hbs');
 app.set('views', './views');
