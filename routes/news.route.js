@@ -36,6 +36,10 @@ router.get('/byCat', async (req, res) => {
         empty: list.length === 0,
         page_items: page_items,
         catId: id,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
     });
 });
 
