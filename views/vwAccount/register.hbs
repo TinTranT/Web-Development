@@ -1,43 +1,60 @@
 {{#section 'css'}}
+{{!--
 <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"> --}}
 {{/section}}
 
 {{#section 'js'}}
+{{!--
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+--}}
 <script>
-  // alert('Hello from vwAccount/register.hbs');
-  $('#txtDOB').datetimepicker({
-    timepicker: false,
-    format: 'd/m/Y',
-    mask: true
-  });
+  document.addEventListener('DOMContentLoaded', function () {
+    // alert('Hello from vwAccount/register.hbs');
 
-  $('#frmRegister').on('submit', function (e) {
-    e.preventDefault();
-    const email = $('#txtEmail').val();
-    const password = $('#txtPassword').val();
-    const confirm_password = $('#txtConfirmPassword').val();
-
-    if (email.length === 0) {
-      alert('Email is required');
-      return;
+    // Initialize datepicker for txtDOB
+    const txtDOB = document.getElementById('txtDOB');
+    if (txtDOB) {
+      new Datepicker(txtDOB, {
+        autohide: true,
+        format: 'dd/mm/yyyy',
+      });
     }
 
-    if (password !== confirm_password) {
-      alert('Password and Confirm Password do not match');
-      return;
-    }
+    const frmRegister = document.getElementById('frmRegister');
+    frmRegister.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    $.getJSON(`/account/is-available?email=${email}`, function (data) {
-      if (data === false) {
-        alert('Email is not available');
-      } else {
-        $('#frmRegister').off('submit').submit();
+      const email = document.getElementById('txtEmail').value.trim();
+      const password = document.getElementById('txtPassword').value;
+      const confirm_password = document.getElementById('txtConfirmPassword').value;
+
+      if (email.length === 0) {
+        alert('Email is required');
+        return;
+      }
+
+      if (password !== confirm_password) {
+        alert('Password and Confirm Password do not match');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/account/is-available?email=${encodeURIComponent(email)}`);
+        const data = await response.json();
+
+        if (!data) {
+          alert('Email is not available');
+        } else {
+          frmRegister.submit();
+        }
+      } catch (error) {
+        console.error('Error checking email availability:', error);
+        alert('An error occurred while checking email availability. Please try again later.');
       }
     });
-  })
+  });
 </script>
 {{/section}}
 
@@ -50,15 +67,16 @@
       <h5>Account Information</h5>
       <div class="form-group">
         <label for="txtEmail">Email</label>
-        <input type="text" name="email" id="txtEmail" class="form-control" placeholder="">
+        <input type="text" name="email" id="txtEmail" class="form-control" placeholder="" required>
       </div>
       <div class="form-group">
         <label for="txtPassword">Password</label>
-        <input type="password" name="raw_password" id="txtPassword" class="form-control" placeholder="">
+        <input type="password" name="raw_password" id="txtPassword" class="form-control" placeholder="" required>
       </div>
-      <div class="form-group">
+      <div class=" form-group">
         <label for="txtConfirmPassword">Confirm Password</label>
-        <input type="password" name="confirm_password" id="txtConfirmPassword" class="form-control" placeholder="">
+        <input type="password" name="confirm_password" id="txtConfirmPassword" class="form-control" placeholder=""
+          required>
       </div>
 
       <h5>Additional Information</h5>
