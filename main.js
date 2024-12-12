@@ -100,7 +100,7 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    console.log(hotCategoriesNews);
+    // console.log(hotCategoriesParent);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
