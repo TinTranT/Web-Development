@@ -7,6 +7,9 @@ export default {
     findById(id) {
         return db('category').where('CatID', id).first();
     },
+    findNoParent() {
+        return db('category').whereNull('CatParentID');
+    },
     findbyNewsId(id) {
         return db('category')
             .join('news', 'category.CatID', 'news.CatID')
@@ -24,5 +27,17 @@ export default {
                 'c2.CatName as CatParentName'
             )
             .orderBy('c1.CatID', 'asc');
+    },
+    add(entity) {
+        return db('category').insert(entity);
+    },
+    del(id) {
+        return db('category').where('CatID', id).del();
+    },
+    countSubCat(id) {
+        return db('category').where('CatParentID', id).count('* as total');
+    },
+    patch(id, changes) {
+        return db('category').where('CatID', id).update(changes);
     }
 }

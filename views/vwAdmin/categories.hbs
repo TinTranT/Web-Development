@@ -141,21 +141,25 @@
                                                             <tr>
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Category</th>
-                                                                <th scope="col">Parent</th>
-                                                                <th>&nbsp;</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {{#each this.listCat}}
                                                             <tr>
                                                                 <th scope="row" style="color: #666666;">{{CatID}}</th>
-                                                                <td>{{CatName}}</td>
-                                                                <td>{{CatParentName}}</td>
+                                                                <td>
+                                                                    {{#if CatParentName}}
+                                                                    {{CatParentName}} > {{CatName}}
+                                                                    {{else}}
+                                                                    {{CatName}}
+                                                                    {{/if}}
+                                                                </td>
                                                                 <td class="text-right">
                                                                     <a class="btn btn-sm btn-outline-primary"
                                                                         href="/admin/categories/edit?id={{CatID}}"
                                                                         role="button">
-                                                                        <i class="bi bi-pencil-square"></i>
+                                                                       <i class="bi bi-pencil-square"></i>
                                                                     </a>
                                                                 </td>
                                                             </tr>

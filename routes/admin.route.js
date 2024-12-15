@@ -1,5 +1,6 @@
 import express from 'express';
 import categoryService from '../services/category.service.js';
+import newsService from '../services/news.service.js';
 
 const router = express.Router();
 
@@ -44,15 +45,76 @@ router.get('/categories', async (req, res) => {
 })
 
 router.get('/categories/add', async (req, res) => {
-    const listCat = await categoryService.findall();
+    const listCat = await categoryService.findNoParent();
     // console.log(listCat);
-
     res.render('vwAdmin/categoriesAdd', {
         layout: 'user',
         listCat: listCat,
-        
+    });
+    
+});
+
+router.post('/categories/add', async (req, res) => {
+    const listCat = await categoryService.findNoParent();
+    // console.log(entity);
+    const entity = {
+        CatName: req.body.categoryName,
+        CatParentID: req.body.categoryParent,
+    }
+    await categoryService.add(entity);
+    res.render('vwAdmin/categoriesAdd', {
+        layout: 'user',
+        listCat: listCat,
     });
 });
+
+router.get('/categories/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await categoryService.findById(id);
+    const listCat = await categoryService.findNoParent();
+    if(!data) {
+        return res.redirect('/admin/categories');
+    }
+    res.render('vwAdmin/categoriesEdit', {
+        layout: 'user',
+        category: data,
+        listCat: listCat,
+    });
+});
+
+//Hàm xử lý xóa category - ko có giao diện
+router.post('/categories/del', async (req, res) => {
+    await categoryService.del(req.body.categoryId);
+    res.redirect('/admin/categories');
+});
+
+router.get('/categories/is-using', async (req, res) => {
+    const catid = req.query.catid;
+    const checkSubCat = await categoryService.countSubCat(catid);
+    const checkNews = await newsService.countByCatId(catid);
+    console.log("checkSubCat:");
+    console.log(checkSubCat);
+    console.log("checknews:");
+    console.log(checkNews);
+    const subCatTotal = checkSubCat.length > 0 ? checkSubCat[0].total : 0;
+    const newsTotal = checkNews.total;
+    if(subCatTotal > 0 || newsTotal > 0) {
+        return res.json(false);
+    }
+    return res.json(true);
+});
+
+//hàm xử lý update category - ko có giao diện
+router.post('/categories/patch', async (req, res) => {
+    const id = parseInt(req.body.categoryId);
+    const changes = {
+        CatName: req.body.categoryName,
+        CatParentID: req.body.categoryParent,
+    }
+    await categoryService.patch(id,changes);
+    res.redirect('/admin/categories');
+});
+
 
 router.get('/tags', (req, res) => {
     res.render('vwAdmin/tags', {
