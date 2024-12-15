@@ -1,6 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 import accountService from '../services/account.service.js';
 import { isAuth } from '../middleware/auth.mdw.js';
@@ -64,10 +65,14 @@ router.get('/login', function (req, res) {
 router.post('/login', async function (req, res) {
     const user = await accountService.findByEmail(req.body.email);
     if (!user) {
-        return res.render('vwAccount/login');
+        return res.render('vwAccount/login', {
+            err_message: 'Email không tồn tại.'
+        });
     }
     if (!bcrypt.compareSync(req.body.raw_password, user.Password)) {
-        return res.render('vwAccount/login');
+        return res.render('vwAccount/login', {
+            err_message: 'Sai mật khẩu.'
+        });
     }
 
     // Save session

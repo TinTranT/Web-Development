@@ -1,4 +1,4 @@
-{{#section css}}
+{{#section 'css'}}
 <style>
   .divider:after,
   .divider:before {
@@ -8,6 +8,20 @@
     background: #eee;
   }
 </style>
+{{/section}}
+{{#section 'js'}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const message = document.getElementById('err_message').value;
+    if (message !== "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message,
+      });
+    }
+  });
+</script>
 {{/section}}
 
 {{!-- <div class="login">
@@ -50,6 +64,7 @@
   </form>
 </div> --}}
 
+<input type="text" id="err_message" value="{{ err_message }}" hidden>
 <div class="login-page">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
