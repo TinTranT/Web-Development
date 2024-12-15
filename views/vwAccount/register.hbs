@@ -1,14 +1,8 @@
 {{#section 'css'}}
-{{!--
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"> --}}
 {{/section}}
 
 {{#section 'js'}}
-{{!--
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
---}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // alert('Hello from vwAccount/register.hbs');
@@ -30,13 +24,8 @@
       const password = document.getElementById('txtPassword').value;
       const confirm_password = document.getElementById('txtConfirmPassword').value;
 
-      if (email.length === 0) {
-        alert('Email is required');
-        return;
-      }
-
       if (password !== confirm_password) {
-        alert('Password and Confirm Password do not match');
+        Swal.fire("ERROR", "Password and Confirm Password do not match", "error");
         return;
       }
 
@@ -45,59 +34,95 @@
         const data = await response.json();
 
         if (!data) {
-          alert('Email is not available');
+          //alert('Email is not available');
+          Swal.fire("ERROR", "Email is not available", "error");
         } else {
           frmRegister.submit();
         }
       } catch (error) {
-        console.error('Error checking email availability:', error);
-        alert('An error occurred while checking email availability. Please try again later.');
+        //console.error('Error checking email availability:', error);
+        Swal.fire("ERROR", "An error occurred while checking email availability. Please try again later.", "error");
+        //alert('An error occurred while checking email availability. Please try again later.');
       }
     });
   });
 </script>
 {{/section}}
 
-<form id="frmRegister" action="" method="post">
-  <div class="card">
-    <h5 class="card-header">
-      Account Registration Form
-    </h5>
-    <div class="card-body">
-      <h5>Account Information</h5>
-      <div class="form-group">
-        <label for="txtEmail">Email</label>
-        <input type="text" name="email" id="txtEmail" class="form-control" placeholder="" required>
-      </div>
-      <div class="form-group">
-        <label for="txtPassword">Password</label>
-        <input type="password" name="raw_password" id="txtPassword" class="form-control" placeholder="" required>
-      </div>
-      <div class=" form-group">
-        <label for="txtConfirmPassword">Confirm Password</label>
-        <input type="password" name="confirm_password" id="txtConfirmPassword" class="form-control" placeholder=""
-          required>
-      </div>
+<div class="register-page">
+  <!-- Section: Design Block -->
+  <section class="text-center text-lg-start">
+    <style>
+      .cascading-right {
+        margin-right: -50px;
+      }
 
-      <h5>Additional Information</h5>
-      <div class="form-group">
-        <label for="txtName">Name</label>
-        <input type="text" name="name" id="txtName" class="form-control" placeholder="">
-      </div>
-      <div class="form-group">
-        <label for="txtPenName">Pen Name</label>
-        <input type="text" name="pen_name" id="txtPenName" class="form-control" placeholder="">
-      </div>
-      <div class="form-group">
-        <label for="txtDOB">Date of Birth</label>
-        <input type="text" name="raw_dob" id="txtDOB" class="form-control" placeholder="">
+      @media (max-width: 991.98px) {
+        .cascading-right {
+          margin-right: 0;
+        }
+      }
+    </style>
+
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card cascading-right bg-body-tertiary" style="
+            backdrop-filter: blur(30px);
+            ">
+            <div class="card-body p-5 shadow-5 text-center">
+              <h2 class="fw-bold mb-5">Sign up now</h2>
+              <form id="frmRegister" action="" method="post">
+
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="text" id="txtEmail" class="form-control" name="email" required>
+                  <label class="form-label" for="txtEmail">Email address</label>
+                </div>
+
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <input type="password" id="txtPassword" class="form-control" name="raw_password" required>
+                      <label class="form-label" for="txtPassword">Password</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <input type="password" id="txtConfirmPassword" class="form-control" name="confirm_password"
+                        required>
+                      <label class="form-label" for="txtConfirmPassword">Confirm Password</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="text" id="txtFullname" class="form-control" name="name" required>
+                  <label class="form-label" for="txtFullname">Fullname</label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">
+                  <i class="bi bi-check2"></i> Sign up
+                </button>
+              </form>
+              <div class="Login my-4">
+                <p>Already have an account? <a href="/account/login" style="color: rgb(26, 137, 23);">Sign in</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+            alt="" />
+        </div>
       </div>
     </div>
-    <div class="card-footer text-muted">
-      <button type="submit" class="btn btn-primary">
-        <i class="bi bi-check2"></i>
-        Sign Up
-      </button>
-    </div>
-  </div>
-</form>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+</div>

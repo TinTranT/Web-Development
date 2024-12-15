@@ -24,7 +24,18 @@ router.post('/register', async function (req, res) {
         Role: 1
     }
     const ret = await accountService.add(entity);
-    res.render('vwAccount/register');
+
+    // Save session
+    const user = await accountService.findByEmail(req.body.email);
+    req.session.authUser = user;
+    req.session.auth = true;
+
+    // Load previous path
+    const retUrl = req.session.retUrl || '/';
+    req.session.retUrl = null;
+
+    //Access previous path
+    res.redirect(retUrl);
 });
 
 router.get('/is-available', async function (req, res) {
@@ -53,14 +64,10 @@ router.get('/login', function (req, res) {
 router.post('/login', async function (req, res) {
     const user = await accountService.findByEmail(req.body.email);
     if (!user) {
-        return res.render('vwAccount/login', {
-            showErrors: true
-        });
+        return res.render('vwAccount/login');
     }
     if (!bcrypt.compareSync(req.body.raw_password, user.Password)) {
-        return res.render('vwAccount/login', {
-            showErrors: true
-        });
+        return res.render('vwAccount/login');
     }
 
     // Save session

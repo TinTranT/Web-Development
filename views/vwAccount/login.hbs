@@ -51,12 +51,6 @@
 </div> --}}
 
 <div class="login-page">
-  {{#if showErrors}}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Login failed!</strong> You should check your Email or password.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {{/if}}
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-8 col-lg-7 col-xl-6">
@@ -101,6 +95,9 @@
             <i class="bi bi-google"></i> Continue with Google
           </a>
         </form>
+        <div class="register my-4">
+          <p>No account? <a href="/account/register" style="color: rgb(26, 137, 23);">Create one</a></p>
+        </div>
       </div>
     </div>
   </div>
