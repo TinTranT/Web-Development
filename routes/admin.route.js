@@ -1,6 +1,8 @@
 import express from 'express';
 import categoryService from '../services/category.service.js';
 import newsService from '../services/news.service.js';
+import tagService from '../services/tag.service.js';
+import newstagsService from '../services/newstags.service.js';
 
 const router = express.Router();
 
@@ -32,6 +34,8 @@ router.get('/articles', (req, res) => {
         layout: 'user',
     });
 })
+
+// ----------------- Category -----------------
 
 router.get('/categories', async (req, res) => {
     const listCat = await categoryService.findallwithParent();
@@ -91,7 +95,7 @@ router.post('/categories/del', async (req, res) => {
 router.get('/categories/is-using', async (req, res) => {
     const catid = req.query.catid;
     const checkSubCat = await categoryService.countSubCat(catid);
-    const checkNews = await newsService.countByCatId(catid);
+    const checkNews = await newsService.countByTagId(catid);
     console.log("checkSubCat:");
     console.log(checkSubCat);
     console.log("checknews:");
@@ -115,11 +119,72 @@ router.post('/categories/patch', async (req, res) => {
     res.redirect('/admin/categories');
 });
 
+// ----------------- Tags -----------------
 
-router.get('/tags', (req, res) => {
+router.get('/tags', async (req, res) => {
+    const listTag = await tagService.findall();
+    console.log(listTag);
+    
     res.render('vwAdmin/tags', {
         layout: 'user',
+        listTag: listTag,
     });
 })
+
+router.get('/tags/add', async (req, res) => {
+    res.render('vwAdmin/tagsAdd', {
+        layout: 'user',
+    });
+});
+
+router.post('/tags/add', async (req, res) => {
+    const entity = {
+        TagName: req.body.tagName,
+    }
+    await tagService.add(entity);
+    res.render('vwAdmin/tagsAdd', {
+        layout: 'user',
+    });
+});
+
+router.get('/tags/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await tagService.findById(id);
+    console.log(data);
+    if(!data) {
+        return res.redirect('/admin/tags');
+    }
+    res.render('vwAdmin/tagsEdit', {
+        layout: 'user',
+        tag: data,
+    });
+});
+
+router.post('/tags/del', async (req, res) => {
+    await tagService.del(req.body.tagId);
+    res.redirect('/admin/tags');
+});
+
+router.get('/tags/is-using', async (req, res) => {
+    const tagid = req.query.id;
+    // console.log(tagid);
+    const checkNews = await newstagsService.countByTagId(tagid);
+    const newsTotal = checkNews.total;
+    if(newsTotal > 0) {
+        return res.json(false);
+    }
+    return res.json(true);
+});
+
+router.post('/tags/patch', async (req, res) => {
+    const id = parseInt(req.body.tagId);
+    const changes = {
+        TagName: req.body.tagName,
+    }
+    await tagService.patch(id,changes);
+    res.redirect('/admin/tags');
+});
+
+
 
 export default router;

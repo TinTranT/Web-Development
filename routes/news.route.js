@@ -2,7 +2,9 @@ import express from 'express';
 import newsService from '../services/news.service.js';
 import categoryService from '../services/category.service.js';
 import tagService from '../services/tag.service.js';
+import newstagsService from '../services/newstags.service.js';
 import commentService from '../services/comment.service.js';
+
 
 const router = express.Router();
 
@@ -64,7 +66,7 @@ router.get('/byTag', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
-    const nRows = await newsService.countByTagId(id);
+    const nRows = await newstagsService.countByTagId(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i<=nPages; i++) { 

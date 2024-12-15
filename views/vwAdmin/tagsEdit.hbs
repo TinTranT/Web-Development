@@ -21,20 +21,20 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const frmEdit = document.getElementById('frmEdit');
-        const deleteButton = document.querySelector('button[formaction="/admin/categories/del"]');
-        const saveButton = document.querySelector('button[formaction="/admin/categories/patch"]');
+        const deleteButton = document.querySelector('button[formaction="/admin/tags/del"]');
+        const saveButton = document.querySelector('button[formaction="/admin/tags/patch"]');
 
         deleteButton.addEventListener('click', async function (e) {
             e.preventDefault();
-            const catId = document.getElementById('categoryId').value;
+            const tagId = document.getElementById('tagId').value;
 
             try {
-                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const response = await fetch(`/admin/tags/is-using?id=${tagId}`);
                 const data = await response.json();
                 console.log(data);
 
                 if (!data) {
-                    Swal.fire("ERROR", "This category is being used", "error");
+                    Swal.fire("ERROR", "This Tag is being used", "error");
                 } else {
                     Swal.fire({
                         title: "Do you really want to continue?",
@@ -45,7 +45,7 @@
                         reverseButtons: false,
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            frmEdit.action = '/admin/categories/del';
+                            frmEdit.action = '/admin/tags/del';
                             frmEdit.submit();
                         }
                     });
@@ -67,7 +67,7 @@
                         reverseButtons: false,
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            frmEdit.action = '/admin/categories/patch';
+                            frmEdit.action = '/admin/tags/patch';
                             frmEdit.submit();
                         }
                     });
@@ -75,15 +75,15 @@
 
         frmEdit.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const catId = document.getElementById('categoryId').value;
+            const tagId = document.getElementById('tagId').value;
 
             try {
-                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const response = await fetch(`/admin/tags/is-using?id=${tagId}`);
                 const data = await response.json();
                 console.log(data);
 
                 if (!data) {
-                    Swal.fire("ERROR", "This category is being used", "error");
+                    Swal.fire("ERROR", "This Tag is being used", "error");
                 } else {
                     frmEdit.submit();
                 }
@@ -119,42 +119,27 @@
             <div class="container-fluid">
                 <div class="mb-3">
                     <div class="row">
-                        <h3 class="fw-bold fs-4 my-3">Edit Category</h3>
+                        <h3 class="fw-bold fs-4 my-3">Edit Tag</h3>
                     </div>
                     <div class="info">
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <td class="col-4">
-                                        <label for="categoryId" class="form-label">Category ID</label>
+                                        <label for="tagId" class="form-label">Tag ID</label>
                                     </td>
                                     <td class="col-8">
-                                        <input type="text" class="form-control" id="categoryId" name="categoryId"
-                                            placeholder="" value="{{this.category.CatID}}" readonly>
+                                        <input type="text" class="form-control" id="tagId" name="tagId"
+                                            placeholder="" value="{{this.tag.TagID}}" readonly>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-4">
-                                        <label for="categoryName" class="form-label">Category Name</label>
+                                        <label for="tagName" class="form-label">Tag Name</label>
                                     </td>
                                     <td class="col-8">
-                                        <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                            placeholder="" value="{{this.category.CatName}}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-4">
-                                        <label for="categoryParent" class="form-label">Parent </label>
-                                    </td>
-                                    <td class="col-8">
-                                        <select class="form-select" id="categoryParent" name="categoryParent">
-                                            <option value="0" {{#if (isEqual category.CatParentID 0)}}selected{{/if}}>No
-                                                Parent</option>
-                                            {{#each this.listCat}}
-                                            <option value="{{this.CatID}}" {{#if (isEqual ../category.CatParentID
-                                                this.CatID)}}selected{{/if}}>{{this.CatName}}</option>
-                                            {{/each}}
-                                        </select>
+                                        <input type="text" class="form-control" id="tagName" name="tagName"
+                                            placeholder="" value="{{this.tag.TagName}}">
                                     </td>
                                 </tr>
                             </tbody>
@@ -162,15 +147,15 @@
                     </div>
                     <div class="row">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/categories/patch">
+                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/tags/patch">
                                 <i class="bi bi-floppy"></i>
                                 Save
                             </button>
-                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/categories/del">
+                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/tags/del">
                                 <i class="bi bi-trash"></i>
                                 Delete
                             </button>
-                            <a href="/admin/categories" class="btn btn-secondary">
+                            <a href="/admin/tags" class="btn btn-secondary">
                                 <i class="bi bi-arrow-bar-left"></i>
                                 Go Back
                             </a>

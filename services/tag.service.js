@@ -1,8 +1,9 @@
+import { add } from 'date-fns';
 import db from '../utils/db.js';
 
 export default {
     findall() {
-        return db('tag');
+        return db('tag').orderBy('TagID', 'asc');
     },
     findById(id) {
         return db('tag').where('TagId', id).first();
@@ -13,6 +14,15 @@ export default {
             .where('newstag.NewsID', newsId)
             .select('tag.*') // Chỉ lấy thông tin từ bảng tag
             .orderBy('tag.TagName', 'asc');
-    }
+    },
+    add(entity) {
+        return db('tag').insert(entity);
+    },
+    patch(id, entity) {
+        return db('tag').where('TagID', id).update(entity);
+    },
+    del(id) {
+        return db('tag').where('TagID', id).del();
+    },
 
 }
