@@ -59,71 +59,11 @@
     <main class="content px-3 py-4">
         <div class="container-fluid">
             <div class="mb-3">
-                <h3 class="fw-bold fs-4 mb-3">Categories DashBoard</h3>
-                <div class="row">
-                    <div class="col-12 col-md-4 ">
-                        <div class="card border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class=" fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 ">
-                        <div class="card  border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class="fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 ">
-                        <div class="card border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class="fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="list-title">
-                    <h3 class="fw-bold fs-4 my-3">Danh sách Category</h3>
+                    <h3 class="fw-bold fs-4 my-3">
+                        <i class="bi bi-list"></i>
+                        Danh sách Category
+                        </h3>
                     <a href="/admin/categories/add" class="btn btn-primary btn-sm" role="button">Add</a>
                 </div>
 
@@ -159,7 +99,7 @@
                                                                     <a class="btn btn-sm btn-outline-primary"
                                                                         href="/admin/categories/edit?id={{CatID}}"
                                                                         role="button">
-                                                                       <i class="bi bi-pencil-square"></i>
+                                                                        <i class="bi bi-pencil-square"></i>
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -174,6 +114,34 @@
                             </div>
                         </section>
                     </div>
+                </div>
+
+                <div class="row mt-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
+                            <a class="page-link"
+                                href="{{#unless this.isFirstPage}}/admin/categories?page={{this.previousPage}}{{/unless}}">
+                                Previous
+                            </a>
+                        </li>
+                        {{#each this.page_items}}
+                        {{#if isActive}}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{value}}</a>
+                        </li>
+                        {{else}}
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/categories?page={{value}}">
+                                {{value}}
+                            </a>
+                        </li>
+                        {{/if}}
+                        {{/each}}
+                        <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
+                            <a class="page-link"
+                                href="{{#unless this.isLastPage}}/admin/categories?page={{this.nextPage}}{{/unless}}">Next</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

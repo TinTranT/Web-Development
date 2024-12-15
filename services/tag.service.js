@@ -5,6 +5,15 @@ export default {
     findall() {
         return db('tag').orderBy('TagID', 'asc');
     },
+    countall() {
+        return db('tag').count('* as total').first();
+    },
+    findPage(limit,offset) {
+        return db('tag')
+            .limit(limit).offset(offset)
+            .orderBy('TagID', 'asc');
+
+    },
     findById(id) {
         return db('tag').where('TagId', id).first();
     },

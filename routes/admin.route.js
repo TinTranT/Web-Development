@@ -24,9 +24,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-    res.render('vwAdmin/users', {
-        layout: 'user',
-    });
+    res.redirect('/admin/categories');
 })
 
 router.get('/articles', (req, res) => {
@@ -38,13 +36,30 @@ router.get('/articles', (req, res) => {
 // ----------------- Category -----------------
 
 router.get('/categories', async (req, res) => {
-    const listCat = await categoryService.findallwithParent();
-    // console.log(listCat);
-
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await categoryService.countall();
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i<=nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const listCat = await categoryService.findPagewithParent(limit,offset);
     res.render('vwAdmin/categories', {
         layout: 'user',
         listCat: listCat,
-        
+        empty: listCat.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
     });
 })
 
@@ -122,12 +137,33 @@ router.post('/categories/patch', async (req, res) => {
 // ----------------- Tags -----------------
 
 router.get('/tags', async (req, res) => {
-    const listTag = await tagService.findall();
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await tagService.countall();
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i<=nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+
+    const listTag = await tagService.findPage(limit,offset);
     console.log(listTag);
     
     res.render('vwAdmin/tags', {
         layout: 'user',
         listTag: listTag,
+        empty: listTag.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
     });
 })
 
@@ -184,7 +220,5 @@ router.post('/tags/patch', async (req, res) => {
     await tagService.patch(id,changes);
     res.redirect('/admin/tags');
 });
-
-
 
 export default router;
