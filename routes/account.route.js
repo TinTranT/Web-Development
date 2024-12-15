@@ -66,12 +66,12 @@ router.post('/login', async function (req, res) {
     const user = await accountService.findByEmail(req.body.email);
     if (!user) {
         return res.render('vwAccount/login', {
-            err_message: 'Email không tồn tại.'
+            err_message: 'Email does not exist.'
         });
     }
     if (!bcrypt.compareSync(req.body.raw_password, user.Password)) {
         return res.render('vwAccount/login', {
-            err_message: 'Sai mật khẩu.'
+            err_message: 'Wrong password.'
         });
     }
 

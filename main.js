@@ -5,7 +5,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
 
-import { format } from 'date-fns';
+import { format, formatDate } from 'date-fns';
 
 import reporterRouter from './routes/reporter.route.js';
 import editorRouter from './routes/editor.route.js';
@@ -104,6 +104,20 @@ app.engine('hbs', engine({
         section: hbs_sections(),
         formatDate: function (value) {
             return format(value, 'dd/MM/yyyy');
+        },
+        formatDate2: function (value) {
+            return format(value, 'dd-MM-yyyy HH:mm');
+        },
+        nameRole: function (value) {
+            if (value === 1) {
+                return 'Reader';
+            } else if (value === 2) {
+                return 'Reporter';
+            } else if (value === 3) {
+                return 'Editor';
+            } else if (value === 4) {
+                return 'Administrator';
+            }
         }
     }
 }));
