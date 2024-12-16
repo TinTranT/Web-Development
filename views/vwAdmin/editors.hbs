@@ -1,0 +1,160 @@
+{{#section 'css'}}
+<style>
+    .intro {
+        height: 100%;
+    }
+
+    .list-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .list-title a {
+        height: 40px;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: normal;
+        padding: 10px 20px;
+    }
+
+    .btn-sm {
+        font-size: 0.875rem;
+        /* Adjust the font size to match the button size */
+    }
+
+    table td,
+    table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    tbody td {
+        font-weight: 500;
+        color: #999999;
+    }
+</style>
+{{/section}}
+
+<div class="main">
+    <nav class="navbar navbar-expand px-4 py-3">
+        <form action="#" class="d-none d-sm-inline-block">
+
+        </form>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                        <img src="/imgs/account.png" class="avatar img-fluid" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end rounded">
+
+                    </div>s
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="content px-3 py-4">
+        <div class="container-fluid">
+            <div class="mb-3">
+                <div class="list-title">
+                    <h3 class="fw-bold fs-4 my-3">
+                        <i class="bi bi-list"></i>
+                        Editor list
+                    </h3>
+                    <a href="/admin/categories/add" class="btn btn-primary btn-sm" role="button">
+                        <i class="bi bi-plus-circle-fill pd4"></i>
+                        Add
+                    </a>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <section class="intro">
+                            <div class="h-100">
+                                <div class="mask d-flex align-items-center h-100">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <div class="table-responsive bg-white">
+                                                    <table class="table mb-0 table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Email</th>
+                                                                <th scope="col">Expired Date</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {{#each this.listEditor}}
+                                                            <tr>
+                                                                <th scope="row" style="color: #666666;">{{Id}}</th>
+                                                                <td>
+                                                                    {{Name}}
+                                                                </td>
+                                                                <td>
+                                                                    {{Email}}
+                                                                </td>
+                                                                <td>
+                                                                    {{#if SubcribeExpireDate}}
+                                                                    {{formatDate SubcribeExpireDate}}
+                                                                    {{else}}
+                                                                    --
+                                                                    {{/if}}
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <a class="btn btn-sm btn-outline-primary"
+                                                                        href="/admin/readers/edit?id={{Id}}"
+                                                                        role="button">
+                                                                        <i class="bi bi-pencil-square"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            {{/each}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
+                            <a class="page-link"
+                                href="{{#unless this.isFirstPage}}/admin/editors?page={{this.previousPage}}{{/unless}}">
+                                Previous
+                            </a>
+                        </li>
+                        {{#each this.page_items}}
+                        {{#if isActive}}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{value}}</a>
+                        </li>
+                        {{else}}
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/editors?page={{value}}">
+                                {{value}}
+                            </a>
+                        </li>
+                        {{/if}}
+                        {{/each}}
+                        <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
+                            <a class="page-link"
+                                href="{{#unless this.isLastPage}}/admin/editors?page={{this.nextPage}}{{/unless}}">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -144,6 +144,37 @@ router.get('/writers', async (req, res) => {
     });
 });
 
+// ------------------ Editors ------------------
+router.get('/editors', async (req, res) => {
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await accountService.countByRole(3);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i<=nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const listEditor = await accountService.findPageByRole(3,limit,offset);
+    res.render('vwAdmin/editors', {
+        layout: 'user',
+        listEditor: listEditor,
+        empty: listEditor.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    });
+});
+
+
+
 // ----------------- Category -----------------
 
 router.get('/categories', async (req, res) => {
