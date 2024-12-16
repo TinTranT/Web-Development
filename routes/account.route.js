@@ -93,6 +93,12 @@ router.get('/profile', isAuth, function (req, res) {
     });
 });
 
+router.get('/update-profile', isAuth, function (req, res) {
+    res.render('vwAccount/update-profile', {
+        user: req.session.authUser,
+    });
+});
+
 router.get('/update-password', isAuth, function (req, res) {
     res.render('vwAccount/update-password', {
         user: req.session.authUser,

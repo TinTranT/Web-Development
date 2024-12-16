@@ -20,34 +20,6 @@
 </style>
 {{/section}}
 
-{{!-- <form action="" method="post">
-    <div class="card">
-        <div class="card-header">
-            Profile
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label for="txtUsername">Username</label>
-                <input type="text" name="txtUsername" id="" class="form-control" value="{{this.user.username}}">
-            </div>
-            <div class="form-group">
-                <label for="txtName">Name</label>
-                <input type="text" name="txtName" id="" class="form-control" value="{{this.user.name}}">
-            </div>
-            <div class="form-group">
-                <label for="txtEmail">Email</label>
-                <input type="text" name="txtEmail" id="" class="form-control" value="{{this.user.email}}">
-            </div>
-        </div>
-        <div class="card-footer text-muted">
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-check2"></i>
-                Save
-            </button>
-        </div>
-    </div>
-</form> --}}
-
 <div class="profile-page">
     <div class="container py-5">
         <div class="row">
@@ -79,7 +51,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{user.Name}}</p>
+                                <input type="text" class="form-control" value="{{user.Name}}" name="name">
                             </div>
                         </div>
                         <hr>
@@ -88,7 +60,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{user.Email}}</p>
+                                <input type="text" class="form-control" value="{{user.Email}}" name="email">
                             </div>
                         </div>
                         <hr>
@@ -97,7 +69,7 @@
                                 <p class="mb-0">Date of Birth</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{formatDate user.Dob}}</p>
+                                <input type="text" class="form-control" value="{{formatDate user.Dob}}" name="dob">
                             </div>
                         </div>
                         <hr>
@@ -106,7 +78,7 @@
                                 <p class="mb-0">Pen Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{user.PenName}}</p>
+                                <input type="text" class="form-control" value="{{user.PenName}}" name="penname">
                             </div>
                         </div>
                         <hr>
@@ -121,7 +93,7 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="/account/update-profile" class="btn btn-success">Change your information</a>
+                    <a href="#" class="btn btn-primary">Apply the change</a>
                 </div>
             </div>
         </div>
