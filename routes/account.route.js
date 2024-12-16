@@ -114,11 +114,28 @@ router.post('/forgot-password', async function (req, res) {
         }
     });
 
+    // const info = await transporter.sendMail({
+    //     from: 'Admin <testing1tintran2@gmail.com>',
+    //     to: user.Email,
+    //     subject: 'Password Reset OTP',
+    //     text: `Your OTP for password reset is ${otp}`
+    // });
+
     const info = await transporter.sendMail({
         from: 'Admin <testing1tintran2@gmail.com>',
         to: user.Email,
-        subject: 'Password Reset OTP',
-        text: `Your OTP for password reset is ${otp}`
+        subject: 'Password Reset Request',
+        text: `Dear ${user.Name},
+    
+    We have received a request to reset your password. Please use the following One-Time Password (OTP) to proceed with resetting your password:
+    
+    OTP: ${otp}
+    
+    If you did not request a password reset, please ignore this email or contact our support team immediately.
+    
+    Best regards,
+    Insight News Development Team.
+    `
     });
 
     // console.log('Message sent: %s', info.messageId);
