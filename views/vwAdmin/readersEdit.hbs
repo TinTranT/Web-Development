@@ -7,9 +7,60 @@
     .table td.col-4 {
         padding-left: 3rem;
     }
+
+    input[readonly] {
+        background-color: #e9ecef;
+        opacity: 0.7;
+        pointer-events: none;
+    }
 </style>
 {{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+const deleteButton = document.querySelector('button[formaction="/admin/categories/del"]');
+const saveButton = document.querySelector('#saveButton');
+        deleteButton.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const readerID = document.getElementById('readerID').value;
 
+            try {
+                    Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/readers/del';
+                            frmEdit.submit();
+                        }
+                    });
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+
+        saveButton.addEventListener('submit', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.submit();
+                        }
+                    });
+        });
+</script>
+{{/section}}
 <div class="main">
     <nav class="navbar navbar-expand px-4 py-3">
         <form action="#" class="d-none d-sm-inline-block">
@@ -28,7 +79,7 @@
             </ul>
         </div>
     </nav>
-    <form action="" method="post">
+    <form action="" method="post" id="frmEdit">
         <main class="content px-3 py-4">
             <div class="container-fluid">
                 <div class="mb-3">
@@ -44,7 +95,7 @@
                                     </td>
                                     <td class="col-8">
                                         <input type="text" class="form-control" id="readerID" name="txtID"
-                                            value="{{this.reader.Id}}" placeholder="">
+                                            value="{{this.reader.Id}}" placeholder="" readonly>
                                     </td>
                                 </tr>
                                 <tr>
@@ -88,9 +139,14 @@
                                         <label for="txtSubExpiredDate" class="form-label">Subscribe expired date</label>
                                     </td>
                                     <td class="col-8">
+                                        {{#if this.reader.SubcribeExpireDate}}
                                         <input type="text" class="form-control" id="readerSubExpiredDate"
                                             name="txtSubExpiredDate" placeholder=""
-                                            value="{{formatDate this.reader.SubcribeExpireDate}}">
+                                            value="{{formatDate this.reader.SubcribeExpireDate}}" readonly>
+                                        {{else}}
+                                        <input type="text" class="form-control" id="readerSubExpiredDate"
+                                            name="txtSubExpiredDate" placeholder="" value="__" readonly>
+                                        {{/if}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -108,7 +164,7 @@
                                         <label for="categoryParent" class="form-label">Change Role</label>
                                     </td>
                                     <td class="col-8">
-                                        <select class="form-select" id="categoryParent" name="categoryParent">
+                                        <select class="form-select" id="readerRole" name="txtRole">
                                             <option selected value="1">{{nameRole 1}}</option>
                                             <option value="2">{{nameRole 2}}</option>
                                             <option value="3">{{nameRole 3}}</option>
@@ -116,26 +172,37 @@
                                         </select>
                                     </td>
                                 </tr>
+                                {{#if this.reader.SubcribeExpireDate}}
                                 <tr>
                                     <td class="col-4">
-                                        <label for="txtExtendExpiredDays" class="form-label">Increase expired date</label>
+                                        <label for="txtExtendExpiredDays" class="form-label">Extend expired date</label>
                                     </td>
                                     <td class="col-8">
-                                        <input type="text" class="form-control" id="extendExpiredDays" name="txtExtendExpiredDays"
-                                            value="{{this.reader.Id}}" placeholder="">
+                                        <select class="form-select" id="extendExpiredDays" name="txtExtendExpiredDays">
+                                            <option selected value="0">No Extension</option>
+                                            <option value="30">1 months</option>
+                                            <option value="90">3 months</option>
+                                            <option value="180">6 months</option>
+                                            <option value="365">12 months</option>
+                                        </select>
                                     </td>
                                 </tr>
+                                {{/if}}
                             </tbody>
                         </table>
                     </div>
 
                     <div class="row">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2">
+                            <button type="submit" class="btn btn-primary me-2" id="saveButton">
                                 <i class="bi bi-floppy"></i>
                                 Save
                             </button>
-                            <a href="/admin/categories" class="btn btn-secondary">
+                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/readers/del">
+                                <i class="bi bi-trash"></i>
+                                Delete
+                            </button>
+                            <a href="/admin/readers" class="btn btn-secondary">
                                 <i class="bi bi-arrow-bar-left"></i>
                                 Go Back
                             </a>

@@ -17,6 +17,16 @@ export default {
             .where('Id', entity.Id)
             .update(entity);
     },
+    patch(id, entity) {
+        return db('account')
+            .where('Id', id)
+            .update(entity);
+    },
+    del(id) {
+        return db('account')
+            .where('Id', id)
+            .del();
+    },
 
     updatePassword(entity) {
         return db('account')

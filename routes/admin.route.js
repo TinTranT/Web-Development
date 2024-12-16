@@ -5,6 +5,8 @@ import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
 import accountService from '../services/account.service.js';
 
+import moment from 'moment';
+
 const router = express.Router();
 
 router.use(function (req, res, next) {
@@ -52,7 +54,7 @@ router.get('/readers', async (req, res) => {
         page_items.push(item);
     }
     const listReader = await accountService.findPageByRole(1,limit,offset);
-    console.log(listReader);
+    // console.log(listReader);
     res.render('vwAdmin/readers', {
         layout: 'user',
         listReader: listReader,
@@ -68,7 +70,7 @@ router.get('/readers', async (req, res) => {
 router.get('/readers/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
-    console.log(data);
+    // console.log(data);
     if(!data) {
         return res.redirect('/admin/readers');
     }
@@ -76,6 +78,39 @@ router.get('/readers/edit', async (req, res) => {
         layout: 'user',
         reader: data,
     });
+});
+
+router.post('/readers/edit', async (req, res) => {
+    const id = parseInt(req.body.txtID);
+    var totalExpiredDate = null;
+    // Tính toán totalExpiredDate
+    if(req.body.txtSubExpiredDate != '__')
+    {
+        const baseDate = moment(req.body.txtSubExpiredDate, 'DD/MM/YYYY');
+        const extendDays = parseInt(req.body.txtExtendExpiredDays, 10);
+    
+        if (!baseDate.isValid() || isNaN(extendDays)) {
+            return res.status(400).send('Invalid date or extend days');
+        }
+    
+        totalExpiredDate = baseDate.add(extendDays, 'days').format('DD/MM/YYYY');
+    }
+
+    const changes = {
+        Name: req.body.txtName,
+        Email: req.body.txtEmail,
+        PenName: req.body.txtPenName,
+        Dob:  moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Role: parseInt(req.body.txtRole),
+        SubcribeExpireDate:  moment(totalExpiredDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+    }
+    await accountService.patch(id,changes);
+    res.redirect('/admin/readers');
+});
+
+router.post('/readers/del', async (req, res) => {
+    await accountService.del(req.body.txtID);
+    res.redirect('/admin/readers');
 });
 
 // ----------------- Category -----------------
