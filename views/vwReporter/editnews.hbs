@@ -18,7 +18,7 @@
 
 
 {{!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 <script>
@@ -43,12 +43,15 @@
 
 
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/fileinput.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/locales/LANG.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/locales/LANG.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/js/locales/vi.min.js"></script>
-{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/themes/fa4/theme.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/themes/fa5/theme.min.js"></script>
 
 <script>
+    //const thumbnailPath = "d://DAI HOC DUNG HOC DAI//THIRD//HK1//Web_Programming//Project//Web-Development//static//imgs//WIN_20240826_09_24_17_Pro.jpg"  //"/static/imgs/{{this.article.Thumbnail}}";
+    //console.log(thumbnailPath)
+    const thumbnailPath = "/static/imgs/{{this.article.Thumbnail}}";
+    /*$(document).ready(function() {
     $("#fulMain").fileinput({
       //showCaption: false, 
       dropZoneEnabled: false,
@@ -56,7 +59,44 @@
       allowedFileExtensions:["jpg", "png", "gif"],
       theme: "fa4",
       language: "vi"
-      });
+      initialPreview: [thumbnailPath],
+        initialPreviewAsData: true,
+        initialPreviewConfig: [
+            { 
+                caption: "Thumbnail.jpg", // Tên file
+                size: 1024,
+                downloadUrl: thumbnailPath,
+                key: 1,
+                width: "120px"
+            },
+        ],
+        deleteUrl: "/site/file-delete",
+        overwriteInitial: true
+        maxFileSize: 100,
+        initialCaption: "Thumbnail"
+      });})*/
+    $("#fulMain").fileinput({
+        allowedFileExtensions:["jpg", "png", "gif"],
+        maxFileCount: 1,
+        dropZoneEnabled: false,
+        theme: "fa4",
+        language: "vi",
+        initialPreview: [thumbnailPath],
+        initialPreviewAsData: true,
+        initialPreviewConfig: [
+            {caption: "Thumbnail.jpg",
+             downloadUrl: thumbnailPath, 
+              size: 1024, 
+              width: "120px", 
+              key: 1
+            },
+        ],
+        deleteUrl: "/site/file-delete",
+        overwriteInitial: true,
+        maxFileSize: 1000,
+        initialCaption: "Thumbnail"
+    });
+
 </script>
 
 
@@ -77,29 +117,37 @@
 <form action="" method="post" enctype="multipart/form-data">
   <div class="card">
     <div class="card-header">
-      <h4>Create New</h4>
+      <h4>Edit New</h4>
     </div>
     <div class="card-body">
 
       <div class="row">
         <div class="col-sm-12 overflow-auto">
           <label for="title" class="form-label d-block">Title</label>
-          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title">
+          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title" value="{{this.article.Title}}">
           <label for="abstract" class="form-label d-block">Abstract</label>
-          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3" name="abstract">
+          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3" name="abstract" value="{{this.article.Abstract}}">
+          
           <div class="form-group mt-3">
             <label for="tags" >Tag</label>
             <select name="tags[]" id="tags" size="1" multiple>
               {{#each this.tags}}
-              <option value="{{TagID}}">{{TagName}}</option>
+                <option value="{{TagID}}" 
+                   {{#if (isInArray ../tagsArticle TagID)}} selected {{/if}}>
+                   {{TagName}}
+                </option>
               {{/each}}
             </select>
           </div>
+          
           <div class="form-group mt-3 mb-3">
             <label for="categories">Categories</label>
             <select name="categories" id="categories">
               {{#each this.categories}}
-              <option value="{{CatID}}">{{CatName}}</option>
+              <option value="{{CatID}}" 
+                 {{#if (isEqual ../categoryArticle.CatID CatID)}} selected {{/if}}>
+                 {{CatName}}
+               </option>
               {{/each}}
             </select>
           </div>
@@ -115,7 +163,7 @@
             <label for="fulMain">Thumnail</label>
             <input type="file" name="fulMain" id="fulMain" multiple>
           </div>
-          <textarea id="summernote" name="content" class="h-100"></textarea>
+          <textarea id="summernote" name="content" class="h-100">{{{this.article.Content}}}</textarea>
         </div>
       </div>
     </div>
@@ -126,7 +174,7 @@
       </a>
       <button type="submit" class="btn btn-success">
         <i class="bi bi-check2"></i>
-        Save
+        Update
       </button>
     </div>
   </div>

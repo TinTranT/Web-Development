@@ -28,6 +28,27 @@ export default {
     },
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
-    }
+    },
+    addNews(entity){
+        return db('news').insert(entity)
+    },
+    findlast(){
+        return db('news')
+        .orderBy('NewsID', 'desc') // Sắp xếp giảm dần theo id
+        .first() // Lấy dòng đầu tiên từ kết quả
 
+    },
+    findTagById(id){
+        return db('newstag').select('TagID').where('NewsID',id)
+    },
+    findCategoryById(id){
+        return db('news').where('NewsID', id).select('CatID').then(result => result[0]);
+    },
+    updateNews(id, entity){
+        return db('news').where('NewsID', id).update(entity)
+    },
+    delTag(id)
+    {
+        return db('newstag').where('NewsID', id).del()
+    }
 }

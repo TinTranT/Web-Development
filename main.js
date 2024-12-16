@@ -32,6 +32,15 @@ app.engine('hbs', engine({
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
+        isInArray: function (array, value) {
+            if (Array.isArray(array)) {
+                return array.some(item => item.TagID === value);
+            }
+            return false;
+        },
+        isEqualOr: function(value,value1,value2){
+            return value === value1 || value === value2;
+        },
         setVar: function (value1) {
             check = value1;
             return '';
@@ -104,6 +113,11 @@ app.use(async (req, res, next) => {
     res.locals.lcListNews = listNews;
     next();
 });
+// app.use(async function(req, res, next) {
+//     const categories = await categoriesService.findall();
+//     res.locals.lcCategories = categories;
+//     next()
+// })
 
 
 app.get('/', async (req, res) => {
