@@ -21,81 +21,87 @@
 {{/section}}
 
 <div class="profile-page">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <img src="https://cdn-icons-png.flaticon.com/512/648/648270.png" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
-                        <h2 class="my-3">{{user.Name}}</h2>
-                        {{#if user.SubcribeExpireDate}}
-                        <h4 class="text-muted mb-1">Premium expiration date: {{formatDate2 user.SubcribeExpireDate}}
-                        </h4>
-                        <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-danger btn-lg btn-block">Expand your PREMIUM right now!!!</a>
-                        </div>
-                        {{else}}
-                        <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-danger btn-lg btn-block">Get PREMIUM right now!!!</a>
-                        </div>
-                        {{/if}}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Full Name</p>
+    <form action="" method="post" id="frmUpdate">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/648/648270.png" alt="avatar"
+                                class="rounded-circle img-fluid" style="width: 150px;">
+                            <h2 class="my-3">{{user.Name}}</h2>
+                            {{#if user.SubcribeExpireDate}}
+                            <h4 class="text-muted mb-1">Premium expiration date: {{formatDate2 user.SubcribeExpireDate}}
+                            </h4>
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href="#" class="btn btn-danger btn-lg btn-block">Expand your PREMIUM right now!!!</a>
                             </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{user.Name}}" name="name">
+                            {{else}}
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href="#" class="btn btn-danger btn-lg btn-block">Get PREMIUM right now!!!</a>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{user.Email}}" name="email">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Date of Birth</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{formatDate user.Dob}}" name="dob">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Pen Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{user.PenName}}" name="penname">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Role</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{nameRole user.Role}}</p>
-                            </div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="#" class="btn btn-primary">Apply the change</a>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{user.Email}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" value="{{user.Name}}" name="name" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Date of Birth</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" value="{{formatDate user.Dob}}" name="dob"
+                                        required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Pen Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" value="{{user.PenName}}" name="penname">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Role</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{nameRole user.Role}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/account/profile" class="btn btn-secondary"><i class="bi bi-box-arrow-left"></i> Go
+                            back</a>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> Apply the
+                            change</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
