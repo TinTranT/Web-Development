@@ -24,6 +24,14 @@ export default {
             .update({ Password: entity.Password });
     },
 
+    updateOTP(id, otp) {
+        return db('account').where('Id', id).update({ OTP: otp });
+    },
+
+    updatePasswordByEmail(email, password) {
+        return db('account').where('Email', email).update({ Password: password });
+    },
+
     findPageByRole(role, limit, offset) {
         return db('account').where('Role', role).limit(limit).offset(offset);
     },
