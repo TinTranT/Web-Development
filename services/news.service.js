@@ -20,7 +20,7 @@ export default {
             ])
             .limit(4);
     },
-    async hotNews() {
+    hotNews() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
         const list = db('news')
@@ -36,7 +36,7 @@ export default {
     latestNews() {
         return db('news').orderBy('PublishDate', 'desc').limit(10);
     },
-    async hotCategories() {
+    hotCategories() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
 
@@ -51,7 +51,7 @@ export default {
             .where('news.PublishDate', '>=', sevenDaysAgo)
             .orderBy('news.viewCount', 'desc');
     },
-    async hotCategoriesParent() {
+    hotCategoriesParent() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
 
@@ -91,6 +91,27 @@ export default {
             .where('NewsID', '<>', id)
             .orderBy('PublishDate', 'desc')
             .limit(5);
-    }
+    },
+    addNews(entity){
+        return db('news').insert(entity)
+    },
+    findlast(){
+        return db('news')
+        .orderBy('NewsID', 'desc') // Sắp xếp giảm dần theo id
+        .first() // Lấy dòng đầu tiên từ kết quả
 
+    },
+    findTagById(id){
+        return db('newstag').select('TagID').where('NewsID',id)
+    },
+    findCategoryById(id){
+        return db('news').where('NewsID', id).select('CatID').then(result => result[0]);
+    },
+    updateNews(id, entity){
+        return db('news').where('NewsID', id).update(entity)
+    },
+    delTag(id)
+    {
+        return db('newstag').where('NewsID', id).del()
+    }
 }

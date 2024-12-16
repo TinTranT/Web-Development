@@ -15,6 +15,8 @@ import accountRouter from './routes/account.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
+import {isAuth} from './middleware/auth.mdw.js';
+import hbs_section from 'express-handlebars-sections';
 import { equal } from 'assert';
 
 const app = express();
@@ -28,12 +30,30 @@ app.use(session({
 }))
 
 let check = false
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'SECRET_KEY',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
+
 app.engine('hbs', engine({
     extname: 'hbs',
     partialsDir: './views/partials',
     helpers: {
+        section: hbs_section(),
         isEqual: function (value1, value2) {
             return value1 === value2;
+        },
+        isInArray: function (array, value) {
+            if (Array.isArray(array)) {
+                return array.some(item => item.TagID === value);
+            }
+            return false;
+        },
+        isEqualOr: function(value,value1,value2){
+            return value === value1 || value === value2;
         },
         setVar: function (value1) {
             check = value1;
@@ -121,6 +141,17 @@ app.engine('hbs', engine({
         }
     }
 }));
+
+//middleware user
+app.use(async function(req, res, next) {
+    if(req.session.auth === undefined){
+        req.session.auth = false;
+    }
+    res.locals.auth = req.session.auth;
+    res.locals.authUser = req.session.authUser;
+    next()
+
+})
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
@@ -153,6 +184,12 @@ app.use(async (req, res, next) => {
     res.locals.lcListNews = listNews;
     next();
 });
+// app.use(async function(req, res, next) {
+//     const categories = await categoriesService.findall();
+//     res.locals.lcCategories = categories;
+//     next()
+// })
+
 
 app.get('/', async (req, res) => {
     const featuredNews = await newsService.featuredNews();
@@ -182,47 +219,7 @@ app.get('/', async (req, res) => {
     });
 })
 
-// app.get('/admin',(req,res) => {
-//     res.render('admin', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
-//             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
-//             { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
-//         ],
-//         userDropdownButtons: [
-//             { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check' },
-//             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' },
-//             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil' }
-//         ]
-//     });
-// })
 
-// app.get('/editor',(req,res) => {
-//     res.render('editor', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'your info', url: '/editor/info', icon: 'bi bi-file-earmark' },
-//             { label: 'Draft Article', url: '/editor/draft', icon: 'bi bi-archive' },
-//         ]
-//     });
-// })
-// app.get('/reporter',(req,res)=>{
-//     res.render('vwReporter/mainreporter', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
-//             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
-//             { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
-//         ],
-//         userDropdownButtons: [
-//             { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check' },
-//             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' },
-//             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil' }
-//         ]
-//     });
-
-// })
 app.use(express.urlencoded({ extended: true }));
 app.use('/admin', adminRouter);
 app.use('/editor', editorRouter);

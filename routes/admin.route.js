@@ -9,15 +9,18 @@ const router = express.Router();
 
 router.use(function (req, res, next) {
     res.locals.items = [
-        { label: 'Users', url: '/admin/', icon: 'bi bi-speedometer', isDropdown: false },
-        { label: 'Articles', url: '/admin/articles', icon: 'bi bi-speedometer', isDropdown: false },
+        { label: 'Articles', url: '/admin/articles', icon: 'bi bi-newspaper', isDropdown: false },
+        { label: 'Categories', url: '/admin/categories', icon: 'bi bi-grid', isDropdown: false },
+        { label: 'Tags', url: '/admin/tags', icon: 'bi bi-tags', isDropdown: false },
         { 
-            label: 'Settings', 
-            icon: 'bi bi-gear', 
+            label: 'Users', 
+            icon: 'bi bi-person', 
             isDropdown: true,
             options: [
-                { label: 'Profile', url: '/profile', icon: 'bi bi-person-circle' },
-                { label: 'Privacy', url: '/privacy', icon: 'bi bi-shield-lock' }
+                { label: 'Reader', url: '/admin/readers', icon: 'bi bi-person-circle' },
+                { label: 'writer', url: '/admin/writers', icon: 'bi bi-shield-lock' },
+                { label: 'Editor', url: '/admin/editors', icon: 'bi bi-person-circle' },
+                { label: 'Admin', url: '/admin/admins', icon: 'bi bi-shield-lock' },
             ]
         }
     ]
@@ -81,7 +84,7 @@ router.get('/readers/edit', async (req, res) => {
 // ----------------- Category -----------------
 
 router.get('/categories', async (req, res) => {
-    const limit = 8;
+    const limit = 14;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
@@ -155,7 +158,7 @@ router.post('/categories/del', async (req, res) => {
 router.get('/categories/is-using', async (req, res) => {
     const catid = req.query.catid;
     const checkSubCat = await categoryService.countSubCat(catid);
-    const checkNews = await newsService.countByTagId(catid);
+    const checkNews = await newstagsService.countByTagId(catid);
     console.log("checkSubCat:");
     console.log(checkSubCat);
     console.log("checknews:");
