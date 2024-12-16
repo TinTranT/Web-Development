@@ -99,6 +99,18 @@ router.get('/update-profile', isAuth, function (req, res) {
     });
 });
 
+router.post('/update-profile', isAuth, async function (req, res) {
+    const user = await accountService.findByEmail(req.session.authUser.Email);
+    user.Name = req.body.name;
+    user.PenName = req.body.penname;
+    user.Dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    req.session.authUser = user;
+    const ret = await accountService.update(user);
+    res.render('vwAccount/profile', {
+        user: req.session.authUser,
+    });
+});
+
 router.get('/update-password', isAuth, function (req, res) {
     res.render('vwAccount/update-password', {
         user: req.session.authUser,
