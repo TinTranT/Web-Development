@@ -34,9 +34,9 @@ router.get('/articles', (req, res) => {
     });
 })
 
-// ----------------- Users -----------------
+// ----------------- ReadersReaders -----------------
 
-router.get('/subscribers', async (req, res) => {
+router.get('/readers', async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -51,13 +51,32 @@ router.get('/subscribers', async (req, res) => {
         }
         page_items.push(item);
     }
-    const listSub = await accountService.findByRole(1,limit,offset);
-    res.render('vwAdmin/subscribers', {
+    const listReader = await accountService.findPageByRole(1,limit,offset);
+    console.log(listReader);
+    res.render('vwAdmin/readers', {
         layout: 'user',
-        listSub: listSub,
+        listReader: listReader,
+        empty: listReader.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
     });
 });
 
+router.get('/readers/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await accountService.findById(id);
+    console.log(data);
+    if(!data) {
+        return res.redirect('/admin/readers');
+    }
+    res.render('vwAdmin/readersEdit', {
+        layout: 'user',
+        reader: data,
+    });
+});
 
 // ----------------- Category -----------------
 

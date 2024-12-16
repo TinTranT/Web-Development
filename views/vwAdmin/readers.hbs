@@ -62,11 +62,11 @@
                 <div class="list-title">
                     <h3 class="fw-bold fs-4 my-3">
                         <i class="bi bi-list"></i>
-                        Danh sách Subscribers
-                        </h3>
+                        Danh sách người đọc
+                    </h3>
                     <a href="/admin/categories/add" class="btn btn-primary btn-sm" role="button">
-                    <i class="bi bi-plus-circle-fill pd4"></i>
-                    Add
+                        <i class="bi bi-plus-circle-fill pd4"></i>
+                        Add
                     </a>
                 </div>
 
@@ -90,19 +90,25 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {{#each this.listCat}}
+                                                            {{#each this.listReader}}
                                                             <tr>
-                                                                <th scope="row" style="color: #666666;">{{CatID}}</th>
+                                                                <th scope="row" style="color: #666666;">{{Id}}</th>
                                                                 <td>
-                                                                    {{#if CatParentName}}
-                                                                    {{CatParentName}} > {{CatName}}
+                                                                    {{Name}}
+                                                                </td>
+                                                                <td>
+                                                                    {{Email}}
+                                                                </td>
+                                                                <td>
+                                                                    {{#if SubcribeExpireDate}}
+                                                                    {{formatDate2 SubcribeExpireDate}}
                                                                     {{else}}
-                                                                    {{CatName}}
+                                                                    --
                                                                     {{/if}}
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <a class="btn btn-sm btn-outline-primary"
-                                                                        href="/admin/categories/edit?id={{CatID}}"
+                                                                        href="/admin/readers/edit?id={{Id}}"
                                                                         role="button">
                                                                         <i class="bi bi-pencil-square"></i>
                                                                     </a>
@@ -125,7 +131,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isFirstPage}}/admin/categories?page={{this.previousPage}}{{/unless}}">
+                                href="{{#unless this.isFirstPage}}/admin/readers?page={{this.previousPage}}{{/unless}}">
                                 Previous
                             </a>
                         </li>
@@ -136,7 +142,7 @@
                         </li>
                         {{else}}
                         <li class="page-item">
-                            <a class="page-link" href="/admin/categories?page={{value}}">
+                            <a class="page-link" href="/admin/readers?page={{value}}">
                                 {{value}}
                             </a>
                         </li>
@@ -144,7 +150,7 @@
                         {{/each}}
                         <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isLastPage}}/admin/categories?page={{this.nextPage}}{{/unless}}">Next</a>
+                                href="{{#unless this.isLastPage}}/admin/readers?page={{this.nextPage}}{{/unless}}">Next</a>
                         </li>
                     </ul>
                 </div>

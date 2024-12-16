@@ -7,7 +7,7 @@ export function isAuth(req, res, next) {
 }
 
 export function isAdmin(req, res, next) {
-    if (req.session.authUser.permission < 1) {
+    if (req.session.authUser.permission === 4) {
         return res.redirect('403');
     }
     next();

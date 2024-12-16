@@ -4,6 +4,9 @@ export default {
     findByEmail(email) {
         return db('account').where('Email', email).first();
     },
+    findById(id) {
+        return db('account').where('Id', id).first();
+    },
 
     add(entity) {
         return db('account').insert(entity);
@@ -17,7 +20,7 @@ export default {
     findPageByRole(role,limit,offset) {
         return db('account').where('Role', role).limit(limit).offset(offset);
     },
-    countbyRole(role) {
-        return db('account').where('Role', role).count('* as total');
+    countByRole(role) {
+        return db('account').where('Role', role).count('* as total').first();
     }
 }
