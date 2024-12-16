@@ -1,0 +1,184 @@
+{{#section 'css'}}
+<style>
+    input[readonly] {
+        background-color: #e9ecef;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .table td {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .table td.col-4 {
+        padding-left: 3rem;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const frmEdit = document.getElementById('frmEdit');
+        const deleteButton = document.querySelector('button[formaction="/admin/categories/del"]');
+        const saveButton = document.querySelector('button[formaction="/admin/categories/patch"]');
+
+        deleteButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const catId = document.getElementById('categoryId').value;
+
+            try {
+                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const data = await response.json();
+                console.log(data);
+
+                if (!data) {
+                    Swal.fire("ERROR", "This category is being used", "error");
+                } else {
+                    Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/categories/del';
+                            frmEdit.submit();
+                        }
+                    });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+
+        saveButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/categories/patch';
+                            frmEdit.submit();
+                        }
+                    });
+        });
+
+        frmEdit.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const catId = document.getElementById('categoryId').value;
+
+            try {
+                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const data = await response.json();
+                console.log(data);
+
+                if (!data) {
+                    Swal.fire("ERROR", "This category is being used", "error");
+                } else {
+                    frmEdit.submit();
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+    });
+</script>
+{{/section}}
+
+<div class="main">
+    <nav class="navbar navbar-expand px-4 py-3">
+        <form action="#" class="d-none d-sm-inline-block">
+
+        </form>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                        <img src="/imgs/account.png" class="avatar img-fluid" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end rounded">
+
+                    </div>s
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <form id="frmEdit" method="post">
+        <main class="content px-3 py-4">
+            <div class="container-fluid">
+                <div class="mb-3">
+                    <div class="row">
+                        <h3 class="fw-bold fs-4 my-3">Edit Category</h3>
+                    </div>
+                    <div class="info">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="categoryId" class="form-label">Category ID</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="categoryId" name="categoryId"
+                                            placeholder="" value="{{this.category.CatID}}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="categoryName" class="form-label">Category Name</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="categoryName" name="categoryName"
+                                            placeholder="" value="{{this.category.CatName}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="categoryParent" class="form-label">Parent </label>
+                                    </td>
+                                    <td class="col-8">
+                                        <select class="form-select" id="categoryParent" name="categoryParent">
+                                            <option value="0" {{#if (isEqual category.CatParentID 0)}}selected{{/if}}>No
+                                                Parent</option>
+                                            {{#each this.listCat}}
+                                            <option value="{{this.CatID}}" {{#if (isEqual ../category.CatParentID
+                                                this.CatID)}}selected{{/if}}>{{this.CatName}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/categories/patch">
+                                <i class="bi bi-floppy"></i>
+                                Save
+                            </button>
+                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/categories/del">
+                                <i class="bi bi-trash"></i>
+                                Delete
+                            </button>
+                            <a href="/admin/categories" class="btn btn-secondary">
+                                <i class="bi bi-arrow-bar-left"></i>
+                                Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</div>

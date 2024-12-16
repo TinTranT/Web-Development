@@ -1,0 +1,169 @@
+{{#section 'css'}}
+<style>
+    input[readonly] {
+        background-color: #e9ecef;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .table td {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .table td.col-4 {
+        padding-left: 3rem;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const frmEdit = document.getElementById('frmEdit');
+        const deleteButton = document.querySelector('button[formaction="/admin/tags/del"]');
+        const saveButton = document.querySelector('button[formaction="/admin/tags/patch"]');
+
+        deleteButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const tagId = document.getElementById('tagId').value;
+
+            try {
+                const response = await fetch(`/admin/tags/is-using?id=${tagId}`);
+                const data = await response.json();
+                console.log(data);
+
+                if (!data) {
+                    Swal.fire("ERROR", "This Tag is being used", "error");
+                } else {
+                    Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/tags/del';
+                            frmEdit.submit();
+                        }
+                    });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+
+        saveButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/tags/patch';
+                            frmEdit.submit();
+                        }
+                    });
+        });
+
+        frmEdit.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const tagId = document.getElementById('tagId').value;
+
+            try {
+                const response = await fetch(`/admin/tags/is-using?id=${tagId}`);
+                const data = await response.json();
+                console.log(data);
+
+                if (!data) {
+                    Swal.fire("ERROR", "This Tag is being used", "error");
+                } else {
+                    frmEdit.submit();
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+    });
+</script>
+{{/section}}
+
+<div class="main">
+    <nav class="navbar navbar-expand px-4 py-3">
+        <form action="#" class="d-none d-sm-inline-block">
+
+        </form>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                        <img src="/imgs/account.png" class="avatar img-fluid" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end rounded">
+
+                    </div>s
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <form id="frmEdit" method="post">
+        <main class="content px-3 py-4">
+            <div class="container-fluid">
+                <div class="mb-3">
+                    <div class="row">
+                        <h3 class="fw-bold fs-4 my-3">Edit Tag</h3>
+                    </div>
+                    <div class="info">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="tagId" class="form-label">Tag ID</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="tagId" name="tagId"
+                                            placeholder="" value="{{this.tag.TagID}}" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="tagName" class="form-label">Tag Name</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="tagName" name="tagName"
+                                            placeholder="" value="{{this.tag.TagName}}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/tags/patch">
+                                <i class="bi bi-floppy"></i>
+                                Save
+                            </button>
+                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/tags/del">
+                                <i class="bi bi-trash"></i>
+                                Delete
+                            </button>
+                            <a href="/admin/tags" class="btn btn-secondary">
+                                <i class="bi bi-arrow-bar-left"></i>
+                                Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</div>

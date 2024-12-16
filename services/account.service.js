@@ -13,5 +13,11 @@ export default {
         return db('account')
             .where('Id', entity.Id)
             .update({ Password: entity.Password });
+    },
+    findPageByRole(role,limit,offset) {
+        return db('account').where('Role', role).limit(limit).offset(offset);
+    },
+    countbyRole(role) {
+        return db('account').where('Role', role).count('* as total');
     }
 }

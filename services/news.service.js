@@ -77,9 +77,6 @@ export default {
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
     },
-    countByTagId(id) {
-        return db('newstag').where('TagID', id).count('* as total').first();
-    },
     findPageByTagId(tagId, limit, offset) {
         return db('news')
         .join('newstag', 'news.NewsID', 'newstag.NewsID')
