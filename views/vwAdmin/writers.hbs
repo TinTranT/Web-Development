@@ -90,7 +90,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {{#each this.listReader}}
+                                                            {{#each this.listWriter}}
                                                             <tr>
                                                                 <th scope="row" style="color: #666666;">{{Id}}</th>
                                                                 <td>
@@ -131,7 +131,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isFirstPage}}/admin/readers?page={{this.previousPage}}{{/unless}}">
+                                href="{{#unless this.isFirstPage}}/admin/writers?page={{this.previousPage}}{{/unless}}">
                                 Previous
                             </a>
                         </li>
@@ -142,7 +142,7 @@
                         </li>
                         {{else}}
                         <li class="page-item">
-                            <a class="page-link" href="/admin/readers?page={{value}}">
+                            <a class="page-link" href="/admin/writers?page={{value}}">
                                 {{value}}
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                         {{/each}}
                         <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isLastPage}}/admin/readers?page={{this.nextPage}}{{/unless}}">Next</a>
+                                href="{{#unless this.isLastPage}}/admin/writers?page={{this.nextPage}}{{/unless}}">Next</a>
                         </li>
                     </ul>
                 </div>

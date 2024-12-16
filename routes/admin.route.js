@@ -36,7 +36,7 @@ router.get('/articles', (req, res) => {
     });
 })
 
-// ----------------- ReadersReaders -----------------
+// ----------------- Readers -----------------
 
 router.get('/readers', async (req, res) => {
     const limit = 8;
@@ -111,6 +111,37 @@ router.post('/readers/edit', async (req, res) => {
 router.post('/readers/del', async (req, res) => {
     await accountService.del(req.body.txtID);
     res.redirect('/admin/readers');
+});
+
+// ------------------   Writers   ------------------
+
+router.get('/writers', async (req, res) => {
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await accountService.countByRole(2);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i<=nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const listWriter = await accountService.findPageByRole(2,limit,offset);
+    console.log(listWriter);
+    res.render('vwAdmin/writers', {
+        layout: 'user',
+        listWriter: listWriter,
+        empty: listWriter.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    });
 });
 
 // ----------------- Category -----------------
