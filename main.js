@@ -105,6 +105,7 @@ app.use(async (req, res, next) => {
     next();
 });
 
+
 app.get('/', async (req, res) => {
     const featuredNews = await newsService.featuredNews();
     // console.log(featuredNews);
@@ -125,47 +126,7 @@ app.get('/', async (req, res) => {
     });
 })
 
-// app.get('/admin',(req,res) => {
-//     res.render('admin', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
-//             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
-//             { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
-//         ],
-//         userDropdownButtons: [
-//             { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check' },
-//             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' },
-//             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil' }
-//         ]
-//     });
-// })
 
-// app.get('/editor',(req,res) => {
-//     res.render('editor', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'your info', url: '/editor/info', icon: 'bi bi-file-earmark' },
-//             { label: 'Draft Article', url: '/editor/draft', icon: 'bi bi-archive' },
-//         ]
-//     });
-// })
-// app.get('/reporter',(req,res)=>{
-//     res.render('vwReporter/mainreporter', {
-//         layout: false,
-//         Buttons: [
-//             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
-//             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
-//             { label: 'Tag', url: '/admin/tags', icon: 'bi bi-tag' }
-//         ],
-//         userDropdownButtons: [
-//             { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check' },
-//             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text' },
-//             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil' }
-//         ]
-//     });
-
-// })
 app.use(express.urlencoded({ extended: true }));
 app.use('/admin', adminRouter);
 app.use('/editor', editorRouter)

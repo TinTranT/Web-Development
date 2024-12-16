@@ -14,58 +14,23 @@
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <link rel="stylesheet" href="/css/sidebar.css" type="text/css">
+    {{{_sections.css}}}
 </head>
 
 <body>
-
-    {{!-- <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top navbar-user">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-        </div>
-    </nav> --}}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar scroll</a>
+            <a class="navbar-brand logo" href="#">
+                <img src="/imgs/newspaper.png" alt="newspaper">
+                <h5 class="navbar-brand" href="#"><strong>Insight</strong> News</h5>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
@@ -87,7 +52,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Link</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <i id="toggleSidebarBtn" class="bi bi-list toggle-sidebar-btn"></i>
                     </li>
@@ -99,12 +64,12 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid mt-2">
         <div class="row">
-            <div class="col-sm-3 position-relative">
-                {{> sidebar expand=true buttons=Buttons}}
+            <div class="col-sm-2 position-relative">
+                {{> sidebar}}
             </div>
-            <div class="col-sm-9 fullbody " id="mainContent">
+            <div class="col-sm-10 fullbody" id="mainContent">
                 {{{body}}}
             </div>
         </div>
@@ -129,6 +94,7 @@
             mainContent.classList.toggle('fullwidth');
         });
     </script>
+    {{{_sections.js}}}
 </body>
 
 </html>

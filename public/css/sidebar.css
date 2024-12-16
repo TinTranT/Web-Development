@@ -1,151 +1,166 @@
 
-  
+
 .sidebar {
-    left: 0;
-    z-index: 996;
-    transition: all 0.3s;
-    padding: 20px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #aab7cf transparent;
-    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
-    position: fixed;
-    height: 100vh; /* Chiều cao full màn hình */
-    width: 25%; /* Đảm bảo tỷ lệ chiếm 1/4 màn hình */
-  }
-  
-  @media (max-width: 500px) {
-    .sidebar {
-      left: -300px;
-    }
-  }
-  
-  .sidebar::-webkit-scrollbar {
-    width: 5px;
-    height: 8px;
-    background-color: #fff;
-  }
-  
-  .sidebar::-webkit-scrollbar-thumb {
-    background-color: #aab7cf;
-  }
-  
+  left: 0;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 10px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #f6f3f3 transparent;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: var(--color-red);
+  position: fixed;
+  height: 100vh; /* Chiều cao full màn hình */
+  width: 16.66666667%; /* Đảm bảo tỷ lệ chiếm 1/4 màn hình */
+  border-top-right-radius: 7px;
+}
 
-  
-  .sidebar-nav {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .sidebar-nav li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .sidebar-nav .nav-item {
-    margin-bottom: 5px;
-  }
-  
-  .sidebar-nav .nav-heading {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #899bbd;
-    font-weight: 600;
-    margin: 10px 0 5px 15px;
-  }
-  
-  .sidebar-nav .nav-link {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    font-weight: 600;
-    color: #4154f1;
-    transition: 0.3;
-    background: #f6f9ff;
-    padding: 10px 15px;
-    border-radius: 4px;
-  }
-  
-  .sidebar-nav .nav-link i {
-    font-size: 16px;
-    margin-right: 10px;
-    color: #4154f1;
-  }
-  
-  .sidebar-nav .nav-link.collapsed {
-    color: #012970;
-    background: #fff;
-  }
-  
-  .sidebar-nav .nav-link.collapsed i {
-    color: #899bbd;
-  }
-  
-  .sidebar-nav .nav-link:hover {
-    color: #4154f1;
-    background: #f6f9ff;
-  }
-  
-  .sidebar-nav .nav-link:hover i {
-    color: #4154f1;
-  }
-  
-  .sidebar-nav .nav-link .bi-chevron-down {
-    margin-right: 0;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
-    transform: rotate(180deg);
-  }
-  
-  .sidebar-nav .nav-content {
-    padding: 5px 0 0 0;
-    margin: 0;
-    list-style: none;
-  }
-  
-  .sidebar-nav .nav-content a {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #012970;
-    transition: 0.3;
-    padding: 10px 0 10px 40px;
-    transition: 0.3s;
-  }
-  
-  .sidebar-nav .nav-content a i {
-    font-size: 6px;
-    margin-right: 8px;
-    line-height: 0;
-    border-radius: 50%;
-  }
-  
-  .sidebar-nav .nav-content a:hover,
-  .sidebar-nav .nav-content a.active {
-    color: #4154f1;
-  }
-  
-  .sidebar-nav .nav-content a.active i {
-    background-color: #4154f1;
-  }
-
-
+@media (max-width: 500px) {
   .sidebar {
-    /* Các thuộc tính CSS của sidebar */
-    transition: transform 0.3s ease;
+    left: -300px;
   }
-  
-  .sidebar.active {
-    transform: translateX(-100%);
-        /* left: -300px; */
-  }
+}
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #fff;
+}
 
-  .fullbody.fullwidth {
-    width: 100%;
-  }
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #aab7cf;
+}
+.sidebar-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar-nav .nav-item {
+  margin-bottom: 5px;
+}
+
+.sidebar-nav .nav-heading {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #899bbd;
+  font-weight: 600;
+  margin: 10px 0 5px 15px;
+}
+
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  /* color: #4154f1; */
+  color: var(--color-white);
+  transition: 0.3;
+  /* background: #f6f9ff; */
+  background-color: #F75D5D;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+.sidebar-nav .nav-link i {
+  font-size: 16px;
+  margin-right: 10px;
+  /* color: #4154f1; */
+  color: var(--color-white);
+}
+
+.sidebar-nav .nav-link.collapsed {
+  color: var(--color-white);
+  background: var(--color-red);
+}
+
+.sidebar-nav .nav-link.collapsed i {
+  color: var(--color-white);
+}
+
+.sidebar-nav .nav-link:hover {
+  /* color: #4154f1; */
+  color: var(--color-white);
+  /* background: #f6f9ff; */
+  background-color: #F75D5D;
+}
+
+.sidebar-nav .nav-link:hover i {
+  /* color: #4154f1; */
+  color: var(--color-white);
+}
+
+.sidebar-nav .nav-link .bi-chevron-down {
+  margin-right: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
+  transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-content {
+  padding: 5px 0 0 0;
+  margin: 0;
+  list-style: none;
+  background-color: #EB4B4B;
+}
+
+.sidebar-nav .nav-content a {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-white);
+  transition: 0.3;
+  padding: 10px 0 10px 40px;
+  transition: 0.3s;
+}
+
+.sidebar-nav .nav-content a i {
+  font-size: 12px;
+  margin-right: 8px;
+  line-height: 0;
+  border-radius: 50%;
+}
+
+/* .sidebar-nav .nav-content a:hover,
+.sidebar-nav .nav-content a.active {
+  color: #4154f1;
+} */
+.sidebar-nav .nav-content li:hover{
+  background-color: #F75D5D;
+}
+.sidebar-nav .nav-content a.active i {
+  font-size: 12px;
+  background-color: var(--color-white);
+}
+
+
+.sidebar {
+  /* Các thuộc tính CSS của sidebar */
+  transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+  transform: translateX(-100%);
+      /* left: -300px; */
+}
+
+.fullbody.fullwidth {
+  width: 90%;
+  margin : 0 auto;
+}
+
+.navbar .toggle-sidebar-btn{
+  font-size: 32px;
+  padding-left: 10px;
+  cursor: pointer;
+  color: #012970;
+}
