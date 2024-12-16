@@ -3,6 +3,7 @@ import categoryService from '../services/category.service.js';
 import newsService from '../services/news.service.js';
 import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
+import accountService from '../services/account.service.js';
 
 const router = express.Router();
 
@@ -32,6 +33,31 @@ router.get('/articles', (req, res) => {
         layout: 'user',
     });
 })
+
+// ----------------- Users -----------------
+
+router.get('/subscribers', async (req, res) => {
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await accountService.countByRole(1);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i<=nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const listSub = await accountService.findByRole(1,limit,offset);
+    res.render('vwAdmin/subscribers', {
+        layout: 'user',
+        listSub: listSub,
+    });
+});
+
 
 // ----------------- Category -----------------
 
