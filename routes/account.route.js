@@ -254,9 +254,7 @@ router.post('/payment-premium', isAuth, async function (req, res) {
     await accountService.update(user);
     req.session.authUser = user;
 
-    res.render('vwAccount/profile', {
-        user: req.session.authUser,
-    });
+    res.redirect('/account/profile');
 });
 
 router.get('/logout', isAuth, function (req, res) {
