@@ -63,13 +63,15 @@
                         {{#if @index}}
                         {{#if (and (greater @index 0) (lower @index 4))}}
                         <div class="col-md-3">
-                            <div class="card">
-                                <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{Title}}</h5>
-                                    <p class="card-text">{{PublishDate}}| 1</p>
+                            <a class="content" href="/news/details?id={{NewsID}}">
+                                <div class="card">
+                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        <p class="card-text">{{PublishDate}}| 1</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         {{/if}}
                         {{/if}}
@@ -82,13 +84,15 @@
                         {{#if @index}}
                         {{#if (and (greater @index 4) (lower @index 8))}}
                         <div class="col-md-3">
-                            <div class="card">
-                                <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{Title}}</h5>
-                                    <p class="card-text">{{PublishDate}}| 2</p>
+                            <a class="content" href="/news/details?id={{NewsID}}">
+                                <div class="card">
+                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        <p class="card-text">{{PublishDate}}| 2</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         {{/if}}
                         {{/if}}
@@ -101,13 +105,15 @@
                         {{#if @index}}
                         {{#if (and (greater @index 8) (lower @index 12))}}
                         <div class="col-md-3">
-                            <div class="card">
-                                <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{Title}}</h5>
-                                    <p class="card-text">{{PublishDate}}| 3</p>
+                            <a class="content" href="/news/details?id={{NewsID}}">
+                                <div class="card">
+                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        <p class="card-text">{{PublishDate}}| 3</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         {{/if}}
                         {{/if}}

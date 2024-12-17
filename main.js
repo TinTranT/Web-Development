@@ -160,7 +160,7 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    // console.log(hotCategoriesParent);
+    // console.log(hotNews);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
@@ -178,7 +178,8 @@ app.get('/', async (req, res) => {
             { label: 'Subscriber', url: '/admin/subscriberlist', icon: 'bi bi-person-check', id: '1' },
             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text', id: '1' },
             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil', id: '1' }
-        ]
+        ],
+        err_message: req.query.err_message
     });
 })
 

@@ -28,6 +28,10 @@ export default {
         return db('account').where('Id', id).update({ OTP: otp });
     },
 
+    deleteOTPByEmail(email) {
+        return db('account').where('Email', email).update({ OTP: null });
+    },
+
     updatePasswordByEmail(email, password) {
         return db('account').where('Email', email).update({ Password: password });
     },

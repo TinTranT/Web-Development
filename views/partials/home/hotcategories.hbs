@@ -116,6 +116,15 @@
         font-size: 15px;
         margin-bottom: 25px;
     }
+
+    .hotcategories a.content {
+        text-decoration: none;
+        /* Loại bỏ gạch chân */
+        color: inherit;
+        /* Giữ nguyên màu sắc của các phần tử bên trong */
+        display: block;
+        /* Đảm bảo thẻ <a> bao quanh toàn bộ nội dung bên trong */
+    }
 </style>
 
 
@@ -169,18 +178,20 @@
                                     {{#each hotCategoriesNews}}
                                     {{#if (lower @index 3)}}
                                     <div class="carousel-item {{#if @first}}active{{/if}}">
-                                        <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{this.CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{this.Title}}</h5>
-                                                    <p>{{this.Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{this.Title}}</h5>
+                                                        <p>{{this.Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/if}}
                                     {{/each}}
@@ -202,18 +213,20 @@
                         {{#each hotCategoriesNews}}
                         {{#if (and (greater @index 2) (lower @index 6))}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/if}}
                         {{/each}}
@@ -250,18 +263,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "International"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -281,18 +296,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "International"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                         {{!-- <div class="col-xl-4">
@@ -360,18 +377,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Sports"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -391,18 +410,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Sports"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -422,18 +443,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Education"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -453,18 +476,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Education"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -484,18 +509,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Entertainment"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -515,18 +542,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Entertainment"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -546,18 +575,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Health"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -577,18 +608,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Health"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -608,18 +641,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Technology"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -639,18 +674,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Technology"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -670,18 +707,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Law"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -701,18 +740,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Law"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -732,18 +773,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Lifestyle"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -763,18 +806,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Lifestyle"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>
@@ -794,18 +839,20 @@
                                 <div class="carousel-inner">
                                     {{#filterCategories1 hotCategoriesNews "Travel"}}
                                     <div class="carousel-item active">
-                                        <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <div class="inner-caption">
-                                                <div class="inner-badge">
-                                                    <span class="badge text-bg-primary">{{CatName}}</span>
-                                                </div>
-                                                <div class="inner-content">
-                                                    <h5>{{Title}}</h5>
-                                                    <p>{{Abstract}}</p>
+                                        <a href="/news/details?id={{this.NewsID}}" class="content">
+                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <div class="inner-caption">
+                                                    <div class="inner-badge">
+                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    </div>
+                                                    <div class="inner-content">
+                                                        <h5>{{Title}}</h5>
+                                                        <p>{{Abstract}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     {{/filterCategories1}}
                                 </div>
@@ -825,18 +872,20 @@
                     <div class="row">
                         {{#filterCategories2 hotCategoriesNews "Travel"}}
                         <div class="col-xl-4">
-                            <div class="inner-box">
-                                <div class="inner-image">
-                                    <img src="{{this.Thumbnail}}" alt="">
-                                    <div class="inner-badge">
-                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                            <a href="/news/details?id={{this.NewsID}}" class="content">
+                                <div class="inner-box">
+                                    <div class="inner-image">
+                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <div class="inner-badge">
+                                            <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inner-content">
+                                        <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5>
                                     </div>
                                 </div>
-                                <div class="inner-content">
-                                    <p class="inner-title">Nguyen Van A - {{this.PublishDate}}</p>
-                                    <h5 class="inner-description">{{this.Title}}</h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {{/filterCategories2}}
                     </div>

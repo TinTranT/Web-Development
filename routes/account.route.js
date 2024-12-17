@@ -158,7 +158,7 @@ router.post('/verify-otp', async function (req, res) {
         });
     }
 
-    res.redirect(`/account/reset-password?email=${req.body.email},otp=${req.body.otp}`);
+    res.redirect(`/account/reset-password?email=${req.body.email}&otp=${req.body.otp}`);
 });
 
 router.get('/reset-password', async function (req, res) {
@@ -166,12 +166,12 @@ router.get('/reset-password', async function (req, res) {
     const otp = req.query.otp;
 
     if (!email || !otp) {
-        return res.redirect('/');
+        return res.redirect('/?err_message=Invalid OTP or Email does not exist.');
     }
 
     const user = await accountService.findByEmail(email);
     if (!user || user.OTP !== otp) {
-        return res.redirect('/');
+        return res.redirect('/?err_message=Invalid OTP or Email does not exist.');
     }
 
     res.render('vwAccount/reset-password', {
@@ -183,6 +183,7 @@ router.get('/reset-password', async function (req, res) {
 router.post('/reset-password', async function (req, res) {
     const hash_password = bcrypt.hashSync(req.body.raw_password, 8);
     await accountService.updatePasswordByEmail(req.body.email, hash_password);
+    await accountService.deleteOTPByEmail(req.body.email);
     res.redirect('/account/login');
 });
 

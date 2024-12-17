@@ -48,6 +48,15 @@
         color: var(--color-gray);
         font-size: 16px;
     }
+
+    .lastnews a.content {
+        text-decoration: none;
+        /* Loại bỏ gạch chân */
+        color: inherit;
+        /* Giữ nguyên màu sắc của các phần tử bên trong */
+        display: block;
+        /* Đảm bảo thẻ <a> bao quanh toàn bộ nội dung bên trong */
+    }
 </style>
 
 
@@ -63,15 +72,17 @@
     <div class="row">
         {{#each latestNews}}
         <div class="col-md-6 mb-3">
-            <div class="inner-box">
-                <div class="inner-image ">
-                    <img src="{{Thumbnail}}" alt="">
+            <a class="content" href="/news/details?id={{this.NewsID}}">
+                <div class="inner-box">
+                    <div class="inner-image ">
+                        <img src="{{Thumbnail}}" alt="">
+                    </div>
+                    <div class="inner-content">
+                        <p class="inner-title">Craig Bator- <span class="inner-titlev2"> {{PublishDate}}</span> </p>
+                        <h5>{{Title}}</h5>
+                    </div>
                 </div>
-                <div class="inner-content">
-                    <p class="inner-title">Craig Bator- <span class="inner-titlev2"> {{PublishDate}}</span> </p>
-                    <h5>{{Title}}</h5>
-                </div>
-            </div>
+            </a>
         </div>
         {{/each}}
     </div>
