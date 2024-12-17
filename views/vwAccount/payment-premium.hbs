@@ -1,0 +1,250 @@
+<div class="update-password-page">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 my-4">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Medium Member (weekly) <i class="bi bi-award-fill" style="color: yellow;"></i>
+                    </div>
+                    <div class="card-body" style="text-align: left;">
+                        <div class="bill" style="display: flex; justify-content: space-between;">
+                            <p class="text-muted">Total bill:</p>
+                            <strong>$1.99</strong>
+                        </div>
+                        <div class="Include">
+                            <strong style="font-size: large;">What's included?</strong>
+                            <p><i class="bi bi-check-lg" style="color: green;"></i> Read member-only news</p>
+                            <p><i class="bi bi-check-lg" style="color: green;"></i> Support writers you read most</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card text-center">
+                    <div class="card-header">
+                        You are signed up with
+                        <a style="text-decoration: underline; color:blue;" href="/account/profile">{{user.Email}}.</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Pay with credit or debit card</h5>
+                        <div class="icon-payment">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="#F2F2F2" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#4095DB" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5V10H0z" clip-rule="evenodd">
+                                </path>
+                                <path fill="#F4B662" fill-rule="evenodd"
+                                    d="M0 21h32v3.5a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#0071CE" fill-rule="evenodd"
+                                    d="M20.14 12.285A3.6 3.6 0 0 0 18.73 12c-1.558 0-2.653.92-2.663 2.238-.01.975.782 1.518 1.38 1.842.613.333.82.545.817.842-.004.454-.49.662-.943.662-.63 0-.965-.102-1.483-.355l-.202-.108-.22 1.518c.367.188 1.047.352 1.754.361 1.654 0 2.73-.91 2.742-2.316.006-.773-.414-1.36-1.323-1.843-.55-.314-.888-.523-.884-.84 0-.283.286-.584.902-.584.515-.01.888.122 1.179.26l.141.078zM12.855 18.9l.985-6.782h1.575l-.986 6.781zm10.01-4.3s-.496 1.505-.627 1.895h1.308l-.365-1.957-.106-.585c-.042.134-.1.312-.145.448-.04.12-.069.207-.064.199m1.316-2.475h-1.217c-.377 0-.66.12-.825.562l-2.339 6.215h1.654s.27-.836.331-1.02l.907.002h.002l1.108.002c.047.236.192 1.016.192 1.016h1.462zm-12.647-.001L9.99 16.747l-.165-.94-.552-3.116c-.095-.43-.372-.557-.714-.572H6.021L6 12.26a6 6 0 0 1 1.654.745l1.4 5.89 1.667-.002 2.48-6.768z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                            </svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="#F2F2F2" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#D8232A" fill-rule="evenodd"
+                                    d="M12.5 21a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11" clip-rule="evenodd"></path>
+                                <path fill="#ED9F2D" fill-rule="evenodd"
+                                    d="M16 19.743a5.5 5.5 0 1 0 0-8.486 5.49 5.49 0 0 1 2 4.243 5.49 5.49 0 0 1-2 4.243"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#D8232A" fill-rule="evenodd"
+                                    d="M16 11.257a5.49 5.49 0 0 0-2 4.243c0 1.708.778 3.234 2 4.243a5.49 5.49 0 0 0 2-4.243 5.49 5.49 0 0 0-2-4.243"
+                                    clip-rule="evenodd"></path>
+                                <mask id="mask0" width="4" height="9" x="14" y="11" mask-type="alpha"
+                                    maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" fill-rule="evenodd"
+                                        d="M16 11.257a5.49 5.49 0 0 0-2 4.243c0 1.708.778 3.234 2 4.243a5.49 5.49 0 0 0 2-4.243 5.49 5.49 0 0 0-2-4.243"
+                                        clip-rule="evenodd"></path>
+                                </mask>
+                                <g mask="url(#mask0)">
+                                    <path fill="#ED9F2D" fill-rule="evenodd"
+                                        d="M13 12h6v1h-6zm0 2h6v1h-6zm6 2h-6v1h6zm-6 2h6v1h-6zm6 2h-6v1h6z"
+                                        clip-rule="evenodd"></path>
+                                </g>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                            </svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="url(#paint0_radial)" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <mask id="path-3-outside-1" width="25" height="7" x="3.568" y="12" fill="#000"
+                                    maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" d="M3.568 12h25v7h-25z"></path>
+                                    <path fill-rule="evenodd"
+                                        d="m7.396 16.067.667-1.835h.015l.645 1.835zM7.504 13l-1.936 5H6.7l.401-1.113h1.915L9.404 18h1.169l-1.915-5zm3.513 0v5h1.054v-3.508h.015L13.34 18h.867l1.255-3.543h.014V18h1.054v-5h-1.584l-1.133 3.438H13.8L12.602 13zm6.504 0v5h3.886v-.924h-2.76V15.85h2.48v-.854h-2.48v-1.072h2.703V13zm5.901 2.381L21.637 18h1.262l1.14-1.73L25.157 18h1.341l-1.785-2.612L26.355 13H25.12l-1.04 1.597L23.079 13h-1.305z"
+                                        clip-rule="evenodd"></path>
+                                </mask>
+                                <path fill="#1793C0" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="m7.396 16.067.667-1.835h.015l.645 1.835zM7.504 13l-1.936 5H6.7l.401-1.113h1.915L9.404 18h1.169l-1.915-5zm3.513 0v5h1.054v-3.508h.015L13.34 18h.867l1.255-3.543h.014V18h1.054v-5h-1.584l-1.133 3.438H13.8L12.602 13zm6.504 0v5h3.886v-.924h-2.76V15.85h2.48v-.854h-2.48v-1.072h2.703V13zm5.901 2.381L21.637 18h1.262l1.14-1.73L25.157 18h1.341l-1.785-2.612L26.355 13H25.12l-1.04 1.597L23.079 13h-1.305z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#fff"
+                                    d="m7.396 16.067-.94-.341-.487 1.341h1.427zm.667-1.835v-1h-.7l-.24.659zm.015 0 .943-.331-.235-.668h-.708zm.645 1.835v1h1.412l-.469-1.332zM7.503 13v-1H6.82l-.248.639zm-1.935 5-.933-.361L4.108 19h1.46zM6.7 18v1h.702l.239-.66zm.401-1.113v-1H6.4l-.238.66zm1.915 0 .944-.329-.233-.671h-.711zM9.404 18l-.944.328.233.672h.711zm1.169 0v1h1.454l-.52-1.358zm-1.915-5 .934-.358L9.346 12h-.688zm2.36 0v-1h-1v1zm0 5h-1v1h1zm1.053 0v1h1v-1zm0-3.508v-1h-1v1zm.015 0 .941-.337-.237-.663h-.704zM13.34 18l-.942.337.237.663h.705zm.867 0v1h.707l.236-.666zm1.255-3.543v-1h-.707l-.236.666zm.014 0h1v-1h-1zm0 3.543h-1v1h1zm1.054 0v1h1v-1zm0-5h1v-1h-1zm-1.584 0v-1h-.724l-.226.687zm-1.133 3.438v1h.723l.227-.687zm-.014 0-.945.33.234.67h.71zM12.602 13l.944-.329-.233-.671h-.711zm4.919 0v-1h-1v1zm0 5h-1v1h1zm3.886 0v1h1v-1zm0-.924h1v-1h-1zm-2.76 0h-1v1h1zm0-1.226v-1h-1v1zm2.48 0v1h1v-1zm0-.854h1v-1h-1zm-2.48 0h-1v1h1zm0-1.072v-1h-1v1zm2.703 0v1h1v-1zm0-.924h1v-1h-1zm2.072 2.381.826.563.387-.568-.39-.564zM21.637 18l-.827-.563L19.745 19h1.892zm1.262 0v1h.538l.297-.45zm1.14-1.73.84-.543-.832-1.286-.843 1.279zM25.157 18l-.84.543.296.457h.544zm1.341 0v1h1.895l-1.07-1.564zm-1.785-2.612-.824-.567-.389.565.387.566zM26.355 13l.824.567L28.256 12h-1.901zm-1.234 0v-1h-.542l-.296.454zm-1.04 1.597-.846.532.832 1.323.853-1.31zM23.079 13l.846-.532L23.63 12h-.552zm-1.305 0v-1h-1.91l1.088 1.57zM8.336 16.409l.667-1.835-1.88-.683-.666 1.835zm-.273-1.176h.015v-2h-.015zm-.929-.669L7.78 16.4l1.886-.664-.645-1.834zm1.589.503H7.396v2h1.327zM6.57 12.64l-1.936 5 1.865.722 1.936-5zM5.568 19H6.7v-2H5.568zm2.074-.66.401-1.114-1.881-.679-.402 1.114zm-.54-.453h1.915v-2H7.102zm.97-.672.388 1.113 1.889-.656-.388-1.114zM9.404 19h1.169v-2H9.404zm2.103-1.358-1.915-5-1.868.716 1.915 5zM8.658 12H7.504v2h1.154zm1.36 1v5h2v-5zm1 6h1.053v-2h-1.054zm2.053-1v-3.508h-2V18zm-1-2.508h.015v-2h-.015zm-.927-.664 1.255 3.509 1.883-.674-1.255-3.508zM13.341 19h.867v-2h-.867zm1.81-.666 1.255-3.544-1.886-.667-1.254 3.543zm.312-2.877h.014v-2h-.014zm-.986-1V18h2v-3.543zm1 4.543h1.054v-2h-1.054zm2.054-1v-5h-2v5zm-1-6h-1.584v2h1.584zm-2.534.687-1.133 3.438 1.9.626 1.133-3.438zm-.183 2.751H13.8v2h.014zm.93.672-1.198-3.439-1.888.658 1.197 3.438zM12.602 12h-1.585v2h1.585zm3.919 1v5h2v-5zm1 6h3.886v-2h-3.886zm4.886-1v-.924h-2V18zm-1-1.924h-2.76v2h2.76zm-1.76 1V15.85h-2v1.226zm-1-.226h2.48v-2h-2.48zm3.48-1v-.854h-2v.854zm-1-1.854h-2.48v2h2.48zm-1.48 1v-1.072h-2v1.072zm-1-.072h2.703v-2h-2.703zm3.703-1V13h-2v.924zm-1-1.924h-3.83v2h3.83zm1.246 2.818-1.786 2.619 1.653 1.126 1.785-2.619zM21.636 19H22.9v-2h-1.262zm2.098-.45 1.14-1.73-1.67-1.1-1.14 1.73zm-.535-1.737 1.119 1.73 1.679-1.086-1.119-1.73zM25.157 19h1.341v-2h-1.34zm2.167-1.564-1.786-2.612-1.65 1.128 1.785 2.612zm-1.787-1.481 1.642-2.388-1.648-1.134-1.642 2.388zM26.355 12H25.12v2h1.234zm-2.072.454-1.04 1.597 1.677 1.091 1.04-1.596zm.645 1.61-1.004-1.596-1.693 1.064 1.004 1.597zM23.078 12h-1.305v2h1.305zm-2.127 1.57 1.649 2.38 1.644-1.138-1.649-2.381z"
+                                    mask="url(#path-3-outside-1)"></path>
+                                <defs>
+                                    <radialGradient id="paint0_radial" cx="0" cy="0" r="1"
+                                        gradientTransform="matrix(0 21 -32 0 10.746 8.98)"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#71C8F2"></stop>
+                                        <stop offset="1" stop-color="#0071BD"></stop>
+                                    </radialGradient>
+                                </defs>
+                            </svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="#F2F2F2" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="url(#paint0_linear)" fill-rule="evenodd"
+                                    d="M20.746 11a3 3 0 0 0-.302.014c-.39.04-.758.213-1.021.482-.196.199-.331.446-.39.71-.027.13-.031.26-.031.392v1.426c0 .033-.009.036.031.036h1.872c.204 0 .41-.007.614.01.2.017.405.07.567.184a.62.62 0 0 1 .243.691c-.075.245-.3.409-.556.477l-.086.02c-.017.002-.04.002-.055.008-.007.004-.026.008-.012.02.003.003.018.003.03.003h.01q.12.01.238.04c.24.06.471.19.582.402a.64.64 0 0 1-.148.759c-.166.153-.399.232-.63.258-.115.013-.231.01-.347.01H19.09c-.017 0-.068-.008-.082 0-.01.005-.006.012-.006.025v2.995c0 .006-.004.03 0 .035.005.006.047.001.057.001h2.263c.371 0 .725-.09 1.026-.297.409-.283.65-.732.652-1.203v-7.494h-1.852q-.187-.002-.375-.004zm-.744 3.61c-.004.014 0 .042 0 .056v.734c0 .02-.006.086.003.096.008.009.044 0 .054 0h.394q.11.002.22 0a.29.29 0 0 0 .243-.137.6.6 0 0 0 .018-.591.3.3 0 0 0-.225-.165c-.04-.005-.083-.002-.124-.002h-.561l-.013-.001q-.005-.001-.009.01m.447.89h-.447v.833c0 .014-.004.043 0 .056.006.019.061.008.08.008h.561c.073 0 .143-.006.208-.062a.48.48 0 0 0 .145-.315.6.6 0 0 0-.097-.406.27.27 0 0 0-.225-.114h-.225"
+                                    clip-rule="evenodd"></path>
+                                <mask id="mask0" width="4" height="9" x="19" y="11" mask-type="alpha"
+                                    maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" fill-rule="evenodd"
+                                        d="M20.746 11a3 3 0 0 0-.302.014c-.39.04-.758.213-1.021.482-.196.199-.331.446-.39.71-.027.13-.031.26-.031.392v1.426c0 .033-.009.036.031.036h1.872c.204 0 .41-.007.614.01.2.017.405.07.567.184a.62.62 0 0 1 .243.691c-.075.245-.3.409-.556.477l-.086.02c-.017.002-.04.002-.055.008-.007.004-.026.008-.012.02.003.003.018.003.03.003h.01q.12.01.238.04c.24.06.471.19.582.402a.64.64 0 0 1-.148.759c-.166.153-.399.232-.63.258-.115.013-.231.01-.347.01H19.09c-.017 0-.068-.008-.082 0-.01.005-.006.012-.006.025v2.995c0 .006-.004.03 0 .035.005.006.047.001.057.001h2.263c.371 0 .725-.09 1.026-.297.409-.283.65-.732.652-1.203v-7.494h-1.852q-.187-.002-.375-.004zm-.744 3.61c-.004.014 0 .042 0 .056v.734c0 .02-.006.086.003.096.008.009.044 0 .054 0h.394q.11.002.22 0a.29.29 0 0 0 .243-.137.6.6 0 0 0 .018-.591.3.3 0 0 0-.225-.165c-.04-.005-.083-.002-.124-.002h-.561l-.013-.001q-.005-.001-.009.01m.447.89h-.447v.833c0 .014-.004.043 0 .056.006.019.061.008.08.008h.561c.073 0 .143-.006.208-.062a.48.48 0 0 0 .145-.315.6.6 0 0 0-.097-.406.27.27 0 0 0-.225-.114h-.225"
+                                        clip-rule="evenodd"></path>
+                                </mask>
+                                <path fill="url(#paint1_linear)" fill-rule="evenodd"
+                                    d="M10.359 11.02c-.23.035-.451.117-.644.237-.445.279-.711.75-.713 1.246v3.678c0 .028 0 .022.033.037l.113.048c.304.124.623.219.953.256.237.027.49.034.715-.053.18-.07.322-.2.396-.367a.8.8 0 0 0 .06-.338v-1.658c0-.01-.005-.038 0-.046.007-.01.063-.003.079-.003h1.316v1.733c0 .173-.028.346-.104.505a1 1 0 0 1-.35.393c-.365.247-.85.311-1.292.33a7 7 0 0 1-.949-.027 6.5 6.5 0 0 1-.97-.154v3.13c0 .005-.004.027 0 .03.006.007.066 0 .078 0h1.868c.276 0 .559.018.828-.045a1.61 1.61 0 0 0 1.076-.827c.111-.224.148-.462.148-.706V11h-2.276c-.122 0-.244.002-.365.02"
+                                    clip-rule="evenodd"></path>
+                                <mask id="mask1" width="4" height="9" x="9" y="11" mask-type="alpha"
+                                    maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" fill-rule="evenodd"
+                                        d="M10.359 11.02c-.23.035-.451.117-.644.237-.445.279-.711.75-.713 1.246v3.678c0 .028 0 .022.033.037l.113.048c.304.124.623.219.953.256.237.027.49.034.715-.053.18-.07.322-.2.396-.367a.8.8 0 0 0 .06-.338v-1.658c0-.01-.005-.038 0-.046.007-.01.063-.003.079-.003h1.316v1.733c0 .173-.028.346-.104.505a1 1 0 0 1-.35.393c-.365.247-.85.311-1.292.33a7 7 0 0 1-.949-.027 6.5 6.5 0 0 1-.97-.154v3.13c0 .005-.004.027 0 .03.006.007.066 0 .078 0h1.868c.276 0 .559.018.828-.045a1.61 1.61 0 0 0 1.076-.827c.111-.224.148-.462.148-.706V11h-2.276c-.122 0-.244.002-.365.02"
+                                        clip-rule="evenodd"></path>
+                                </mask>
+                                <path fill="url(#paint2_linear)" fill-rule="evenodd"
+                                    d="M15.52 11.004c-.176.01-.35.047-.512.109a1.6 1.6 0 0 0-.832.71c-.115.21-.173.443-.174.677v1.963a2 2 0 0 1 .159-.11 2.5 2.5 0 0 1 .894-.31c.255-.044.515-.063.775-.068q.383-.007.765.03a8 8 0 0 1 .865.135c.017.004.08.008.09.02.006.009 0 .043 0 .052v.582l-.11-.049a3.4 3.4 0 0 0-.872-.255c-.408-.06-.869-.058-1.22.167-.34.218-.459.604-.422.971a.95.95 0 0 0 .609.807c.355.141.768.122 1.14.054.305-.056.596-.158.874-.287v.582c0 .01.007.044 0 .053-.008.011-.073.016-.09.02a9 9 0 0 1-.971.145 7 7 0 0 1-.77.017 4.7 4.7 0 0 1-.778-.087c-.338-.069-.673-.187-.938-.398v3.418c0 .007-.005.036 0 .042.011.012.102.002.123.002h1.664c.234 0 .473.011.706-.004a1.68 1.68 0 0 0 1.105-.51c.268-.284.4-.643.4-1.017v-7.464h-2.18L15.674 11q-.077-.001-.155.004"
+                                    clip-rule="evenodd"></path>
+                                <mask id="mask2" width="4" height="9" x="14" y="11" mask-type="alpha"
+                                    maskUnits="userSpaceOnUse">
+                                    <path fill="#fff" fill-rule="evenodd"
+                                        d="M15.52 11.004c-.176.01-.35.047-.512.109a1.6 1.6 0 0 0-.832.71c-.115.21-.173.443-.174.677v1.963a2 2 0 0 1 .159-.11 2.5 2.5 0 0 1 .894-.31c.255-.044.515-.063.775-.068q.383-.007.765.03a8 8 0 0 1 .865.135c.017.004.08.008.09.02.006.009 0 .043 0 .052v.582l-.11-.049a3.4 3.4 0 0 0-.872-.255c-.408-.06-.869-.058-1.22.167-.34.218-.459.604-.422.971a.95.95 0 0 0 .609.807c.355.141.768.122 1.14.054.305-.056.596-.158.874-.287v.582c0 .01.007.044 0 .053-.008.011-.073.016-.09.02a9 9 0 0 1-.971.145 7 7 0 0 1-.77.017 4.7 4.7 0 0 1-.778-.087c-.338-.069-.673-.187-.938-.398v3.418c0 .007-.005.036 0 .042.011.012.102.002.123.002h1.664c.234 0 .473.011.706-.004a1.68 1.68 0 0 0 1.105-.51c.268-.284.4-.643.4-1.017v-7.464h-2.18L15.674 11q-.077-.001-.155.004"
+                                        clip-rule="evenodd"></path>
+                                </mask>
+                                <defs>
+                                    <linearGradient id="paint0_linear" x1="23" x2="19.135" y1="10.611" y2="10.611"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#43C311"></stop>
+                                        <stop offset="1" stop-color="#288C00"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="paint1_linear" x1="9.01" x2="13.05" y1="20.023" y2="20.023"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#21469E"></stop>
+                                        <stop offset="1" stop-color="#1E81EB"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="paint2_linear" x1="18" x2="14" y1="11" y2="11"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F42D3E"></stop>
+                                        <stop offset="1" stop-color="#9C0017"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="#F2F2F2" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#212D34" fill-rule="evenodd"
+                                    d="M7.016 16.333c-.21.191-.484.275-.917.275h-.18v-2.286h.18c.433 0 .696.078.917.28.232.207.371.53.371.86 0 .332-.139.663-.37.871m-.782-2.596H5.25v3.456h.978c.52 0 .896-.123 1.226-.4.392-.325.624-.817.624-1.326 0-1.02-.758-1.73-1.844-1.73M8.386 17.193h.67v-3.457h-.67zM10.695 15.063c-.403-.15-.52-.248-.52-.435 0-.218.21-.383.498-.383.201 0 .366.083.54.28l.351-.463a1.5 1.5 0 0 0-1.009-.383c-.608 0-1.071.425-1.071.99 0 .477.215.72.845.949.262.093.396.155.463.196.134.088.2.213.2.358 0 .28-.22.488-.52.488-.319 0-.576-.161-.73-.461l-.434.42c.31.455.68.657 1.19.657.696 0 1.185-.466 1.185-1.135 0-.55-.226-.798-.989-1.078M11.894 15.467c0 1.016.793 1.804 1.813 1.804.288 0 .536-.057.84-.201v-.794c-.268.27-.505.378-.809.378-.675 0-1.154-.492-1.154-1.192 0-.663.495-1.187 1.123-1.187.32 0 .562.115.84.389v-.793a1.7 1.7 0 0 0-.824-.213 1.81 1.81 0 0 0-1.83 1.81M19.86 16.058l-.916-2.322h-.732l1.458 3.546h.36l1.484-3.546h-.726zM21.817 17.193h1.9v-.585h-1.23v-.933h1.185v-.586h-1.185v-.767h1.23v-.586h-1.9zM25.026 15.328h-.195V14.28h.206c.417 0 .644.176.644.512 0 .348-.227.535-.655.535m1.345-.571c0-.647-.443-1.02-1.216-1.02h-.994v3.456h.67v-1.389h.087l.927 1.389h.825l-1.082-1.456c.505-.104.783-.45.783-.98"
+                                    clip-rule="evenodd"></path>
+                                <g filter="url(#filter0_i)">
+                                    <path fill="url(#paint0_linear)" fill-rule="evenodd"
+                                        d="M18.42 15.477a1.833 1.833 0 0 1-1.827 1.838 1.833 1.833 0 0 1-1.827-1.838c0-1.016.818-1.84 1.827-1.84 1.01 0 1.828.824 1.828 1.84"
+                                        clip-rule="evenodd"></path>
+                                </g>
+                                <defs>
+                                    <linearGradient id="paint0_linear" x1="18.832" x2="16.663" y1="15.828" y2="13.264"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#FFA700"></stop>
+                                        <stop offset="1" stop-color="#E75A10"></stop>
+                                    </linearGradient>
+                                    <filter id="filter0_i" width="3.655" height="3.678" x="14.766" y="13.638"
+                                        color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                        <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                                        <feColorMatrix in="SourceAlpha" result="hardAlpha"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"></feColorMatrix>
+                                        <feOffset dx="1" dy="1"></feOffset>
+                                        <feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"></feComposite>
+                                        <feColorMatrix
+                                            values="0 0 0 0 0.314068 0 0 0 0 0.00146228 0 0 0 0 0.00146228 0 0 0 0.5 0">
+                                        </feColorMatrix>
+                                        <feBlend in2="shape" result="effect1_innerShadow"></feBlend>
+                                    </filter>
+                                </defs>
+                            </svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                viewBox="0 0 32 32" class="fy" role="presentation" aria-hidden="true" focusable="false">
+                                <path fill="#F2F2F2" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#E5E5E5" fill-opacity="0.01" fill-rule="evenodd"
+                                    d="M0 6.5A1.5 1.5 0 0 1 1.5 5h29A1.5 1.5 0 0 1 32 6.5v18a1.5 1.5 0 0 1-1.5 1.5h-29A1.5 1.5 0 0 1 0 24.5z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="url(#paint0_linear)" fill-rule="evenodd"
+                                    d="M17.313 20.48c2.704.013 5.17-2.224 5.17-4.946 0-2.977-2.466-5.035-5.17-5.034h-2.326C12.252 10.499 10 12.557 10 15.534c0 2.722 2.252 4.96 4.987 4.946z"
+                                    clip-rule="evenodd"></path>
+                                <path fill="#F4F6F7" fill-rule="evenodd"
+                                    d="M14.997 10.916c-2.5 0-4.525 2.045-4.526 4.569s2.026 4.567 4.526 4.568c2.5-.001 4.526-2.046 4.526-4.568 0-2.524-2.026-4.568-4.526-4.57m-2.87 4.569a2.9 2.9 0 0 1 1.843-2.703v5.404a2.9 2.9 0 0 1-1.842-2.701m3.896 2.703v-5.406a2.9 2.9 0 0 1 1.843 2.703 2.9 2.9 0 0 1-1.843 2.703"
+                                    clip-rule="evenodd"></path>
+                                <defs>
+                                    <linearGradient id="paint0_linear" x1="25.074" x2="21.873" y1="18.57" y2="8.108"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#009BE0"></stop>
+                                        <stop offset="1" stop-color="#006BA8"></stop>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <form action="" method="post">
+                            <!-- Card number input -->
+                            <div data-mdb-input-init class="form-outline mb-4 text-muted" style="text-align: left;">
+                                <label class="form-label" for="txtCardNumber">Card number</label>
+                                <input type="text" id="txtCardNumber" class="form-control"
+                                    placeholder="5555 4444 4444 4444" required>
+                            </div>
+
+                            <!-- 2 column grid layout with text inputs for the Expiration and Security code -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div data-mdb-input-init class="form-outline text-muted" style="text-align: left;">
+                                        <label class="form-label" for="txtExpiration">Expiration</label>
+                                        <input type="text" id="txtExpiration" class="form-control" placeholder="MM/yy"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div data-mdb-input-init class="form-outline text-muted" style="text-align: left;">
+                                        <label class="form-label" for="txtCVV">Security code</label>
+                                        <input type="text" id="txtCVV" class="form-control" placeholder="123" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success" style="border-radius: 99em;">Pay with credit
+                                or
+                                debit card</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

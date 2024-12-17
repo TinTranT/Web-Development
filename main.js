@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import hbs_sections from 'express-handlebars-sections';
+import moment from 'moment';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
@@ -118,7 +119,10 @@ app.engine('hbs', engine({
             } else if (value === 4) {
                 return 'Administrator';
             }
-        }
+        },
+        isExpired: function (date) {
+            return moment(date).isBefore(moment());
+        },
     }
 }));
 app.set('view engine', 'hbs');
