@@ -46,6 +46,9 @@ app.engine('hbs', engine({
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
+        isNotEqual: function (value1, value2) {
+            return value1 !== value2;
+        },
         isInArray: function (array, value) {
             if (Array.isArray(array)) {
                 return array.some(item => item.TagID === value);
@@ -138,7 +141,20 @@ app.engine('hbs', engine({
             } else if (value === 4) {
                 return 'Administrator';
             }
-        }
+        },
+        nameStatus: function (value) {
+            if (value === 0) {
+                return 'Rejected';
+            } else if (value === 1) {
+                return 'Not approved';
+            }
+            else if (value === 2) {
+                return 'Pending Publication';
+            }
+            else if (value === 3) {
+                return 'Published';
+            }
+        },
     }
 }));
 

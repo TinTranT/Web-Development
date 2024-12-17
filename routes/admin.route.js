@@ -52,6 +52,7 @@ router.get('/articles', async (req, res) => {
         page_items.push(item);
     }
     const news = await newsService.findPageByCatId(id, limit, offset);
+    console.log(news);
     const catList = await categoryService.findWithParent();
 
     res.render('vwAdmin/articles', {
@@ -90,6 +91,15 @@ router.post('/articles/del', async (req, res) => {
     await newstagsService.del(req.body.newsId);
     await newsService.del(req.body.newsId);
     res.redirect('/admin/articles?id=10&page=1');
+});
+
+router.post('/articles/patch', async (req, res) => {
+    const id = parseInt(req.body.newsId);
+    const changes = {
+        Status: 3,
+    }
+    await newsService.patch(id, changes);
+    res.redirect('/admin/articles/details?id='+ id);
 });
 
 // ----------------- Readers -----------------

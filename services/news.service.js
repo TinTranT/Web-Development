@@ -77,6 +77,7 @@ export default {
     countByCatId(id) {
         return db('news').where('CatID', id).count('* as total').first();
     },
+
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
     },
@@ -120,4 +121,7 @@ export default {
     del(id){
         return db('news').where('NewsID', id).del()
     },
+    patch(id, changes){
+        return db('news').where('NewsID', id).update(changes)
+    }
 }

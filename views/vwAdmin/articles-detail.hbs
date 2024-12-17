@@ -17,10 +17,11 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButton = document.querySelector('#deleteButton');
+        const publishButton = document.querySelector('#publishButton');
         deleteButton.addEventListener('click', async function (e) {
             e.preventDefault();
             Swal.fire({
-                title: "Do you really want to continue?",
+                title: "Do you to permanently delete this article ?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Yes",
@@ -34,6 +35,25 @@
                 }
             });
         });
+    
+        publishButton.addEventListener('click', async function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Do you want to publish this Article?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    reverseButtons: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const frmAction = document.querySelector('#frmAction');
+                        frmAction.action = '/admin/articles/patch';
+                        frmAction.submit();
+                    }
+                });
+            });
+    
     });
 </script>
 {{/section}}
@@ -44,12 +64,18 @@
             <div class="mb-3">
                 <div class="news-content">
                     <div class="d-flex justify-content-between">
-                        <a href="#" class="text-dark link-hover me-3">
+                        <h5>
+                            <a href="#" class="text-dark link-hover me-3">
                             <span class="badge bg-primary">
                                 {{this.category.CatName}}
                             </span>
-                        </a>
-                        <p class="text-dark">{{formatDate this.news.PublishDate}}</p>
+                        </h5>
+                        </h4>
+                        <h4 class="text-dark">
+                            <span class="badge bg-info">
+                                {{nameStatus this.news.Status}}
+                            </span>
+                        </h4>
                     </div>
                     <div class="mb-4">
                         <a href="#" class="h1 display-5">{{this.news.Title}}</a>
@@ -92,12 +118,22 @@
                         <div style="display: none;">
                             <input type="text" id="newsId" name="newsId" value="{{this.news.NewsID}}">
                         </div>
+
                         <div class="d-flex justify-content-around">
-                            <a href="#" class="btn btn-primary">
+                            {{#if (isNotEqual this.news.Status 3)}}
+                            <button type="click" id="publishButton" class="btn btn-primary" formaction="/admin/articles/patch">
                                 <i class="bi bi-file-earmark-arrow-up"></i>
                                 Publish
-                            </a>
-                            <button type="click" id="deleteButton" class="btn btn-danger" formaction="/admin/articles/del">
+                            </button>
+                            {{else}}
+                            <button class="btn btn-secondary" readonly>
+                                <i class="bi bi-check-circle"></i>
+                                Published
+                            </button>
+                            {{/if}}
+
+                            <button type="click" id="deleteButton" class="btn btn-danger"
+                                formaction="/admin/articles/del">
                                 <i class="bi bi-trash"></i>
                                 Delete
                             </button>

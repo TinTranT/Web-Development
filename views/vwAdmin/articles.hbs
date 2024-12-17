@@ -53,12 +53,17 @@
                             <span class="badge bg-dark">{{TagName}}</span>
                             {{/each}}
                             {{#if (isEqual PremiumFlag 1)}}
-                            <span class="badge badge-success">Premium</span>
+                            <span class="badge bg-success">Premium</span>
                             {{else}}
-                            <span class="badge badge-danger">Non-Premium</span>
+                            <span class="badge bg-danger">Non-Premium</span>
                             {{/if}}
                             <p class="card-text">{{Abstract}}</p>
-                            <p class="card-text">{{PublishDate}}</p>
+                            <p class="card-text">{{formatDate PublishDate}}</p>
+                            <p class="card-text">
+                                <span class="badge bg-primary">
+                                {{nameStatus Status}}
+                            </span>
+                            </p>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between">
                             <a href="/admin/articles/details?id={{NewsID}}" class="btn btn-outline-info" disabled
