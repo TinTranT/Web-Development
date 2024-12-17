@@ -11,12 +11,12 @@ const router = express.Router();
 
 router.use(function (req, res, next) {
     res.locals.items = [
-        { label: 'Articles', url: '/admin/articles', icon: 'bi bi-newspaper', isDropdown: false },
+        { label: 'Articles', url: '/admin/articles?id=10&page=1', icon: 'bi bi-newspaper', isDropdown: false },
         { label: 'Categories', url: '/admin/categories', icon: 'bi bi-grid', isDropdown: false },
         { label: 'Tags', url: '/admin/tags', icon: 'bi bi-tags', isDropdown: false },
-        { 
-            label: 'Users', 
-            icon: 'bi bi-person', 
+        {
+            label: 'Users',
+            icon: 'bi bi-person',
             isDropdown: true,
             options: [
                 { label: 'Reader', url: '/admin/readers', icon: 'bi bi-person-circle' },
@@ -30,14 +30,67 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-    res.redirect('/admin/categories');
+    res.redirect('/admin/articles?id=10&page=1');
 })
 
-router.get('/articles', (req, res) => {
+// ------------------ Articles ------------------
+
+router.get('/articles', async (req, res) => {
+    const id = parseInt(req.query.id) || 0;
+    const limit = 4;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await newsService.countByCatId(id);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const news = await newsService.findPageByCatId(id, limit, offset);
+    const catList = await categoryService.findWithParent();
+
     res.render('vwAdmin/articles', {
         layout: 'user',
+        news: news,
+        catList: catList,
+        empty: news.length === 0,
+        page_items: page_items,
+        catId: id,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
     });
 })
+
+router.get('/articles/details', async (req, res) => {
+    const id = parseInt(req.query.id) || 0;
+    const news = await newsService.findbyId(id);
+    const category = await categoryService.findbyNewsId(id);
+    const taglist = await tagService.findByNewsId(id);
+    if (!news) {
+        return res.redirect('/admin/articles?id=10&page=1');
+    }
+
+    res.render('vwAdmin/articles-detail', {
+        layout: 'user',
+        category: category,
+        news: news,
+        taglist: taglist,
+    });
+
+});
+
+router.post('/articles/del', async (req, res) => {
+    await newstagsService.del(req.body.newsId);
+    await newsService.del(req.body.newsId);
+    res.redirect('/admin/articles?id=10&page=1');
+});
 
 // ----------------- Readers -----------------
 
@@ -49,14 +102,14 @@ router.get('/readers', async (req, res) => {
     const nRows = await accountService.countByRole(1);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) {
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
         }
         page_items.push(item);
     }
-    const listReader = await accountService.findPageByRole(1,limit,offset);
+    const listReader = await accountService.findPageByRole(1, limit, offset);
     // console.log(listReader);
     res.render('vwAdmin/readers', {
         layout: 'user',
@@ -74,7 +127,7 @@ router.get('/readers/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
     // console.log(data);
-    if(!data) {
+    if (!data) {
         return res.redirect('/admin/readers');
     }
     res.render('vwAdmin/readersEdit', {
@@ -87,15 +140,14 @@ router.post('/readers/edit', async (req, res) => {
     const id = parseInt(req.body.txtID);
     var totalExpiredDate = null;
     // Tính toán totalExpiredDate
-    if(req.body.txtSubExpiredDate != '__')
-    {
+    if (req.body.txtSubExpiredDate != '__') {
         const baseDate = moment(req.body.txtSubExpiredDate, 'DD/MM/YYYY');
         const extendDays = parseInt(req.body.txtExtendExpiredDays, 10);
-    
+
         if (!baseDate.isValid() || isNaN(extendDays)) {
             return res.status(400).send('Invalid date or extend days');
         }
-    
+
         totalExpiredDate = baseDate.add(extendDays, 'days').format('DD/MM/YYYY');
     }
 
@@ -103,11 +155,11 @@ router.post('/readers/edit', async (req, res) => {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
-        Dob:  moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
         Role: parseInt(req.body.txtRole),
-        SubcribeExpireDate:  moment(totalExpiredDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
+        SubcribeExpireDate: moment(totalExpiredDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
     }
-    await accountService.patch(id,changes);
+    await accountService.patch(id, changes);
     res.redirect('/admin/readers');
 });
 
@@ -126,15 +178,14 @@ router.get('/writers', async (req, res) => {
     const nRows = await accountService.countByRole(2);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) {
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
         }
         page_items.push(item);
     }
-    const listWriter = await accountService.findPageByRole(2,limit,offset);
-    console.log(listWriter);
+    const listWriter = await accountService.findPageByRole(2, limit, offset);
     res.render('vwAdmin/writers', {
         layout: 'user',
         listWriter: listWriter,
@@ -156,14 +207,14 @@ router.get('/editors', async (req, res) => {
     const nRows = await accountService.countByRole(3);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) {
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
         }
         page_items.push(item);
     }
-    const listEditor = await accountService.findPageByRole(3,limit,offset);
+    const listEditor = await accountService.findPageByRole(3, limit, offset);
     res.render('vwAdmin/editors', {
         layout: 'user',
         listEditor: listEditor,
@@ -188,14 +239,14 @@ router.get('/categories', async (req, res) => {
     const nRows = await categoryService.countall();
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) {
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
         }
         page_items.push(item);
     }
-    const listCat = await categoryService.findPagewithParent(limit,offset);
+    const listCat = await categoryService.findPagewithParent(limit, offset);
     res.render('vwAdmin/categories', {
         layout: 'user',
         listCat: listCat,
@@ -215,7 +266,7 @@ router.get('/categories/add', async (req, res) => {
         layout: 'user',
         listCat: listCat,
     });
-    
+
 });
 
 router.post('/categories/add', async (req, res) => {
@@ -236,7 +287,7 @@ router.get('/categories/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await categoryService.findById(id);
     const listCat = await categoryService.findNoParent();
-    if(!data) {
+    if (!data) {
         return res.redirect('/admin/categories');
     }
     res.render('vwAdmin/categoriesEdit', {
@@ -262,7 +313,7 @@ router.get('/categories/is-using', async (req, res) => {
     console.log(checkNews);
     const subCatTotal = checkSubCat.length > 0 ? checkSubCat[0].total : 0;
     const newsTotal = checkNews.total;
-    if(subCatTotal > 0 || newsTotal > 0) {
+    if (subCatTotal > 0 || newsTotal > 0) {
         return res.json(false);
     }
     return res.json(true);
@@ -275,7 +326,7 @@ router.post('/categories/patch', async (req, res) => {
         CatName: req.body.categoryName,
         CatParentID: req.body.categoryParent,
     }
-    await categoryService.patch(id,changes);
+    await categoryService.patch(id, changes);
     res.redirect('/admin/categories');
 });
 
@@ -289,7 +340,7 @@ router.get('/tags', async (req, res) => {
     const nRows = await tagService.countall();
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) {
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
@@ -297,9 +348,9 @@ router.get('/tags', async (req, res) => {
         page_items.push(item);
     }
 
-    const listTag = await tagService.findPage(limit,offset);
+    const listTag = await tagService.findPage(limit, offset);
     console.log(listTag);
-    
+
     res.render('vwAdmin/tags', {
         layout: 'user',
         listTag: listTag,
@@ -332,7 +383,7 @@ router.get('/tags/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await tagService.findById(id);
     console.log(data);
-    if(!data) {
+    if (!data) {
         return res.redirect('/admin/tags');
     }
     res.render('vwAdmin/tagsEdit', {
@@ -351,7 +402,7 @@ router.get('/tags/is-using', async (req, res) => {
     // console.log(tagid);
     const checkNews = await newstagsService.countByTagId(tagid);
     const newsTotal = checkNews.total;
-    if(newsTotal > 0) {
+    if (newsTotal > 0) {
         return res.json(false);
     }
     return res.json(true);
@@ -362,7 +413,7 @@ router.post('/tags/patch', async (req, res) => {
     const changes = {
         TagName: req.body.tagName,
     }
-    await tagService.patch(id,changes);
+    await tagService.patch(id, changes);
     res.redirect('/admin/tags');
 });
 

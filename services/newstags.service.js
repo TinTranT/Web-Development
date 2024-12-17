@@ -7,4 +7,8 @@ export default{
     countByTagId(id) {
         return db('newstag').where('TagID', id).count('* as total').first();
     },
+    del(id){
+        return db('newstag').where('NewsID', id).del()
+    },
+    
 }

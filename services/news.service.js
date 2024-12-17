@@ -116,5 +116,8 @@ export default {
     delTag(id)
     {
         return db('newstag').where('NewsID', id).del()
-    }
+    },
+    del(id){
+        return db('news').where('NewsID', id).del()
+    },
 }
