@@ -154,7 +154,7 @@
               {{#each this.categories}}
               <option value="{{CatID}}" 
                  {{#if (isEqual ../categoryArticle.CatID CatID)}} selected {{/if}}>
-                 {{CatName}}
+                 {{CatParentName}} > {{CatName}}
                </option>
               {{/each}}
             </select>
