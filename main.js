@@ -197,7 +197,24 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    // console.log(hotCategoriesParent);
+    const categories = await categoriesService.findGroupCat();
+    // console.log(categories);
+    // Khởi tạo Map để nhóm dữ liệu
+    const groupedData = new Map();
+
+    // Duyệt qua từng object trong mảng
+    for (const item of categories) {
+        const parent = item.CatParentName || 'Root';
+        if (!groupedData.has(parent)) {
+            groupedData.set(parent, []);
+        }
+        groupedData.get(parent).push(item.CatName);
+    }
+    const result = [];
+    for (const [key, value] of groupedData) {
+        result.push({ catParentName: key, catChildren: value });
+    }
+    console.log(result);
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
@@ -205,6 +222,7 @@ app.get('/', async (req, res) => {
         latestNews: latestNews,
         hotCategoriesNews: hotCategoriesNews,
         hotCategoriesParent: hotCategoriesParent,
+        categories: result,
         Buttons: [
             { label: 'Article', url: '/admin/article', icon: 'bi bi-file-earmark' },
             { label: 'Category', url: '/admin/category', icon: 'bi bi-archive' },
