@@ -107,7 +107,7 @@
             <label for="categories">Categories</label>
             <select name="categories" id="categories" class="form-select" size="1" required>
               {{#each this.categories}}
-              <option value="{{CatID}}">{{CatName}}</option>
+              <option value="{{CatID}}">{{CatParentName}} > {{CatName}}</option>
               {{/each}}
             </select>
           </div>

@@ -10,6 +10,17 @@ export default {
     findNoParent() {
         return db('category').whereNull('CatParentID');
     },
+    findWithParent() {
+        return db('category as c1')
+            .leftJoin('category as c2', 'c1.CatParentID', 'c2.CatID')
+            .whereNotNull('c1.CatParentID')
+            .select(
+                'c1.CatID',
+                'c1.CatName',
+                'c2.CatName as CatParentName'
+            )
+            .orderBy('c1.CatID', 'asc');
+    },
     findbyNewsId(id) {
         return db('category')
             .join('news', 'category.CatID', 'news.CatID')

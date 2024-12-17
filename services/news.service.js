@@ -4,6 +4,9 @@ export default {
     findall() {
         return db('news').orderBy('PublishDate', 'desc');
     },
+    findAll(limit,offset) {
+        return db('news').orderBy('PublishDate', 'desc').limit(limit).offset(offset);
+    },
 
     findby3() {
         return db('news').orderBy('PublishDate', 'desc').limit(3);
