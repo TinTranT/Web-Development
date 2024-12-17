@@ -9,12 +9,7 @@
 }
 
 .header .navbar-light .navbar-brand.logo {
-    color: #F65050 !important;
-}
-
-.header .logo {
-    /* color: #F65050; */
-    color: var(--color-gray);
+    color: #F65050 ;
 }
 
 .header .bottom-navbar {
@@ -265,3 +260,26 @@
 }
 
 /*** Footer End ***/
+
+.navbar-user .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.navbar-user .logo img {
+    display: block;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+.navbar-user .logo h5 {
+    margin: 0;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    color: var(--color-red);
+}
+.navbar-user .logo h5 strong{
+    margin-right: 8px;
+    color: #393939
+}
