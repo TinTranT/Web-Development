@@ -17,6 +17,8 @@
 </head>
 
 <body>
+
+
     {{!-- Header --}}
     {{> header}}
     <div class="container">
@@ -35,82 +37,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script>
-        function toggleDropdownAttributes() {
-            //console.log(1);
-            //const dropdownLink = document.getElementById("first");
-            const dropdownLinks = document.querySelectorAll(".nav-item .nav-link");
-            const preventdropdownitems = document.querySelectorAll(".nav-item .dropdown-menu");
-            const dropdownLinksLevel3 = document.querySelectorAll(".son-son-menu-father-six .son-menu-six");
-            const dropdownLinksfather3 = document.querySelectorAll(".son-son-menu-father-six .son-a-menu-father-six")
-
-            if (window.matchMedia("(max-width: 991px)").matches) {
-                const dropdowns = document.querySelectorAll(".son-son-menu-father-six")
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove("dropright");
-                    dropdown.classList.add("dropdown");
-                });
-                preventdropdownitems.forEach(preventdropdownitem => {
-                    preventdropdownitem.addEventListener("click", (event) => {
-                        event.stopPropagation();
-                    })
-                })
-            }
-            else {
-                dropdownLinks.forEach(link => {
-                    link.removeAttribute("data-toggle", "dropdown");
-                    link.removeAttribute("aria-expanded", "false");
-                    link.removeAttribute("aria-expanded", "true");
-                })
-                const elements = document.querySelectorAll('.show');
-                elements.forEach(element => { element.classList.remove('show'); });
-                const dropdowns = document.querySelectorAll(".son-son-menu-father-six")
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove("dropdown");
-                    dropdown.classList.add("dropright");
-                });
-            }
-
-
-
-            dropdownLinks.forEach(link => {
-                link.addEventListener("click", () => {
-                    if (window.matchMedia("(max-width: 991px)").matches) {
-                        link.setAttribute("data-toggle", "dropdown");
-
-                        link.setAttribute("aria-expanded", "false");
-                    }
-                    else {
-                        link.removeAttribute("data-toggle", "dropdown");
-                        link.removeAttribute("aria-expanded", "false");
-                        link.removeAttribute("aria-expanded", "true");
-                        const elements = document.querySelectorAll('.show');
-                        elements.forEach(element => { element.classList.remove('show'); });
-                    }
-                });
-            });
-
-
-
-
-        }
-
-        // Kiểm tra khi tải trang và khi thay đổi kích thước cửa sổ
-        window.addEventListener("load", toggleDropdownAttributes);
-        window.addEventListener("resize", toggleDropdownAttributes);
-
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("logoutLink").addEventListener("click", function (event) {
+            event.preventDefault(); // Ngăn hành động mặc định của liên kết
+            document.getElementById("frmLogout").submit(); // Gửi form
+        });
+    </script>
+    <script>
+        // Hàm xử lý sự kiện scroll
+        window.addEventListener('scroll', function () {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop; // Vị trí cuộn
+
+            // Khi cuộn qua 150px, làm cho first-bar biến mất và menu cố định
+            if (scrollTop > 150) {
+               
+                document.querySelector('.header').classList.add('nav-sticky'); // Làm cho nav-bar cố định
+            } else {
+                
+                document.querySelector('.header').classList.remove('nav-sticky'); // Xóa tính cố định cho nav-bar
+            }
+        });
+    </script>
+
     {{{_sections.js}}}
 </body>
 
 </html>
-
-
-{{!-- if(window.matchMedia("(max-width: 991px)").matches)
-{
-dropdownLinks.forEach( link => {
-link.setAttribute("data-toggle", "dropdown");
-link.setAttribute("aria-expanded", "false");
-});
-} --}}

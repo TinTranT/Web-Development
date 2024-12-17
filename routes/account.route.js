@@ -127,7 +127,7 @@ router.post('/update-password', isAuth, async function (req, res) {
     res.redirect('/account/profile');
 });
 
-router.get('/logout', isAuth, function (req, res) {
+router.post('/logout', isAuth, function (req, res) {
     req.session.auth = false;
     req.session.authUser = null;
     req.session.retUrl = null;
