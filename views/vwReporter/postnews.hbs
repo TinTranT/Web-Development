@@ -1,4 +1,6 @@
 {{#section 'css'}}
+{{!-- multi select  --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
 
@@ -10,11 +12,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- Multiselect CSS và JS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.min.css"> --}}
-
-
 {{/section}}
 
 {{#section 'js'}}
+{{!-- multi select --}}
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+<script>
+    new MultiSelectTag('tags')  // id
+</script>
+
+
 
 
 {{!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
@@ -85,12 +92,12 @@
       <div class="row">
         <div class="col-sm-12 overflow-auto">
           <label for="title" class="form-label d-block">Title</label>
-          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title">
+          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title" required>
           <label for="abstract" class="form-label d-block">Abstract</label>
-          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3" name="abstract">
+          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3" name="abstract" required>
           <div class="form-group mt-3">
             <label for="tags" >Tag</label>
-            <select name="tags[]" id="tags" size="1" multiple>
+            <select name="tags[]" id="tags" size="1" multiple required>
               {{#each this.tags}}
               <option value="{{TagID}}">{{TagName}}</option>
               {{/each}}
@@ -98,7 +105,7 @@
           </div>
           <div class="form-group mt-3 mb-3">
             <label for="categories">Categories</label>
-            <select name="categories" id="categories">
+            <select name="categories" id="categories" class="form-select" size="1" required>
               {{#each this.categories}}
               <option value="{{CatID}}">{{CatName}}</option>
               {{/each}}
@@ -116,7 +123,7 @@
             <label for="fulMain">Thumnail</label>
             <input type="file" name="fulMain" id="fulMain" multiple>
           </div>
-          <textarea id="summernote" name="content" class="h-100"></textarea>
+          <textarea id="summernote" name="content" class="h-100" required></textarea>
         </div>
       </div>
     </div>
