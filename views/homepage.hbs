@@ -1,4 +1,20 @@
+{{#section 'js'}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.getElementById('err_message').value;
+        if (message !== "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+            });
+        }
+    });
+</script>
+{{/section}}
+
 <div class="homepage">
+    <input type="text" id="err_message" value="{{ err_message }}" hidden>
     {{> home/featurednews}}
     {{> home/hotnews}}
     {{> home/latestnews}}

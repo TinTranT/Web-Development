@@ -58,14 +58,20 @@
                             class="rounded-circle img-fluid" style="width: 150px;">
                         <h2 class="my-3">{{user.Name}}</h2>
                         {{#if user.SubcribeExpireDate}}
-                        <h4 class="text-muted mb-1">Premium expiration date: {{formatDate2 user.SubcribeExpireDate}}
+                        {{#if (isExpired user.SubcribeExpireDate)}}
+                        <h4 class="text-muted my-4">Your Premium has expired</h4>
+                        {{else}}<h4 class="text-muted my-4">Premium expiration date:</h4>
+                        <h4 class="text-muted my-4">{{formatDate2 user.SubcribeExpireDate}}
                         </h4>
+                        {{/if}}
                         <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-danger btn-lg btn-block">Expand your PREMIUM right now!!!</a>
+                            <a href="/account/payment-premium" class="btn btn-danger btn-lg btn-block">Extend your
+                                PREMIUM right now!!!</a>
                         </div>
                         {{else}}
                         <div class="d-flex justify-content-center mb-2">
-                            <a href="#" class="btn btn-danger btn-lg btn-block">Get PREMIUM right now!!!</a>
+                            <a href="/account/payment-premium" class="btn btn-danger btn-lg btn-block">Get PREMIUM right
+                                now!!!</a>
                         </div>
                         {{/if}}
                     </div>

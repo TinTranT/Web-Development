@@ -127,7 +127,7 @@
             <div class="content">
                 <div class="taba">
                     {{#if this.featuredNews.[0]}}
-                    <div class="card bg-dark text-white">
+                    <a class="card bg-dark text-white" href="/news/details?id={{this.featuredNews.[0].NewsID}}">
                         <img class="card-img" src="{{this.featuredNews.[0].Thumbnail}}" alt="Card image">
                         <div class="card-img-overlay">
                             <span class="badge bg-primary mb-2">Business</span>
@@ -136,7 +136,7 @@
                                 <p class="card-text">{{this.featuredNews.[0].PublishDate}}</p>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     {{/if}}
                 </div>
                 <div class="tabb">
@@ -180,7 +180,7 @@
                     {{#if @index}}
                     {{#if (and (greater @index 0) (lower @index 4))}}
                     <div class="small-item">
-                        <div class="card bg-dark text-white">
+                        <a class="card bg-dark text-white" href="/news/details?id={{NewsID}}">
                             <img class="card-img" src="{{Thumbnail}}" alt="Card image">
                             <div class="card-img-overlay">
                                 <span class="badge bg-primary mb-2">Business</span>
@@ -189,7 +189,7 @@
                                     <p class="card-text">{{PublishDate}}</p>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     {{/if}}
                     {{/if}}
