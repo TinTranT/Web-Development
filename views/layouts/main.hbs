@@ -55,13 +55,31 @@
 
             // Khi cuộn qua 150px, làm cho first-bar biến mất và menu cố định
             if (scrollTop > 150) {
-               
+
                 document.querySelector('.header').classList.add('nav-sticky'); // Làm cho nav-bar cố định
             } else {
-                
+
                 document.querySelector('.header').classList.remove('nav-sticky'); // Xóa tính cố định cho nav-bar
             }
         });
+        document.addEventListener('click', function (event) {
+    // Kiểm tra nếu phần tử được click là dropdown-item
+    if (event.target.matches('.drop-child')) {
+        // Tìm phần tử cha với class 'drop-parent'
+        const dropParent = document.querySelector('.drop-parent');
+        if (dropParent) {
+            // Lấy thể hiện Bootstrap Dropdown của drop-parent
+            const dropdownInstance = bootstrap.Dropdown.getInstance(dropParent);
+            if (dropdownInstance) {
+                dropdownInstance.hide(); // Đóng dropdown cha
+            }
+        }
+    }
+});
+
+
+
+
     </script>
 
     {{{_sections.js}}}

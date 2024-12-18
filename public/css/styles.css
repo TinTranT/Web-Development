@@ -90,7 +90,9 @@
 .header .first-bar .sign .nav-link:hover {
     color: var(--color-red);
 }
-
+.header .first-bar .sign .nav-link:focus {
+    color: var(--color-red);
+}
 .header .menu {
     background-color: var(--color-white);
     border-top: 1px solid #dddddd;
@@ -111,24 +113,27 @@
 .header.nav-sticky .menu .scroll-action{
     display: block;
 }
-
+.header .first-bar ul.sign,
 .header .menu ul.dropdown-menu {
     padding: 0;
     top: 45px;
     border-radius: 0;
 }
-
+.header .first-bar ul.sign li a.dropdown-item,
 .header .menu ul.dropdown-menu li a {
     width: 200px;
     height: 40px;
     line-height: 35px;
 }
-
+.header .first-bar ul.sign li a.dropdown-item:hover,
 .header .menu ul.dropdown-menu li a:hover {
     background-color: var(--color-red);
     color: var(--color-white);
 }
-
+.header .menu ul.dropdown-menu li a:focus {
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
 .header .menu li .dropdown-toggle::after {
     display: inline-block;
     margin-left: 0;
@@ -170,8 +175,11 @@
     width: 100%;
     /* Khi hover, mở rộng full chiều rộng */
 }
-
-
+.header .menu li.more ul.dropdown-menu{
+    top: 0px;
+    left: 197px;
+}
+/* .header .menu li.more ul.dropdown-menu */
 
 .hotnews .top {
     display: flex;

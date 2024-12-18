@@ -78,15 +78,17 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item scroll-action">
                         <a class="nav-link d-flex align-items-center" aria-current="page" href="/">
-                            <img src="/imgs/newspaper.png" alt="newspaper" width="25px" height="25px" style="margin-right: 5px;">
+                            <img src="/imgs/newspaper.png" alt="newspaper" width="25px" height="25px"
+                                style="margin-right: 5px;">
                             <div class="title">
-                                <h5 style="margin: 0; color: var(--color-red);"><strong style="color: var(--color-black); margin-right: 5px;">Insight</strong>News</h5>
+                                <h5 style="margin: 0; color: var(--color-red);"><strong
+                                        style="color: var(--color-black); margin-right: 5px;">Insight</strong>News</h5>
                             </div>
                         </a>
                     </li>
-                    {{#each this.categories}}
+                    {{#each lcCategories}}
                     {{#if @index}}
-                    {{#if (and (greater @index 0) (lower @index 9))}}
+                    {{#if (and (greater @index 0) (lower @index 8))}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -94,7 +96,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {{#each catChildren}}
-                               <li><a class="dropdown-item" href="#">{{this}}</a></li>
+                            <li><a class="dropdown-item" href="#">{{this}}</a></li>
                             {{/each}}
                         </ul>
                     </li>
@@ -112,6 +114,30 @@
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li> --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle drop-parent" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" data-bs-auto-close="outside">
+                            <b>More</b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {{#each lcCategories}}
+                            {{#if @index}}
+                            {{#if (and (greater @index 7) (lower @index 10000))}}
+                            <li class="dropdown-submenu dropend more">
+                                <a class="dropdown-item dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">{{catParentName}}</a>
+                                <ul class="dropdown-menu">
+                                    {{#each catChildren}}
+                                    <li><a class="dropdown-item drop-child" href="#">{{this}}</a></li>
+                                    {{/each}}
+                                </ul>
+                            </li>
+                            {{else}}
+                            {{/if}}
+                            {{/if}}
+                            {{/each}}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
