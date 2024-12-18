@@ -1,168 +1,119 @@
-<div class="header">
-    <nav class="navbar navbar-expand-lg navbar-light top-navbar" id="header">
-        <img src="/imgs/newspaper.png" alt="newspaper" width="100px" height="100px">
-        <a class="logo navbar-brand" href="#"><strong style="color: #393939;">Insight</strong> News</a>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bottom-navbar">
-        <button class="navbar-toggler button-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse div-nav" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item active big-screen shift-right">
-                    <a class="nav-link text-white bold-content" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right " href="#" role="button">
-                        International
-                    </a>
-                    <div class="dropdown-menu dropdown-bigscreen">
-                        <a class="dropdown-item bold-content" href="#">America</a>
-                        <a class="dropdown-item bold-content" href="#">Asia</a>
-                        {{!-- <div class="dropdown-divider"></div> --}}
-                        <a class="dropdown-item bold-content" href="#">Africa</a>
-                        <a class="dropdown-item bold-content" href="#">Europe</a>
-                        <a class="dropdown-item bold-content" href="#">Australia</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
-                        Sports
-                    </a>
-                    <div class="dropdown-menu dropdown-bigscreen">
-                        <a class="dropdown-item bold-content" href="#">Football</a>
-                        <a class="dropdown-item bold-content" href="#">Badminton</a>
-                        {{!-- <div class="dropdown-divider"></div> --}}
-                        <a class="dropdown-item bold-content" href="#">Cycling</a>
-                        <a class="dropdown-item bold-content" href="#">Tennis</a>
-                        <a class="dropdown-item bold-content" href="#">Athletics</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right " href="#" role="button">
-                        Education
-                    </a>
-                    <div class="dropdown-menu dropdown-bigscreen">
-                        <a class="dropdown-item bold-content" href="#">Admission</a>
-                        <a class="dropdown-item bold-content" href="#">Study Abroad</a>
-                        {{!-- <div class="dropdown-divider"></div> --}}
-                        <a class="dropdown-item bold-content" href="#">English</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
-                        Business
-                    </a>
-                    <div class="dropdown-menu dropdown-bigscreen">
-                        <a class="dropdown-item bold-content" href="#">Stock market</a>
-                        <a class="dropdown-item bold-content" href="#">Company</a>
-                        {{!-- <div class="dropdown-divider"></div> --}}
-                        <a class="dropdown-item bold-content" href="#">NetZero</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
-                        Entertainment
-                    </a>
-                    <div class="dropdown-menu dropdown-bigscreen">
-                        <a class="dropdown-item bold-content" href="#">Movies</a>
-                        <a class="dropdown-item bold-content" href="#">Television</a>
-                        {{!-- <div class="dropdown-divider"></div> --}}
-                        <a class="dropdown-item bold-content" href="#">Celebrity</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown change-nav-item-big nav-item-father-six big-screen">
-                    <a class="nav-link dropdown-toggle text-white shift-right" href="#" role="button">
-                        More
-                    </a>
-                    <div class="dropdown-menu son-menu-father-six">
-
-
-                        {{!-- <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                            role="button">Technology</a>
-                        <div class="dropdown-menu son-menu-six">
-                            <a class="dropdown-item bold-content" href="#">Innovate</a>
-                            <a class="dropdown-item bold-content" href="#">Innovaties cities</a>
-                            <a class="dropdown-item bold-content" href="#">Work Transformed</a>
-                            <a class="dropdown-item bold-content" href="#">Mission: ahead</a>
-                        </div> --}}
-                        <div class="nav-item dropright son-son-menu-father-six">
-                            <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                                role="button">Technology</a>
-                            <div class="dropdown-menu son-menu-six">
-                                <a class="dropdown-item bold-content" href="#">Innovate</a>
-                                <a class="dropdown-item bold-content" href="#">Innovaties cities</a>
-                                <a class="dropdown-item bold-content" href="#">Work Transformed</a>
-                                <a class="dropdown-item bold-content" href="#">Mission: ahead</a>
+<header class="header">
+    <div class="first-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="logo">
+                        <a href="/" class="d-flex align-items-center">
+                            <img src="/imgs/newspaper.png" alt="newspaper" width="100px" height="100px">
+                            <div class="title">
+                                <h5><strong>Insight</strong>News</h5>
                             </div>
-                        </div>
-                        <div class="nav-item dropright son-son-menu-father-six">
-                            <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                                role="button">
-                                Health
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="search">
+                        <form class="d-flex align-items-center" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Type something here"
+                                aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">
+                                <i class="bi bi-search "></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 ">
+                    <ul class="navbar-nav sign">
+                        {{#if auth}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Hello, <b>{{authUser.Name}}</b>
                             </a>
-                            <div class="dropdown-menu son-menu-six">
-                                <a class="dropdown-item bold-content" href="#">Food</a>
-                                <a class="dropdown-item bold-content" href="#">Fitness</a>
-                                {{!-- <div class="dropdown-divider"></div> --}}
-                                <a class="dropdown-item bold-content" href="#">Sleep</a>
-                                <a class="dropdown-item bold-content" href="#">Mindfulness</a>
-                                <a class="dropdown-item bold-content" href="#">Relationship</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropright son-son-menu-father-six">
-                            <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                                role="button">
-                                Laws
+                            <ul class="dropdown-menu">
+                                <a class="dropdown-item" href="/account/profile">
+                                    <i class="bi bi-person"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="/account/update-password">
+                                    <i class="bi bi-gear"></i>
+                                    Change password
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <form action="/account/logout" method="post" id="frmLogout"></form>
+                                <a class="dropdown-item" href="#" id="logoutLink">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    Sign out
+                                </a>
+                            </ul>
+                        </li>
+                        {{else}}
+                        <li class="nav-item firstli">
+                            <a class="nav-link" href="/account/register">
+                                <i class="bi bi-person-plus-fill"></i>
+                                Register
                             </a>
-                            <div class="dropdown-menu son-menu-six">
-                                <a class="dropdown-item bold-content" href="#">Case files</a>
-                                <a class="dropdown-item bold-content" href="#">Consulting</a>
-                                {{!-- <div class="dropdown-divider"></div> --}}
-                                <a class="dropdown-item bold-content" href="#">Blog</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropright son-son-menu-father-six">
-                            <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                                role="button">
-                                Lifestyle
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account/login">
+                                <i class="bi bi-person-fill"></i>
+                                Login
                             </a>
-                            <div class="dropdown-menu son-menu-six">
-                                <a class="dropdown-item bold-content" href="#">Home</a>
-                                <a class="dropdown-item bold-content" href="#">Life Lesson</a>
-                                {{!-- <div class="dropdown-divider"></div> --}}
-                                <a class="dropdown-item bold-content" href="#">Cooking</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropright son-son-menu-father-six">
-                            <a class="nav-link dropdown-toggle inline-text son-a-menu-father-six" href="#"
-                                role="button">
-                                Travel
-                            </a>
-                            <div class="dropdown-menu son-menu-six">
-                                <a class="dropdown-item bold-content" href="#">Destination</a>
-                                <a class="dropdown-item bold-content" href="#">Cuisine</a>
-                                {{!-- <div class="dropdown-divider"></div> --}}
-                                <a class="dropdown-item bold-content" href="#">Footprints</a>
-                                <a class="dropdown-item bold-content" href="#">Blog</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                {{!-- <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li> --}}
-            </ul>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
         </div>
-        {{!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form> --}}
+    </div>
+    <nav class="navbar navbar-expand-lg menu">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item scroll-action">
+                        <a class="nav-link d-flex align-items-center" aria-current="page" href="/">
+                            <img src="/imgs/newspaper.png" alt="newspaper" width="25px" height="25px" style="margin-right: 5px;">
+                            <div class="title">
+                                <h5 style="margin: 0; color: var(--color-red);"><strong style="color: var(--color-black); margin-right: 5px;">Insight</strong>News</h5>
+                            </div>
+                        </a>
+                    </li>
+                    {{#each this.categories}}
+                    {{#if @index}}
+                    {{#if (and (greater @index 0) (lower @index 9))}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <b>{{catParentName}}</b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {{#each catChildren}}
+                               <li><a class="dropdown-item" href="#">{{this}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    {{/if}}
+                    {{/if}}
+                    {{/each}}
+                    {{!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li> --}}
+                </ul>
+            </div>
+        </div>
     </nav>
-</div>
+</header>

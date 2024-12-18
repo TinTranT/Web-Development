@@ -54,5 +54,14 @@ export default {
     },
     patch(id, changes) {
         return db('category').where('CatID', id).update(changes);
+    },
+    findGroupCat() {
+        return db('category as c1')
+            .leftJoin('category as c2', 'c1.CatParentID', 'c2.CatID')
+            .select(
+                'c1.CatID',
+                'c1.CatName',
+                'c2.CatName as CatParentName'
+            )
     }
 }
