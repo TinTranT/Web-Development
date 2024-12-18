@@ -201,7 +201,7 @@ app.use(async function (req, res, next) {
     next()
 
 });
-app.use(async function(req, res, next) {
+app.use(async function (req, res, next) {
     const categories = await categoriesService.findGroupCat();
     const groupedData = new Map();
     for (const item of categories) {
@@ -218,27 +218,6 @@ app.use(async function(req, res, next) {
     res.locals.lcCategories = result;
     next()
 
-});
-app.set('view engine', 'hbs');
-app.set('views', './views');
-
-
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Serve static files from the "public" directory
-app.use(express.static('public'));
-app.use('/static', express.static('static'))
-
-// Load Account's session
-app.use(async function (req, res, next) {
-    if (req.session.auth === null || req.session.auth === undefined) {
-        req.session.auth = false;
-    }
-
-    res.locals.auth = req.session.auth;
-    res.locals.authAccount = req.session.authAccount;
-    next();
 });
 
 // app.get('/test', function(req,res){ 
@@ -257,6 +236,15 @@ app.use(async (req, res, next) => {
 //     next()
 // })
 
+app.set('view engine', 'hbs');
+app.set('views', './views');
+
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+app.use('/static', express.static('static'))
 
 app.get('/', async (req, res) => {
     const featuredNews = await newsService.featuredNews();
@@ -264,7 +252,7 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     const hotCategoriesNews = await newsService.hotCategories();
     const hotCategoriesParent = await newsService.hotCategoriesParent();
-    
+
     res.render('homepage', {
         layout: 'main',
         featuredNews: featuredNews,
