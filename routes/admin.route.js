@@ -6,6 +6,7 @@ import newstagsService from '../services/newstags.service.js';
 import accountService from '../services/account.service.js';
 
 import moment from 'moment';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
@@ -99,6 +100,39 @@ router.post('/articles/patch', async (req, res) => {
     }
     await newsService.patch(id, changes);
     res.redirect('/admin/articles/details?id='+ id);
+});
+
+// ----------------- User Add -----------------
+
+router.get('/users-add', async (req, res) => {
+    res.render('vwAdmin/usersAdd', {
+        layout: 'user',
+    });
+});
+
+router.post('/users-add', async (req, res) => {
+    const hash_password = bcrypt.hashSync(req.body.txtPassword, 10);
+    const ymd_dob = moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    const entity = {
+        Name: req.body.txtName,
+        Email: req.body.txtEmail,
+        PenName: req.body.txtPenName,
+        Password: hash_password,
+        Dob: ymd_dob,
+        Role: parseInt(req.body.txtRole),
+    }
+    console.log(entity);
+    await accountService.add(entity);
+    res.redirect('/admin/users-add');
+});
+
+router.get('/users-add/is-available', async (req, res) => {
+    const email = req.query.email;
+    const user = await accountService.findByEmail(email);
+    if (!user) {
+        return res.json(true);
+    }
+    res.json(false);
 });
 
 // ----------------- Readers -----------------
