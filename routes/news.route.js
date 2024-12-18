@@ -15,7 +15,7 @@ router.get('/details', async (req, res) => {
     const taglist = await tagService.findByNewsId(id);
     const relatednews = await newsService.relatedNews(id);
     const commentlist = await commentService.findbyNewId(id);
-    
+
     res.render('vwNews/news-detail.hbs', {
         category: category,
         news: news,

@@ -135,5 +135,11 @@ export default {
      .andWhere('WriterID', idWriter) // Lọc theo Writer ID
      .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
 
+    },
+    del(id){
+        return db('news').where('NewsID', id).del()
+    },
+    patch(id, changes){
+        return db('news').where('NewsID', id).update(changes)
     }
 }

@@ -74,34 +74,35 @@
             <div class="card-body p-5 shadow-5 text-center">
               <h2 class="fw-bold mb-5">Sign up now</h2>
               <form id="frmRegister" action="" method="post">
+                <div class="form-register-input" style="text-align: left;">
+                  <!-- Email input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label" for="txtEmail">Email address</label>
+                    <input type="text" id="txtEmail" class="form-control" name="email" required>
+                  </div>
 
-                <!-- Email input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="txtEmail" class="form-control" name="email" required>
-                  <label class="form-label" for="txtEmail">Email address</label>
-                </div>
-
-                <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="password" id="txtPassword" class="form-control" name="raw_password" required>
-                      <label class="form-label" for="txtPassword">Password</label>
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div data-mdb-input-init class="form-outline">
+                        <label class="form-label" for="txtPassword">Password</label>
+                        <input type="password" id="txtPassword" class="form-control" name="raw_password" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div data-mdb-input-init class="form-outline">
+                        <label class="form-label" for="txtConfirmPassword">Confirm Password</label>
+                        <input type="password" id="txtConfirmPassword" class="form-control" name="confirm_password"
+                          required>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <input type="password" id="txtConfirmPassword" class="form-control" name="confirm_password"
-                        required>
-                      <label class="form-label" for="txtConfirmPassword">Confirm Password</label>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="txtFullname" class="form-control" name="name" required>
-                  <label class="form-label" for="txtFullname">Fullname</label>
+                  <!-- Password input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label" for="txtFullname">Fullname</label>
+                    <input type="text" id="txtFullname" class="form-control" name="name" required>
+                  </div>
                 </div>
 
                 <!-- Submit button -->

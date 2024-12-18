@@ -1,0 +1,163 @@
+{{#section 'css'}}
+<style>
+    .table td {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .table td.col-4 {
+        padding-left: 3rem;
+    }
+
+    input[readonly] {
+        background-color: #e9ecef;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+</style>
+{{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const frmAddUser = document.getElementById('frmAddUser');
+        frmAddUser.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('userEmail').value.trim();
+            const password = document.getElementById('userPassword').value;
+            const confirm_password = document.getElementById('userConfirmPassword').value;
+
+            if (password !== confirm_password) {
+                Swal.fire("ERROR", "Password and Confirm Password do not match", "error");
+                return;
+            }
+
+            const response = await fetch(`/admin/users-add/is-available?email=${encodeURIComponent(email)}`);
+
+
+            const data = await response.json();
+            
+            console.log(data);
+
+
+            if (!data) {
+                //alert('Email is not available');
+                Swal.fire("ERROR", "Email is not available", "error");
+            } else {
+                frmAddUser.action = '/admin/users-add';
+                frmAddUser.submit();
+            }
+        });
+    });
+</script>
+{{/section}}
+<div class="main">
+    <form action="" method="post" id="frmAddUser">
+        <main class="content px-3 py-4">
+            <div class="container-fluid">
+                <div class="mb-3">
+                    <div class="row">
+                        <h3 class="fw-bold fs-4 my-3">Add user profile</h3>
+                    </div>
+                    <div class="info">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtName" class="form-label">Name</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userName" name="txtName" value=""
+                                            placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtPenName" class="form-label">Pen Name</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userPenName" name="txtPenName"
+                                            value="" placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtEmail" class="form-label">Email</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userEmail" name="txtEmail" value=""
+                                            placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtDOB" class="form-label">Date of birth</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userDOB" name="txtDOB" value=""
+                                            placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtDOB" class="form-label">Password</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userPassword" name="txtPassword"
+                                            value="" placeholder="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="txtDOB" class="form-label">Confirm Password</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <input type="text" class="form-control" id="userConfirmPassword"
+                                            name="txtConfirmPassword" value="" placeholder="">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <h3 class="fw-bold fs-4 my-3">Others</h3>
+                    </div>
+                    <div class="info">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">
+                                        <label for="categoryParent" class="form-label">Choose Role</label>
+                                    </td>
+                                    <td class="col-8">
+                                        <select class="form-select" id="readerRole" name="txtRole">
+                                            <option selected value="1">{{nameRole 1}}</option>
+                                            <option value="2">{{nameRole 2}}</option>
+                                            <option value="3">{{nameRole 3}}</option>
+                                            <option value="4">{{nameRole 4}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2" id="saveButton">
+                                <i class="bi bi-floppy"></i>
+                                Save
+                            </button>
+                            <a href="/admin/readers" class="btn btn-secondary">
+                                <i class="bi bi-arrow-bar-left"></i>
+                                Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</div>
