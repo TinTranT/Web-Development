@@ -44,40 +44,51 @@ app.engine('hbs', engine({
     partialsDir: './views/partials',
     helpers: {
         section: hbs_section(),
+
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
+
         isNotEqual: function (value1, value2) {
             return value1 !== value2;
         },
+
         isInArray: function (array, value) {
             if (Array.isArray(array)) {
                 return array.some(item => item.TagID === value);
             }
             return false;
         },
+
         isEqualOr: function (value, value1, value2) {
             return value === value1 || value === value2;
         },
+
         setVar: function (value1) {
             check = value1;
             return '';
         },
+
         getVar: function () {
             return check;
         },
+
         equal: function (value1, value2) {
             return value1 === value2;
         },
+
         greater: function (value1, value2) {
             return value1 > value2;
         },
+
         lower: function (value1, value2) {
             return value1 < value2;
         },
+
         and: function (value1, value2) {
             return value1 && value2;
         },
+
         timeAgo: function (value) {
             const now = new Date();
             const past = new Date(value);
@@ -97,28 +108,35 @@ app.engine('hbs', engine({
                 return `${diffInMonths} months ago`;
             }
         },
+
         or: function (value1, value2) {
             return value1 || value2;
         },
+
         mod: function (value1, value2) {
             return value1 % value2;
         },
+
         add: function (value1, value2) {
             return value1 + value2;
         },
+
         length: function (value) {
             return value.length;
         },
+
         slice: function (array, start, end) {
             if (!array) return [];
             return array.slice(start, end);
         },
+
         filterCategories1: function (items, categoryName, options) {
             if (!items) return '';
             const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(0, 3);
             const result = filteredItems.map(item => options.fn(item)).join('');
             return result;
         },
+
         filterCategories2: function (items, categoryName, options) {
             if (!items) return '';
             const filteredItems = items.filter(item => item.CatParentName === categoryName).slice(3, 6);
@@ -126,12 +144,15 @@ app.engine('hbs', engine({
             return result;
         },
         section: hbs_sections(),
+
         formatDate: function (value) {
             return format(value, 'dd/MM/yyyy');
         },
+
         formatDate2: function (value) {
             return format(value, 'dd-MM-yyyy HH:mm');
         },
+
         nameRole: function (value) {
             if (value === 1) {
                 return 'Reader';
@@ -143,6 +164,7 @@ app.engine('hbs', engine({
                 return 'Administrator';
             }
         },
+
         isExpired: function (date) {
             return moment(date).isBefore(moment());
         },
