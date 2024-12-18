@@ -457,10 +457,7 @@ router.post('/categories/add', async (req, res) => {
         CatParentID: req.body.categoryParent,
     }
     await categoryService.add(entity);
-    res.render('vwAdmin/categoriesAdd', {
-        layout: 'user',
-        listCat: listCat,
-    });
+    res.redirect('/admin/categories/add');
 });
 
 router.get('/categories/edit', async (req, res) => {
@@ -554,9 +551,7 @@ router.post('/tags/add', async (req, res) => {
         TagName: req.body.tagName,
     }
     await tagService.add(entity);
-    res.render('vwAdmin/tagsAdd', {
-        layout: 'user',
-    });
+    res.redirect('/admin/tags/add');
 });
 
 router.get('/tags/edit', async (req, res) => {
