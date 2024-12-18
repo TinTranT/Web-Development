@@ -4,17 +4,16 @@ import categoryService from '../services/category.service.js';
 import newsService from '../services/news.service.js';
 import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
+import accountService from '../services/account.service.js';
 import { parse } from 'date-fns';
 
 const router = express.Router();
 
 router.use(function (req, res, next) {
     res.locals.items = [
-        // { label: 'Dashboard', url: '/reporter', icon: 'bi bi-file-earmark', isDropdown: false },
+        { label: 'Dashboard', url: '/reporter?account=5', icon: 'bi bi-file-earmark', isDropdown: false },
         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text', isDropdown: false },
-        {
-            label: 'Category', url: '/reporter/category?id=10&page=1', icon: 'bi bi-person-check', isDropdown: false,
-        }
+        { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,}
         // {
         //     label: 'Post',
         //     icon: 'bi bi-archive',
@@ -31,19 +30,69 @@ router.use(function (req, res, next) {
 
 
 
-router.get('/', function (req, res) {
+router.get('/', async function (req, res) {
+    const account = parseInt(req.query.account) || 0;
+    const writer = await accountService.findById(account);
     res.render('vwReporter/mainreporter', {
         layout: 'user',
+        user: writer
 
     })
 })
 router.get('/category', async function (req, res) {
+    // const id = parseInt(req.query.id) || 0;
+    // const limit = 4;
+    // const page = parseInt(req.query.page) || 1;
+    // const offset = (page - 1) * limit;
+    // //Phân trang
+    // const nRows = await newsService.countByCatId(id);
+    // const nPages = Math.ceil(nRows.total / limit);
+    // const page_items = [];
+    // for (let i = 1; i <= nPages; i++) {
+    //     const item = {
+    //         value: i,
+    //         isActive: i === page,
+    //     }
+    //     page_items.push(item);
+    // }
+    // const news = await newsService.findPageByCatId(id, limit,offset);
+    // const catList = await categoryService.findWithParent();
+
+    // res.render('vwReporter/listnews', {
+    //     layout: 'user',
+    //     news: news,
+    //     catList: catList,
+    //     empty: news.length === 0,
+    //     page_items: page_items,
+    //     catId: id,
+    //     isFirstPage: page === 1,
+    //     isLastPage: page === nPages,
+    //     previousPage: page > 1 ? page - 1 : 1,
+    //     nextPage: page < nPages ? page + 1 : nPages,
+    // });
+
+
+
+    const account = parseInt(req.query.account) || 0;
+    console.log(account);
+    const writer = await accountService.findById(account);
+    //console.log(writer);
+    const CatIDs = await newsService.findCatofWriter(account);
+    //console.log(CatIDs);
     const id = parseInt(req.query.id) || 0;
+    // if (id === undefined) {
+    //     return res.redirect('/reporter/category')
+    // }
+    // for (const cat of CatIDs) {
+    //     if (cat.CatID != id &&) {
+    //         return res.redirect('/reporter/category')
+    //     }
+    // }
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
-    const nRows = await newsService.countByCatId(id);
+    const nRows = await newsService.findCountCatNewsofWriter(id,account);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -53,11 +102,20 @@ router.get('/category', async function (req, res) {
         }
         page_items.push(item);
     }
-    const news = await newsService.findPageByCatId(id, limit,offset);
-    const catList = await categoryService.findWithParent();
-
+    const news = await newsService.findPageByCatId(id, limit, offset,account);
+    const catList = await categoryService.findWithParentAndWriter(account);
+    console.log(catList);
+    // const tagOfArticle = await newsService.findTagById(id)
+    // //console.log(tagOfArticle)
+    // const tags = req.body.tags || tagOfArticle
+    // const tagObjects = tags.map(tag => ({
+    //     NewsID: article.NewsID,  // Gán NewsID
+    //     TagID: parseInt(tag) // Chuyển tag thành số (nếu cần)
+    // }
+    // ));
     res.render('vwReporter/listnews', {
         layout: 'user',
+        account: account,
         news: news,
         catList: catList,
         empty: news.length === 0,
@@ -68,11 +126,11 @@ router.get('/category', async function (req, res) {
         previousPage: page > 1 ? page - 1 : 1,
         nextPage: page < nPages ? page + 1 : nPages,
     });
+    
 
 })
 
 router.get('/news', async function (req, res) {
-
     const listCategory = await categoryService.findWithParent();
     const listTag = await tagService.findall();
     res.render('vwReporter/postnews', {

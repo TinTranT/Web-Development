@@ -77,9 +77,12 @@ export default {
     countByCatId(id) {
         return db('news').where('CatID', id).count('* as total').first();
     },
-    findPageByCatId(id, limit, offset) {
-        return db('news').where('CatID', id).limit(limit).offset(offset);
+    findPageByCatId(id, limit, offset,account) {
+        return db('news').where('CatID', id).andWhere('WriterID',account).limit(limit).offset(offset);
     },
+    // findPageByCatId(id, limit, offset) {
+    //     return db('news').where('CatID', id).limit(limit).offset(offset);
+    // },
     findPageByTagId(tagId, limit, offset) {
         return db('news')
         .join('newstag', 'news.NewsID', 'newstag.NewsID')
@@ -116,5 +119,21 @@ export default {
     delTag(id)
     {
         return db('newstag').where('NewsID', id).del()
+    },
+    findNewsofWriter(id)
+    {
+        return db('news').where('WriterID', id).orderBy('PublishDate', 'desc')
+    },
+    findCatofWriter(id)
+    {
+        return db('news').where('WriterID', id).select('CatID');
+    },
+    findCountCatNewsofWriter(idCat,idWriter)
+    {
+        return db('news') // Chọn bảng 'news'
+     .where('CatID', idCat) // Lọc theo Category ID
+     .andWhere('WriterID', idWriter) // Lọc theo Writer ID
+     .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
+
     }
 }

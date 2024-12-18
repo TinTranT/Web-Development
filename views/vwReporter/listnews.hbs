@@ -30,7 +30,7 @@
             <div>
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
                 {{#each this.catList}}
-                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/reporter/category?id={{CatID}}&page=1">
+                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/reporter/category?id={{CatID}}&page=1&account={{../account}}">
                     {{CatParentName}} > {{CatName}}
                 </option>
                 {{/each}}
@@ -46,10 +46,10 @@
                         <img class="card-img-top" src="/static/imgs/{{Thumbnail}}" alt="HIII">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/" class="">{{Title}}</a>
+                                <a href="/news/details?id={{NewsID}}" class="">{{Title}}</a>
                             </h5>
                             <span class="badge badge-primary">{{Author}}</span>
-                            {{#each this.tags}}
+                            {{#each ../this.tags}}
                             <span class="badge bg-dark">{{TagName}}</span>
                             {{/each}}
                             {{#if (isEqual PremiumFlag 1)}}
@@ -64,13 +64,13 @@
                             {{#if (isEqualOr Status 0 1)}}
                             <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info" disabled
                                 aria-label="Close">
-                                <i class="bi bi-check2"></i>
+                                <i class="bi bi-pencil"></i>
                                 Edit
                             </a>
                             {{else}}
                             <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info d-none" disabled
                                 aria-label="Close">
-                                <i class="bi bi-check2"></i>
+                                <i class="bi bi-pencil"></i>
                                 Edit
                             </a>
                             {{/if}}
@@ -103,7 +103,7 @@
                  <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link"
-                        href="{{#unless this.isFirstPage}}/reporter/category?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
+                        href="{{#unless this.isFirstPage}}/reporter/category?id={{this.catId}}&page={{this.previousPage}}&account={{this.account}}{{/unless}}">
                         Previous
                     </a>
                 </li>
@@ -114,7 +114,7 @@
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="/reporter/category?id={{../catId}}&page={{value}}">
+                    <a class="page-link" href="/reporter/category?id={{../catId}}&page={{value}}&account={{../account}}">
                         {{value}}
                     </a>
                 </li>
@@ -122,7 +122,7 @@
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                     <a class="page-link"
-                        href="{{#unless this.isLastPage}}/reporter/category?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                        href="{{#unless this.isLastPage}}/reporter/category?id={{this.catId}}&page={{this.nextPage}}&account={{this.account}}{{/unless}}">Next</a>
                 </li>
             </ul>
         </div>
