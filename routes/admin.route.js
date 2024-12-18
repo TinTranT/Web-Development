@@ -6,6 +6,9 @@ import newstagsService from '../services/newstags.service.js';
 import accountService from '../services/account.service.js';
 import editorcategoryService from '../services/editorcategory.service.js';
 
+import { isAuth } from '../middleware/auth.mdw.js';
+import { isAdmin } from '../middleware/auth.mdw.js';
+
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
 
@@ -31,13 +34,13 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/', (req, res) => {
+router.get('/', isAuth, isAdmin, (req, res) => {
     res.redirect('/admin/articles?id=10&page=1');
 })
 
 // ------------------ Articles ------------------
 
-router.get('/articles', async (req, res) => {
+router.get('/articles', isAuth, isAdmin, async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
@@ -70,7 +73,7 @@ router.get('/articles', async (req, res) => {
     });
 })
 
-router.get('/articles/details', async (req, res) => {
+router.get('/articles/details', isAuth, isAdmin, async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
     const category = await categoryService.findbyNewsId(id);
@@ -100,12 +103,12 @@ router.post('/articles/patch', async (req, res) => {
         Status: 3,
     }
     await newsService.patch(id, changes);
-    res.redirect('/admin/articles/details?id='+ id);
+    res.redirect('/admin/articles/details?id=' + id);
 });
 
 // ----------------- User Add -----------------
 
-router.get('/users-add', async (req, res) => {
+router.get('/users-add', isAuth, isAdmin, async (req, res) => {
     res.render('vwAdmin/usersAdd', {
         layout: 'user',
     });
@@ -127,7 +130,7 @@ router.post('/users-add', async (req, res) => {
     res.redirect('/admin/users-add');
 });
 
-router.get('/users-add/is-available', async (req, res) => {
+router.get('/users-add/is-available', isAuth, isAdmin, async (req, res) => {
     const email = req.query.email;
     const user = await accountService.findByEmail(email);
     if (!user) {
@@ -138,7 +141,7 @@ router.get('/users-add/is-available', async (req, res) => {
 
 // ----------------- Readers -----------------
 
-router.get('/readers', async (req, res) => {
+router.get('/readers', isAuth, isAdmin, async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -167,7 +170,7 @@ router.get('/readers', async (req, res) => {
     });
 });
 
-router.get('/readers/edit', async (req, res) => {
+router.get('/readers/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
     // console.log(data);
@@ -214,7 +217,7 @@ router.post('/readers/del', async (req, res) => {
 
 // ------------------   Writers   ------------------
 
-router.get('/writers', async (req, res) => {
+router.get('/writers', isAuth, isAdmin, async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -242,10 +245,10 @@ router.get('/writers', async (req, res) => {
     });
 });
 
-router.get('/writers/edit', async (req, res) => {
+router.get('/writers/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
-    if(!data || data.Role !== 2) {
+    if (!data || data.Role !== 2) {
         return res.redirect('/admin/writers');
     }
     res.render('vwAdmin/writersEdit', {
@@ -273,7 +276,7 @@ router.post('/writers/del', async (req, res) => {
 });
 
 // ------------------ Editors ------------------
-router.get('/editors', async (req, res) => {
+router.get('/editors', isAuth, isAdmin, async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -301,7 +304,7 @@ router.get('/editors', async (req, res) => {
     });
 });
 
-router.get('/editors/edit', async (req, res) => {
+router.get('/editors/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
     const listCategory = await categoryService.findWithParent();
@@ -350,7 +353,7 @@ router.post('/editors/del', async (req, res) => {
 
 // ----------------- Admins -----------------
 
-router.get('/admins', async (req, res) => {
+router.get('/admins', isAuth, isAdmin, async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -378,7 +381,7 @@ router.get('/admins', async (req, res) => {
     });
 });
 
-router.get('/admins/edit', async (req, res) => {
+router.get('/admins/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
 
@@ -411,7 +414,7 @@ router.post('/admins/del', async (req, res) => {
 
 // ----------------- Category -----------------
 
-router.get('/categories', async (req, res) => {
+router.get('/categories', isAuth, isAdmin, async (req, res) => {
     const limit = 14;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -439,7 +442,7 @@ router.get('/categories', async (req, res) => {
     });
 })
 
-router.get('/categories/add', async (req, res) => {
+router.get('/categories/add', isAuth, isAdmin, async (req, res) => {
     const listCat = await categoryService.findNoParent();
     // console.log(listCat);
     res.render('vwAdmin/categoriesAdd', {
@@ -460,7 +463,7 @@ router.post('/categories/add', async (req, res) => {
     res.redirect('/admin/categories/add');
 });
 
-router.get('/categories/edit', async (req, res) => {
+router.get('/categories/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await categoryService.findById(id);
     const listCat = await categoryService.findNoParent();
@@ -480,7 +483,7 @@ router.post('/categories/del', async (req, res) => {
     res.redirect('/admin/categories');
 });
 
-router.get('/categories/is-using', async (req, res) => {
+router.get('/categories/is-using', isAuth, isAdmin, async (req, res) => {
     const catid = req.query.catid;
     const checkSubCat = await categoryService.countSubCat(catid);
     const checkNews = await newstagsService.countByTagId(catid);
@@ -509,7 +512,7 @@ router.post('/categories/patch', async (req, res) => {
 
 // ----------------- Tags -----------------
 
-router.get('/tags', async (req, res) => {
+router.get('/tags', isAuth, isAdmin, async (req, res) => {
     const limit = 8;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -540,7 +543,7 @@ router.get('/tags', async (req, res) => {
     });
 })
 
-router.get('/tags/add', async (req, res) => {
+router.get('/tags/add', isAuth, isAdmin, async (req, res) => {
     res.render('vwAdmin/tagsAdd', {
         layout: 'user',
     });
@@ -554,7 +557,7 @@ router.post('/tags/add', async (req, res) => {
     res.redirect('/admin/tags/add');
 });
 
-router.get('/tags/edit', async (req, res) => {
+router.get('/tags/edit', isAuth, isAdmin, async (req, res) => {
     const id = +req.query.id || 0;
     const data = await tagService.findById(id);
     console.log(data);
@@ -572,7 +575,7 @@ router.post('/tags/del', async (req, res) => {
     res.redirect('/admin/tags');
 });
 
-router.get('/tags/is-using', async (req, res) => {
+router.get('/tags/is-using', isAuth, isAdmin, async (req, res) => {
     const tagid = req.query.id;
     // console.log(tagid);
     const checkNews = await newstagsService.countByTagId(tagid);

@@ -1,7 +1,9 @@
 import express from 'express';
+import { isAuth, isEditor } from '../middleware/auth.mdw.js';
+
 const router = express.Router();
 
-router.get('/',(req,res) => {
+router.get('/', isAuth, isEditor, (req, res) => {
     res.render('vwEditor/editor', {
         layout: false,
         Buttons: [

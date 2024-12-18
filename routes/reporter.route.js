@@ -4,6 +4,9 @@ import categoryService from '../services/category.service.js';
 import newsService from '../services/news.service.js';
 import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
+
+import { isAuth } from '../middleware/auth.mdw.js';
+import { isReporter } from '../middleware/auth.mdw.js';
 import { parse } from 'date-fns';
 
 const router = express.Router();
@@ -31,13 +34,13 @@ router.use(function (req, res, next) {
 
 
 
-router.get('/', function (req, res) {
+router.get('/', isAuth, isReporter, function (req, res) {
     res.render('vwReporter/mainreporter', {
         layout: 'user',
 
     })
 })
-router.get('/category', async function (req, res) {
+router.get('/category', isAuth, isReporter, async function (req, res) {
     const id = parseInt(req.query.id) || 0;
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
@@ -53,7 +56,7 @@ router.get('/category', async function (req, res) {
         }
         page_items.push(item);
     }
-    const news = await newsService.findPageByCatId(id, limit,offset);
+    const news = await newsService.findPageByCatId(id, limit, offset);
     const catList = await categoryService.findWithParent();
 
     res.render('vwReporter/listnews', {
@@ -71,7 +74,7 @@ router.get('/category', async function (req, res) {
 
 })
 
-router.get('/news', async function (req, res) {
+router.get('/news', isAuth, isReporter, async function (req, res) {
 
     const listCategory = await categoryService.findWithParent();
     const listTag = await tagService.findall();
@@ -82,7 +85,7 @@ router.get('/news', async function (req, res) {
     });
 
 });
-router.get('/editnews', async function (req, res) {
+router.get('/editnews', isAuth, isReporter, async function (req, res) {
     const id = +req.query.id || 0;
 
     const listCategory = await categoryService.findWithParent();

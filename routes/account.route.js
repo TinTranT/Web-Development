@@ -80,12 +80,28 @@ router.post('/login', async function (req, res) {
     req.session.authUser = user;
     req.session.auth = true;
 
-    // Load previous path
-    const retUrl = req.session.retUrl || '/';
-    req.session.retUrl = null;
+    // // Load previous path
+    // const retUrl = req.session.retUrl || '/';
+    // req.session.retUrl = null;
 
-    //Access previous path
-    res.redirect(retUrl);
+    // //Access previous path
+    // res.redirect(retUrl);
+
+    if (req.session.retUrl) {
+        const retUrl = req.session.retUrl;
+        req.session.retUrl = null;
+        res.redirect(retUrl);
+    } else {
+        if (user.Role === 4) {
+            res.redirect('/admin');
+        } else if (user.Role === 3) {
+            res.redirect('/editor');
+        } else if (user.Role === 2) {
+            res.redirect('/reporter');
+        } else {
+            res.redirect('/');
+        }
+    }
 });
 
 router.get('/forgot-password', function (req, res) {
