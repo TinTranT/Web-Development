@@ -8,7 +8,10 @@ export default {
         return db('category').where('CatID', id).first();
     },
     findNoParent() {
-        return db('category').whereNull('CatParentID');
+        return db('category')
+            .where(function() {
+                this.whereNull('CatParentID').orWhere('CatParentID', 0);
+            });
     },
     findWithParent() {
         return db('category as c1')

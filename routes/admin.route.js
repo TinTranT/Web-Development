@@ -4,6 +4,7 @@ import newsService from '../services/news.service.js';
 import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
 import accountService from '../services/account.service.js';
+import editorcategoryService from '../services/editorcategory.service.js';
 
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
@@ -303,23 +304,40 @@ router.get('/editors', async (req, res) => {
 router.get('/editors/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
+    const listCategory = await categoryService.findWithParent();
+    const listEditorCat = await editorcategoryService.findbyAccountID(id);
+    console.log(listEditorCat);
     if (!data || data.Role !== 3) {
         return res.redirect('/admin/editors');
     }
     res.render('vwAdmin/editorsEdit', {
         layout: 'user',
         editor: data,
+        categories: listCategory,   
+        editorCat: listEditorCat,
     });
 });
 
 router.post('/editors/edit', async (req, res) => {
     const id = parseInt(req.body.txtID);
+    console.log(req.body);
     const changes = {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
         Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
         Role: parseInt(req.body.txtRole),
+    }
+    if(req.body.txtCategories != null){
+        const catList = req.body.txtCategories;
+        await editorcategoryService.del(id);
+        for (let i = 0; i < catList.length; i++) {
+            const entity = {
+                AccountID: id,
+                CatID: catList[i],
+            }
+            await editorcategoryService.add(entity);
+        }
     }
     await accountService.patch(id, changes);
     res.redirect('/admin/editors');

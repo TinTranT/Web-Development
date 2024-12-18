@@ -59,6 +59,12 @@ app.engine('hbs', engine({
             }
             return false;
         },
+        isInArrayCat: function (array, value) {
+            if (Array.isArray(array)) {
+                return array.some(item => item.CatID === value);
+            }
+            return false;
+        },
 
         isEqualOr: function (value, value1, value2) {
             return value === value1 || value === value2;
