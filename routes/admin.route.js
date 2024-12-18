@@ -52,7 +52,6 @@ router.get('/articles', async (req, res) => {
         page_items.push(item);
     }
     const news = await newsService.findPageByCatId(id, limit, offset);
-    console.log(news);
     const catList = await categoryService.findWithParent();
 
     res.render('vwAdmin/articles', {
@@ -137,7 +136,7 @@ router.get('/readers/edit', async (req, res) => {
     const id = +req.query.id || 0;
     const data = await accountService.findById(id);
     // console.log(data);
-    if (!data) {
+    if (!data || data.Role !== 1) {
         return res.redirect('/admin/readers');
     }
     res.render('vwAdmin/readersEdit', {
@@ -208,6 +207,36 @@ router.get('/writers', async (req, res) => {
     });
 });
 
+router.get('/writers/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await accountService.findById(id);
+    if(!data || data.Role !== 2) {
+        return res.redirect('/admin/writers');
+    }
+    res.render('vwAdmin/writersEdit', {
+        layout: 'user',
+        writer: data,
+    });
+});
+
+router.post('/writers/edit', async (req, res) => {
+    const id = parseInt(req.body.txtID);
+    const changes = {
+        Name: req.body.txtName,
+        Email: req.body.txtEmail,
+        PenName: req.body.txtPenName,
+        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Role: parseInt(req.body.txtRole),
+    }
+    await accountService.patch(id, changes);
+    res.redirect('/admin/writers');
+});
+
+router.post('/writers/del', async (req, res) => {
+    await accountService.del(req.body.txtID);
+    res.redirect('/admin/writers');
+});
+
 // ------------------ Editors ------------------
 router.get('/editors', async (req, res) => {
     const limit = 8;
@@ -237,6 +266,95 @@ router.get('/editors', async (req, res) => {
     });
 });
 
+router.get('/editors/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await accountService.findById(id);
+    if (!data || data.Role !== 3) {
+        return res.redirect('/admin/editors');
+    }
+    res.render('vwAdmin/editorsEdit', {
+        layout: 'user',
+        editor: data,
+    });
+});
+
+router.post('/editors/edit', async (req, res) => {
+    const id = parseInt(req.body.txtID);
+    const changes = {
+        Name: req.body.txtName,
+        Email: req.body.txtEmail,
+        PenName: req.body.txtPenName,
+        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Role: parseInt(req.body.txtRole),
+    }
+    await accountService.patch(id, changes);
+    res.redirect('/admin/editors');
+});
+
+router.post('/editors/del', async (req, res) => {
+    await accountService.del(req.body.txtID);
+    res.redirect('/admin/editors');
+});
+
+// ----------------- Admins -----------------
+
+router.get('/admins', async (req, res) => {
+    const limit = 8;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await accountService.countByRole(4);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const listAdmin = await accountService.findPageByRole(4, limit, offset);
+    res.render('vwAdmin/admins', {
+        layout: 'user',
+        listAdmin: listAdmin,
+        empty: listAdmin.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    });
+});
+
+router.get('/admins/edit', async (req, res) => {
+    const id = +req.query.id || 0;
+    const data = await accountService.findById(id);
+
+    if (!data || data.Role !== 4) {
+        return res.redirect('/admin/admins');
+    }
+    res.render('vwAdmin/adminsEdit', {
+        layout: 'user',
+        admin: data,
+    });
+});
+
+router.post('/admins/edit', async (req, res) => {
+    const id = parseInt(req.body.txtID);
+    const changes = {
+        Name: req.body.txtName,
+        Email: req.body.txtEmail,
+        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Role: parseInt(req.body.txtRole),
+    }
+    await accountService.patch(id, changes);
+    res.redirect('/admin/admins');
+});
+
+router.post('/admins/del', async (req, res) => {
+    await accountService.del(req.body.txtID);
+    res.redirect('/admin/admins');
+});
 
 
 // ----------------- Category -----------------

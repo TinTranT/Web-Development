@@ -67,7 +67,7 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Name</th>
                                                                 <th scope="col">Email</th>
-                                                                <th scope="col">Expired Date</th>
+                                                                <th scope="col">Date of Birth</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -82,15 +82,11 @@
                                                                     {{Email}}
                                                                 </td>
                                                                 <td>
-                                                                    {{#if SubcribeExpireDate}}
-                                                                    {{formatDate SubcribeExpireDate}}
-                                                                    {{else}}
-                                                                    --
-                                                                    {{/if}}
+                                                                    {{formatDate Dob}}
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <a class="btn btn-sm btn-outline-primary"
-                                                                        href="/admin/readers/edit?id={{Id}}"
+                                                                        href="/admin/editors/edit?id={{Id}}"
                                                                         role="button">
                                                                         <i class="bi bi-pencil-square"></i>
                                                                     </a>
