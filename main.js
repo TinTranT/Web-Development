@@ -16,7 +16,7 @@ import accountRouter from './routes/account.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
-import {isAuth} from './middleware/auth.mdw.js';
+import { isAuth } from './middleware/auth.mdw.js';
 import hbs_section from 'express-handlebars-sections';
 import { equal } from 'assert';
 
@@ -33,10 +33,10 @@ app.use(session({
 let check = false
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-  secret: 'SECRET_KEY',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {}
+    secret: 'SECRET_KEY',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {}
 }))
 
 app.engine('hbs', engine({
@@ -47,13 +47,16 @@ app.engine('hbs', engine({
         isEqual: function (value1, value2) {
             return value1 === value2;
         },
+        isNotEqual: function (value1, value2) {
+            return value1 !== value2;
+        },
         isInArray: function (array, value) {
             if (Array.isArray(array)) {
                 return array.some(item => item.TagID === value);
             }
             return false;
         },
-        isEqualOr: function(value,value1,value2){
+        isEqualOr: function (value, value1, value2) {
             return value === value1 || value === value2;
         },
         setVar: function (value1) {
@@ -143,12 +146,26 @@ app.engine('hbs', engine({
         isExpired: function (date) {
             return moment(date).isBefore(moment());
         },
+
+        nameStatus: function (value) {
+            if (value === 0) {
+                return 'Rejected';
+            } else if (value === 1) {
+                return 'Not approved';
+            }
+            else if (value === 2) {
+                return 'Pending Publication';
+            }
+            else if (value === 3) {
+                return 'Published';
+            }
+        },
     }
 }));
 
 //middleware user
-app.use(async function(req, res, next) {
-    if(req.session.auth === undefined){
+app.use(async function (req, res, next) {
+    if (req.session.auth === undefined) {
         req.session.auth = false;
     }
     res.locals.auth = req.session.auth;

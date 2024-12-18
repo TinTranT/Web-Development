@@ -45,7 +45,7 @@
                 <div class="list-title">
                     <h3 class="fw-bold fs-4 my-3">
                         <i class="bi bi-list"></i>
-                        Editor list
+                        Admin list
                     </h3>
                     <a href="/admin/users-add" class="btn btn-primary btn-sm" role="button">
                         <i class="bi bi-plus-circle-fill pd4"></i>
@@ -67,12 +67,12 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Name</th>
                                                                 <th scope="col">Email</th>
-                                                                <th scope="col">Date of Birth</th>
+                                                                <th scope="col">Expired Date</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {{#each this.listEditor}}
+                                                            {{#each this.listAdmin}}
                                                             <tr>
                                                                 <th scope="row" style="color: #666666;">{{Id}}</th>
                                                                 <td>
@@ -82,11 +82,15 @@
                                                                     {{Email}}
                                                                 </td>
                                                                 <td>
-                                                                    {{formatDate Dob}}
+                                                                    {{#if SubcribeExpireDate}}
+                                                                    {{formatDate SubcribeExpireDate}}
+                                                                    {{else}}
+                                                                    --
+                                                                    {{/if}}
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <a class="btn btn-sm btn-outline-primary"
-                                                                        href="/admin/editors/edit?id={{Id}}"
+                                                                        href="/admin/admins/edit?id={{Id}}"
                                                                         role="button">
                                                                         <i class="bi bi-pencil-square"></i>
                                                                     </a>
@@ -109,7 +113,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isFirstPage}}/admin/editors?page={{this.previousPage}}{{/unless}}">
+                                href="{{#unless this.isFirstPage}}/admin/admins?page={{this.previousPage}}{{/unless}}">
                                 Previous
                             </a>
                         </li>
@@ -120,7 +124,7 @@
                         </li>
                         {{else}}
                         <li class="page-item">
-                            <a class="page-link" href="/admin/editors?page={{value}}">
+                            <a class="page-link" href="/admin/admins?page={{value}}">
                                 {{value}}
                             </a>
                         </li>
@@ -128,7 +132,7 @@
                         {{/each}}
                         <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                             <a class="page-link"
-                                href="{{#unless this.isLastPage}}/admin/editors?page={{this.nextPage}}{{/unless}}">Next</a>
+                                href="{{#unless this.isLastPage}}/admin/admins?page={{this.nextPage}}{{/unless}}">Next</a>
                         </li>
                     </ul>
                 </div>
