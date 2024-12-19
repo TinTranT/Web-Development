@@ -60,20 +60,35 @@
                 <div class="carousel-item active">
                     <div class="row d-flex justify-content-center">
                         {{#each hotNews}}
-                        {{#if @index}}
-                        {{#if (and (greater @index 0) (lower @index 4))}}
+                        {{#if (and (st @index 0) (en @index 3))}}
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
                                     <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
                                     <div class="card-body">
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
                                         <h5 class="card-title">{{Title}}</h5>
-                                        <p class="card-text">{{formatDate2 PublishDate}}</p>
+                                        {{/if}} 
+                                        <p class="card-text">{{Abstract}}</p>
+                                        <p class="card-text">{{formatDate PublishDate}}</p>
+                                        <span class="badge bg-primary mb-3">{{CatName}}</span>
+
+                                        <ul class="nav nav-pills d-inline-flex text-center">
+                                            {{#each Tags}}
+                                            <li class="nav-item mb-3">
+                                                <div class="d-flex py-2 bg-light rounded-pill active me-2">
+                                                    <span class="text-dark" style="width: 100px;">{{this}}</span>
+                                                </div>
+                                            </li>
+                                            {{/each}}
+
+                                        </ul>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        {{/if}}
                         {{/if}}
                         {{/each}}
                     </div>
@@ -81,20 +96,36 @@
                 <div class="carousel-item">
                     <div class="row d-flex justify-content-center">
                         {{#each hotNews}}
-                        {{#if @index}}
-                        {{#if (and (greater @index 4) (lower @index 8))}}
+                        {{#if (and (st @index 4) (en @index 8))}}
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
                                     <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
                                     <div class="card-body">
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
                                         <h5 class="card-title">{{Title}}</h5>
-                                        <p class="card-text">{{formatDate2 PublishDate}}</p>
+                                        {{/if}} 
+                                        <p class="card-text">{{Abstract}}</p>
+                                        <p class="card-text">{{formatDate PublishDate}}</p>
+                                        <span class="badge bg-primary mb-3">{{CatName}}</span>
+
+                                        <ul class="nav nav-pills d-inline-flex text-center">
+                                            {{#each Tags}}
+                                            <li class="nav-item mb-3">
+                                                <div class="d-flex py-2 bg-light rounded-pill active me-2">
+                                                    <span class="text-dark" style="width: 100px;">{{this}}</span>
+                                                </div>
+                                            </li>
+                                            {{/each}}
+
+                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        {{/if}}
                         {{/if}}
                         {{/each}}
                     </div>
@@ -102,20 +133,35 @@
                 <div class="carousel-item">
                     <div class="row d-flex justify-content-center">
                         {{#each hotNews}}
-                        {{#if @index}}
-                        {{#if (and (greater @index 8) (lower @index 12))}}
+                        {{#if (and (st @index 9) (en @index 12))}}
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
                                     <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
                                     <div class="card-body">
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
                                         <h5 class="card-title">{{Title}}</h5>
-                                        <p class="card-text">{{formatDate2 PublishDate}}</p>
+                                        {{/if}} 
+                                        <p class="card-text">{{Abstract}}</p>
+                                        <p class="card-text">{{formatDate PublishDate}}</p>
+                                        <span class="badge bg-primary mb-3">{{CatName}}</span>
+
+                                        <ul class="nav nav-pills d-inline-flex text-center">
+                                            {{#each Tags}}
+                                            <li class="nav-item mb-3">
+                                                <div class="d-flex py-2 bg-light rounded-pill active me-2">
+                                                    <span class="text-dark" style="width: 100px;">{{this}}</span>
+                                                </div>
+                                            </li>
+                                            {{/each}}
+
+                                        </ul>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        {{/if}}
                         {{/if}}
                         {{/each}}
                     </div>

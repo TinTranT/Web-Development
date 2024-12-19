@@ -94,6 +94,13 @@ app.engine('hbs', engine({
         and: function (value1, value2) {
             return value1 && value2;
         },
+        st: function (value1, value2) {
+            return value1 >= value2;
+        },
+
+        en: function (value1, value2) {
+            return value1 <= value2;
+        },
 
         timeAgo: function (value) {
             const now = new Date();
@@ -209,12 +216,13 @@ app.use(async function (req, res, next) {
         if (!groupedData.has(parent)) {
             groupedData.set(parent, []);
         }
-        groupedData.get(parent).push(item.CatName);
+        groupedData.get(parent).push([item.CatID ,item.CatName]);
     }
     const result = [];
     for (const [key, value] of groupedData) {
         result.push({ catParentName: key, catChildren: value });
     }
+    //console.log(result);
     res.locals.lcCategories = result;
     next()
 
@@ -247,10 +255,24 @@ app.use(express.static('public'));
 app.use('/static', express.static('static'))
 
 app.get('/', async (req, res) => {
-    const featuredNews = await newsService.featuredNews();
-    const hotNews = await newsService.hotNews();
+    const processResults = (rows) => {
+        return rows.map(row => ({
+          ...row, // Giữ nguyên các trường hiện có
+          Tags: row.Tags ? row.Tags.split(',') : [] // Tách chuỗi Tags thành mảng
+        }));
+      };
+    const featuredNewsTemporary = await newsService.featuredNews();
+    const featuredNews = processResults(featuredNewsTemporary);
+    //console.log(featuredNews)
+
+    const hotNewsTemporary = await newsService.hotNews();
+    const hotNews = processResults(hotNewsTemporary);
+    //console.log(hotNews)
+
     const latestNews = await newsService.latestNews();
+    //console.log(latestNews)
     const hotCategoriesNews = await newsService.hotCategories();
+    console.log(hotCategoriesNews)
     const hotCategoriesParent = await newsService.hotCategoriesParent();
 
     res.render('homepage', {
