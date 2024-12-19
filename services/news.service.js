@@ -4,7 +4,7 @@ export default {
     findall() {
         return db('news').orderBy('PublishDate', 'desc');
     },
-    findAll(limit,offset) {
+    findAll(limit, offset) {
         return db('news').orderBy('PublishDate', 'desc').limit(limit).offset(offset);
     },
 
@@ -77,20 +77,20 @@ export default {
     countByCatId(id) {
         return db('news').where('CatID', id).count('* as total').first();
     },
-    findPageByCatId(id, limit, offset,account) {
-        return db('news').where('CatID', id).andWhere('WriterID',account).limit(limit).offset(offset);
+    findPageByCatId2(id, limit, offset, account) {
+        return db('news').where('CatID', id).andWhere('WriterID', account).limit(limit).offset(offset);
     },
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
     },
     findPageByTagId(tagId, limit, offset) {
         return db('news')
-        .join('newstag', 'news.NewsID', 'newstag.NewsID')
-        .where('newstag.TagID', tagId)
-        .select('news.*') // Chỉ lấy thông tin từ bảng news
-        .orderBy('news.PublishDate', 'desc')
-        .limit(limit)
-        .offset(offset);
+            .join('newstag', 'news.NewsID', 'newstag.NewsID')
+            .where('newstag.TagID', tagId)
+            .select('news.*') // Chỉ lấy thông tin từ bảng news
+            .orderBy('news.PublishDate', 'desc')
+            .limit(limit)
+            .offset(offset);
     },
     relatedNews(id) {
         return db('news')
@@ -98,55 +98,51 @@ export default {
             .orderBy('PublishDate', 'desc')
             .limit(5);
     },
-    addNews(entity){
+    addNews(entity) {
         return db('news').insert(entity)
     },
-    findlast(){
+    findlast() {
         return db('news')
-        .orderBy('NewsID', 'desc') // Sắp xếp giảm dần theo id
-        .first() // Lấy dòng đầu tiên từ kết quả
+            .orderBy('NewsID', 'desc') // Sắp xếp giảm dần theo id
+            .first() // Lấy dòng đầu tiên từ kết quả
 
     },
-    findTagById(id){
-        return db('newstag').select('TagID').where('NewsID',id)
+    findTagById(id) {
+        return db('newstag').select('TagID').where('NewsID', id)
     },
-    findCategoryById(id){
+    findCategoryById(id) {
         return db('news').where('NewsID', id).select('CatID').then(result => result[0]);
     },
-    updateNews(id, entity){
+    updateNews(id, entity) {
         return db('news').where('NewsID', id).update(entity)
     },
-    delTag(id)
-    {
+    delTag(id) {
         return db('newstag').where('NewsID', id).del()
     },
-    findNewsofWriter(id)
-    {
+    findNewsofWriter(id) {
         return db('news').where('WriterID', id).orderBy('PublishDate', 'desc')
     },
-    findCatofWriter(id)
-    {
+    findCatofWriter(id) {
         return db('news').where('WriterID', id).select('CatID');
     },
-    findCountCatNewsofWriter(idCat,idWriter)
-    {
+    findCountCatNewsofWriter(idCat, idWriter) {
         return db('news') // Chọn bảng 'news'
-     .where('CatID', idCat) // Lọc theo Category ID
-     .andWhere('WriterID', idWriter) // Lọc theo Writer ID
-     .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
+            .where('CatID', idCat) // Lọc theo Category ID
+            .andWhere('WriterID', idWriter) // Lọc theo Writer ID
+            .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
 
     },
-    del(id){
+    del(id) {
         return db('news').where('NewsID', id).del()
     },
-    patch(id, changes){
+    patch(id, changes) {
         return db('news').where('NewsID', id).update(changes)
     },
-    findTagByIdOfNew(id){
+    findTagByIdOfNew(id) {
         return db('newstag as t1')
-        .join('tag as t2', 't1.TagID', '=', 't2.TagID')
-        .select('*')
-        .where('t1.NewsID',id)
+            .join('tag as t2', 't1.TagID', '=', 't2.TagID')
+            .select('*')
+            .where('t1.NewsID', id)
     },
     findCountAllByAccount(account) {
         return db('news')
