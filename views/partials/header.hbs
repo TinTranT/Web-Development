@@ -96,7 +96,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {{#each catChildren}}
-                            <li><a class="dropdown-item" href="#">{{this}}</a></li>
+                            <li><a class="dropdown-item" href="/news/byCat?id={{this.[0]}}">{{this.[1]}}</a></li>
                             {{/each}}
                         </ul>
                     </li>
@@ -128,7 +128,7 @@
                                     aria-expanded="false">{{catParentName}}</a>
                                 <ul class="dropdown-menu">
                                     {{#each catChildren}}
-                                    <li><a class="dropdown-item drop-child" href="#">{{this}}</a></li>
+                                    <li><a class="dropdown-item drop-child" href="/news/byCat?id={{this.[0]}}">{{this.[1]}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>
