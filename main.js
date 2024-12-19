@@ -16,7 +16,7 @@ import accountRouter from './routes/account.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
-import { isAuth,isReporter,isEditor,isAdmin } from './middleware/auth.mdw.js';
+import { isAuth, isReporter, isEditor, isAdmin } from './middleware/auth.mdw.js';
 import hbs_section from 'express-handlebars-sections';
 import { equal } from 'assert';
 
@@ -159,6 +159,10 @@ app.engine('hbs', engine({
             return format(value, 'dd-MM-yyyy HH:mm');
         },
 
+        formatDate3: function (value) {
+            return format(value, 'yyyy-MM-dd');
+        },
+
         nameRole: function (value) {
             if (value === 1) {
                 return 'Reader';
@@ -277,9 +281,9 @@ app.get('/', async (req, res) => {
 
 
 app.use(express.urlencoded({ extended: true }));
-app.use('/admin',isAuth,isAdmin, adminRouter);
-app.use('/editor',isAuth,isEditor, editorRouter);
-app.use('/reporter', isAuth,isReporter,reporterRouter);
+app.use('/admin', isAuth, isAdmin, adminRouter);
+app.use('/editor', isAuth, isEditor, editorRouter);
+app.use('/reporter', isAuth, isReporter, reporterRouter);
 app.use('/news', newsRouter);
 app.use('/account', accountRouter);
 function serverStartedHandler() {
