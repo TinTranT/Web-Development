@@ -25,6 +25,11 @@
         right: 0;
         bottom: 0;
     }
+    .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
 </style>
 <div class="catnews">
     <div class="row">
@@ -47,19 +52,18 @@
         <div class="article row my-3">
             <div class="col-md-3">
                 <div class="card-body">
-                    <img src="{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
+                    <img src="/static/imgs/{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
                 </div>
             </div>
-            <div class="col-md-8" style="border-bottom: 1px solid #727272;">
+            <div class="col-md-9" style="border-bottom: 1px solid #727272;">
                 <div class="card-body">
+                    <p class="card-text">
+                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i> {{/if}}
+                        <i class="bi bi-clock"></i> {{timeAgo PublishDate}}
+                    </p>
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
                     <p class="card-text">{{Abstract}}</p>
                     <p class="card-text">by Nguyễn Văn A</p>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="card-body">
-                    <p class="card-text">{{timeAgo PublishDate}}</p>
                 </div>
             </div>
         </div>

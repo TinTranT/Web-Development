@@ -80,9 +80,9 @@ export default {
     findPageByCatId(id, limit, offset,account) {
         return db('news').where('CatID', id).andWhere('WriterID',account).limit(limit).offset(offset);
     },
-    // findPageByCatId(id, limit, offset) {
-    //     return db('news').where('CatID', id).limit(limit).offset(offset);
-    // },
+    findPageByCatId(id, limit, offset) {
+        return db('news').where('CatID', id).limit(limit).offset(offset);
+    },
     findPageByTagId(tagId, limit, offset) {
         return db('news')
         .join('newstag', 'news.NewsID', 'newstag.NewsID')

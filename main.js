@@ -110,8 +110,10 @@ app.engine('hbs', engine({
                 return `${diffInHours} hours ago`;
             } else if (diffInDays < 30) {
                 return `${diffInDays} days ago`;
-            } else {
+            } else if (diffInMonths < 12) {
                 return `${diffInMonths} months ago`;
+            } else {
+                return past.toLocaleDateString();;
             }
         },
 
