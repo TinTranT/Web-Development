@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-header">
+        <h4>{{this.news.Title}}</h4>
+        {{#if (isEqual this.news.is_premium 1)}}
+            <span class="badge text-bg-success">Premium</span>
+        {{else}}
+            <span class="badge text-bg-danger">Non-Premium</span>
+        {{/if}}
+        <span class="badge text-bg-secondary">{{this.categories.CatName}}</span>
+
+    </div>
+    <div class="card-body">
+        <h5>{{this.news.Abstract}}</h5>
+        <br />
+        {{{this.news.Content}}}
+        <br />
+        <ul class="nav nav-pills d-inline-flex text-center">
+            <li class="nav-item mb-3">
+                <h5 class="mt-2 me-3 mb-0">Tags:</h5>
+            </li>
+            {{#each this.tags}}
+            <li class="nav-item mb-3">
+                <a class="d-flex py-2 bg-light rounded-pill active me-2" href="/news/byTag?id={{TagID}}">
+                    <span class="text-dark" style="width: 100px;">{{TagName}}</span>
+                </a>
+            </li>
+            {{/each}}
+
+        </ul>
+ 
+    </div>
+    <div class="card-footer text-muted">
+        <a href="/reporter/category?account=5" class="btn btn-outline-primary" >
+        Back
+        <i class="bi bi-backspace"></i>
+        </a>
+    </div>
+</div>
+

@@ -141,5 +141,24 @@ export default {
     },
     patch(id, changes){
         return db('news').where('NewsID', id).update(changes)
+    },
+    findTagByIdOfNew(id){
+        return db('newstag as t1')
+        .join('tag as t2', 't1.TagID', '=', 't2.TagID')
+        .select('*')
+        .where('t1.NewsID',id)
+    },
+    findCountAllByAccount(account) {
+        return db('news')
+            .where('WriterID', account)
+            .count({ total: 'NewsID' })
+            .first();
+    },
+    findPageByAccount(account, limit, offset) {
+        return db('news')
+            .where('WriterID', account)
+            .limit(limit)
+            .offset(offset);
     }
+
 }
