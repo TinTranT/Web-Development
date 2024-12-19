@@ -31,7 +31,22 @@
         font-size: 0.9em;
     }
 </style>
+{{#section 'js'}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.getElementById('err_message').value;
+        if (message !== "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+            });
+        }
+    });
+</script>
+{{/section}}
 <div class="catnews">
+<input type="text" id="err_message" value="{{ err_message }}" hidden>
     <div class="row">
         <div class="col-12">
             <div class="top">

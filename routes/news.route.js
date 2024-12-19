@@ -5,7 +5,7 @@ import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
 import commentService from '../services/comment.service.js';
 
-import { isAuth } from '../middleware/auth.mdw.js';
+import { isAuth, isSubscriber } from '../middleware/auth.mdw.js';
 
 import moment from 'moment';
 
@@ -18,6 +18,17 @@ router.get('/details', async (req, res) => {
     const taglist = await tagService.findByNewsId(id);
     const relatednews = await newsService.relatedNews(id);
     const commentlist = await commentService.findbyNewId(id);
+
+    // console.log(category);
+    if(news.PremiumFlag === 1){ 
+        if(!req.session.authUser){
+            req.session.retUrl = `/news/byCat?id=${category.CatID}`;
+            return res.redirect('/account/login');
+        }
+        if(req.session.authUser.SubcribeExpireDate < new Date()){
+            return res.redirect(`/news/byCat?id=${category.CatID}&err_message=You dont have permission to view this page`);
+        }
+    }
 
     res.render('vwNews/news-detail.hbs', {
         category: category,
@@ -45,6 +56,7 @@ router.post('/details',isAuth, async (req, res) => {
 //danh sách sản phẩm theo category
 router.get('/byCat', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
+    const err_message = req.query.err_message;
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
@@ -69,6 +81,7 @@ router.get('/byCat', async (req, res) => {
         empty: list.length === 0,
         page_items: page_items,
         catId: id,
+        err_message: err_message,
         category: category,
         isFirstPage: page === 1,
         isLastPage: page === nPages,
