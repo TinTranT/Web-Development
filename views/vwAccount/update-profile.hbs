@@ -29,7 +29,7 @@
         var yyyy = today.getFullYear();
 
         today = yyyy + '-' + mm + '-' + dd;
-        if (!dobInput.value) {
+        if (dobInput.value === "1899-11-30" || !dobInput.value) {
             dobInput.value = today;
         }
         dobInput.setAttribute('max', today);
@@ -91,9 +91,8 @@
                                     <p class="mb-0">Date of Birth</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="date" id="dobInput" class="form-control"
-                                        value="{{#if user.Dob}}{{formatDate3 user.Dob}}{{/if}}" name="dob"
-                                        min="1900-01-01" required>
+                                    <input type="date" id="dobInput" class="form-control" value="{{formatDate3
+                                        user.Dob}}" name="dob" min="1900-01-01" required>
                                 </div>
                             </div>
                             <hr>
