@@ -19,8 +19,6 @@ router.get('/details', async (req, res) => {
     const relatednews = await newsService.relatedNews(id);
     const commentlist = await commentService.findbyNewId(id);
 
-    console.log(commentlist);
-
     res.render('vwNews/news-detail.hbs', {
         category: category,
         news: news,
@@ -63,6 +61,7 @@ router.get('/byCat', async (req, res) => {
     }
 
     const list = await newsService.findPageByCatId(id, limit, offset);
+    // console.log(list);
     const category = await categoryService.findById(id);
 
     res.render('vwNews/news-category', {
