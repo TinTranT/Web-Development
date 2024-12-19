@@ -211,7 +211,7 @@ app.use(async function (req, res, next) {
         if (!groupedData.has(parent)) {
             groupedData.set(parent, []);
         }
-        groupedData.get(parent).push(item.CatName);
+        groupedData.get(parent).push([item.CatID ,item.CatName]);
     }
     const result = [];
     for (const [key, value] of groupedData) {
