@@ -5,6 +5,9 @@ import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
 import commentService from '../services/comment.service.js';
 
+import { isAuth } from '../middleware/auth.mdw.js';
+
+import moment from 'moment';
 
 const router = express.Router();
 
@@ -23,6 +26,20 @@ router.get('/details', async (req, res) => {
         relatedNews: relatednews,
         commentList: commentlist,
     });
+});
+
+router.post('/details',isAuth, async (req, res) => {
+    const newDate = new Date();
+    const formattedDate = moment(newDate).format('YYYY-MM-DD HH:mm:ss');
+    const entity = {
+        NewsID: req.body.newsId,
+        AccountID: req.session.authUser.Id,
+        Content: req.body.txtComment,
+        Date: formattedDate,
+    };
+    await commentService.add(entity);
+    res.redirect(`/news/details?id=${req.body.newsId}`);
+
 });
 
 //danh sách sản phẩm theo category
@@ -44,6 +61,7 @@ router.get('/byCat', async (req, res) => {
     }
 
     const list = await newsService.findPageByCatId(id, limit, offset);
+    // console.log(list);
     const category = await categoryService.findById(id);
 
     res.render('vwNews/news-category', {
