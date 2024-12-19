@@ -10,20 +10,34 @@
         background-color: var(--color-red-dark);
         color: #fff;
     }
+    .description {
+        display: block;
+    }
+    .timeComment{
+        color: var(--color-gray);
+        font-size: 0.9em;
+    }
+    .content {
+        font-size: 1em;
+    }
+
 </style>
 <div class="bg-light rounded p-4">
-    <h4 class="mb-4">Comments</h4>
+    <h4 class="mb-4">Comments ({{commentList.length}})</h4>
+    {{#if (isEqual commentList.length 0)}}
+    <div>
+        <p>No comments yet</p>
+    </div>
+    {{/if}}
     {{#each this.commentList}}
     <div class="p-4 bg-white rounded mb-4">
         <div class="row g-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <h5>{{ReaderName}}</h5>
-                </div>
-                <small class="text-body d-block mb-3"><i class="fas fa-calendar-alt me-1"></i> {{formatDate Date}}</small>
-                <p class="mb-0">
+            <div class="col-12 description">
+                <h5>{{AccountName}}</h5>
+                <div class="timeComment d-block mb-3"> {{timeAgo Date}}</div>
+                <div class="mb-0 content">
                     {{Content}}
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -32,17 +46,20 @@
 </div>
 <div class="bg-light rounded p-4 my-4">
     <h4 class="mb-4">Leave A Comment</h4>
-    <form action="#">
+    <form action="#" method="post">
         <div class="row g-4">
+            <div style="display: none;">
+                            <input type="text" id="newsId" name="newsId" value="{{this.news.NewsID}}">
+            </div>
             <div class="col-12">
 
             </div>
             <div class="col-12">
-                <textarea class="form-control" name="textarea" id="" cols="30" rows="7"
+                <textarea class="form-control" name="txtComment" id="txtComment" cols="30" rows="7"
                     placeholder="Write Your Comment Here"></textarea>
             </div>
             <div class="col-12">
-                <button class="submit-button form-control btn py-3" type="button">Submit Now</button>
+                <button class="submit-button form-control btn py-3" type="submit">Submit Now</button>
             </div>
         </div>
     </form>
