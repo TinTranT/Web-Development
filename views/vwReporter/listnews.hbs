@@ -29,6 +29,7 @@
             <h4>News</h4>
             <div>
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
+                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/reporter/category?id=0&page=1">All News</option>
                 {{#each this.catList}}
                 <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/reporter/category?id={{CatID}}&page=1">
                     {{CatParentName}} > {{CatName}}
@@ -46,64 +47,59 @@
                         <img class="card-img-top" src="/static/imgs/{{Thumbnail}}" alt="HIII">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/" class="">{{Title}}</a>
+                                <a href="/news/details?id={{NewsID}}" class="">{{Title}}</a>
                             </h5>
-                            <span class="badge badge-primary">{{Author}}</span>
-                            {{#each this.tags}}
-                            <span class="badge bg-dark">{{TagName}}</span>
-                            {{/each}}
+                            <span class="badge text-bg-primary mb-3">{{../this.writer.Name}}</span>
                             {{#if (isEqual PremiumFlag 1)}}
-                            <span class="badge badge-success">Premium</span>
+                            <span class="badge text-bg-success">Premium</span>
                             {{else}}
-                            <span class="badge badge-danger">Non-Premium</span>
+                            <span class="badge text-bg-danger">Non-Premium</span>
                             {{/if}}
+                            <span class="badge text-bg-warning">{{nameStatus Status}}</span>
                             <p class="card-text">{{Abstract}}</p>
-                            <p class="card-text">{{PublishDate}}</p>
+
+                            {{#if (isNotEqual PublishDate null)}}
+                             <p class="card-text">{{formatDate PublishDate}}</p>
+                            {{/if}}
+                            
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between">
                             {{#if (isEqualOr Status 0 1)}}
                             <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info" disabled
                                 aria-label="Close">
-                                <i class="bi bi-check2"></i>
+                                <i class="bi bi-pencil"></i>
                                 Edit
                             </a>
                             {{else}}
                             <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info d-none" disabled
                                 aria-label="Close">
-                                <i class="bi bi-check2"></i>
+                                <i class="bi bi-pencil"></i>
                                 Edit
                             </a>
                             {{/if}}
+                            {{#if (isEqual Status 0)}}
+                            <a href="/reporter/rejected?id={{NewsID}}" class="btn btn-danger" disabled
+                                aria-label="Close">
+                                <i class="bi bi-arrow-bar-left"></i>
+                                Reject
+                            </a>
+                            {{/if}}
+                            <a href="/reporter/detail?id={{NewsID}}" class="btn btn-outline-dark" disabled
+                                aria-label="Close">
+                                Draft
+                                <i class="bi bi-ticket-detailed"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
                 {{/each}}
             </div>
-            {{!-- <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                {{#each this.page_items}}
-                {{#if active}}
-                <li class="page-item active">
-                    <a class="page-link" href="#">{{value}}</a>
-                </li>
-                {{else}}
-                <li class="page-item">
-                    <a class="page-link" href="/products/byCat?id={{../catId}}&page={{value}}">{{value}}</a>
-                </li>
-                {{/if}}
-                {{/each}}
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul> --}}
         </div>
         <div class="card-footer text-muted">
                  <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link"
-                        href="{{#unless this.isFirstPage}}/reporter/category?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
+                        href="{{#unless this.isFirstPage}}/reporter/category?id={{this.catId}}&page={{this.previousPage}}&account={{this.account}}{{/unless}}">
                         Previous
                     </a>
                 </li>
@@ -114,7 +110,7 @@
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="/reporter/category?id={{../catId}}&page={{value}}">
+                    <a class="page-link" href="/reporter/category?id={{../catId}}&page={{value}}&account={{../account}}">
                         {{value}}
                     </a>
                 </li>
@@ -122,14 +118,13 @@
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                     <a class="page-link"
-                        href="{{#unless this.isLastPage}}/reporter/category?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                        href="{{#unless this.isLastPage}}/reporter/category?id={{this.catId}}&page={{this.nextPage}}&account={{this.account}}{{/unless}}">Next</a>
                 </li>
             </ul>
         </div>
     </div>
 
 </form>
-</div>
 
 
 

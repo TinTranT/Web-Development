@@ -1,172 +1,179 @@
-<div class="main">
-    <main class="px-3 py-4 h-100">
-        <div class="">
-            <div class="mb-3">
-                <h3 class="fw-bold fs-4 mb-3">Writer Dashboard</h3>
-                <div class="container">
-                    <canvas id="myChart"></canvas>
-                </div>
+{{#section 'css'}}
+<style>
+    .profile-page {
+        font-size: 1.2rem;
+    }
 
-                <script>
-                    let myChart = document.getElementById('myChart').getContext('2d');
-                    // Global Options
-                    Chart.defaults.font.family = 'Lato';
-                    Chart.defaults.font.size = 18;
-                    Chart.defaults.color = '#777';
+    .profile-page .card-body {
+        font-size: 1.1rem;
+    }
 
-                    let massPopChart = new Chart(myChart, {
-                        type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-                        data: {
-                            labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-                            datasets: [{
-                                label: 'Population',
-                                data: [
-                                    617594,
-                                    181045,
-                                    153060,
-                                    106519,
-                                    105162,
-                                    95072
-                                ],
-                                //backgroundColor:'green',
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.6)',
-                                    'rgba(54, 162, 235, 0.6)',
-                                    'rgba(255, 206, 86, 0.6)',
-                                    'rgba(75, 192, 192, 0.6)',
-                                    'rgba(153, 102, 255, 0.6)',
-                                    'rgba(255, 159, 64, 0.6)',
-                                    'rgba(255, 99, 132, 0.6)'
-                                ],
-                                borderWidth: 1,
-                                borderColor: '#777',
-                                hoverBorderWidth: 3,
-                                hoverBorderColor: '#000'
-                            }]
-                        },
-                        options: {
-                            title: {
-                                display: true,
-                                text: 'Largest Cities In Massachusetts',
-                                fontSize: 25
-                            },
-                            legend: {
-                                display: true,
-                                position: 'right',
-                                labels: {
-                                    fontColor: '#000'
-                                }
-                            },
-                            layout: {
-                                padding: {
-                                    left: 50,
-                                    right: 0,
-                                    bottom: 0,
-                                    top: 0
-                                }
-                            },
-                            tooltips: {
-                                enabled: true
-                            }
-                        }
-                    });
-                </script>
+    .profile-page .btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+
+    .profile-page .mb-0 {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+</style>
+{{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+ 
+    let myChart = document.getElementById('myChart').getContext('2d');
+    // Global Options
+    Chart.defaults.font.family = 'Lato';
+    Chart.defaults.font.size = 18;
+    Chart.defaults.color = '#777';
+
+    let massPopChart = new Chart(myChart, {
+        type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data: {
+            labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+            datasets: [{
+                label: 'Population',
+                data: [
+                    617594,
+                    181045,
+                    153060,
+                    106519,
+                    105162,
+                    95072
+                ],
+                //backgroundColor:'green',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                ],
+                borderWidth: 1,
+                borderColor: '#777',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Largest Cities In Massachusetts',
+                fontSize: 25
+            },
+            legend: {
+                display: true,
+                position: 'right',
+                labels: {
+                    fontColor: '#000'
+                }
+            },
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 0,
+                    bottom: 0,
+                    top: 0
+                }
+            },
+            tooltips: {
+                enabled: true
+            }
+        }
+    });
+</script>
+{{/section}}
 
 
-                {{!-- <div class="row">
-                    <div class="col-12 col-md-4 ">
-                        <div class="card border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class=" fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
+{{!-- <div class="profile-page">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/648/648270.png" alt="avatar"
+                            class="rounded-circle img-fluid" style="width: 150px;">
+                        <h2 class="my-3">{{user.Name}}</h2>
+                        {{#if user.SubcribeExpireDate}}
+                        <h4 class="text-muted mb-1">Premium expiration date: {{formatDate2 user.SubcribeExpireDate}}
+                        </h4>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href="#" class="btn btn-danger btn-lg btn-block">Expand your PREMIUM right now!!!</a>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 ">
-                        <div class="card  border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class="fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
+                        {{else}}
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href="#" class="btn btn-danger btn-lg btn-block">Get PREMIUM right now!!!</a>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 ">
-                        <div class="card border-0">
-                            <div class="card-body py-4">
-                                <h5 class="mb-2 fw-bold">
-                                    Memebers Progress
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    $72,540
-                                </p>
-                                <div class="mb-0">
-                                    <span class="badge text-success me-2">
-                                        +9.0%
-                                    </span>
-                                    <span class="fw-bold">
-                                        Since Last Month
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                <h3 class="fw-bold fs-4 my-3">News</h3>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="highlight">
-                                    <th scope="col">TH</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">View</th>
-                                    <th scope="col">Money</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>How Donald Trump is laying the groundwork to dispute the election results –
-                                        again.</td>
-                                    <td>160</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Israel has long wanted to dismantle the UN’s Palestinian refugee agency. The
-                                        consequences could be disastrous for all.</td>
-                                    <td>200</td>
-                                    <td>$300</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {{/if}}
                     </div>
                 </div>
             </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.Email}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.Name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Date of Birth</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{formatDate user.Dob}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Pen Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.PenName}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Role</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{nameRole user.Role}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/account/update-password" class="btn btn-primary"><i class="bi bi-shield-lock"></i> Change
+                        your password</a>
+                    <a href="/account/update-profile" class="btn btn-success"><i class="bi bi-person"></i> Change your
+                        information</a>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
+</div> --}}
+
+
+<div class="container">
+    <canvas id="myChart"></canvas>
 </div>
+

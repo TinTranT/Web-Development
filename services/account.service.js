@@ -53,4 +53,5 @@ export default {
     countByRole(role) {
         return db('account').where('Role', role).count('* as total').first();
     }
+    
 }

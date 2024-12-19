@@ -7,17 +7,18 @@ import newstagsService from '../services/newstags.service.js';
 
 import { isAuth } from '../middleware/auth.mdw.js';
 import { isReporter } from '../middleware/auth.mdw.js';
+import accountService from '../services/account.service.js';
+import rejectreason from '../services/rejectreason.service.js';
 import { parse } from 'date-fns';
 
 const router = express.Router();
 
 router.use(function (req, res, next) {
+    //const account = req.session.authUser.Id;
     res.locals.items = [
-        // { label: 'Dashboard', url: '/reporter', icon: 'bi bi-file-earmark', isDropdown: false },
+        { label: 'Dashboard', url: '/reporter?account', icon: 'bi bi-file-earmark', isDropdown: false },
         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text', isDropdown: false },
-        {
-            label: 'Category', url: '/reporter/category?id=10&page=1', icon: 'bi bi-person-check', isDropdown: false,
-        }
+        { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,}
         // {
         //     label: 'Post',
         //     icon: 'bi bi-archive',
@@ -34,19 +35,112 @@ router.use(function (req, res, next) {
 
 
 
-router.get('/', isAuth, isReporter, function (req, res) {
+router.get('/',  async function (req, res) {
+    //const account = parseInt(req.query.account) || 0;
+    //const Writer = req.session.authUser
+    //console.log(writer)
+    const account = req.session.authUser.Id;
+    const writer = await accountService.findById(account);
     res.render('vwReporter/mainreporter', {
         layout: 'user',
+        user: writer
 
     })
 })
-router.get('/category', isAuth, isReporter, async function (req, res) {
+router.get('/category', async function (req, res) {
+    // const id = parseInt(req.query.id) || 0;
+    // const limit = 4;
+    // const page = parseInt(req.query.page) || 1;
+    // const offset = (page - 1) * limit;
+    // //Phân trang
+    // const nRows = await newsService.countByCatId(id);
+    // const nPages = Math.ceil(nRows.total / limit);
+    // const page_items = [];
+    // for (let i = 1; i <= nPages; i++) {
+    //     const item = {
+    //         value: i,
+    //         isActive: i === page,
+    //     }
+    //     page_items.push(item);
+    // }
+    // const news = await newsService.findPageByCatId(id, limit,offset);
+    // const catList = await categoryService.findWithParent();
+
+    // res.render('vwReporter/listnews', {
+    //     layout: 'user',
+    //     news: news,
+    //     catList: catList,
+    //     empty: news.length === 0,
+    //     page_items: page_items,
+    //     catId: id,
+    //     isFirstPage: page === 1,
+    //     isLastPage: page === nPages,
+    //     previousPage: page > 1 ? page - 1 : 1,
+    //     nextPage: page < nPages ? page + 1 : nPages,
+    // });
+
+
+
+    // const account = parseInt(req.query.account) || 0;
+    // console.log(account);
+    // const writer = await accountService.findById(account);
+    // //console.log(writer);
+    // const CatIDs = await newsService.findCatofWriter(account);
+    // //console.log(CatIDs);
+    // const id = parseInt(req.query.id) || 0;
+    // const limit = 4;
+    // const page = parseInt(req.query.page) || 1;
+    // const offset = (page - 1) * limit;
+    // //Phân trang
+    // const nRows = await newsService.findCountCatNewsofWriter(id,account);
+    // const nPages = Math.ceil(nRows.total / limit);
+    // const page_items = [];
+    // for (let i = 1; i <= nPages; i++) {
+    //     const item = {
+    //         value: i,
+    //         isActive: i === page,
+    //     }
+    //     page_items.push(item);
+    // }
+    // const news = await newsService.findPageByCatId(id, limit, offset,account);
+    // const catList = await categoryService.findWithParentAndWriter(account);
+    // //console.log(catList);
+    // res.render('vwReporter/listnews', {
+    //     layout: 'user',
+    //     account: account,
+    //     writer: writer,
+    //     news: news,
+    //     catList: catList,
+    //     empty: news.length === 0,
+    //     page_items: page_items,
+    //     catId: id,
+    //     isFirstPage: page === 1,
+    //     isLastPage: page === nPages,
+    //     previousPage: page > 1 ? page - 1 : 1,
+    //     nextPage: page < nPages ? page + 1 : nPages,
+    // });
+
+
+    //const account = parseInt(req.query.account) || 0;
+    const account = req.session.authUser.Id;
+    //account = writer.Id;
     const id = parseInt(req.query.id) || 0;
+    const writer = await accountService.findById(account);
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
-    //Phân trang
-    const nRows = await newsService.countByCatId(id);
+
+    let nRows, news;
+
+    // Kiểm tra nếu id (category) = 0 thì lấy tất cả bài viết
+    if (id === 0) {
+        nRows = await newsService.findCountAllByAccount(account); // Tổng số bài viết
+        news = await newsService.findPageByAccount(account, limit, offset); // Lấy tất cả bài viết
+    } else {
+        nRows = await newsService.findCountCatNewsofWriter(id, account); // Tổng số bài theo category
+        news = await newsService.findPageByCatId(id, limit, offset, account); // Lấy bài theo category
+    }
+
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -56,12 +150,14 @@ router.get('/category', isAuth, isReporter, async function (req, res) {
         }
         page_items.push(item);
     }
-    const news = await newsService.findPageByCatId(id, limit, offset);
-    const catList = await categoryService.findWithParent();
+
+    const catList = await categoryService.findWithParentAndWriter(account);
 
     res.render('vwReporter/listnews', {
         layout: 'user',
+        account: account,
         news: news,
+        writer: writer,
         catList: catList,
         empty: news.length === 0,
         page_items: page_items,
@@ -72,10 +168,40 @@ router.get('/category', isAuth, isReporter, async function (req, res) {
         nextPage: page < nPages ? page + 1 : nPages,
     });
 
+    
+
 })
+router.get('/detail', async function(req, res) {
+    const id = parseInt(req.query.id) || 0;
+    const news = await newsService.findbyId(id);
+    //console.log(news);
+    const categories = await categoryService.findById(news.CatID)
+    const listTagArticle = await newsService.findTagByIdOfNew(id)
+    //console.log(listTagArticle);
+    //console.log(news[0].title);
+    res.render('vwReporter/detail',{
+        layout:'user',
+        news: news,
+        categories: categories,
+        tags:listTagArticle
+    });
+})
+router.get('/rejected', async function(req, res) {
+    const id = parseInt(req.query.id) || 0;
+    const reject = await rejectreason.findRejectById(id);
+    console.log(id,reject.EditorID)
+    const editor = await accountService.findById(reject.EditorID);
+    console.log(editor)
 
-router.get('/news', isAuth, isReporter, async function (req, res) {
+    res.render('vwReporter/reject', {
+        layout: 'user',
+        reject: reject,
+        editor: editor
+    })
 
+
+})
+router.get('/news', async function (req, res) {
     const listCategory = await categoryService.findWithParent();
     const listTag = await tagService.findall();
     res.render('vwReporter/postnews', {
@@ -85,7 +211,7 @@ router.get('/news', isAuth, isReporter, async function (req, res) {
     });
 
 });
-router.get('/editnews', isAuth, isReporter, async function (req, res) {
+router.get('/editnews',  async function (req, res) {
     const id = +req.query.id || 0;
 
     const listCategory = await categoryService.findWithParent();
@@ -140,6 +266,7 @@ router.post('/editnews', async function (req, res) {
                 Thumbnail: nameThumnail || article.Thumbnail,
                 //PremiumFlag: req.body.premium,
                 CatID: req.body.categories || article.CatID,
+                Status: 1,
             }
 
             //console.log(news)
@@ -170,6 +297,9 @@ router.post('/news', async function (req, res) {
     // console.log(1)
     // res.redirect('/reporter/news');
     let nameThumnail = ''
+    // writer = req.session.authUser
+    // account = writer.Id
+    const account = req.session.authUser.Id;
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -200,8 +330,8 @@ router.post('/news', async function (req, res) {
                 Content: req.body.content,
                 Abstract: req.body.abstract,
                 Thumbnail: nameThumnail,
-                //author: req.session.user.id,
-                Status: 0,
+                WriterId: account,
+                Status: 1,
                 //PremiumFlag: req.body.premium,
                 //PublishDate: formattedDate,
                 CatID: req.body.categories,

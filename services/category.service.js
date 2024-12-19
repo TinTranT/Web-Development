@@ -24,6 +24,21 @@ export default {
             )
             .orderBy('c1.CatID', 'asc');
     },
+    findWithParentAndWriter(writerId) {
+        return db('category as c1')
+        .leftJoin('category as c2', 'c1.CatParentID', 'c2.CatID')
+        .join('news as n', 'c1.CatID', 'n.CatID')
+        .where('n.WriterID', writerId)
+        .whereNotNull('c1.CatParentID')
+        .select(
+            'c1.CatID',
+            'c1.CatName',
+            'c2.CatName as CatParentName'
+        )
+        .groupBy('c1.CatID', 'c1.CatName', 'c2.CatName') // Nhóm theo CatID để loại bỏ lặp
+        .orderBy('c1.CatID', 'asc');
+
+    },
     findbyNewsId(id) {
         return db('category')
             .join('news', 'category.CatID', 'news.CatID')

@@ -16,7 +16,7 @@ import accountRouter from './routes/account.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
-import { isAuth } from './middleware/auth.mdw.js';
+import { isAuth,isReporter,isEditor,isAdmin } from './middleware/auth.mdw.js';
 import hbs_section from 'express-handlebars-sections';
 import { equal } from 'assert';
 
@@ -277,9 +277,9 @@ app.get('/', async (req, res) => {
 
 
 app.use(express.urlencoded({ extended: true }));
-app.use('/admin', adminRouter);
-app.use('/editor', editorRouter);
-app.use('/reporter', reporterRouter);
+app.use('/admin',isAuth,isAdmin, adminRouter);
+app.use('/editor',isAuth,isEditor, editorRouter);
+app.use('/reporter', isAuth,isReporter,reporterRouter);
 app.use('/news', newsRouter);
 app.use('/account', accountRouter);
 function serverStartedHandler() {
