@@ -11,9 +11,22 @@
         }
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.getElementById('success_message').value;
+        if (message !== "") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: message,
+            });
+        }
+    });
+</script>
 {{/section}}
 
 <div class="homepage">
+    <input type="text" id="success_message" value="{{ success_message }}" hidden>
     <input type="text" id="err_message" value="{{ err_message }}" hidden>
     {{> home/featurednews}}
     {{> home/hotnews}}

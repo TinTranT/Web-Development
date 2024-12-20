@@ -13,6 +13,7 @@ import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
 import newsRouter from './routes/news.route.js';
 import accountRouter from './routes/account.route.js';
+import authRouter from './routes/auth.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
@@ -222,7 +223,7 @@ app.use(async function (req, res, next) {
         if (!groupedData.has(parent)) {
             groupedData.set(parent, []);
         }
-        groupedData.get(parent).push([item.CatID ,item.CatName]);
+        groupedData.get(parent).push([item.CatID, item.CatName]);
     }
     const result = [];
     for (const [key, value] of groupedData) {
@@ -299,7 +300,8 @@ app.get('/', async (req, res) => {
             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text', id: '1' },
             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil', id: '1' }
         ],
-        err_message: req.query.err_message
+        err_message: req.query.err_message,
+        success_message: req.query.success_message
     });
 })
 
@@ -310,6 +312,7 @@ app.use('/editor', isAuth, isEditor, editorRouter);
 app.use('/reporter', isAuth, isReporter, reporterRouter);
 app.use('/news', newsRouter);
 app.use('/account', accountRouter);
+app.use('/auth', authRouter);
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }

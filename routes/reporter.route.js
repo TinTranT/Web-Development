@@ -136,7 +136,7 @@ router.get('/category', async function (req, res) {
         news = await newsService.findPageByAccount(account, limit, offset); // Lấy tất cả bài viết
     } else {
         nRows = await newsService.findCountCatNewsofWriter(id, account); // Tổng số bài theo category
-        news = await newsService.findPageByCatId(id, limit, offset, account); // Lấy bài theo category
+        news = await newsService.findPageByCatId2(id, limit, offset, account); // Lấy bài theo category
     }
 
     const nPages = Math.ceil(nRows.total / limit);
