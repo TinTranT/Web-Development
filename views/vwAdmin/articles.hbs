@@ -14,6 +14,7 @@
     .article-title {
         font-size: 1.3rem;
         font-weight: 650;
+        color: var(--color-black);
     }
 </style>
 {{/section}}
@@ -53,7 +54,7 @@
             <div class="row">
                 {{#each this.news}}
                 <div class="col-sm-6 my-2">
-                    <div class="card article" style="min-height: 650px">
+                    <div class="card article">
                         <img class="card-img-top thumbnail" src="/static/imgs/{{Thumbnail}}" alt="{{Title}}">
                         <div class="card-body">
                             <h5 class="card-title">
