@@ -51,6 +51,7 @@
         color: #87743D;
         font-weight: bold;
         font-size: 0.9em;
+        margin-right: 10px;
     }
 </style>
 <div class="catnews">
@@ -80,7 +81,7 @@
             <div class="col-md-9">
                 <div class="card-body">
                     <p class="card-text">
-                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i> {{/if}}
+                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> {{/if}}
                         <i class="bi bi-clock"></i> {{timeAgo PublishDate}}
                     </p>
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>

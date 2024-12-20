@@ -10,9 +10,16 @@
     .premium {
         color: #87743D;
         font-weight: bold;
-        font-size: 0.9em;
+        font-size: 14px;
         margin-right: 10px;
+        line-height: 1;
+        margin: 0;
     }
+
+    .badge {
+    font-size: 14px; /* Đồng nhất kích thước font */
+    line-height: 1; /* Đảm bảo chiều cao bằng với PREMIUM */
+}
 
     .article-content {
         position: relative;
@@ -53,8 +60,8 @@
 {{/section}}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
-        {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium">PREMIUM</span> {{/if}}
-        <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-3">
+        {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium me-2">PREMIUM</span> {{/if}}
+        <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-2" style="font-size: 14px;">
             <span class="badge bg-primary">
                 {{this.category.CatName}}
             </span>
@@ -76,7 +83,7 @@
 </div>
 
 <div class="tab-class mt-4">
-    <div class="d-flex justify-content-between border-bottom mb-4">
+    <div class="d-flex justify-content-between align-items-center border-bottom mb-4">
         <ul class="nav nav-pills d-inline-flex text-center">
             <li class="nav-item mb-3">
                 <h5 class="mt-2 me-3 mb-0">Tags:</h5>
@@ -89,5 +96,8 @@
             </li>
             {{/each}}
         </ul>
+        <div class="d-flex align-items-center text-center" style="font-weight: bold;">
+            By {{ writer.Name}}
+        </div>
     </div>
 </div>

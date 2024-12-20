@@ -149,7 +149,10 @@ export default {
     },
     relatedNews(id) {
         return db('news')
-            .where('NewsID', '<>', id)
+            .where('CatID', function() {
+                this.select('CatID').from('news').where('NewsID', id);
+            })
+            .andWhere('NewsID', '<>', id)
             .orderBy('PublishDate', 'desc')
             .limit(5);
     },

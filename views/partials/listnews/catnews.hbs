@@ -48,6 +48,7 @@
         color: #87743D;
         font-weight: bold;
         font-size: 0.9em;
+        margin-right: 10px;
     }
     .tag {
         margin-right: 10px;
@@ -96,7 +97,7 @@
             <div class="col-md-9" style="">
                 <div class="card-body">
                     <p class="card-text">
-                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i> {{/if}}
+                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> </i> {{/if}}
                         <i class="bi bi-clock"></i> {{timeAgo PublishDate}}
                     </p>
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
