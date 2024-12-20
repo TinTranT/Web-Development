@@ -46,6 +46,12 @@
         font-size: 0.9em;
         margin-right: 10px;
     }
+
+    .hotnew-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
    
 </style>
 <div class="hotnews my-4">
@@ -74,11 +80,11 @@
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5> 
-                                        <p class="card-text">{{truncate Abstract 70}}</p>
-                                        <div class="mb-3">
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <p class="card-text">{{truncate Abstract 80}}</p>
+                                        <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
                                             <span class="premium">PREMIUM</span>
                                             {{/if}}{{formatDate PublishDate}}</p>
@@ -111,11 +117,11 @@
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px">{{Title}}</h5> 
-                                        <p class="card-text">{{truncate Abstract 70}}</p>
-                                        <div class="mb-3">
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <p class="card-text">{{truncate Abstract 80}}</p>
+                                        <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
                                             <span class="premium">PREMIUM</span>
                                             {{/if}}{{formatDate PublishDate}}</p>
@@ -150,11 +156,11 @@
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="{{Thumbnail}}" class="card-img-top" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px">{{Title}}</h5> 
-                                        <p class="card-text">{{truncate Abstract 70}}</p>
-                                        <div class="mb-3">
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <p class="card-text">{{truncate Abstract 80}}</p>
+                                        <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
                                             <span class="premium">PREMIUM</span>
                                             {{/if}}{{formatDate PublishDate}}</p>
