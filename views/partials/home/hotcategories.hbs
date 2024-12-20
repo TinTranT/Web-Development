@@ -129,6 +129,12 @@
         color: var(--color-gray);
         font-size: 16px;
     }
+    .hotcategories .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.9em;
+        margin-right: 10px;
+    }
 </style>
 
 <div class="hotcategories mt-5 mb-5">
@@ -228,16 +234,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        {{!-- <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5> --}}
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -323,13 +327,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -446,13 +450,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -521,13 +525,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -596,13 +600,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -671,13 +675,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -746,13 +750,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -821,13 +825,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -896,13 +900,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -971,13 +975,13 @@
                                     </div>
                                     <div class="inner-content">
                                         <p class="inner-title mb-1">{{Name}} </p>
-                                        {{#if (isEqual PremiumFlag 1)}}
-                                        <h5 class="card-title text-danger">{{Title}}</h5>
-                                        {{else}}
-                                        <h5 class="card-title">{{Title}}</h5>
-                                        {{/if}}
-                                        <p class="card-text mb-3">{{Abstract}}</p>
-                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>

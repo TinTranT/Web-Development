@@ -195,6 +195,12 @@ app.engine('hbs', engine({
                 return 'Published';
             }
         },
+        truncate: function (text, length) {
+            if (text.length > length) {
+                return text.substring(0, length) + ' ...';
+            }
+            return text;
+        },
     }
 }));
 
@@ -267,12 +273,13 @@ app.get('/', async (req, res) => {
 
     const hotNewsTemporary = await newsService.hotNews();
     const hotNews = processResults(hotNewsTemporary);
+    
     //console.log(hotNews)
 
     const latestNews = await newsService.latestNews();
     //console.log(latestNews)
     const hotCategoriesNews = await newsService.hotCategories();
-    console.log(hotCategoriesNews)
+    //console.log(hotCategoriesNews)
     const hotCategoriesParent = await newsService.hotCategoriesParent();
 
     res.render('homepage', {
