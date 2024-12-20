@@ -8,17 +8,19 @@ import commentService from '../services/comment.service.js';
 import { isAuth, isSubscriber } from '../middleware/auth.mdw.js';
 
 import moment from 'moment';
+import accountService from '../services/account.service.js';
 
 const router = express.Router();
 
 router.get('/details', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
+    
     const category = await categoryService.findbyNewsId(id);
     const taglist = await tagService.findByNewsId(id);
     const relatednews = await newsService.relatedNews(id);
     const commentlist = await commentService.findbyNewId(id);
-
+    const writer = await accountService.findById(news.WriterID);
     // console.log(category);
     if (news.PremiumFlag === 1) {
         if (!req.session.authUser) {
@@ -33,6 +35,7 @@ router.get('/details', async (req, res) => {
     res.render('vwNews/news-detail.hbs', {
         category: category,
         news: news,
+        writer: writer,
         taglist: taglist,
         relatedNews: relatednews,
         commentList: commentlist,
