@@ -125,6 +125,10 @@
         display: block;
         /* Đảm bảo thẻ <a> bao quanh toàn bộ nội dung bên trong */
     }
+    .hotcategories .inner-titlev2 {
+        color: var(--color-gray);
+        font-size: 16px;
+    }
 </style>
 
 <div class="hotcategories mt-5 mb-5">
@@ -181,8 +185,11 @@
                                             <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{this.Title}}</h5>
@@ -221,8 +228,16 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        {{!-- <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
+                                        <h5 class="inner-description">{{this.Title}}</h5> --}}
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -266,8 +281,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -304,8 +322,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -380,8 +404,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -418,8 +445,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -446,8 +479,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -484,8 +520,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -512,8 +554,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -550,8 +595,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -578,8 +629,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -616,8 +670,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -644,8 +704,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -682,8 +745,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -710,8 +779,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -748,8 +820,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -776,8 +854,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -814,8 +895,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -842,8 +929,11 @@
                                             <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -880,8 +970,14 @@
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        {{#if (isEqual PremiumFlag 1)}}
+                                        <h5 class="card-title text-danger">{{Title}}</h5>
+                                        {{else}}
+                                        <h5 class="card-title">{{Title}}</h5>
+                                        {{/if}}
+                                        <p class="card-text mb-3">{{Abstract}}</p>
+                                        <span class="inner-titlev2"> {{formatDate PublishDate}}</span>
                                     </div>
                                 </div>
                             </a>

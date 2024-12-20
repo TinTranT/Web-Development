@@ -188,30 +188,11 @@
 }
 
 /*** Footer Start ***/
-@media (max-width: 600px) {
-    .footer .bottom_border {
-        display: none;
-    }
+.footer .link:hover{
+    text-decoration: underline;
 }
-
-.footer {
-    background-color: rgb(28, 36, 49);
-    color: #d1cfd9;
-    padding-top: 1%;
-    padding-bottom: 1%;
-}
-
-.footer p {
-    text-align: justify;
-}
-
-.footer a {
+.footer .link{
     text-decoration: none;
-    color: #d1cfd9;
-}
-
-.footer li {
-    list-style: none;
 }
 
 /*** Footer End ***/
