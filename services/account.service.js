@@ -35,11 +35,17 @@ export default {
     },
 
     updateOTP(id, otp) {
-        return db('account').where('Id', id).update({ OTP: otp });
+        return db('account').where('Id', id).update({
+            OTP: otp,
+            OTP_CreatedAt: db.fn.now()
+        });
     },
 
     deleteOTPByEmail(email) {
-        return db('account').where('Email', email).update({ OTP: null });
+        return db('account').where('Email', email).update({
+            OTP: null,
+            OTP_CreatedAt: null
+        });
     },
 
     updatePasswordByEmail(email, password) {
@@ -53,5 +59,5 @@ export default {
     countByRole(role) {
         return db('account').where('Role', role).count('* as total').first();
     }
-    
+
 }
