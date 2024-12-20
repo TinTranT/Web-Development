@@ -33,12 +33,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 {{#if (isEqual authUser.Role 2)}}
-                                <a class="dropdown-item" href="/editor">
+                                <a class="dropdown-item" href="/reporter">
                                     <i class="bi bi-menu-button-wide"></i>
                                     Reporter Panel
                                 </a>
                                 {{else if (isEqual authUser.Role 3)}}
-                                <a class="dropdown-item" href="/reporter">
+                                <a class="dropdown-item" href="/editor">
                                     <i class="bi bi-menu-button-wide"></i>
                                     Editor Panel
                                 </a>
