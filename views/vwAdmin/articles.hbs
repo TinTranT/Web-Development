@@ -3,9 +3,20 @@
     .categoryDropDown {
     width: 350px;
     }
+    .article {
+    height: 750px;
+    }
+    .thumbnail {
+        object-fit: cover;
+        width: 100%; 
+        height: 400px;
+    }
+    .article-title {
+        font-size: 1.3rem;
+        font-weight: 650;
+    }
 </style>
 {{/section}}
-
 {{#section 'js'}}
 <script>
     function redirectToCategory(selectElement) {
@@ -41,12 +52,12 @@
         <div class="card-body">
             <div class="row">
                 {{#each this.news}}
-                <div class="col-sm-6 mb-3">
-                    <div class="card" style="min-height: 650px">
+                <div class="col-sm-6 my-2">
+                    <div class="card article" style="min-height: 650px">
                         <img class="card-img-top thumbnail" src="/static/imgs/{{Thumbnail}}" alt="{{Title}}">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/" class="">{{Title}}</a>
+                                <p class="article-title">{{Title}}</p>
                             </h5>
                             <span class="badge badge-primary">{{Author}}</span>
                             {{#each this.tags}}
@@ -57,13 +68,12 @@
                             {{else}}
                             <span class="badge bg-danger">Non-Premium</span>
                             {{/if}}
-                            <p class="card-text">{{Abstract}}</p>
-                            <p class="card-text">{{formatDate PublishDate}}</p>
-                            <p class="card-text">
-                                <span class="badge bg-primary">
+                            <span class="badge bg-warning">
                                 {{nameStatus Status}}
                             </span>
-                            </p>
+                            <p class="card-text mt-4">{{truncate Abstract 200}}</p>
+                            <p class="card-text">{{formatDate PublishDate}}</p>
+                            <p class="card-text text-dark">Write by {{WriterName}}</p>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between">
                             <a href="/admin/articles/details?id={{NewsID}}" class="btn btn-outline-info" disabled

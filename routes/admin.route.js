@@ -53,8 +53,20 @@ router.get('/articles', async (req, res) => {
         }
         page_items.push(item);
     }
+
+
+
     const news = await newsService.findPageByCatId(id, limit, offset);
     const catList = await categoryService.findWithParent();
+
+    for (let i = 0; i < news.length; i++) {
+        const writer = await accountService.findById(news[i].WriterID);
+        if (writer && writer.WriterID !== 0 && writer.WriterID !== null) {
+            news[i].WriterName = writer.Name; // Assign the writer's name to the news item
+        } else {
+            news[i].WriterName = 'Unknown'; // Handle the case where the writer is not found
+        }
+    }
 
     res.render('vwAdmin/articles', {
         layout: 'user',
@@ -113,16 +125,19 @@ router.get('/users-add', async (req, res) => {
 
 router.post('/users-add', async (req, res) => {
     const hash_password = bcrypt.hashSync(req.body.txtPassword, 10);
-    const ymd_dob = moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    var SubcribeExpireDate = null;
+    if(req.body.txtRole != 1){
+        SubcribeExpireDate = new Date('2099-01-01');
+    }
     const entity = {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
         Password: hash_password,
-        Dob: ymd_dob,
+        Dob: req.body.txtDOB,
+        SubcribeExpireDate: SubcribeExpireDate,
         Role: parseInt(req.body.txtRole),
     }
-    console.log(entity);
     await accountService.add(entity);
     res.redirect('/admin/users-add');
 });
@@ -199,7 +214,7 @@ router.post('/readers/edit', async (req, res) => {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
-        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Dob: req.body.txtDOB,
         Role: parseInt(req.body.txtRole),
         SubcribeExpireDate: moment(totalExpiredDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
     }
@@ -260,7 +275,7 @@ router.post('/writers/edit', async (req, res) => {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
-        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Dob: req.body.txtDOB,
         Role: parseInt(req.body.txtRole),
     }
     await accountService.patch(id, changes);
@@ -325,7 +340,7 @@ router.post('/editors/edit', async (req, res) => {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
         PenName: req.body.txtPenName,
-        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Dob: req.body.txtDOB,
         Role: parseInt(req.body.txtRole),
     }
     if (req.body.txtCategories != null) {
@@ -396,7 +411,7 @@ router.post('/admins/edit', async (req, res) => {
     const changes = {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
-        Dob: moment(req.body.txtDOB, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        Dob: req.body.txtDOB,
         Role: parseInt(req.body.txtRole),
     }
     await accountService.patch(id, changes);

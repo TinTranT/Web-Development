@@ -202,6 +202,13 @@ app.engine('hbs', engine({
                 return 'Published';
             }
         },
+        truncate: function (text, length) {
+            if (text.length > length) {
+                return text.substring(0, length) + ' ...';
+            }
+            return text;
+        },
+
     }
 }));
 
