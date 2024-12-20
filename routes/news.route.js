@@ -75,7 +75,7 @@ router.get('/byCat', async (req, res) => {
         page_items.push(item);
     }
 
-    const list = await newsService.findPageByCatId(id, limit, offset);
+    let list = await newsService.findPageByCatId(id, limit, offset);
     const category = await categoryService.findById(id);
 
     // Fetch tags for each news item
@@ -88,6 +88,8 @@ router.get('/byCat', async (req, res) => {
         }
         // console.log(news.tags);
     }
+
+    list = list.sort((a, b) => b.PremiumFlag - a.PremiumFlag);
 
 
     res.render('vwNews/news-category', {
@@ -121,8 +123,10 @@ router.get('/byTag', async (req, res) => {
         }
         page_items.push(item);
     }
-    const list = await newsService.findPageByTagId(id, limit, offset);
+    let list = await newsService.findPageByTagId(id, limit, offset);
     const tag = await tagService.findById(id);
+
+    list = list.sort((a, b) => b.PremiumFlag - a.PremiumFlag);
 
     res.render('vwNews/news-tag', {
         news: list,
