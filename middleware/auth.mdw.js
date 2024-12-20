@@ -6,6 +6,13 @@ export function isAuth(req, res, next) {
     next();
 }
 
+export function isSubscriber(req, res, next) {
+    if (req.session.authUser.SubcribeExpireDate < new Date()) {
+        return res.redirect('/?err_message=Your subscription has expired');
+    }
+    next();
+}
+
 export function isReporter(req, res, next) {
     if (req.session.authUser.Role !== 2) {
         return res.redirect('/?err_message=You are not a reporter');

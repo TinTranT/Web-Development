@@ -5,6 +5,11 @@
     .relatednews {
         position: relative;
     }
+    .RelatedArticles {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+
     .container-link {
         display: block;
     }
@@ -21,7 +26,7 @@
 <div class="row g-4">
     <div class="col-12">
         <div class="p-3 rounded border">
-            <h4 class="my-4">Related Articles</h4>
+            <h4 class="RelatedArticles">Related Articles</h4>
             <div class="row g-4">
                 {{#each this.relatedNews}}
                 {{#if @first}}
