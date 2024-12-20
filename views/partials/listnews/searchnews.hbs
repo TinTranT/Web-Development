@@ -1,0 +1,119 @@
+<style>
+    .searchNews .card-title {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
+    .searchNews .card-body {
+        min-height: 300px;
+        /* Adjust the height as needed */
+    }
+
+    .article {
+        position: relative;
+    }
+
+    .container-link {
+        display: block;
+    }
+
+    .container-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+</style>
+{{#section 'js'}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.getElementById('err_message').value;
+        if (message !== "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+            });
+        }
+    });
+</script>
+{{/section}}
+<div class="searchNews">
+    <input type="text" id="err_message" value="{{ err_message }}" hidden>
+    <div class="row">
+        <div class="col-12">
+            <div class="top">
+                <h3 class="md-3">
+                    {{this.category.CatName}}
+                </h3>
+            </div>
+        </div>
+    </div>
+    {{#if this.empty}}
+    <div class="container">
+        <p>Không có dữ liệu</p>
+    </div>
+    {{else}}
+    <div class="container">
+        {{#each this.news.[0]}}
+        <div class="article row my-3">
+            <div class="col-md-3">
+                <div class="card-body">
+                    <img src="/static/imgs/{{Thumbnail}}" class="img-fluid" alt="{{Title}}"
+                        style="width: 350px; height: 250px;">
+                </div>
+            </div>
+            <div class="col-md-9" style="border-bottom: 1px solid #727272;">
+                <div class="card-body">
+                    <p class="card-text">
+                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i>
+                        {{/if}}
+                        <i class="bi bi-clock"></i> {{timeAgo PublishDate}}
+                    </p>
+                    <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
+                    <p class="card-text">{{Abstract}}</p>
+                    <p class="card-text">by Nguyễn Văn A</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
+                    <a class="page-link"
+                        href="{{#unless this.isFirstPage}}/news/search?keyword={{this.keyword}}&page={{this.previousPage}}{{/unless}}">
+                        Previous
+                    </a>
+                </li>
+                {{#each this.page_items}}
+                {{#if isActive}}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{value}}</a>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="/news/search?id={{../keyword}}&page={{value}}">
+                        {{value}}
+                    </a>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
+                    <a class="page-link"
+                        href="{{#unless this.isLastPage}}/news/search?id={{this.keyword}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {{/if}}
+</div>

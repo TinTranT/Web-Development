@@ -14,9 +14,9 @@
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="search">
-                        <form class="d-flex align-items-center" role="search">
+                        <form class="d-flex align-items-center" role="search" action="/news/search" method="get">
                             <input class="form-control me-2" type="search" placeholder="Type something here"
-                                aria-label="Search">
+                                aria-label="Search" name="keyword">
                             <button class="btn btn-outline-success" type="submit">
                                 <i class="bi bi-search "></i>
                             </button>
@@ -124,11 +124,12 @@
                             {{#if @index}}
                             {{#if (and (greater @index 7) (lower @index 10000))}}
                             <li class="dropdown-submenu dropend more">
-                                <a class="dropdown-item dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">{{catParentName}}</a>
+                                <a class="dropdown-item dropdown-toggle " href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">{{catParentName}}</a>
                                 <ul class="dropdown-menu">
                                     {{#each catChildren}}
-                                    <li><a class="dropdown-item drop-child" href="/news/byCat?id={{this.[0]}}">{{this.[1]}}</a></li>
+                                    <li><a class="dropdown-item drop-child"
+                                            href="/news/byCat?id={{this.[0]}}">{{this.[1]}}</a></li>
                                     {{/each}}
                                 </ul>
                             </li>

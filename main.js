@@ -264,10 +264,10 @@ app.use('/static', express.static('static'))
 app.get('/', async (req, res) => {
     const processResults = (rows) => {
         return rows.map(row => ({
-          ...row, // Giữ nguyên các trường hiện có
-          Tags: row.Tags ? row.Tags.split(',') : [] // Tách chuỗi Tags thành mảng
+            ...row, // Giữ nguyên các trường hiện có
+            Tags: row.Tags ? row.Tags.split(',') : [] // Tách chuỗi Tags thành mảng
         }));
-      };
+    };
     const featuredNewsTemporary = await newsService.featuredNews();
     const featuredNews = processResults(featuredNewsTemporary);
     //console.log(featuredNews)
@@ -279,8 +279,11 @@ app.get('/', async (req, res) => {
     const latestNews = await newsService.latestNews();
     //console.log(latestNews)
     const hotCategoriesNews = await newsService.hotCategories();
-    console.log(hotCategoriesNews)
+    // console.log(hotCategoriesNews)
     const hotCategoriesParent = await newsService.hotCategoriesParent();
+
+    // const searchNews = await newsService.searchNews("next era", 1, 1);
+    // console.log(searchNews);
 
     res.render('homepage', {
         layout: 'main',

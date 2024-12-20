@@ -210,6 +210,30 @@ export default {
             .where('WriterID', account)
             .limit(limit)
             .offset(offset);
+    },
+    searchNews(keyword, limit, offset) {
+        return db.raw(`
+            SELECT 
+                *
+            FROM 
+                news
+            WHERE 
+                MATCH (Title, Abstract, Content) AGAINST (
+                    ? IN NATURAL LANGUAGE MODE
+                )
+            LIMIT ? OFFSET ?;
+        `, [keyword, limit, offset]);
+    },
+    countBySearch(keyword) {
+        return db.raw(`
+            SELECT 
+                COUNT(*) as total
+            FROM 
+                news
+            WHERE 
+                MATCH (Title, Abstract, Content) AGAINST (
+                    ? IN NATURAL LANGUAGE MODE
+                );
+        `, [keyword]);
     }
-
 }

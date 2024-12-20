@@ -20,12 +20,12 @@ router.get('/details', async (req, res) => {
     const commentlist = await commentService.findbyNewId(id);
 
     // console.log(category);
-    if(news.PremiumFlag === 1){ 
-        if(!req.session.authUser){
+    if (news.PremiumFlag === 1) {
+        if (!req.session.authUser) {
             req.session.retUrl = `/news/byCat?id=${category.CatID}`;
             return res.redirect('/account/login');
         }
-        if(req.session.authUser.SubcribeExpireDate < new Date()){
+        if (req.session.authUser.SubcribeExpireDate < new Date()) {
             return res.redirect(`/news/byCat?id=${category.CatID}&err_message=You dont have permission to view this page`);
         }
     }
@@ -39,7 +39,7 @@ router.get('/details', async (req, res) => {
     });
 });
 
-router.post('/details',isAuth, async (req, res) => {
+router.post('/details', isAuth, async (req, res) => {
     const newDate = new Date();
     const formattedDate = moment(newDate).format('YYYY-MM-DD HH:mm:ss');
     const entity = {
@@ -64,7 +64,7 @@ router.get('/byCat', async (req, res) => {
     const nRows = await newsService.countByCatId(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) { 
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
@@ -100,7 +100,7 @@ router.get('/byTag', async (req, res) => {
     const nRows = await newstagsService.countByTagId(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) { 
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
@@ -116,6 +116,38 @@ router.get('/byTag', async (req, res) => {
         page_items: page_items,
         tagId: id,
         tag: tag,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    });
+});
+
+router.get('/search', async (req, res) => {
+    const keyword = req.query.keyword || '';
+    const limit = 4;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    //Phân trang
+    const nRows = await newsService.countBySearch(keyword);
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    const list = await newsService.searchNews(keyword, limit, offset);
+    list.pop();
+    // console.log(list);
+
+    res.render('vwNews/news-search', {
+        news: list,
+        empty: list.length === 0,
+        page_items: page_items,
+        keyword: keyword,
         isFirstPage: page === 1,
         isLastPage: page === nPages,
         previousPage: page > 1 ? page - 1 : 1,
