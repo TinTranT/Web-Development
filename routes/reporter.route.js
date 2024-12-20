@@ -19,15 +19,6 @@ router.use(function (req, res, next) {
         { label: 'Dashboard', url: '/reporter?account', icon: 'bi bi-file-earmark', isDropdown: false },
         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text', isDropdown: false },
         { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,}
-        // {
-        //     label: 'Post',
-        //     icon: 'bi bi-archive',
-        //     isDropdown: true,
-        //     options: [
-        //         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text' },
-        //         { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check' }
-        //     ]
-        // }
     ]
     next();
 });
@@ -48,79 +39,7 @@ router.get('/',  async function (req, res) {
     })
 })
 router.get('/category', async function (req, res) {
-    // const id = parseInt(req.query.id) || 0;
-    // const limit = 4;
-    // const page = parseInt(req.query.page) || 1;
-    // const offset = (page - 1) * limit;
-    // //Phân trang
-    // const nRows = await newsService.countByCatId(id);
-    // const nPages = Math.ceil(nRows.total / limit);
-    // const page_items = [];
-    // for (let i = 1; i <= nPages; i++) {
-    //     const item = {
-    //         value: i,
-    //         isActive: i === page,
-    //     }
-    //     page_items.push(item);
-    // }
-    // const news = await newsService.findPageByCatId(id, limit,offset);
-    // const catList = await categoryService.findWithParent();
-
-    // res.render('vwReporter/listnews', {
-    //     layout: 'user',
-    //     news: news,
-    //     catList: catList,
-    //     empty: news.length === 0,
-    //     page_items: page_items,
-    //     catId: id,
-    //     isFirstPage: page === 1,
-    //     isLastPage: page === nPages,
-    //     previousPage: page > 1 ? page - 1 : 1,
-    //     nextPage: page < nPages ? page + 1 : nPages,
-    // });
-
-
-
-    // const account = parseInt(req.query.account) || 0;
-    // console.log(account);
-    // const writer = await accountService.findById(account);
-    // //console.log(writer);
-    // const CatIDs = await newsService.findCatofWriter(account);
-    // //console.log(CatIDs);
-    // const id = parseInt(req.query.id) || 0;
-    // const limit = 4;
-    // const page = parseInt(req.query.page) || 1;
-    // const offset = (page - 1) * limit;
-    // //Phân trang
-    // const nRows = await newsService.findCountCatNewsofWriter(id,account);
-    // const nPages = Math.ceil(nRows.total / limit);
-    // const page_items = [];
-    // for (let i = 1; i <= nPages; i++) {
-    //     const item = {
-    //         value: i,
-    //         isActive: i === page,
-    //     }
-    //     page_items.push(item);
-    // }
-    // const news = await newsService.findPageByCatId(id, limit, offset,account);
-    // const catList = await categoryService.findWithParentAndWriter(account);
-    // //console.log(catList);
-    // res.render('vwReporter/listnews', {
-    //     layout: 'user',
-    //     account: account,
-    //     writer: writer,
-    //     news: news,
-    //     catList: catList,
-    //     empty: news.length === 0,
-    //     page_items: page_items,
-    //     catId: id,
-    //     isFirstPage: page === 1,
-    //     isLastPage: page === nPages,
-    //     previousPage: page > 1 ? page - 1 : 1,
-    //     nextPage: page < nPages ? page + 1 : nPages,
-    // });
-
-
+    
     //const account = parseInt(req.query.account) || 0;
     const account = req.session.authUser.Id;
     //account = writer.Id;
@@ -140,7 +59,6 @@ router.get('/category', async function (req, res) {
         nRows = await newsService.findCountCatNewsofWriter(id, account); // Tổng số bài theo category
         news = await newsService.findPageByCatId(id, limit, offset, account); // Lấy bài theo category
     }
-
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -152,7 +70,6 @@ router.get('/category', async function (req, res) {
     }
 
     const catList = await categoryService.findWithParentAndWriter(account);
-
     res.render('vwReporter/listnews', {
         layout: 'user',
         account: account,

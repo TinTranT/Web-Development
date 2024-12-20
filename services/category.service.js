@@ -81,5 +81,19 @@ export default {
                 'c1.CatName',
                 'c2.CatName as CatParentName'
             )
+    },
+    findWithParentAndEditor(editorId){
+        return db('category as c1')
+        .leftJoin('category as c2', 'c1.CatParentID', 'c2.CatID')
+        .join('editorcategory as n', 'c1.CatID', 'n.CatID')
+        .where('n.AccountID', editorId)
+        .whereNotNull('c1.CatParentID')
+        .select(
+            'c1.CatID',
+            'c1.CatName',
+            'c2.CatName as CatParentName'
+        )
+        .groupBy('c1.CatID', 'c1.CatName', 'c2.CatName') // Nhóm theo CatID để loại bỏ lặp
+        .orderBy('c1.CatID', 'asc');
     }
 }

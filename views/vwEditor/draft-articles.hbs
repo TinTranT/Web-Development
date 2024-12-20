@@ -1,0 +1,106 @@
+{{#section 'css'}}
+<style>
+    .categoryDropDown {
+    width: 350px;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script>
+    function redirectToCategory(selectElement) {
+        // Lấy option được chọn
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        
+        // Lấy link từ thuộc tính data-link
+        var link = selectedOption.getAttribute('data-link');
+        
+        // Chuyển hướng đến link tương ứng
+        if (link) {
+            window.location.href = link;
+        }
+    }
+</script>
+{{/section}}
+
+<form action="" method="post">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4>News</h4>
+            <div>
+                <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
+                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/editor/draft-articles?id=0&page=1">All News</option>
+                {{#each this.catList}}
+                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/editor/draft-articles?id={{CatID}}&page=1">
+                    {{CatParentName}} > {{CatName}}
+                </option>
+                {{/each}}
+            </select>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                {{#each this.news}}
+                <div class="col-sm-6 mb-3">
+                    <div class="card" style="min-height: 650px">
+                        <img class="card-img-top" src="/static/imgs/{{Thumbnail}}" alt="HIII">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/news/details?id={{NewsID}}" class="">{{Title}}</a>
+                            </h5>
+                            {{#if (isEqual PremiumFlag 1)}}
+                            <span class="badge text-bg-success">Premium</span>
+                            {{else}}
+                            <span class="badge text-bg-danger">Non-Premium</span>
+                            {{/if}}
+                            <span class="badge text-bg-warning">{{nameStatus Status}}</span>
+                            <p class="card-text">{{Abstract}}</p>
+
+                            {{#if (isNotEqual PublishDate null)}}
+                             <p class="card-text">{{formatDate PublishDate}}</p>
+                            {{/if}}
+                            <p class="card-text">Written by: {{Name}}</p>
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between flex-row-reverse">
+                            <a href="/editor/draft-articles/detail?id={{NewsID}}" class="btn btn-outline-dark" disabled
+                                aria-label="Close">
+                                Draft
+                                <i class="bi bi-ticket-detailed"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+                 <ul class="pagination justify-content-center">
+                <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
+                    <a class="page-link"
+                        href="{{#unless this.isFirstPage}}/editor/draft-articles?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
+                        Previous
+                    </a>
+                </li>
+                {{#each this.page_items}}
+                {{#if isActive}}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{value}}</a>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="/editor/draft-articles?id={{../catId}}&page={{value}}">
+                        {{value}}
+                    </a>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
+                    <a class="page-link"
+                        href="{{#unless this.isLastPage}}/editor/draft-articles?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</form>

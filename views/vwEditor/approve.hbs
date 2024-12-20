@@ -1,0 +1,98 @@
+{{#section 'css'}}
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+<style>
+    h4 {
+        margin: 0;
+    }
+</style>
+{{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+<script>
+    new MultiSelectTag('tags')  // id
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var pubInput = document.getElementById('pubInput');
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var yyyy = today.getFullYear();
+        var hh = String(today.getHours()).padStart(2, '0');
+        var mi = String(today.getMinutes()).padStart(2, '0');
+
+        today = yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + mi;
+        if (pubInput.value === "1899-11-30" || !pubInput.value) {
+            pubInput.value = today;
+        }
+        pubInput.setAttribute('min', today);
+    });
+</script>
+{{/section}}
+<form action="" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4>Edit information</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4 mb-3">
+                    <div class="card" style="height: 400px">
+                        <img class="card-img-top" src="/static/imgs/{{this.news.Thumbnail}}" alt="HIII">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/news/details?id={{this.news.NewsID}}" class="">{{Title}}</a>
+                            </h5>
+                            {{#if (isEqual this.news.PremiumFlag 1)}}
+                            <span class="badge text-bg-success">Premium</span>
+                            {{else}}
+                            <span class="badge text-bg-danger">Non-Premium</span>
+                            {{/if}}
+                            <span class="badge text-bg-warning">{{nameStatus this.news.Status}}</span>
+                            <p class="card-text">{{this.news.Abstract}}</p>
+
+                            {{#if (isNotEqual this.news.PublishDate null)}}
+                            <p class="card-text">{{formatDate this.news.PublishDate}}</p>
+                            {{/if}}
+                            <p class="card-text">Written by: {{this.writer.Name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mb-3">
+                    <div class="card" style="height: 400px">
+                        <div class="card-body">
+                            <div class="mb-5 mt-3">
+                                <label for="categories" class="mb-2">Category</label>
+                                <select name="categories" id="categories" class="form-select" size="1" required>
+                                    {{#each this.listallCategory}}
+                                    <option value="{{CatID}}" {{#if (isEqual CatID ../this.category.CatID)}} selected
+                                        {{/if}}>{{CatParentName}} > {{CatName}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="mb-5">
+                                <label for="tags" class="mb-2">Tag</label>
+                                <select name="tags[]" id="tags" size="1" multiple required>
+                                    {{#each this.listallTag}}
+                                    <option value="{{TagID}}" {{#if isSelected}}selected{{/if}}>{{TagName}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="mb-5">
+                                <label for="pubInput" class="mb-2">Set publishing date</label>
+                                <input type="datetime-local" id="pubInput" class="form-control" name="pubdate" min="1900-01-01"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Confirm Approve</button>
+            </div>
+        </div>
+    </div>
+</form>

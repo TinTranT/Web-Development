@@ -159,6 +159,51 @@ export default {
             .where('WriterID', account)
             .limit(limit)
             .offset(offset);
-    }
+    },
+    findNewsofEditor(accountID){
+        return db('news')
+            .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
+            .where('editorcategory.AccountID', accountID)
+            .andWhere('news.Status', 1)
+            .select('news.*')
+    },
+    findCountAllArticles(accountID) {
+        return db('news')
+            .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('editorcategory.AccountID', accountID)
+            .andWhere('news.Status', 1)
+            .count({ total: 'news.NewsID' })
+            .first();
+    },
+    findCountArticlesByCat(idCat,accountID)
+    {
+        return db('news') // Chọn bảng 'news'
+            .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('editorcategory.AccountID', accountID)
+            .andWhere('news.Status', 1)
+            .andWhere('news.CatID', idCat) // Lọc theo Category ID
+            .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
 
+    },
+    findPageForAllArticles(accountID, limit, offset) {
+        return db('news')
+            .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('editorcategory.AccountID', accountID)
+            .andWhere('news.Status', 1)
+            .limit(limit)
+            .offset(offset);
+    },
+    findPageForArticlesByCat(CatID, limit, offset, accountID) {
+        return db('news') // Chọn bảng 'news'
+            .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('editorcategory.AccountID', accountID)
+            .andWhere('news.Status', 1)
+            .andWhere('news.CatID', CatID) // Lọc theo Category ID
+            .limit(limit)
+            .offset(offset);
+    },
 }
