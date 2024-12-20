@@ -20,12 +20,12 @@ router.get('/details', async (req, res) => {
     const commentlist = await commentService.findbyNewId(id);
 
     // console.log(category);
-    if(news.PremiumFlag === 1){ 
-        if(!req.session.authUser){
+    if (news.PremiumFlag === 1) {
+        if (!req.session.authUser) {
             req.session.retUrl = `/news/byCat?id=${category.CatID}`;
             return res.redirect('/account/login');
         }
-        if(req.session.authUser.SubcribeExpireDate < new Date()){
+        if (req.session.authUser.SubcribeExpireDate < new Date()) {
             return res.redirect(`/news/byCat?id=${category.CatID}&err_message=You dont have permission to view this page`);
         }
     }
@@ -39,7 +39,7 @@ router.get('/details', async (req, res) => {
     });
 });
 
-router.post('/details',isAuth, async (req, res) => {
+router.post('/details', isAuth, async (req, res) => {
     const newDate = new Date();
     const formattedDate = moment(newDate).format('YYYY-MM-DD HH:mm:ss');
     const entity = {
@@ -64,7 +64,7 @@ router.get('/byCat', async (req, res) => {
     const nRows = await newsService.countByCatId(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) { 
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,
@@ -73,8 +73,19 @@ router.get('/byCat', async (req, res) => {
     }
 
     const list = await newsService.findPageByCatId(id, limit, offset);
-    // console.log(list);
     const category = await categoryService.findById(id);
+
+    // Fetch tags for each news item
+    for (let news of list) {
+        const tags = await newstagsService.getTagsByNewsId(news.NewsID);
+        news.tags = [];
+        for (let tag of tags) {
+            const tagName = await tagService.findById(tag.TagID);
+            news.tags.push({ tagName });
+        }
+        // console.log(news.tags);
+    }
+
 
     res.render('vwNews/news-category', {
         news: list,
@@ -100,7 +111,7 @@ router.get('/byTag', async (req, res) => {
     const nRows = await newstagsService.countByTagId(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
-    for (let i = 1; i<=nPages; i++) { 
+    for (let i = 1; i <= nPages; i++) {
         const item = {
             value: i,
             isActive: i === page,

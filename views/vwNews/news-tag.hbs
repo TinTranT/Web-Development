@@ -5,8 +5,19 @@
     }
 
     .catnews .card-body {
-        min-height: 300px;
+        max-height: 300px;
         /* Adjust the height as needed */
+    }
+    .article {
+        position: relative;
+        padding: 32px 0;
+        border-bottom: 1px dotted var(--color-gray);
+    }
+
+    .tagName {
+        font-weight: bold;
+        font-size: 2em;
+        color: var(--color-black);
     }
 
     .article {
@@ -25,12 +36,26 @@
         right: 0;
         bottom: 0;
     }
+    .container-link.card-title {
+        transition: color 0.5s ease;
+    }
+    .container-link.card-title:hover {
+        color: var(--color-red);
+    }
+    .image-container {
+        padding-left: 0;
+    }
+    .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
 </style>
 <div class="catnews">
     <div class="row">
         <div class="col-12">
             <div class="top">
-                <h3 class="md-3">
+                <h3 class="md-3 tagName">
                     {{this.tag.TagName}}
                 </h3>
             </div>
@@ -45,28 +70,27 @@
 
         {{#each this.news}}
         <div class="article row my-3">
-            <div class="col-md-3">
+            <div class="col-md-3 image-container">
                 <div class="card-body">
-                    <img src="{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
+                    <img src="/static/imgs/{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
                 </div>
             </div>
-            <div class="col-md-8" style="border-bottom: 1px solid #727272;">
+            <div class="col-md-9">
                 <div class="card-body">
+                    <p class="card-text">
+                        {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i> {{/if}}
+                        <i class="bi bi-clock"></i> {{timeAgo PublishDate}}
+                    </p>
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
                     <p class="card-text">{{Abstract}}</p>
                     <p class="card-text">by Nguyễn Văn A</p>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="card-body">
-                    <p class="card-text">{{timeAgo PublishDate}}</p>
                 </div>
             </div>
         </div>
         {{/each}}
 
 
-        <nav aria-label="...">
+        <nav aria-label="..." class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link"

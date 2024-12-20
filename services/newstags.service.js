@@ -10,5 +10,7 @@ export default{
     del(id){
         return db('newstag').where('NewsID', id).del()
     },
-    
+    getTagsByNewsId(id){
+        return db('newstag').where('NewsID', id)
+    },
 }
