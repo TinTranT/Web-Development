@@ -73,8 +73,19 @@ router.get('/byCat', async (req, res) => {
     }
 
     const list = await newsService.findPageByCatId(id, limit, offset);
-    // console.log(list);
     const category = await categoryService.findById(id);
+
+    // Fetch tags for each news item
+    for (let news of list) {
+        const tags = await newstagsService.getTagsByNewsId(news.NewsID);
+        news.tags = [];
+        for (let tag of tags) {
+            const tagName = await tagService.findById(tag.TagID);
+            news.tags.push({ tagName });
+        }
+        // console.log(news.tags);
+    }
+
 
     res.render('vwNews/news-category', {
         news: list,

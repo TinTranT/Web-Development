@@ -5,12 +5,22 @@
     }
 
     .catnews .card-body {
-        min-height: 300px;
+        max-height: 300px;
         /* Adjust the height as needed */
     }
 
     .article {
         position: relative;
+        padding: 32px 0;
+        border-bottom: 1px dotted var(--color-gray);
+    }
+
+    .catName {
+        font-weight: bold;
+        font-size: 2em;
+        color: var(--color-black);
+        border-left: 5px solid var(--color-red);
+        padding-left: 8px;
     }
 
     .container-link {
@@ -25,10 +35,23 @@
         right: 0;
         bottom: 0;
     }
+    .container-link.card-title {
+        transition: color 0.5s ease;
+    }
+    .container-link.card-title:hover {
+        color: var(--color-red);
+    }
+    .image-container {
+        padding-left: 0;
+    }
     .premium {
         color: #87743D;
         font-weight: bold;
         font-size: 0.9em;
+    }
+    .tag {
+        margin-right: 10px;
+        background-color: var(--color-gray);
     }
 </style>
 {{#section 'js'}}
@@ -50,7 +73,7 @@
     <div class="row">
         <div class="col-12">
             <div class="top">
-                <h3 class="md-3">
+                <h3 class="md-3 catName">
                     {{this.category.CatName}}
                 </h3>
             </div>
@@ -64,13 +87,13 @@
     <div class="container">
 
         {{#each this.news}}
-        <div class="article row my-3">
-            <div class="col-md-3">
+        <div class="article row">
+            <div class="col-md-3 image-container" style="">
                 <div class="card-body">
                     <img src="/static/imgs/{{Thumbnail}}" class="img-fluid" alt="{{Title}}" style="width: 350px; height: 250px;">
                 </div>
             </div>
-            <div class="col-md-9" style="border-bottom: 1px solid #727272;">
+            <div class="col-md-9" style="">
                 <div class="card-body">
                     <p class="card-text">
                         {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> <i class="bi bi-dot"></i> {{/if}}
@@ -79,13 +102,18 @@
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
                     <p class="card-text">{{Abstract}}</p>
                     <p class="card-text">by Nguyễn Văn A</p>
+                    <div class="card-text" style="margin-top: 20px;">
+                        {{#each tags}}
+                        <span class="tag badge">{{this.tagName.TagName}}</span>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         </div>
         {{/each}}
 
 
-        <nav aria-label="...">
+        <nav aria-label="..." class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link"

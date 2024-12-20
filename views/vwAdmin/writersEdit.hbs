@@ -59,6 +59,21 @@
     
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dobInput = document.getElementById('userDOB');
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        if (dobInput.value === "1899-11-30" || !dobInput.value) {
+            dobInput.value = today;
+        }
+        dobInput.setAttribute('max', today);
+    });
+</script>
 {{/section}}
 <div class="main">
     <form action="" method="post" id="frmEdit">
@@ -112,8 +127,8 @@
                                         <label for="txtDOB" class="form-label">Date of birth</label>
                                     </td>
                                     <td class="col-8">
-                                        <input type="text" class="form-control" id="userDOB" name="txtDOB"
-                                            value="{{formatDate this.writer.Dob}}" placeholder="">
+                                        <input type="date" class="form-control" id="userDOB" name="txtDOB"
+                                            value="{{formatDate3 this.writer.Dob}}" placeholder="">
                                     </td>
                                 </tr>
                             </tbody>

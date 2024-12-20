@@ -1,3 +1,5 @@
+{{#section 'css'}}
+{{/section}}
 {{#section 'js'}}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -11,43 +13,43 @@
 
     // Đặt class 'active' cho liên kết được lưu trước đó
     if (activeUrl) {
-        dropdownItems.forEach(function (item) {
-            if (item.href === activeUrl) {
-                item.classList.add('active');
-                // Mở menu cha nếu cần
-                var parentMenu = item.closest('.nav-content');
-                if (parentMenu) {
-                    parentMenu.classList.add('show');
-                    var parentNav = parentMenu.previousElementSibling;
-                    if (parentNav) {
-                        parentNav.classList.remove('collapsed');
-                    }
-                }
+      dropdownItems.forEach(function (item) {
+        if (item.href === activeUrl) {
+          item.classList.add('active');
+          // Mở menu cha nếu cần
+          var parentMenu = item.closest('.nav-content');
+          if (parentMenu) {
+            parentMenu.classList.add('show');
+            var parentNav = parentMenu.previousElementSibling;
+            if (parentNav) {
+              parentNav.classList.remove('collapsed');
             }
-        });
+          }
+        }
+      });
 
-        nonDropdownItems.forEach(function (item) {
-            if (item.href === activeUrl) {
-                item.classList.remove('collapsed');
-            }
-        });
+      nonDropdownItems.forEach(function (item) {
+        if (item.href === activeUrl) {
+          item.classList.remove('collapsed');
+        }
+      });
     }
 
     // Thêm sự kiện click cho mỗi thẻ <a>
     dropdownItems.forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            // Lưu liên kết đang được chọn vào localStorage
-            localStorage.setItem('activeLink', item.href);
-        });
+      item.addEventListener('click', function (event) {
+        // Lưu liên kết đang được chọn vào localStorage
+        localStorage.setItem('activeLink', item.href);
+      });
     });
 
     nonDropdownItems.forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            // Lưu liên kết đang được chọn vào localStorage
-            localStorage.setItem('activeLink', item.href);
-        });
+      item.addEventListener('click', function (event) {
+        // Lưu liên kết đang được chọn vào localStorage
+        localStorage.setItem('activeLink', item.href);
+      });
     });
-});
+  });
 
 
 </script>
@@ -57,7 +59,6 @@
 <div id="sidebar" class="sidebar">
 
   <ul class="sidebar-nav mt-2" id="sidebar-nav">
-
     {{#each items}}
     {{#if isDropdown}}
     <li class="nav-item">
@@ -84,5 +85,6 @@
     {{/if}}
     {{/each}}
   </ul>
+
 
 </div><!-- End Sidebar-->

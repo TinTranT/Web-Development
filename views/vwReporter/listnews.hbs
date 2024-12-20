@@ -3,6 +3,19 @@
     .categoryDropDown {
     width: 350px;
     }
+    .article {
+    height: 750px;
+    }
+    .thumbnail {
+        object-fit: cover;
+        width: 100%; 
+        height: 400px;
+    }
+    .article-title {
+        font-size: 1.3rem;
+        font-weight: 650;
+        color: var(--color-black);
+    }
 </style>
 {{/section}}
 
@@ -43,11 +56,11 @@
             <div class="row">
                 {{#each this.news}}
                 <div class="col-sm-6 mb-3">
-                    <div class="card" style="min-height: 650px">
-                        <img class="card-img-top" src="/static/imgs/{{Thumbnail}}" alt="HIII">
+                    <div class="card article">
+                        <img class="card-img-top thumbnail" src="/static/imgs/{{Thumbnail}}" alt="{{Title}}">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/news/details?id={{NewsID}}" class="">{{Title}}</a>
+                                <a href="/news/details?id={{NewsID}}" class="article-title">{{Title}}</a>
                             </h5>
                             <span class="badge text-bg-primary mb-3">{{../this.writer.Name}}</span>
                             {{#if (isEqual PremiumFlag 1)}}
@@ -56,7 +69,7 @@
                             <span class="badge text-bg-danger">Non-Premium</span>
                             {{/if}}
                             <span class="badge text-bg-warning">{{nameStatus Status}}</span>
-                            <p class="card-text">{{Abstract}}</p>
+                            <p class="card-text">{{truncate Abstract 200}}</p>
 
                             {{#if (isNotEqual PublishDate null)}}
                              <p class="card-text">{{formatDate PublishDate}}</p>
