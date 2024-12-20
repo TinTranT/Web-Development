@@ -92,15 +92,7 @@ router.post('/login', async function (req, res) {
         req.session.retUrl = null;
         res.redirect(retUrl);
     } else {
-        if (user.Role === 4) {
-            res.redirect('/admin');
-        } else if (user.Role === 3) {
-            res.redirect('/editor');
-        } else if (user.Role === 2) {
-            res.redirect('/reporter');
-        } else {
-            res.redirect('/');
-        }
+        res.redirect('/');
     }
 });
 
