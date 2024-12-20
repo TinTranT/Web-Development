@@ -1,27 +1,71 @@
 {{#section 'css'}}
 <style>
     .thumbnail {
-    object-fit: cover; 
-    width: 100%; 
-    height: 100%;
-    max-height: 600px;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        max-height: 600px;
     }
+
     .premium {
         color: #87743D;
         font-weight: bold;
-        font-size: 0.9em;
+        font-size: 14px;
         margin-right: 10px;
+        line-height: 1;
+        margin: 0;
+    }
+
+    .badge {
+    font-size: 14px; /* Đồng nhất kích thước font */
+    line-height: 1; /* Đảm bảo chiều cao bằng với PREMIUM */
+}
+
+    .article-content {
+        position: relative;
+        overflow: hidden;
+        /* Đảm bảo nội dung không tràn ra ngoài */
+        word-wrap: break-word;
+        /* Đảm bảo từ không bị tràn */
+        max-width: 100%;
+        /* Giới hạn chiều rộng tối đa */
+        padding: 20px;
+        /* Tạo khoảng cách giữa nội dung và viền div */
+        box-sizing: border-box;
+        /* Bao gồm padding trong kích thước tổng thể */
+    }
+
+    .article-content img,
+    .article-content video,
+    .article-content iframe {
+        max-width: 100%;
+        /* Đảm bảo hình ảnh hoặc iframe không lớn hơn div cha */
+        height: auto;
+        /* Giữ tỷ lệ khung hình */
+        display: block;
+        /* Ngăn các thành phần inline gây lỗi */
+        margin: 0 auto;
+        /* Căn giữa nội dung */
+    }
+
+    .article-content table {
+        max-width: 100%;
+        /* Giới hạn chiều rộng bảng */
+        overflow-x: auto;
+        /* Cho phép cuộn ngang nếu bảng quá rộng */
+        display: block;
+        /* Bảng không làm vỡ layout */
     }
 </style>
 {{/section}}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
-    {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium" >PREMIUM</span>  {{/if}}
-    <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-3">
-        <span class="badge bg-primary">
-            {{this.category.CatName}}
-        </span>
-    </a>
+        {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium me-2">PREMIUM</span> {{/if}}
+        <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-2" style="font-size: 14px;">
+            <span class="badge bg-primary">
+                {{this.category.CatName}}
+            </span>
+        </a>
     </div>
     <div class="">{{formatDate this.news.PublishDate}}</div>
 </div>
@@ -31,12 +75,15 @@
 <div class="position-relative rounded overflow-hidden mb-3">
     <img src="/static/imgs/{{this.news.Thumbnail}}" alt="" class="thumbnail">
 </div>
+<div class="mb-4">
+    <p class="">{{this.news.Abstract}}</p>
+</div>
 <div class="article-content">
     {{{this.news.Content}}}
 </div>
 
 <div class="tab-class mt-4">
-    <div class="d-flex justify-content-between border-bottom mb-4">
+    <div class="d-flex justify-content-between align-items-center border-bottom mb-4">
         <ul class="nav nav-pills d-inline-flex text-center">
             <li class="nav-item mb-3">
                 <h5 class="mt-2 me-3 mb-0">Tags:</h5>
@@ -44,17 +91,13 @@
             {{#each this.taglist}}
             <li class="nav-item mb-3">
                 <a class="d-flex py-2 bg-light rounded-pill active me-2" href="/news/byTag?id={{TagID}}">
-                    <span class="text-dark" style="width: 100px;">{{TagName}}</span>
+                    <span class="text-dark" style="width: 100%; padding: 0 10px;">{{TagName}}</span>
                 </a>
             </li>
             {{/each}}
         </ul>
-        <div class="d-flex align-items-center">
-            <h5 class="mb-0 me-3">Share:</h5>
-            <i class="fab bi bi-facebook  btn btn-square rounded-circle border  text-dark me-2"></i>
-            <i class="btn fab bi-twitter  btn btn-square rounded-circle b border text-dark me-2"></i>
-            <i class="btn fab bi bi-instagram  btn btn-square rounded-circle  border text-dark me-2"></i>
-            <i class="btn fab bi bi-linkedin btn btn-square rounded-circle  border text-dark"></i>
+        <div class="d-flex align-items-center text-center" style="font-weight: bold;">
+            By {{ writer.Name}}
         </div>
     </div>
 </div>

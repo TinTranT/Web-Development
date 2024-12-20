@@ -13,10 +13,11 @@ import editorRouter from './routes/editor.route.js';
 import adminRouter from './routes/admin.route.js';
 import newsRouter from './routes/news.route.js';
 import accountRouter from './routes/account.route.js';
+import authRouter from './routes/auth.route.js';
 
 import newsService from './services/news.service.js';
 import categoriesService from './services/category.service.js';
-import { isAuth,isReporter,isEditor,isAdmin } from './middleware/auth.mdw.js';
+import { isAuth, isReporter, isEditor, isAdmin } from './middleware/auth.mdw.js';
 import hbs_section from 'express-handlebars-sections';
 import { equal } from 'assert';
 
@@ -94,6 +95,13 @@ app.engine('hbs', engine({
         and: function (value1, value2) {
             return value1 && value2;
         },
+        st: function (value1, value2) {
+            return value1 >= value2;
+        },
+
+        en: function (value1, value2) {
+            return value1 <= value2;
+        },
 
         timeAgo: function (value) {
             const now = new Date();
@@ -161,6 +169,10 @@ app.engine('hbs', engine({
             return format(value, 'dd-MM-yyyy HH:mm');
         },
 
+        formatDate3: function (value) {
+            return format(value, 'yyyy-MM-dd');
+        },
+
         nameRole: function (value) {
             if (value === 1) {
                 return 'Reader';
@@ -190,6 +202,12 @@ app.engine('hbs', engine({
                 return 'Published';
             }
         },
+        truncate: function (text, length) {
+            if (text.length > length) {
+                return text.substring(0, length) + ' ...';
+            }
+            return text;
+        },
     }
 }));
 
@@ -211,12 +229,13 @@ app.use(async function (req, res, next) {
         if (!groupedData.has(parent)) {
             groupedData.set(parent, []);
         }
-        groupedData.get(parent).push([item.CatID ,item.CatName]);
+        groupedData.get(parent).push([item.CatID, item.CatName]);
     }
     const result = [];
     for (const [key, value] of groupedData) {
         result.push({ catParentName: key, catChildren: value });
     }
+    //console.log(result);
     res.locals.lcCategories = result;
     next()
 
@@ -249,11 +268,29 @@ app.use(express.static('public'));
 app.use('/static', express.static('static'))
 
 app.get('/', async (req, res) => {
-    const featuredNews = await newsService.featuredNews();
-    const hotNews = await newsService.hotNews();
+    const processResults = (rows) => {
+        return rows.map(row => ({
+            ...row, // Giữ nguyên các trường hiện có
+            Tags: row.Tags ? row.Tags.split(',') : [] // Tách chuỗi Tags thành mảng
+        }));
+    };
+    const featuredNewsTemporary = await newsService.featuredNews();
+    const featuredNews = processResults(featuredNewsTemporary);
+    //console.log(featuredNews)
+
+    const hotNewsTemporary = await newsService.hotNews();
+    const hotNews = processResults(hotNewsTemporary);
+
+    //console.log(hotNews)
+
     const latestNews = await newsService.latestNews();
+    //console.log(latestNews)
     const hotCategoriesNews = await newsService.hotCategories();
+    //console.log(hotCategoriesNews)
     const hotCategoriesParent = await newsService.hotCategoriesParent();
+
+    // const searchNews = await newsService.searchNews("next era", 1, 1);
+    // console.log(searchNews);
 
     res.render('homepage', {
         layout: 'main',
@@ -273,17 +310,19 @@ app.get('/', async (req, res) => {
             { label: 'Writer', url: '/admin/writerlist', icon: 'bi bi-journal-text', id: '1' },
             { label: 'Editor', url: '/admin/editorlist', icon: 'bi bi-pencil', id: '1' }
         ],
-        err_message: req.query.err_message
+        err_message: req.query.err_message,
+        success_message: req.query.success_message
     });
 })
 
 
 app.use(express.urlencoded({ extended: true }));
-app.use('/admin',isAuth,isAdmin, adminRouter);
-app.use('/editor',isAuth,isEditor, editorRouter);
-app.use('/reporter', isAuth,isReporter,reporterRouter);
+app.use('/admin', isAuth, isAdmin, adminRouter);
+app.use('/editor', isAuth, isEditor, editorRouter);
+app.use('/reporter', isAuth, isReporter, reporterRouter);
 app.use('/news', newsRouter);
 app.use('/account', accountRouter);
+app.use('/auth', authRouter);
 function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }

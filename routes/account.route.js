@@ -92,15 +92,7 @@ router.post('/login', async function (req, res) {
         req.session.retUrl = null;
         res.redirect(retUrl);
     } else {
-        if (user.Role === 4) {
-            res.redirect('/admin');
-        } else if (user.Role === 3) {
-            res.redirect('/editor');
-        } else if (user.Role === 2) {
-            res.redirect('/reporter');
-        } else {
-            res.redirect('/');
-        }
+        res.redirect('/');
     }
 });
 
@@ -138,20 +130,48 @@ router.post('/forgot-password', async function (req, res) {
     // });
 
     const info = await transporter.sendMail({
-        from: 'Admin <testing1tintran2@gmail.com>',
+        from: 'Insight News <testing1tintran2@gmail.com>',
         to: user.Email,
         subject: 'Password Reset Request',
-        text: `Dear ${user.Name},
-    
-    We have received a request to reset your password. Please use the following One-Time Password (OTP) to proceed with resetting your password:
-    
-    OTP: ${otp}
-    
-    If you did not request a password reset, please ignore this email or contact our support team immediately.
-    
-    Best regards,
-    Insight News Development Team.
-    `
+        html: `<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .otp {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0056b3;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="header">Dear ${user.Name},</p>
+        <p>We have received a request to reset the password associated with your account. To proceed with resetting your password, please use the following One-Time Password (OTP):</p>
+        <p class="otp">OTP: ${otp}</p>
+        <p>This OTP will remain valid for a limited time. If you did not request this password reset, please disregard this email or contact our support team immediately for assistance.</p>
+        <p>We take the security of your account seriously and are here to help should you have any concerns.</p>
+        <div class="footer">
+            <p>Thank you for your attention.</p>
+            <p>Best regards,<br>Insight News.</p>
+        </div>
+    </div>
+</body>
+</html>`
     });
 
     // console.log('Message sent: %s', info.messageId);
@@ -219,7 +239,8 @@ router.post('/update-profile', isAuth, async function (req, res) {
     const user = await accountService.findByEmail(req.session.authUser.Email);
     user.Name = req.body.name;
     user.PenName = req.body.penname;
-    user.Dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    // user.Dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    user.Dob = req.body.dob;
     req.session.authUser = user;
     const ret = await accountService.update(user);
     res.render('vwAccount/profile', {

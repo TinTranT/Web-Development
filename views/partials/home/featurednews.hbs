@@ -128,13 +128,24 @@
                 <div class="taba">
                     {{#if this.featuredNews.[0]}}
                     <a class="card bg-dark text-white" href="/news/details?id={{this.featuredNews.[0].NewsID}}">
-                        <img class="card-img" src="{{this.featuredNews.[0].Thumbnail}}" alt="Card image">
+                        <img class="card-img" src="/static/imgs/{{this.featuredNews.[0].Thumbnail}}" alt="Card image">
                         <div class="card-img-overlay">
-                            <span class="badge bg-primary mb-2">Business</span>
+                            <div class="d-flex flex-row gap-3 p-3">
+                                <span class="badge bg-primary">{{this.featuredNews.[0].CatName}}</span>
+                                {{#if (isEqual this.featuredNews.[0].PremiumFlag 1)}}
+                                <span class="badge text-bg-success">Premium</span>
+                                {{/if}}
+                            </div>
                             <div class="item-title">
                                 <h4 class="card-title">{{this.featuredNews.[0].Title}}</h4>
-                                <p class="card-text">{{formatDate2 this.featuredNews.[0].PublishDate}}</p>
+                                <p class="card-text">{{formatDate this.featuredNews.[0].PublishDate}}</p>
+                                <div class="d-flex flex-row gap-3">
+                                    {{#each this.featuredNews.[0].Tags}}
+                                    <p class="card-text">{{this}}</p>
+                                    {{/each}}
+                                </div>
                             </div>
+
                         </div>
                     </a>
                     {{/if}}
@@ -181,12 +192,17 @@
                     {{#if (and (greater @index 0) (lower @index 4))}}
                     <div class="small-item">
                         <a class="card bg-dark text-white" href="/news/details?id={{NewsID}}">
-                            <img class="card-img" src="{{Thumbnail}}" alt="Card image">
+                            <img class="card-img" src="/static/imgs/{{Thumbnail}}" alt="Card image">
                             <div class="card-img-overlay">
-                                <span class="badge bg-primary mb-2">Business</span>
+                                <div class="d-flex flex-row gap-3 p-3">
+                                    <span class="badge bg-primary">{{CatName}}</span>
+                                    {{#if (isEqual PremiumFlag 1)}}
+                                    <span class="badge text-bg-success">Premium</span>
+                                    {{/if}}
+                                </div>
                                 <div class="item-title">
                                     <h4 class="card-title">{{Title}}</h4>
-                                    <p class="card-text">{{formatDate2 PublishDate}}</p>
+                                    <p class="card-text">{{formatDate PublishDate}}</p>
                                 </div>
                             </div>
                         </a>

@@ -5,8 +5,21 @@
     .relatednews {
         position: relative;
     }
+    .RelatedArticles {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+
     .container-link {
         display: block;
+    }
+
+        .catName {
+        font-weight: bold;
+        font-size: 2em;
+        color: var(--color-black);
+        border-left: 5px solid var(--color-red);
+        padding-left: 8px;
     }
 
     .container-link::after {
@@ -17,22 +30,38 @@
         right: 0;
         bottom: 0;
     }
+
+    .title {
+        transition: color 0.5s ease;
+    }
+    .title:hover {
+        color: var(--color-red);
+    }
+
+    .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.8em;
+        margin-right: 10px;
+    }
 </style>
 <div class="row g-4">
     <div class="col-12">
         <div class="p-3 rounded border">
-            <h4 class="my-4">Related Articles</h4>
+            <h4 class="RelatedArticles">Related Articles</h4>
             <div class="row g-4">
                 {{#each this.relatedNews}}
                 {{#if @first}}
                 <div class="col-12 relatednews">
                     <div class="rounded overflow-hidden my-4">
-                        <img src="{{Thumbnail}}" class="img-fluid rounded img-zoomin w-100" alt="">
+                        <img src="/static/imgs/{{Thumbnail}}" class="img-fluid rounded img-zoomin w-100" alt="">
                     </div>
                     <div class="d-flex flex-column">
-                        <a href="/news/details?id={{NewsID}}" class="h4 mb-2 container-link">{{Title}}</a>
-                        <p class="fs-5 mb-0"><i class="fa fa-clock">{{formatDate PublishDate}}</i> </p>
-                        <p class="fs-5 mb-0"><i class="fa fa-eye">by Nguyễn Văn A</i></p>
+                        <a href="/news/details?id={{NewsID}}" class="h4 mb-2 container-link title">{{Title}}</a>
+                        <p class="fs-5 mb-0">
+                            {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> {{/if}}
+                            <i class="fa fa-clock">{{formatDate PublishDate}}</i>  
+                            </p>
                     </div>
                 </div>
                 {{else}}
@@ -40,14 +69,16 @@
                     <div class="row g-4 align-items-center">
                         <div class="col-5">
                             <div class="overflow-hidden rounded">
-                                <img src="{{Thumbnail}}" class="img-zoomin img-fluid rounded w-100" alt="">
+                                <img src="/static/imgs/{{Thumbnail}}" class="img-zoomin img-fluid rounded w-100" alt="">
                             </div>
                         </div>
                         <div class="col-7">
                             <div class="features-content d-flex flex-column">
-                                <a href="/news/details?id={{NewsID}}" class="h6 container-link">{{Title}}</a>
-                                <small><i class="fa fa-clock"> {{formatDate PublishDate}}</i> </small>
-                                <small><i class="fa fa-eye">by Nguyễn Văn A</i></small>
+                                <a href="/news/details?id={{NewsID}}" class="h6 container-link title">{{Title}}</a>
+                                <small><i class="fa fa-clock"> 
+                                    {{#if (isEqual PremiumFlag 1)}}<span class="premium">PREMIUM</span> {{/if}}
+                                    {{formatDate PublishDate}}</i> 
+                                    </small>
                             </div>
                         </div>
                     </div>

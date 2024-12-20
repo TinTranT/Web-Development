@@ -125,6 +125,16 @@
         display: block;
         /* Đảm bảo thẻ <a> bao quanh toàn bộ nội dung bên trong */
     }
+    .hotcategories .inner-titlev2 {
+        color: var(--color-gray);
+        font-size: 16px;
+    }
+    .hotcategories .premium {
+        color: #87743D;
+        font-weight: bold;
+        font-size: 0.9em;
+        margin-right: 10px;
+    }
 </style>
 
 <div class="hotcategories mt-5 mb-5">
@@ -178,11 +188,14 @@
                                     {{#if (lower @index 3)}}
                                     <div class="carousel-item {{#if @first}}active{{/if}}">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{this.Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{this.Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{this.CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{this.Title}}</h5>
@@ -215,14 +228,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -263,11 +282,14 @@
                                     {{#filterCategories1 hotCategoriesNews "International"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -298,14 +320,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -377,11 +405,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Sports"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -412,14 +443,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -443,11 +480,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Education"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -478,14 +518,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -509,11 +555,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Entertainment"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -544,14 +593,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -575,11 +630,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Health"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -610,14 +668,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -641,11 +705,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Technology"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -676,14 +743,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -707,11 +780,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Law"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -742,14 +818,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -773,11 +855,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Lifestyle"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -808,14 +893,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -839,11 +930,14 @@
                                     {{#filterCategories1 hotCategoriesNews "Travel"}}
                                     <div class="carousel-item active">
                                         <a href="/news/details?id={{this.NewsID}}" class="content">
-                                            <img src="{{Thumbnail}}" class="d-block w-100" alt="...">
+                                            <img src="/static/imgs/{{Thumbnail}}" class="d-block w-100" alt="...">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="inner-caption">
-                                                    <div class="inner-badge">
-                                                        <span class="badge text-bg-primary">{{CatName}}</span>
+                                                    <div class="inner-badge d-flex flex-row gap-3 p-3">
+                                                        <span class="badge bg-primary">{{CatName}}</span>
+                                                        {{#if (isEqual PremiumFlag 1)}}
+                                                        <span class="badge text-bg-success">Premium</span>
+                                                        {{/if}}
                                                     </div>
                                                     <div class="inner-content">
                                                         <h5>{{Title}}</h5>
@@ -874,14 +968,20 @@
                             <a href="/news/details?id={{this.NewsID}}" class="content">
                                 <div class="inner-box">
                                     <div class="inner-image">
-                                        <img src="{{this.Thumbnail}}" alt="">
+                                        <img src="/static/imgs/{{this.Thumbnail}}" alt="">
                                         <div class="inner-badge">
                                             <span class="badge text-bg-primary">{{this.CatName}}</span>
                                         </div>
                                     </div>
                                     <div class="inner-content">
-                                        <p class="inner-title">Nguyen Van A - {{formatDate this.PublishDate}}</p>
-                                        <h5 class="inner-description">{{this.Title}}</h5>
+                                        <p class="inner-title mb-1">{{Name}} </p>
+                                        <h5 class="card-title" style="height:50px; overflow:hidden">{{Title}}</h5>
+                                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                                        <div class="mb-3">
+                                            <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
+                                            <span class="premium">PREMIUM</span>
+                                            {{/if}}{{formatDate PublishDate}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </a>

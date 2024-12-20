@@ -1,3 +1,4 @@
+
 <footer class="footer">
     <!-- Footer Start -->
     <div class="container-fluid bg-dark footer py-5">
@@ -11,11 +12,11 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="d-flex position-relative rounded-pill overflow-hidden">
-                            <input class="form-control border-0 w-100 py-3 rounded-pill" type="email"
-                                placeholder="example@gmail.com">
+                            <input class="form-control border-0 w-100 py-3 rounded-pill" type="email" name="search"
+                                placeholder="Search">
                             <button type="submit"
                                 class="btn btn-primary border-0 py-3 px-5 rounded-pill text-white position-absolute"
-                                style="top: 0; right: 0;">Subscribe Now</button>
+                                style="top: 0; right: 0;">Search</button>
                         </div>
                     </div>
                 </div>
@@ -24,23 +25,41 @@
                 <div class="col-lg-6 col-xl-3">
                     <div class="footer-item-1">
                         <h4 class="mb-4 text-white">Get In Touch</h4>
-                        <p class="text-secondary line-h">Address: <span class="text-white">123 Streat, New York</span>
+                        <p class="text-secondary line-h">Address: <span class="text-white">484 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh</span>
                         </p>
-                        <p class="text-secondary line-h">Email: <span class="text-white">Example@gmail.com</span></p>
-                        <p class="text-secondary line-h">Phone: <span class="text-white">+0123 4567 8910</span></p>
+                        <p class="text-secondary line-h">Email: <span class="text-white">22110046@student.hcmute.com</span></p>
+                        <p class="text-secondary line-h">Phone: <span class="text-white">0336248641</span></p>
                         <div class="d-flex line-h">
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter text-dark"></i></a>
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f text-dark"></i></a>
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube text-dark"></i></a>
-                            <a class="btn btn-light btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in text-dark"></i></a>
+                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href="https://github.com/KITLoveWF">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href="https://www.facebook.com/kien.mai.871992/">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a class="btn btn-light btn-md-square rounded-circle" href="https://www.linkedin.com/in/ki%C3%AAn-mai-4729842b5/">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+                {{#each lcCategories}}
+                {{#if @index}}
+                {{#if (and (greater @index 0) (lower @index 1000))}}
                 <div class="col-lg-6 col-xl-3">
+                    <div class="d-flex flex-column text-start footer-item-3">
+                        <h4 class="mb-4 text-white">{{catParentName}}</h4>
+                        {{#each catChildren}}
+                        <a class="btn-link text-white link" href="/news/byCat?id={{this.[0]}}">
+                            {{!-- <i class="fas fa-angle-right text-white me-2"></i> --}}
+                            {{this.[1]}}
+                        </a>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{/each}}
+                {{!-- <div class="col-lg-6 col-xl-3">
                     <div class="footer-item-2">
                         <div class="d-flex flex-column mb-4">
                             <h4 class="mb-4 text-white">Recent Posts</h4>
@@ -140,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

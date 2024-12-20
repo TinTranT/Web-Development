@@ -1,3 +1,24 @@
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+<script>
+    new Cleave('#txtCardNumber', {
+        blocks: [4, 4, 4],
+        delimiter: ' ',
+        numericOnly: true
+    });
+
+    new Cleave('#txtExpiration', {
+        date: true,
+        datePattern: ['m', 'y']
+    });
+
+    new Cleave('#txtCVV', {
+        blocks: [3],
+        numericOnly: true
+    });
+</script>
+{{/section}}
+
 <div class="update-password-page">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100 my-4">
@@ -240,8 +261,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success" style="border-radius: 99em;">Pay with credit
-                                or
-                                debit card</button>
+                                or debit card</button>
                         </form>
                     </div>
                 </div>

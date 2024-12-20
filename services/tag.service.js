@@ -34,4 +34,5 @@ export default {
         return db('tag').where('TagID', id).del();
     },
 
+
 }

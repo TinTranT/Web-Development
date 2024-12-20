@@ -5,8 +5,6 @@ import newsService from '../services/news.service.js';
 import tagService from '../services/tag.service.js';
 import newstagsService from '../services/newstags.service.js';
 
-import { isAuth } from '../middleware/auth.mdw.js';
-import { isReporter } from '../middleware/auth.mdw.js';
 import accountService from '../services/account.service.js';
 import rejectreason from '../services/rejectreason.service.js';
 import { parse } from 'date-fns';
@@ -26,7 +24,7 @@ router.use(function (req, res, next) {
 
 
 
-router.get('/',  async function (req, res) {
+router.get('/', async function (req, res) {
     //const account = parseInt(req.query.account) || 0;
     //const Writer = req.session.authUser
     //console.log(writer)
@@ -57,7 +55,7 @@ router.get('/category', async function (req, res) {
         news = await newsService.findPageByAccount(account, limit, offset); // Lấy tất cả bài viết
     } else {
         nRows = await newsService.findCountCatNewsofWriter(id, account); // Tổng số bài theo category
-        news = await newsService.findPageByCatId(id, limit, offset, account); // Lấy bài theo category
+        news = await newsService.findPageByCatId2(id, limit, offset, account); // Lấy bài theo category
     }
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
@@ -85,10 +83,10 @@ router.get('/category', async function (req, res) {
         nextPage: page < nPages ? page + 1 : nPages,
     });
 
-    
+
 
 })
-router.get('/detail', async function(req, res) {
+router.get('/detail', async function (req, res) {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
     //console.log(news);
@@ -96,17 +94,17 @@ router.get('/detail', async function(req, res) {
     const listTagArticle = await newsService.findTagByIdOfNew(id)
     //console.log(listTagArticle);
     //console.log(news[0].title);
-    res.render('vwReporter/detail',{
-        layout:'user',
+    res.render('vwReporter/detail', {
+        layout: 'user',
         news: news,
         categories: categories,
-        tags:listTagArticle
+        tags: listTagArticle
     });
 })
-router.get('/rejected', async function(req, res) {
+router.get('/rejected', async function (req, res) {
     const id = parseInt(req.query.id) || 0;
     const reject = await rejectreason.findRejectById(id);
-    console.log(id,reject.EditorID)
+    console.log(id, reject.EditorID)
     const editor = await accountService.findById(reject.EditorID);
     console.log(editor)
 
@@ -128,7 +126,7 @@ router.get('/news', async function (req, res) {
     });
 
 });
-router.get('/editnews',  async function (req, res) {
+router.get('/editnews', async function (req, res) {
     const id = +req.query.id || 0;
 
     const listCategory = await categoryService.findWithParent();
