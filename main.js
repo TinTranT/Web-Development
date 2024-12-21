@@ -2,6 +2,8 @@ import express from 'express';
 import session from 'express-session';
 import hbs_sections from 'express-handlebars-sections';
 import moment from 'moment';
+import db from './utils/db.js';
+
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { engine } from 'express-handlebars';
@@ -229,7 +231,6 @@ app.use(async function (req, res, next) {
     res.locals.auth = req.session.auth;
     res.locals.authUser = req.session.authUser;
     next()
-
 });
 app.use(async function (req, res, next) {
     const categories = await categoriesService.findGroupCat();
@@ -259,6 +260,11 @@ app.use(async function (req, res, next) {
 app.use(async (req, res, next) => {
     const listNews = await newsService.findall();
     res.locals.lcListNews = listNews;
+    next();
+});
+
+app.use(async (req, res, next) => {
+    await newsService.turnOnEventScheduler();
     next();
 });
 // app.use(async function(req, res, next) {

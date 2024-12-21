@@ -1,6 +1,10 @@
 import db from '../utils/db.js';
 
 export default {
+    turnOnEventScheduler() {
+        return db.raw('SET GLOBAL event_scheduler = ON;');
+    },
+
     findall() {
         return db('news').orderBy('PublishDate', 'desc');
     },
