@@ -239,48 +239,48 @@ export default {
                 );
         `, [keyword]);
     },
-    findNewsofEditor(accountID){
+    findNewsofEditor(accountID, status){
         return db('news')
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .where('editorcategory.AccountID', accountID)
-            .andWhere('news.Status', 1)
+            .andWhere('news.Status', status)
             .select('news.*')
     },
-    findCountAllArticles(accountID) {
+    findCountAllArticles(accountID, status) {
         return db('news')
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
             .where('editorcategory.AccountID', accountID)
-            .andWhere('news.Status', 1)
+            .andWhere('news.Status', status)
             .count({ total: 'news.NewsID' })
             .first();
     },
-    findCountArticlesByCat(idCat,accountID)
+    findCountArticlesByCat(idCat,accountID, status)
     {
         return db('news') // Chọn bảng 'news'
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
             .where('editorcategory.AccountID', accountID)
-            .andWhere('news.Status', 1)
+            .andWhere('news.Status', status)
             .andWhere('news.CatID', idCat) // Lọc theo Category ID
             .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
 
     },
-    findPageForAllArticles(accountID, limit, offset) {
+    findPageForAllArticles(accountID, limit, offset, status) {
         return db('news')
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
             .where('editorcategory.AccountID', accountID)
-            .andWhere('news.Status', 1)
+            .andWhere('news.Status', status)
             .limit(limit)
             .offset(offset);
     },
-    findPageForArticlesByCat(CatID, limit, offset, accountID) {
+    findPageForArticlesByCat(CatID, limit, offset, accountID, status) {
         return db('news') // Chọn bảng 'news'
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
             .where('editorcategory.AccountID', accountID)
-            .andWhere('news.Status', 1)
+            .andWhere('news.Status', status)
             .andWhere('news.CatID', CatID) // Lọc theo Category ID
             .limit(limit)
             .offset(offset);
