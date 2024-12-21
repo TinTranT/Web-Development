@@ -1,50 +1,55 @@
 {{#section 'css'}}
-{{!-- multi select  --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+{{!-- multi select --}}
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
 
 
-<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/css/fileinput.min.css" media="all"
+  rel="stylesheet" type="text/css" />
 
 
 {{!-- <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- Multiselect CSS và JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.min.css"> --}}
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.min.css"> --}}
 {{/section}}
 
 {{#section 'js'}}
 {{!-- multi select --}}
 <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
 <script>
-    new MultiSelectTag('tags')  // id
+  new MultiSelectTag('tags')  // id
 </script>
 
 
 
 
-{{!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
-    crossorigin="anonymous"></script>
+{{!--
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+--}}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 <script>
-      $('#summernote').summernote({
-        placeholder: 'Please enter content news',
-        tabsize: 2,
-        height: 400,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['fontsize', ['fontsize']],
-          ['fontname', ['fontname']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
+  $('#summernote').summernote({
+    placeholder: 'Please enter content news',
+    tabsize: 2,
+    height: 400,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['fontsize', ['fontsize']],
+      ['fontname', ['fontname']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['codeview', 'help']]
+    ]
+  });
 </script>
 
 
@@ -52,37 +57,66 @@
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/fileinput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.0/js/locales/LANG.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/js/locales/vi.min.js"></script>
-{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/themes/fa4/theme.min.js"></script> --}}
+{{!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/themes/fa4/theme.min.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.0/themes/fa5/theme.min.js"></script>
 
 <script>
-    $("#fulMain").fileinput({
-      //showCaption: false, 
-      dropZoneEnabled: false,
-      maxFileCount: 1,
-      allowedFileExtensions:["jpg", "png", "gif"],
-      theme: "fa4",
-      language: "vi",
-      showUpload: false,
-      });
+  $("#fulMain").fileinput({
+    //showCaption: false, 
+    dropZoneEnabled: false,
+    maxFileCount: 1,
+    allowedFileExtensions: ["jpg", "png", "gif"],
+    theme: "fa4",
+    language: "vi",
+    showUpload: false,
+  });
 </script>
 
-
-
-{{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-  $(document).ready(function() {
-    $('#tags').multiselect({
-        includeSelectAllOption: true, // Thêm tùy chọn "Chọn tất cả"
-        nonSelectedText: 'Chọn danh mục',
-        buttonWidth: '100%'
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const createButton = document.querySelector('#createBTN');
+    const frmCreate = document.querySelector('#frmCreate');
+
+    createButton.addEventListener('click', async function (e) {
+
+      e.preventDefault();
+      try {
+        Swal.fire({
+          title: "Do you really want to continue?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          reverseButtons: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "You create article successfully",
+              icon: "success",
+              confirmButtonText: "OK", // Tùy chỉnh nút bấm
+            }).then((result) => {
+              if (result.isConfirmed) { // Chỉ khi người dùng bấm "OK"
+                frmCreate.submit();
+              }
+            });
+            //frmCreate.submit();
+
+          }
+        });
+      } catch (error) {
+        Swal.fire("ERROR", error, "error");
+        console.error(error);
+      }
     });
-});
-</script> --}}
+  });
+</script>
 {{/section}}
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data" id="frmCreate">
   <div class="card">
     <div class="card-header">
       <h4>Create New</h4>
@@ -92,11 +126,13 @@
       <div class="row">
         <div class="col-sm-12 overflow-auto">
           <label for="title" class="form-label d-block">Title</label>
-          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title" required>
+          <input type="text" class="form-control d-inline mb-3" id="title" aria-describedby="basic-addon3" name="title"
+            required>
           <label for="abstract" class="form-label d-block">Abstract</label>
-          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3" name="abstract" required>
+          <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3"
+            name="abstract" required>
           <div class="form-group mt-3">
-            <label for="tags" >Tag</label>
+            <label for="tags">Tag</label>
             <select name="tags[]" id="tags" size="1" multiple required>
               {{#each this.tags}}
               <option value="{{TagID}}">{{TagName}}</option>
@@ -128,11 +164,11 @@
       </div>
     </div>
     <div class="card-footer text-muted">
-      <a href="/reporter" class="btn btn-outline-primary">
+      <a href="/reporter/category" class="btn btn-outline-primary">
         <i class="bi bi-arrow-left"></i>
         Back
       </a>
-      <button type="submit" class="btn btn-success">
+      <button type="submit" class="btn btn-success" id="createBTN">
         <i class="bi bi-check2"></i>
         Save
       </button>
