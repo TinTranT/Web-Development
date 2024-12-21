@@ -43,7 +43,16 @@ router.get('/articles', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
-    const nRows = await newsService.countByCatId(id);
+    let nRows, news;
+    if(id===0) {
+        news = await newsService.findAll(limit, offset);
+        nRows = await newsService.countAll();
+    }
+    else {
+        nRows = await newsService.countByCatId(id);
+        news = await newsService.findPageByCatId(id, limit, offset);
+    }
+    console.log(nRows);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -56,7 +65,6 @@ router.get('/articles', async (req, res) => {
 
 
 
-    const news = await newsService.findPageByCatId(id, limit, offset);
     const catList = await categoryService.findWithParent();
 
     for (let i = 0; i < news.length; i++) {
@@ -100,10 +108,45 @@ router.get('/articles/details', async (req, res) => {
 
 });
 
+router.get('/articles/edit', async (req, res) => {
+        const id = parseInt(req.query.id) || 0;
+        const news = await newsService.findbyId(id);
+        const category = await categoryService.findbyNewsId(id);
+        const taglist = await tagService.findByNewsId(id);
+        const writer = await accountService.findById(news.WriterID);
+        const listallCategory = await categoryService.findWithParent();
+        const listallTag = await tagService.findall();
+        const selectedTagIds = new Set(taglist.map(tag => tag.TagID));
+        listallTag.forEach(tag => {
+            tag.isSelected = selectedTagIds.has(tag.TagID);
+        });
+        res.render('vwAdmin/articleEdit', {
+            layout: 'user',
+            category: category,
+            news: news,
+            taglist: taglist,
+            writer: writer,
+            listallCategory: listallCategory,
+            listallTag: listallTag,
+        });
+});
+
+router.post('/articles/edit', async (req, res) => {
+    const id = parseInt(req.query.id) || 0;
+    const formattedPublishDate = moment(req.body.pubdate).format('YYYY-MM-DD HH:mm:ss');
+    const changes1 = {
+        PublishDate: formattedPublishDate,
+        Status: req.body.status,
+    };
+    console.log(changes1);
+    await newsService.updateNews(id, changes1);
+    res.redirect('/admin/articles?id=0&page=1');
+});
+
 router.post('/articles/del', async (req, res) => {
     await newstagsService.del(req.body.newsId);
     await newsService.del(req.body.newsId);
-    res.redirect('/admin/articles?id=10&page=1');
+    res.redirect('/admin/articles?id=0&page=1');
 });
 
 router.post('/articles/patch', async (req, res) => {

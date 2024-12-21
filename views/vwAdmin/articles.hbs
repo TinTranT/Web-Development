@@ -41,6 +41,7 @@
             <h4>News</h4>
             <div>
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
+                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/admin/articles?id=0&page=1">All News</option>
                 {{#each this.catList}}
                 <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/admin/articles?id={{CatID}}&page=1">
                     {{CatParentName}} > {{CatName}}
@@ -72,7 +73,7 @@
                             <span class="badge bg-warning">
                                 {{nameStatus Status}}
                             </span>
-                            <p class="card-text mt-4">{{truncate Abstract 200}}</p>
+                            <p class="card-text mt-4">{{truncate Abstract 140}}</p>
                             <p class="card-text">{{formatDate PublishDate}}</p>
                             <p class="card-text text-dark">Write by {{WriterName}}</p>
                         </div>

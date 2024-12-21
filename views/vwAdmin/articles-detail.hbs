@@ -109,26 +109,16 @@
                         <div style="display: none;">
                             <input type="text" id="newsId" name="newsId" value="{{this.news.NewsID}}">
                         </div>
-
                         <div class="d-flex justify-content-around">
-                            {{#if (isNotEqual this.news.Status 3)}}
-                            <button type="click" id="publishButton" class="btn btn-primary" formaction="/admin/articles/patch">
-                                <i class="bi bi-file-earmark-arrow-up"></i>
-                                Publish
-                            </button>
-                            {{else}}
-                            <button class="btn btn-secondary" readonly>
+                            <a href="/admin/articles/edit?id={{{this.news.NewsID}}}" class="btn btn-warning" readonly>
                                 <i class="bi bi-check-circle"></i>
-                                Published
-                            </button>
-                            {{/if}}
-
+                                Update
+                            </a>
                             <button type="click" id="deleteButton" class="btn btn-danger"
                                 formaction="/admin/articles/del">
                                 <i class="bi bi-trash"></i>
                                 Delete
                             </button>
-
                             <a href="/admin/articles?id={{this.news.CatID}}&page=1" class="btn btn-primary">
                                 <i class="bi bi-arrow-left"></i>
                                 Go back
