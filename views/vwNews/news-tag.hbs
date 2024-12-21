@@ -93,7 +93,7 @@
                     </p>
                     <a class="container-link card-title" href="/news/details?id={{NewsID}}">{{Title}}</a>
                     <p class="card-text">{{Abstract}}</p>
-                    <p class="card-text">by Nguyễn Văn A</p>
+                    
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
             <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
-                        href="{{#unless this.isFirstPage}}/news/byCat?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
+                        href="{{#unless this.isFirstPage}}/news/byTag?id={{this.tagId}}&page={{this.previousPage}}{{/unless}}">
                         Previous
                     </a>
                 </li>
@@ -115,7 +115,7 @@
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link notActiveRed" href="/news/byCat?id={{../catId}}&page={{value}}">
+                    <a class="page-link notActiveRed" href="/news/byTag?id={{../tagId}}&page={{value}}">
                         {{value}}
                     </a>
                 </li>
@@ -123,7 +123,7 @@
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                     <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
-                        href="{{#unless this.isLastPage}}/news/byCat?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                        href="{{#unless this.isLastPage}}/news/byTag?id={{this.tagId}}&page={{this.nextPage}}{{/unless}}">Next</a>
                 </li>
             </ul>
         </nav>
