@@ -125,11 +125,29 @@ export default {
     countByCatId(id) {
         return db('news').where('CatID', id).count('* as total').first();
     },
+    countByCatIdFillGuest(id) {
+        const currentDate = new Date();
+        return db('news')
+            .where('CatID', id)
+            .andWhere('Status', 3) // Điều kiện Status = 3
+            .andWhere('PublishDate', '<=', currentDate) // Điều kiện PublishDate <= currentDate
+            .count('* as total') // Đếm tổng số bản ghi
+            .first(); // Lấy kết quả đầu tiên
+    },
     findPageByCatId2(id, limit, offset, account) {
         return db('news').where('CatID', id).andWhere('WriterID', account).limit(limit).offset(offset);
     },
     findPageByCatId(id, limit, offset) {
         return db('news').where('CatID', id).limit(limit).offset(offset);
+    },
+    findPageByCatIdFillGuest(id, limit, offset) {
+        const currentDate = new Date();
+        return db('news')
+            .where('CatID', id)
+            .andWhere('Status', 3) // Điều kiện Status = 3
+            .andWhere('PublishDate', '<=', currentDate) // Điều kiện PublishDate <= currentDate
+            .limit(limit)
+            .offset(offset);
     },
     findPageByTagId(tagId, limit, offset) {
         return db('news')
