@@ -150,6 +150,17 @@ export default {
             .limit(limit)
             .offset(offset);
     },
+    findPageByTagIdFilter(tagId, limit, offset) {
+        return db('news')
+            .join('newstag', 'news.NewsID', 'newstag.NewsID')
+            .where('newstag.TagID', tagId)
+            .andWhere('news.Status', 3)
+            .andWhere('news.PublishDate', '<=', new Date())
+            .select('news.*') // Chỉ lấy thông tin từ bảng news
+            .orderBy('news.PublishDate', 'desc')
+            .limit(limit)
+            .offset(offset);
+    },
     relatedNews(id) {
         return db('news')
             .where('CatID', function() {

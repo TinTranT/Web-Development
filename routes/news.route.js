@@ -126,7 +126,7 @@ router.get('/byTag', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
-    const nRows = await newstagsService.countByTagId(id);
+    const nRows = await newstagsService.countByTagIdFilter(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -136,7 +136,7 @@ router.get('/byTag', async (req, res) => {
         }
         page_items.push(item);
     }
-    let list = await newsService.findPageByTagId(id, limit, offset);
+    let list = await newsService.findPageByTagIdFilter(id, limit, offset);
     const tag = await tagService.findById(id);
 
     list = list.sort((a, b) => b.PremiumFlag - a.PremiumFlag);
