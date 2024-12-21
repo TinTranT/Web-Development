@@ -327,3 +327,14 @@ function serverStartedHandler() {
     console.log('Server is listening on http://localhost:5555');
 }
 app.listen(5555, serverStartedHandler);
+app.use((req, res, next) => {
+    res.status(404).sendFile(__dirname + '/error.html');
+});
+
+app.use((err, req, res, next) => {
+    if (err.status === 403) {
+        res.status(403).sendFile(__dirname + '/error.html?error=403');
+    } else {
+        next(err);
+    }
+});

@@ -14,7 +14,7 @@ const router = express.Router();
 router.use(function (req, res, next) {
     //const account = req.session.authUser.Id;
     res.locals.items = [
-        { label: 'Dashboard', url: '/reporter?account', icon: 'bi bi-file-earmark', isDropdown: false },
+        //{ label: 'Dashboard', url: '/reporter?account', icon: 'bi bi-file-earmark', isDropdown: false },
         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text', isDropdown: false },
         { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,}
     ]
@@ -23,20 +23,15 @@ router.use(function (req, res, next) {
 
 
 
-
-router.get('/', async function (req, res) {
-    //const account = parseInt(req.query.account) || 0;
-    //const Writer = req.session.authUser
-    //console.log(writer)
-    const account = req.session.authUser.Id;
-    const writer = await accountService.findById(account);
-    res.render('vwReporter/mainreporter', {
-        layout: 'user',
-        user: writer
-
-    })
+function PreviousUrl(req, res, next) {
+    req.session.PreviousUrl = req.originalUrl;
+    next();
+};
+router.get('/', function (req, res) {
+    res.redirect('/reporter/category');
 })
-router.get('/category', async function (req, res) {
+router.get('/category', PreviousUrl,async function (req, res) {
+    //console.log(req.session.PreviousUrl)
     
     //const account = parseInt(req.query.account) || 0;
     const account = req.session.authUser.Id;
@@ -92,13 +87,16 @@ router.get('/detail', async function (req, res) {
     //console.log(news);
     const categories = await categoryService.findById(news.CatID)
     const listTagArticle = await newsService.findTagByIdOfNew(id)
+    const previousPage =  req.session.PreviousUrl 
+    req.session.PreviousUrl = null;
     //console.log(listTagArticle);
     //console.log(news[0].title);
     res.render('vwReporter/detail', {
         layout: 'user',
         news: news,
         categories: categories,
-        tags: listTagArticle
+        tags: listTagArticle,
+        previousPage: previousPage
     });
 })
 router.get('/rejected', async function (req, res) {
@@ -107,11 +105,14 @@ router.get('/rejected', async function (req, res) {
     console.log(id, reject.EditorID)
     const editor = await accountService.findById(reject.EditorID);
     console.log(editor)
+    const previousPage =  req.session.PreviousUrl 
+    req.session.PreviousUrl = null;
 
     res.render('vwReporter/reject', {
         layout: 'user',
         reject: reject,
-        editor: editor
+        editor: editor,
+        previousPage: previousPage
     })
 
 
