@@ -16,6 +16,13 @@
         font-weight: 650;
         color: var(--color-black);
     }
+    .activeRed{
+        background-color: var(--color-red) !important;
+        border-color: var(--color-red) !important;
+    }
+    .notActiveRed{
+        color: var(--color-red) !important;
+    }
 </style>
 {{/section}}
 {{#section 'js'}}
@@ -41,6 +48,7 @@
             <h4>News</h4>
             <div>
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
+                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/admin/articles?id=0&page=1">All News</option>
                 {{#each this.catList}}
                 <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/admin/articles?id={{CatID}}&page=1">
                     {{CatParentName}} > {{CatName}}
@@ -72,7 +80,7 @@
                             <span class="badge bg-warning">
                                 {{nameStatus Status}}
                             </span>
-                            <p class="card-text mt-4">{{truncate Abstract 200}}</p>
+                            <p class="card-text mt-4">{{truncate Abstract 140}}</p>
                             <p class="card-text">{{formatDate PublishDate}}</p>
                             <p class="card-text text-dark">Write by {{WriterName}}</p>
                         </div>
@@ -80,6 +88,11 @@
                             <a href="/admin/articles/details?id={{NewsID}}" class="btn btn-outline-info" disabled
                                 aria-label="Close">
                                 Full draft
+                                <i class="bi bi-box-arrow-in-right"></i>
+                            </a>
+                            <a href="/admin/articles/edit?id={{NewsID}}" class="btn btn-warning" disabled
+                                aria-label="Close">
+                                Edit
                                 <i class="bi bi-box-arrow-in-right"></i>
                             </a>
                         </div>
@@ -91,7 +104,7 @@
         <div class="card-footer text-muted">
                  <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
-                    <a class="page-link"
+                    <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
                         href="{{#unless this.isFirstPage}}/admin/articles?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
                         Previous
                     </a>
@@ -99,18 +112,18 @@
                 {{#each this.page_items}}
                 {{#if isActive}}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">{{value}}</a>
+                    <a class="page-link activeRed" href="#">{{value}}</a>
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="/admin/articles?id={{../catId}}&page={{value}}">
+                    <a class="page-link notActiveRed" href="/admin/articles?id={{../catId}}&page={{value}}">
                         {{value}}
                     </a>
                 </li>
                 {{/if}}
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
-                    <a class="page-link"
+                    <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
                         href="{{#unless this.isLastPage}}/admin/articles?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
                 </li>
             </ul>

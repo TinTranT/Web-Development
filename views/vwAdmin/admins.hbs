@@ -35,6 +35,13 @@
         font-weight: 500;
         color: #999999;
     }
+    .activeRed{
+        background-color: var(--color-red) !important;
+        border-color: var(--color-red) !important;
+    }
+    .notActiveRed{
+        color: var(--color-red) !important;
+    }
 </style>
 {{/section}}
 
@@ -112,7 +119,7 @@
                 <div class="row mt-3">
                     <ul class="pagination justify-content-center">
                         <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
-                            <a class="page-link"
+                            <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
                                 href="{{#unless this.isFirstPage}}/admin/admins?page={{this.previousPage}}{{/unless}}">
                                 Previous
                             </a>
@@ -120,18 +127,18 @@
                         {{#each this.page_items}}
                         {{#if isActive}}
                         <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">{{value}}</a>
+                            <a class="page-link activeRed" href="#">{{value}}</a>
                         </li>
                         {{else}}
                         <li class="page-item">
-                            <a class="page-link" href="/admin/admins?page={{value}}">
+                            <a class="page-link notActiveRed" href="/admin/admins?page={{value}}">
                                 {{value}}
                             </a>
                         </li>
                         {{/if}}
                         {{/each}}
                         <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
-                            <a class="page-link"
+                            <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
                                 href="{{#unless this.isLastPage}}/admin/admins?page={{this.nextPage}}{{/unless}}">Next</a>
                         </li>
                     </ul>

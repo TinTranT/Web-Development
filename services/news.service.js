@@ -11,6 +11,9 @@ export default {
     findby3() {
         return db('news').orderBy('PublishDate', 'desc').limit(3);
     },
+    countAll() {
+        return db('news').count('* as total').first();
+    },
     featuredNews() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
@@ -132,6 +135,17 @@ export default {
         return db('news')
             .join('newstag', 'news.NewsID', 'newstag.NewsID')
             .where('newstag.TagID', tagId)
+            .select('news.*') // Chỉ lấy thông tin từ bảng news
+            .orderBy('news.PublishDate', 'desc')
+            .limit(limit)
+            .offset(offset);
+    },
+    findPageByTagIdFilter(tagId, limit, offset) {
+        return db('news')
+            .join('newstag', 'news.NewsID', 'newstag.NewsID')
+            .where('newstag.TagID', tagId)
+            .andWhere('news.Status', 3)
+            .andWhere('news.PublishDate', '<=', new Date())
             .select('news.*') // Chỉ lấy thông tin từ bảng news
             .orderBy('news.PublishDate', 'desc')
             .limit(limit)
