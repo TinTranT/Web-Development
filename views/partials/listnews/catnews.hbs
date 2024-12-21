@@ -54,6 +54,13 @@
         margin-right: 10px;
         background-color: var(--color-gray);
     }
+    .activeRed{
+        background-color: var(--color-red) !important;
+        border-color: var(--color-red) !important;
+    }
+    .notActiveRed{
+        color: var(--color-red) !important;
+    }
 </style>
 {{#section 'js'}}
 <script>
@@ -117,7 +124,7 @@
         <nav aria-label="..." class="mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
-                    <a class="page-link"
+                    <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
                         href="{{#unless this.isFirstPage}}/news/byCat?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
                         Previous
                     </a>
@@ -125,18 +132,18 @@
                 {{#each this.page_items}}
                 {{#if isActive}}
                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">{{value}}</a>
+                    <a class="page-link activeRed" href="#">{{value}}</a>
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="/news/byCat?id={{../catId}}&page={{value}}">
+                    <a class="page-link notActiveRed" href="/news/byCat?id={{../catId}}&page={{value}}">
                         {{value}}
                     </a>
                 </li>
                 {{/if}}
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
-                    <a class="page-link"
+                    <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
                         href="{{#unless this.isLastPage}}/news/byCat?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
                 </li>
             </ul>

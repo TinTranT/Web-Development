@@ -212,6 +212,12 @@ app.engine('hbs', engine({
             }
             return text;
         },
+        ifNot: function (condition, options) {
+            if (!condition) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        }
     }
 }));
 

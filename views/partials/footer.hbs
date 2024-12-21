@@ -11,13 +11,16 @@
                         </a>
                     </div>
                     <div class="col-lg-9">
-                        <div class="d-flex position-relative rounded-pill overflow-hidden">
-                            <input class="form-control border-0 w-100 py-3 rounded-pill" type="email" name="search"
-                                placeholder="Search">
+                        <form class="d-flex position-relative rounded-pill overflow-hidden" role="search" action="/news/search" method="get">
+                         <input class="form-control border-0 w-100 py-3 rounded-pill" type="search" placeholder="Search" name="keyword">
                             <button type="submit"
                                 class="btn btn-primary border-0 py-3 px-5 rounded-pill text-white position-absolute"
                                 style="top: 0; right: 0;">Search</button>
-                        </div>
+                             
+                        </form>
+                        {{!-- <div class="d-flex position-relative rounded-pill overflow-hidden">
+                            
+                        </div> --}}
                     </div>
                 </div>
             </div>
