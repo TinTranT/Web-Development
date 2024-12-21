@@ -70,7 +70,8 @@ router.get('/byCat', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * limit;
     //Phân trang
-    const nRows = await newsService.countByCatId(id);
+    //const nRows = await newsService.countByCatId(id);
+    const nRows = await newsService.countByCatIdFillGuest(id);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -81,7 +82,8 @@ router.get('/byCat', async (req, res) => {
         page_items.push(item);
     }
 
-    let list = await newsService.findPageByCatId(id, limit, offset);
+    //let list = await newsService.findPageByCatId(id, limit, offset);
+    let list = await newsService.findPageByCatIdFillGuest(id, limit, offset);
     const category = await categoryService.findById(id);
 
     // Fetch tags for each news item
