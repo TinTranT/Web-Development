@@ -32,6 +32,12 @@ router.get('/details', async (req, res) => {
         }
     }
 
+    const change = {
+        ViewCount: news.ViewCount + 1,
+    }
+    await newsService.patch(id,change);
+
+
     res.render('vwNews/news-detail.hbs', {
         category: category,
         news: news,

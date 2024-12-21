@@ -1,9 +1,25 @@
 <style>
+    .carousel-controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        /* Adjust the gap as needed */
+    }
+
+    .buttonPrev,.buttonNext {
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        color: var(--color-red);
+    }
+    
+
     .carousel-control-prev,
     .carousel-control-next {
         width: 5%;
         background: none;
     }
+
 
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
@@ -37,9 +53,11 @@
         height: 2px;
         background: linear-gradient(to right, var(--color-red) 15%, var(--color-gray) 15%);
     }
-    .hotnews .card-body{
+
+    .hotnews .card-body {
         height: 250px;
     }
+
     .hotnews .premium {
         color: #87743D;
         font-weight: bold;
@@ -52,13 +70,24 @@
         height: 200px;
         object-fit: cover;
     }
-   
 </style>
 <div class="hotnews my-4">
     <div class="row">
         <div class="col-12">
             <div class="box-head">
-                <h5 class="inner-title">Hot News</h5>
+                    <h5 class="inner-title">Hot News</h5>
+                    <div class="">
+                        <button class="buttonPrev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <i class="bi bi-caret-left-fill"></i>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="buttonNext" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <i class="bi bi-caret-right-fill"></i>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -80,19 +109,22 @@
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img"
+                                        alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title
+                                            60}}</h5>
                                         <p class="card-text">{{truncate Abstract 80}}</p>
                                         <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
-                                            <span class="premium">PREMIUM</span>
-                                            {{/if}}{{formatDate PublishDate}}</p>
+                                                <span class="premium">PREMIUM</span>
+                                                {{/if}}{{formatDate PublishDate}}
+                                            </p>
                                         </div>
                                         <div>
                                             <span class="badge bg-primary mb-3">{{CatName}}</span>
                                         </div>
-                                        
+
                                         {{!-- <ul class="nav nav-pills d-inline-flex text-center">
                                             {{#each Tags}}
                                             <li class="nav-item mb-3">
@@ -113,18 +145,21 @@
                 <div class="carousel-item">
                     <div class="row d-flex justify-content-center">
                         {{#each hotNews}}
-                        {{#if (and (st @index 4) (en @index 8))}}
+                        {{#if (and (st @index 4) (en @index 7))}}
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img"
+                                        alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title
+                                            60}}</h5>
                                         <p class="card-text">{{truncate Abstract 80}}</p>
                                         <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
-                                            <span class="premium">PREMIUM</span>
-                                            {{/if}}{{formatDate PublishDate}}</p>
+                                                <span class="premium">PREMIUM</span>
+                                                {{/if}}{{formatDate PublishDate}}
+                                            </p>
                                         </div>
                                         <div>
                                             <span class="badge bg-primary mb-3">{{CatName}}</span>
@@ -140,7 +175,7 @@
                                             {{/each}}
 
                                         </ul> --}}
-                                        
+
                                     </div>
                                 </div>
                             </a>
@@ -152,18 +187,21 @@
                 <div class="carousel-item">
                     <div class="row d-flex justify-content-center">
                         {{#each hotNews}}
-                        {{#if (and (st @index 9) (en @index 12))}}
+                        {{#if (and (st @index 8) (en @index 11))}}
                         <div class="col-md-3">
                             <a class="content" href="/news/details?id={{NewsID}}">
                                 <div class="card">
-                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img" alt="Img Dead">
+                                    <img src="/static/imgs/{{Thumbnail}}" class="card-img-top hotnew-img"
+                                        alt="Img Dead">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title 60}}</h5> 
+                                        <h5 class="card-title" style="height:50px; overflow:hidden;">{{truncate Title
+                                            60}}</h5>
                                         <p class="card-text">{{truncate Abstract 80}}</p>
                                         <div class="my-2">
                                             <p class="card-text">{{#if (isEqual PremiumFlag 1)}}
-                                            <span class="premium">PREMIUM</span>
-                                            {{/if}}{{formatDate PublishDate}}</p>
+                                                <span class="premium">PREMIUM</span>
+                                                {{/if}}{{formatDate PublishDate}}
+                                            </p>
                                         </div>
                                         <div>
                                             <span class="badge bg-primary mb-3">{{CatName}}</span>
@@ -188,16 +226,6 @@
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
 </div>

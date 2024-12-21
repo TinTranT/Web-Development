@@ -51,6 +51,8 @@
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+
     }
 
     .featurednews .card .badge {
@@ -58,7 +60,7 @@
         align-self: flex-start;
     }
 
-    .featurednews .card:after {
+    .featurednews .card::after {
         content: '';
         position: absolute;
         top: 0;
@@ -133,7 +135,7 @@
                             <div class="d-flex flex-row gap-3 p-3">
                                 <span class="badge bg-primary">{{this.featuredNews.[0].CatName}}</span>
                                 {{#if (isEqual this.featuredNews.[0].PremiumFlag 1)}}
-                                <span class="badge text-bg-success">Premium</span>
+                                <span class="badge bg-success">Premium</span>
                                 {{/if}}
                             </div>
                             <div class="item-title">

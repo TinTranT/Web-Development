@@ -90,6 +90,10 @@
         font-size: 18px;
     }
 
+    .hotcategories .inner-caption .inner-content {
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    }
+
     .hotcategories .inner-box {
         margin-top: 20px;
         display: flex;
@@ -98,10 +102,11 @@
     .hotcategories .inner-box .inner-image {
         margin-right: 20px;
         position: relative;
+
     }
 
     .hotcategories .inner-box .inner-image img {
-        height: 160px;
+        height: 200px;
         width: 180px;
         object-fit: cover;
     }
@@ -111,6 +116,7 @@
         top: 8px;
         left: 8px;
     }
+
 
     .hotcategories .inner-box .inner-content .inner-title {
         font-size: 15px;
@@ -134,6 +140,29 @@
         font-weight: bold;
         font-size: 0.9em;
         margin-right: 10px;
+    }
+
+    .hotcategories button {
+        color: var(--color-red);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .hotcategories .nav-pills .nav-link.active {
+        background-color: var(--color-red);
+    }
+
+    .hotcategories button::selection {
+    background-color: var(--color-red);
+    color: var(--color-white);
+    }
+
+    .hotcategories button:hover {
+        color: var(--color-red);
     }
 </style>
 
@@ -208,7 +237,7 @@
                                     {{/if}}
                                     {{/each}}
                                 </div>
-                                <button class="carousel-control-prev " type="button" data-bs-target="#carouselAll"
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAll"
                                     data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>

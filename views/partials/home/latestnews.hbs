@@ -28,13 +28,22 @@
         margin-bottom: 25px;
     }
 
+    .lastnews .inner-box .inner-content .card-title {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .lastnews .inner-box .inner-content .abstract {
+        font-size: 14px;
+    }
+
     .lastnews .inner-box .inner-image {
         margin-right: 20px;
         position: relative;
     }
 
     .lastnews .inner-box .inner-image img {
-        height: 160px;
+        height: 180px;
         width: 180px;
         object-fit: cover;
     }
@@ -87,7 +96,7 @@
                         <p class="inner-title mb-1">{{Name}} <span class="inner-titlev2"> {{formatDate
                                 PublishDate}}</span> </p>
                         <h5 class="card-title mb-3" style="height:50px; overflow:hidden">{{Title}}</h5>
-                        <p class="card-text mb-3">{{truncate Abstract 70}}</p>
+                        <p class="card-text mb-3 abstract">{{truncate Abstract 70}}</p>
                         {{#if (isEqual PremiumFlag 1)}}
                             <span class="premium">PREMIUM</span>
                         {{/if}}
