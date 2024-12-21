@@ -1,0 +1,168 @@
+{{#section 'css'}}
+<style>
+    h4,
+    h5 {
+        margin: 0;
+    }
+</style>
+{{/section}}
+{{#section 'js'}}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const form = document.getElementById('formreject');
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        const reasonTextarea = document.getElementById('reason');
+        form.addEventListener('submit', async function (e) {
+            event.preventDefault();
+            const selectedReasons = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.nextElementSibling.innerText); // Lấy nhãn (label) của checkbox
+
+            const manualReasons = reasonTextarea.value.split(',').map(item => item.trim()).filter(item => item);
+
+            const allReasons = [...selectedReasons, ...manualReasons].join(', ');
+            reasonTextarea.value = allReasons;
+            form.submit();
+        });
+    });
+
+</script>
+{{/section}}
+<form action="" method="post" id="formreject">
+    <div class="card">
+        <div class="card-header">
+            <h4>Reject reasons</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4 mb-3">
+                    <div class="card" style="height: 550px">
+                        <img class="card-img-top" src="/static/imgs/{{this.news.Thumbnail}}" alt="HIII">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/news/details?id={{this.news.NewsID}}" class="">{{this.news.Title}}</a>
+                            </h5>
+                            {{#if (isEqual this.news.PremiumFlag 1)}}
+                            <span class="badge text-bg-success">Premium</span>
+                            {{else}}
+                            <span class="badge text-bg-danger">Non-Premium</span>
+                            {{/if}}
+                            <span class="badge text-bg-warning">{{nameStatus this.news.Status}}</span>
+                            <p class="card-text">{{truncate this.news.Abstract 50}}</p>
+
+                            {{#if (isNotEqual this.news.PublishDate null)}}
+                            <p class="card-text">{{formatDate this.news.PublishDate}}</p>
+                            {{/if}}
+                            <p class="card-text">Written by: {{this.writer.Name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 mb-3">
+                    <div class="card" style="height: 550px">
+                        <div class="card-header">
+                            <h5>Reason</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-5 mt-3">
+                                <label class="form-label">Popular reasons for rejecting a paper</label>
+                                <div class="d-grid gap-2" style="grid-template-columns: repeat(4, 1fr);">
+                                    <!-- Row 1 -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="checkbox1">
+                                        <label class="form-check-label" for="checkbox1">Lack of novelty</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="2" id="checkbox2">
+                                        <label class="form-check-label" for="checkbox2">Weak methodology</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="3" id="checkbox3">
+                                        <label class="form-check-label" for="checkbox3">Poor presentation</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="4" id="checkbox4">
+                                        <label class="form-check-label" for="checkbox4">Lack of literature
+                                            review</label>
+                                    </div>
+
+                                    <!-- Row 2 -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="5" id="checkbox5">
+                                        <label class="form-check-label" for="checkbox5">Unreliable data</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="6" id="checkbox6">
+                                        <label class="form-check-label" for="checkbox6">Ignoring comments</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="7" id="checkbox7">
+                                        <label class="form-check-label" for="checkbox7">Plagiarism issues</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="8" id="checkbox8">
+                                        <label class="form-check-label" for="checkbox8">No scientific
+                                            contribution</label>
+                                    </div>
+
+                                    <!-- Row 3 -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="9" id="checkbox9">
+                                        <label class="form-check-label" for="checkbox9">Poor statistical
+                                            analysis</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="10" id="checkbox10">
+                                        <label class="form-check-label" for="checkbox10">Narrow scope</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="11" id="checkbox11">
+                                        <label class="form-check-label" for="checkbox11">Lack of innovation</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="12" id="checkbox12">
+                                        <label class="form-check-label" for="checkbox12">Doesn't meet standards</label>
+                                    </div>
+
+                                    <!-- Row 4 -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="13" id="checkbox13">
+                                        <label class="form-check-label" for="checkbox13">Out of scope</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="14" id="checkbox14">
+                                        <label class="form-check-label" for="checkbox14">Insufficient results</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="15" id="checkbox15">
+                                        <label class="form-check-label" for="checkbox15">Guideline violations</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="16" id="checkbox16">
+                                        <label class="form-check-label" for="checkbox16">Unclear objectives</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="mb-5">
+                                <label for="reason">All Reasons</label>
+                                <textarea name="reason" id="reason" class="form-control" rows="5" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+            <a href="/editor/draft-articles/detail?id={{this.news.NewsID}}" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i>
+                Go back
+            </a>
+            <div class="">
+                <button type="submit" class="btn btn-primary">Confirm Rejection</button>
+            </div>
+        </div>
+    </div>
+</form>
