@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/details', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
-    
+
     const category = await categoryService.findbyNewsId(id);
     const taglist = await tagService.findByNewsId(id);
     const relatednews = await newsService.relatedNews(id);
@@ -32,10 +32,15 @@ router.get('/details', async (req, res) => {
         }
     }
 
+    let userPremium = true;
+    if (!req.session.authUser || req.session.authUser.SubcribeExpireDate < new Date()) {
+        userPremium = false;
+    }
+
     const change = {
         ViewCount: news.ViewCount + 1,
     }
-    await newsService.patch(id,change);
+    await newsService.patch(id, change);
 
 
     res.render('vwNews/news-detail.hbs', {
@@ -45,6 +50,7 @@ router.get('/details', async (req, res) => {
         taglist: taglist,
         relatedNews: relatednews,
         commentList: commentlist,
+        userPremium: userPremium,
     });
 });
 

@@ -17,9 +17,11 @@
     }
 
     .badge {
-    font-size: 14px; /* Đồng nhất kích thước font */
-    line-height: 1; /* Đảm bảo chiều cao bằng với PREMIUM */
-}
+        font-size: 14px;
+        /* Đồng nhất kích thước font */
+        line-height: 1;
+        /* Đảm bảo chiều cao bằng với PREMIUM */
+    }
 
     .article-content {
         position: relative;
@@ -56,48 +58,66 @@
         display: block;
         /* Bảng không làm vỡ layout */
     }
+
+    #download-pdf {
+        background-color: var(--color-white);
+        color: var(--color-red);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 </style>
 {{/section}}
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="d-flex align-items-center">
-        {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium me-2">PREMIUM</span> {{/if}}
-        <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-2" style="font-size: 14px;">
-            <span class="badge bg-primary">
-                {{this.category.CatName}}
-            </span>
-        </a>
-    </div>
-    <div class="">{{formatDate this.news.PublishDate}}</div>
-</div>
-<div class="mb-4">
-    <a href="#" class="h1 display-5">{{this.news.Title}}</a>
-</div>
-<div class="position-relative rounded overflow-hidden mb-3">
-    <img src="/static/imgs/{{this.news.Thumbnail}}" alt="" class="thumbnail">
-</div>
-<div class="mb-4">
-    <p class="">{{this.news.Abstract}}</p>
-</div>
-<div class="article-content">
-    {{{this.news.Content}}}
-</div>
-
-<div class="tab-class mt-4">
-    <div class="d-flex justify-content-between align-items-center border-bottom mb-4">
-        <ul class="nav nav-pills d-inline-flex text-center">
-            <li class="nav-item mb-3">
-                <h5 class="mt-2 me-3 mb-0">Tags:</h5>
-            </li>
-            {{#each this.taglist}}
-            <li class="nav-item mb-3">
-                <a class="d-flex py-2 bg-light rounded-pill active me-2" href="/news/byTag?id={{TagID}}">
-                    <span class="text-dark" style="width: 100%; padding: 0 10px;">{{TagName}}</span>
-                </a>
-            </li>
-            {{/each}}
-        </ul>
-        <div class="d-flex align-items-center text-center" style="font-weight: bold;">
-            By {{ writer.Name}}
+<div class="newscontent">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex align-items-center">
+            {{#if (isEqual this.news.PremiumFlag 1)}} <span class="premium me-2">PREMIUM</span> {{/if}}
+            <a href="/news/byCat?id={{this.category.CatID}}" class="text-dark link-hover me-2" style="font-size: 14px;">
+                <span class="badge bg-primary">
+                    {{this.category.CatName}}
+                </span>
+            </a>
         </div>
+        <div class="">{{formatDate this.news.PublishDate}}</div>
+    </div>
+    <div class="mb-4">
+        <a href="#" class="h1 display-5">{{this.news.Title}}</a>
+    </div>
+    <div class="position-relative rounded overflow-hidden mb-3">
+        <img src="/static/imgs/{{this.news.Thumbnail}}" alt="" class="thumbnail">
+    </div>
+    <div class="mb-4">
+        <p class="">{{this.news.Abstract}}</p>
+    </div>
+    <div class="article-content">
+        {{{this.news.Content}}}
+    </div>
+
+    <div class="tab-class mt-4 border-bottom mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <ul class="nav nav-pills d-inline-flex text-center">
+                <li class="nav-item mb-3">
+                    <h5 class="mt-2 me-3 mb-0">Tags:</h5>
+                </li>
+                {{#each this.taglist}}
+                <li class="nav-item mb-3">
+                    <a class="d-flex py-2 bg-light rounded-pill active me-2" href="/news/byTag?id={{TagID}}">
+                        <span class="text-dark" style="width: 100%; padding: 0 10px;">{{TagName}}</span>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="d-flex align-items-center text-center" style="font-weight: bold;">
+                By {{ writer.Name}}
+            </div>
+        </div>
+        {{#if userPremium}}
+        <div class="download" style="text-align: right;">
+            <button type="button" id="download-pdf"><i class="bi bi-download"></i>
+                Download</button>
+        </div>
+        {{/if}}
     </div>
 </div>
