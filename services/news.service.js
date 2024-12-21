@@ -14,19 +14,15 @@ export default {
     featuredNews() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        const currentDate = new Date();
 
-        // return db('news')
-        //     .where('PublishDate', '>=', sevenDaysAgo)
-        //     .orderBy([
-        //         { column: 'viewCount', order: 'desc' },
-        //         { column: 'PublishDate', order: 'desc' }
-        //     ])
-        //     .limit(4);
         return db('news as n')
             .leftJoin('category as c', 'n.CatID', 'c.CatID') // Liên kết bảng news với category
             .leftJoin('newstag as nt', 'n.NewsID', 'nt.NewsID') // Liên kết bảng news với news_tags
             .leftJoin('tag as t', 'nt.TagID', 't.TagID') // Liên kết bảng news_tags với tags
             .where('n.PublishDate', '>=', sevenDaysAgo)
+            .andWhere('n.Status', 3)
+            .andWhere('n.PublishDate', '<=', currentDate)
             .select(
                 'n.*',
                 'c.CatName', // Lấy tên category
@@ -39,23 +35,19 @@ export default {
             ])
             .limit(4); // Giới hạn kết quả trả về 4 bài viết
     },
+
     hotNews() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-        // const list = db('news')
-        //     .where('PublishDate', '>=', sevenDaysAgo)
-        //     .orderBy([
-        //         { column: 'viewCount', order: 'desc' },
-        //         { column: 'PublishDate', order: 'desc' }
-        //     ])
-        //     .offset(4)
-        //     .limit(16);
-        // return list;
+        const currentDate = new Date();
+
         return db('news as n')
             .leftJoin('category as c', 'n.CatID', 'c.CatID') // Liên kết bảng news với category
             .leftJoin('newstag as nt', 'n.NewsID', 'nt.NewsID') // Liên kết bảng news với news_tags
             .leftJoin('tag as t', 'nt.TagID', 't.TagID') // Liên kết bảng news_tags với tags
             .where('n.PublishDate', '>=', sevenDaysAgo)
+            .andWhere('n.Status', 3)
+            .andWhere('n.PublishDate', '<=', currentDate)
             .select(
                 'n.*',
                 'c.CatName', // Lấy tên category
@@ -67,13 +59,17 @@ export default {
                 { column: 'n.PublishDate', order: 'desc' }
             ])
             .offset(4)
-            .limit(16); // Giới hạn kết quả trả về 4 bài viết
+            .limit(16); // Giới hạn kết quả trả về 16 bài viết
     },
+
     latestNews() {
-        // return db('news').orderBy('PublishDate', 'desc').limit(10);
+        const currentDate = new Date();
+
         return db('news as n')
             .leftJoin('account as a', 'n.WriterID', 'a.Id') // Liên kết với bảng account
             .leftJoin('category as c', 'n.CatID', 'c.CatID') // Liên kết với bảng category
+            .where('n.Status', 3)
+            .andWhere('n.PublishDate', '<=', currentDate)
             .select(
                 'n.*',
                 'a.Name', // Tên người viết
@@ -82,31 +78,25 @@ export default {
             .orderBy('n.PublishDate', 'desc') // Sắp xếp theo PublishDate giảm dần
             .limit(10); // Lấy tối đa 10 bài viết
     },
+
     hotCategories() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
+        const currentDate = new Date();
 
-        // return db('news')
-        //     .join('Category', 'news.CatID', 'Category.CatID')
-        //     .join('Category as ParentCat', 'Category.CatParentID', 'ParentCat.CatID')
-        //     .select(
-        //         'news.*',
-        //         'Category.CatName',
-        //         'ParentCat.CatName as CatParentName'
-        //     )
-        //     .where('news.PublishDate', '>=', sevenDaysAgo)
-        //     .orderBy('news.viewCount', 'desc');
         return db('news')
             .join('category', 'news.CatID', 'category.CatID') // Liên kết với bảng category
             .leftJoin('category as ParentCat', 'category.CatParentID', 'ParentCat.CatID') // Liên kết với bảng category cha
             .join('account', 'news.WriterID', 'account.Id') // Liên kết với bảng account để lấy tên người viết
+            .where('news.PublishDate', '>=', sevenDaysAgo) // Lọc bài viết trong 14 ngày qua
+            .andWhere('news.Status', 3)
+            .andWhere('news.PublishDate', '<=', currentDate)
             .select(
                 'news.*', // Lấy tất cả các cột từ bảng news
                 'category.CatName', // Lấy tên mục
                 'ParentCat.CatName as CatParentName', // Lấy tên mục cha
                 'account.Name' // Lấy tên người viết
             )
-            .where('news.PublishDate', '>=', sevenDaysAgo) // Lọc bài viết trong 7 ngày qua
             .orderBy('news.viewCount', 'desc'); // Sắp xếp theo viewCount giảm dần
     },
     hotCategoriesParent() {
@@ -149,7 +139,7 @@ export default {
     },
     relatedNews(id) {
         return db('news')
-            .where('CatID', function() {
+            .where('CatID', function () {
                 this.select('CatID').from('news').where('NewsID', id);
             })
             .andWhere('NewsID', '<>', id)
@@ -215,6 +205,8 @@ export default {
             .offset(offset);
     },
     searchNews(keyword, limit, offset) {
+        const currentDate = new Date().toISOString();
+
         return db.raw(`
             SELECT 
                 *
@@ -224,10 +216,14 @@ export default {
                 MATCH (Title, Abstract, Content) AGAINST (
                     ? IN NATURAL LANGUAGE MODE
                 )
+                AND Status = 3
+                AND PublishDate <= ?
             LIMIT ? OFFSET ?;
-        `, [keyword, limit, offset]);
+        `, [keyword, currentDate, limit, offset]);
     },
     countBySearch(keyword) {
+        const currentDate = new Date().toISOString();
+
         return db.raw(`
             SELECT 
                 COUNT(*) as total
@@ -236,10 +232,12 @@ export default {
             WHERE 
                 MATCH (Title, Abstract, Content) AGAINST (
                     ? IN NATURAL LANGUAGE MODE
-                );
-        `, [keyword]);
+                )
+                AND Status = 3
+                AND PublishDate <= ?;
+        `, [keyword, currentDate]);
     },
-    findNewsofEditor(accountID, status){
+    findNewsofEditor(accountID, status) {
         return db('news')
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .where('editorcategory.AccountID', accountID)
@@ -255,8 +253,7 @@ export default {
             .count({ total: 'news.NewsID' })
             .first();
     },
-    findCountArticlesByCat(idCat,accountID, status)
-    {
+    findCountArticlesByCat(idCat, accountID, status) {
         return db('news') // Chọn bảng 'news'
             .leftJoin('editorcategory', 'news.CatID', 'editorcategory.CatID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
