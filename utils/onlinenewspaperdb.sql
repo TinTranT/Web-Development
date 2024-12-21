@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : ecdb2
+ Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 100432 (10.4.32-MariaDB)
+ Source Server Version : 100428 (10.4.28-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : onlinenewspaperdb
 
  Target Server Type    : MySQL
- Target Server Version : 100432 (10.4.32-MariaDB)
+ Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 20/12/2024 18:16:09
+ Date: 21/12/2024 07:17:56
 */
 
 SET NAMES utf8mb4;
@@ -352,6 +352,20 @@ EVERY '1' HOUR STARTS '2024-12-20 16:43:10'
 DO UPDATE account
 SET OTP = NULL, OTP_CreatedAt = NULL
 WHERE OTP_CreatedAt < NOW() - INTERVAL 3 HOUR
+;;
+delimiter ;
+
+-- ----------------------------
+-- Event structure for update_post_status
+-- ----------------------------
+DROP EVENT IF EXISTS `update_post_status`;
+delimiter ;;
+CREATE EVENT `update_post_status`
+ON SCHEDULE
+EVERY '1' MINUTE STARTS '2024-12-21 02:31:58'
+DO UPDATE news
+    SET Status = 3
+    WHERE Status = 2 AND PublishDate <= NOW()
 ;;
 delimiter ;
 
