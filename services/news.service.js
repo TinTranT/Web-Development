@@ -11,6 +11,9 @@ export default {
     findby3() {
         return db('news').orderBy('PublishDate', 'desc').limit(3);
     },
+    countAll() {
+        return db('news').count('* as total').first();
+    },
     featuredNews() {
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);

@@ -173,6 +173,10 @@ app.engine('hbs', engine({
             return format(value, 'yyyy-MM-dd');
         },
 
+        formatDate4: function (value) {
+            return format(value, "yyyy-MM-dd'T'HH:mm");
+        },
+
         nameRole: function (value) {
             if (value === 1) {
                 return 'Reader';
