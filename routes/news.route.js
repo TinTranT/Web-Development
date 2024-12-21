@@ -32,6 +32,7 @@ router.get('/details', async (req, res) => {
         }
     }
 
+    // Check if user is premium, if not, disable function download news as pdf
     let userPremium = true;
     if (!req.session.authUser || req.session.authUser.SubcribeExpireDate < new Date()) {
         userPremium = false;
