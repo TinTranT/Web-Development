@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .error-container {
+            text-align: center;
+        }
+        .error-container h1 {
+            font-size: 6rem;
+            color: #dc3545;
+        }
+        .error-container p {
+            font-size: 1.5rem;
+        }
+        .error-container a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .error-container a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 id="error-code">404</h1>
+        <p id="error-message">Page Not Found</p>
+        <a href="/">Go Back to Home</a>
+    </div>
+
+    <script>
+        // This script dynamically adjusts the page for 404 or 403
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorType = urlParams.get('error') || '404';
+
+        const errorCode = document.getElementById('error-code');
+        const errorMessage = document.getElementById('error-message');
+
+        if (errorType === '403') {
+            errorCode.textContent = '403';
+            errorMessage.textContent = 'Forbidden: You don\'t have permission to access this resource.';
+        } else {
+            errorCode.textContent = '404';
+            errorMessage.textContent = 'Page Not Found';
+        }
+    </script>
+</body>
+</html>
