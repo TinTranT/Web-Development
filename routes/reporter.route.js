@@ -145,7 +145,7 @@ router.get('/editnews', async function (req, res) {
         tags: listTag,
         tagsArticle: listTagArticle,
         categoryArticle: categoryArticle,
-        article: article
+        article: article    
     });
 });
 router.post('/editnews', async function (req, res) {
