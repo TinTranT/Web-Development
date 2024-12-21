@@ -8,12 +8,13 @@ import editorcategoryService from '../services/editorcategory.service.js';
 
 import moment from 'moment';
 import bcrypt from 'bcryptjs';
+import { parse } from 'date-fns';
 
 const router = express.Router();
 
 router.use(function (req, res, next) {
     res.locals.items = [
-        { label: 'Articles', url: '/admin/articles?id=10&page=1', icon: 'bi bi-newspaper', isDropdown: false },
+        { label: 'Articles', url: '/admin/articles?id=0&page=1', icon: 'bi bi-newspaper', isDropdown: false },
         { label: 'Categories', url: '/admin/categories', icon: 'bi bi-grid', isDropdown: false },
         { label: 'Tags', url: '/admin/tags', icon: 'bi bi-tags', isDropdown: false },
         {
@@ -32,7 +33,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', (req, res) => {
-    res.redirect('/admin/articles?id=10&page=1');
+    res.redirect('/admin/articles?id=0&page=1');
 })
 
 // ------------------ Articles ------------------
@@ -139,8 +140,9 @@ router.post('/articles/edit', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const formattedPublishDate = moment(req.body.pubdate).format('YYYY-MM-DD HH:mm:ss');
     const changes1 = {
-        PublishDate: formattedPublishDate,
+        PublishDate: req.body.status == 2 ? null : formattedPublishDate,
         Status: req.body.status,
+        PremiumFlag: parseInt(req.body.premium),
     };
     console.log(changes1);
     await newsService.updateNews(id, changes1);

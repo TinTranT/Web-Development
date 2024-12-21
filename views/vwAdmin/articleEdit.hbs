@@ -5,6 +5,7 @@
     h4 {
         margin: 0;
     }
+
     .card-img-top {
         width: 100%;
         height: 250px;
@@ -38,10 +39,14 @@
     function togglePubDate() {
         var status = document.getElementById('status').value;
         var pubDateDiv = document.getElementById('pubDateDiv');
+        var pubInput = document.getElementById('pubInput');
         if (status == 2) {
             pubDateDiv.style.display = 'none';
+            pubInput.required = false;
+            pubInput.value = null;
         } else {
             pubDateDiv.style.display = 'block';
+            pubInput.required = true;
         }
     }
 
@@ -83,7 +88,8 @@
                 <div class="col-sm-8 mb-3">
                     <div class="card" style="height: 500px">
                         <div class="card-body">
-                            <div class="mb-5 mt-3">
+
+                            <div class="mb-5">
                                 <label for="status" class="mb-2">Status</label>
                                 <select name="status" id="status" class="form-select" size="1" required
                                     onchange="togglePubDate()">
@@ -95,8 +101,16 @@
                             </div>
                             <div class="mb-5" id="pubDateDiv">
                                 <label for="pubInput" class="mb-2">Set publishing date</label>
-                                <input type="datetime-local" id="pubInput" class="form-control" name="pubdate" min="1900-01-01" value="{{formatDate4 this.news.PublishDate}}"
-                                    required>
+                                <input type="datetime-local" id="pubInput" class="form-control" name="pubdate"
+                                    min="1900-01-01" value="{{formatDate4 this.news.PublishDate}}">
+                            </div>
+                            <div class="mb-5">
+                                <select name="premium" id="premium" class="form-select" size="1">
+                                    <option value="1" {{#if (isEqual this.news.PremiumFlag 1)}}selected{{/if}}>Premium
+                                    </option>
+                                    <option value="0" {{#if (isEqual this.news.PremiumFlag 0)}}selected{{/if}}>Non-Premium
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
