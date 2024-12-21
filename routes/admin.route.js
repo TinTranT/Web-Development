@@ -52,7 +52,6 @@ router.get('/articles', async (req, res) => {
         nRows = await newsService.countByCatId(id);
         news = await newsService.findPageByCatId(id, limit, offset);
     }
-    console.log(nRows);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
@@ -120,6 +119,11 @@ router.get('/articles/edit', async (req, res) => {
         listallTag.forEach(tag => {
             tag.isSelected = selectedTagIds.has(tag.TagID);
         });
+
+        if(news.Status < 2){ 
+            res.redirect('/admin/articles/details?id=' + id);
+        }
+
         res.render('vwAdmin/articleEdit', {
             layout: 'user',
             category: category,

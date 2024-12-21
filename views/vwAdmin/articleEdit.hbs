@@ -5,6 +5,11 @@
     h4 {
         margin: 0;
     }
+    .card-img-top {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
 </style>
 {{/section}}
 {{#section 'js'}}
@@ -58,7 +63,7 @@
                         <img class="card-img-top" src="/static/imgs/{{this.news.Thumbnail}}" alt="HIII">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/news/details?id={{this.news.NewsID}}" class="">{{this.news.Title}}</a>
+                                <p> {{truncate this.news.Title 100}}</p>
                             </h5>
                             {{#if (isEqual this.news.PremiumFlag 1)}}
                             <span class="badge text-bg-success">Premium</span>
