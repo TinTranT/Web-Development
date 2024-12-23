@@ -318,4 +318,20 @@ export default {
             .limit(limit)
             .offset(offset);
     },
+    findCountNewsByStatusID(account, status){
+        return db('news')
+            .where('WriterID', account)
+            .andWhere('Status', status)
+            .count({ total: 'NewsID' })
+            .first();
+
+    },
+    findPageNewsByStatusID(account, limit, offset, status){
+        return db('news')
+            .where('Status', status)
+            .andWhere('WriterID', account)
+            .limit(limit)
+            .offset(offset);
+    }
+
 }

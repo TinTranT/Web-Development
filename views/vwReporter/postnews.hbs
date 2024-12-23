@@ -131,8 +131,8 @@
           <label for="abstract" class="form-label d-block">Abstract</label>
           <input type="text" class="form-control d-inline mb-3" id="abstract" aria-describedby="basic-addon3"
             name="abstract" required>
-          <div class="form-group mt-3">
-            <label for="tags">Tag</label>
+          <div class="form-group ">
+            <label for="tags" class="mb-2">Tag</label>
             <select name="tags[]" id="tags" size="1" multiple required>
               {{#each this.tags}}
               <option value="{{TagID}}">{{TagName}}</option>
@@ -140,7 +140,7 @@
             </select>
           </div>
           <div class="form-group mt-3 mb-3">
-            <label for="categories">Categories</label>
+            <label for="categories" class="mb-2">Categories</label>
             <select name="categories" id="categories" class="form-select" size="1" required>
               {{#each this.categories}}
               <option value="{{CatID}}">{{CatParentName}} > {{CatName}}</option>
@@ -149,14 +149,21 @@
           </div>
           {{!-- <div class="form-group mt-3 mb-3">
             <label for="premium">Premium</label>
-            <select name="premium" id="premium">
+            <select name="premium" id="premium" class="form-select" required>
+              <option value="0">Non-Premium</option>
+              <option value="1">Premium</option>
+            </select>
+          </div> --}}
+          <div class="form-group mt-3 mb-3">
+            <label for="premium" class="mb-2">Premium</label>
+            <select name="premium" id="premium" class="form-select">
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
-          </div> --}}
+          </div>
 
           <div class="form-group mb-3">
-            <label for="fulMain">Thumnail</label>
+            <label for="fulMain" class="mb-2">Thumnail</label>
             <input type="file" name="fulMain" id="fulMain" multiple>
           </div>
           <textarea id="summernote" name="content" class="h-100" required></textarea>

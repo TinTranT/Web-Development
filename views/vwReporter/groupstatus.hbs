@@ -1,0 +1,220 @@
+{{#section 'css'}}
+<style>
+    .statusDropDown {
+    width: 350px;
+    }
+    .article {
+    height: 750px;
+    }
+    .thumbnail {
+        object-fit: cover;
+        width: 100%; 
+        height: 400px;
+    }
+    .article-title {
+        font-size: 1.3rem;
+        font-weight: 650;
+        color: var(--color-black);
+    }
+    .activeRed{
+        background-color: var(--color-red) !important;
+        border-color: var(--color-red) !important;
+    }
+    .notActiveRed{
+        color: var(--color-red) !important;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script>
+    function redirectToCategory(selectElement) {
+        // Lấy option được chọn
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        
+        // Lấy link từ thuộc tính data-link
+        var link = selectedOption.getAttribute('data-link');
+        
+        // Chuyển hướng đến link tương ứng
+        if (link) {
+            window.location.href = link;
+        }
+    }
+</script>
+{{/section}}
+
+<form action="" method="post">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4>Status News</h4>
+            <div>
+                <select class="statusDropDown form-select" id="status" name="status" onchange="redirectToCategory(this)">
+                <option value="4"{{#if (isEqual statusId 4)}} selected {{/if}}data-link="/reporter/status?id=4&page=1">All Status News</option>
+                <option value="3"{{#if (isEqual statusId 3)}} selected {{/if}}data-link="/reporter/status?id=3&page=1">Published</option>
+                <option value="2"{{#if (isEqual statusId 2)}} selected {{/if}}data-link="/reporter/status?id=2&page=1">Approved & awaiting publication</option>
+                <option value="1"{{#if (isEqual statusId 1)}} selected {{/if}}data-link="/reporter/status?id=1&page=1">Not approved yet</option>
+                <option value="0"{{#if (isEqual statusId 0)}} selected {{/if}}data-link="/reporter/status?id=0&page=1">Rejected</option>
+                
+                {{!-- <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/reporter/category?id=0&page=1">All News</option>
+                {{#each this.catList}}
+                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/reporter/category?id={{CatID}}&page=1">
+                    {{CatParentName}} > {{CatName}}
+                </option>
+                {{/each}} --}}
+            </select>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                {{#each this.news}}
+                <div class="col-sm-6 mb-3">
+                    <div class="card article">
+                        <img class="card-img-top thumbnail" src="/static/imgs/{{Thumbnail}}" alt="{{Title}}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/news/details?id={{NewsID}}" class="article-title">{{Title}}</a>
+                            </h5>
+                            <span class="badge text-bg-primary mb-3">{{../this.writer.Name}}</span>
+                            {{#if (isEqual PremiumFlag 1)}}
+                            <span class="badge text-bg-success">Premium</span>
+                            {{else}}
+                            <span class="badge text-bg-danger">Non-Premium</span>
+                            {{/if}}
+                            <span class="badge text-bg-warning">{{nameStatus Status}}</span>
+                            <p class="card-text">{{truncate Abstract 200}}</p>
+
+                            {{#if (isNotEqual PublishDate null)}}
+                             <p class="card-text">{{formatDate PublishDate}}</p>
+                            {{/if}}
+                            
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between">
+                            {{#if (isEqualOr Status 0 1)}}
+                            <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info" disabled
+                                aria-label="Close">
+                                <i class="bi bi-pencil"></i>
+                                Edit
+                            </a>
+                            {{else}}
+                            <a href="/reporter/editnews?id={{NewsID}}" class="btn btn-outline-info d-none" disabled
+                                aria-label="Close">
+                                <i class="bi bi-pencil"></i>
+                                Edit
+                            </a>
+                            {{/if}}
+                            {{#if (isEqual Status 0)}}
+                            <a href="/reporter/rejected?id={{NewsID}}" class="btn btn-danger" disabled
+                                aria-label="Close">
+                                <i class="bi bi-arrow-bar-left"></i>
+                                Reject
+                            </a>
+                            {{/if}}
+                            <a href="/reporter/detail?id={{NewsID}}" class="btn btn-outline-dark" disabled
+                                aria-label="Close">
+                                Draft
+                                <i class="bi bi-ticket-detailed"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+                 <ul class="pagination justify-content-center">
+                <li class="page-item {{#if this.isFirstPage}} disabled{{/if}}">
+                    <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
+                        href="{{#unless this.isFirstPage}}/reporter/status?id={{this.statusId}}&page={{this.previousPage}}{{/unless}}">
+                        Previous
+                    </a>
+                </li>
+                {{#each this.page_items}}
+                {{#if isActive}}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link activeRed" href="#">{{value}}</a>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link notActiveRed" href="/reporter/status?id={{../statusId}}&page={{value}}">
+                        {{value}}
+                    </a>
+                </li>
+                {{/if}}
+                {{/each}}
+                <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
+                    <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
+                        href="{{#unless this.isLastPage}}/reporter/status?id={{this.statusId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+{{!-- <div class="col-sm-6 mb-3">
+    <div class="card" style="min-height: 650px">
+        <img class="card-img-top " src="/static/imgs/sp/1/111.jpg" alt="HII">
+        <div class="card-body">
+            <h5 class="card-title">How Donald Trump is laying the groundwork to dispute the election
+                results – again.</h5>
+            <p class="card-text">Donald Trump is re-using his 2020 playbook to baselessly.</p>
+            <p class="card-text"> November 3,2024</p>
+            <h5 class="card-text">Jeremy Herb</h5>
+        </div>
+
+        <div class="card-footer text-muted d-flex justify-content-between">
+            <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
+                <i class="bi bi-eye-fill"></i>
+                View Details
+            </a>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Action
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Approved and awaiting
+                            publication</a></li>
+                    <li><a class="dropdown-item" href="#">Published</a></li>
+                    <li><a class="dropdown-item" href="#">Not approved
+                            yet</a></li>
+                    <li><a class="dropdown-item" href="#">Rejected</a></li>
+                </ul>
+            </div>
+            <a href="/reporter/editnews" class="btn btn-outline-info">
+                <i class="bi bi-check2"></i>
+                Edit
+            </a>
+
+        </div>
+
+    </div>
+
+
+</div> --}}
+
+{{!-- <a class="btn btn-outline-primary btn-sm" href="/products/detail?id={{ProID}}" role="button">
+    <i class="bi bi-eye-fill"></i>
+    View Details
+</a> --}}
+{{!-- <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Action
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">Approved and awaiting
+                publication</a></li>
+        <li><a class="dropdown-item" href="#">Published</a></li>
+        <li><a class="dropdown-item" href="#">Not approved
+                yet</a></li>
+        <li><a class="dropdown-item" href="#">Rejected</a></li>
+    </ul>
+</div> --}}
