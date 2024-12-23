@@ -317,4 +317,21 @@ export default {
             .limit(limit)
             .offset(offset);
     },
+    findPageForAllRejectedArticles(accountID, limit, offset){
+        return db('news')
+            .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('rejectreason.EditorID', accountID)
+            .limit(limit)
+            .offset(offset);
+    },
+    findPageForRejectedArticlesByCat(CatID, limit, offset, accountID){
+        return db('news')
+            .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('rejectreason.EditorID', accountID)
+            .andWhere('news.CatID', CatID)
+            .limit(limit)
+            .offset(offset);
+    }
 }

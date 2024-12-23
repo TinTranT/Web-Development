@@ -36,9 +36,9 @@
             <h4>News</h4>
             <div>
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
-                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/editor/draft-articles?id=0&page=1">All News</option>
+                <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/editor/rejected?id=0&page=1">All News</option>
                 {{#each this.catList}}
-                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/editor/draft-articles?id={{CatID}}&page=1">
+                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/editor/rejected?id={{CatID}}&page=1">
                     {{CatParentName}} > {{CatName}}
                 </option>
                 {{/each}}
@@ -70,7 +70,7 @@
                             <p class="card-text">Written by: {{Name}}</p>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between flex-row-reverse">
-                            <a href="/editor/draft-articles/detail?id={{NewsID}}" class="btn btn-outline-dark" disabled
+                            <a href="/editor/draft-articles/detail?id={{NewsID}}&hide=1" class="btn btn-outline-dark" disabled
                                 aria-label="Close">
                                 Draft
                                 <i class="bi bi-ticket-detailed"></i>

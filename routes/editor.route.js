@@ -185,7 +185,7 @@ router.get('/pending-publication', PreviousUrl, async function (req, res) {
         nextPage: page < nPages ? page + 1 : nPages,
     });
 });
-router.get('/rejected', async function (req, res) {
+router.get('/rejected', PreviousUrl, async function (req, res) {
     const accountID = req.session.authUser.Id;
     const catlist = await categoryService.findWithParentAndEditor(accountID);
     const id = parseInt(req.query.id) || 0;
@@ -194,12 +194,14 @@ router.get('/rejected', async function (req, res) {
     const offset = (page - 1) * limit;
     let nRows, news;
     if (id === 0) {
-        nRows = await newsService.findCountAllArticles(accountID, 0); // Tổng số bài viết
-        news = await newsService.findPageForAllArticles(accountID, limit, offset, 0); // Lấy tất cả bài viết
+        nRows = await rejectreasonService.findCountAllRejectedArticles(accountID); // Tổng số bài viết
+        news = await newsService.findPageForAllRejectedArticles(accountID, limit, offset); // Lấy tất cả bài viết
     } else {
-        nRows = await newsService.findCountArticlesByCat(id, accountID, 0); // Tổng số bài theo category
-        news = await newsService.findPageForArticlesByCat(id, limit, offset, accountID, 0); // Lấy bài theo category
+        nRows = await rejectreasonService.findCountRejectedArticlesByCat(id, accountID); // Tổng số bài theo category
+        news = await newsService.findPageForRejectedArticlesByCat(id, limit, offset, accountID); // Lấy bài theo category
     }
+    console.log(nRows);
+    console.log(news);
     const nPages = Math.ceil(nRows.total / limit);
     const page_items = [];
     for (let i = 1; i <= nPages; i++) {
