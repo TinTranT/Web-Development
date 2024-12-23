@@ -6,6 +6,9 @@ import nodemailer from 'nodemailer'; // Add this line
 
 import accountService from '../services/account.service.js';
 import { isAuth } from '../middleware/auth.mdw.js';
+import { ca } from 'date-fns/locale';
+
+const GOOGLE_CAPCHA_SECRET = process.env.GOOGLE_CAPCHA_SECRET;
 
 const router = express.Router();
 
@@ -64,6 +67,29 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', async function (req, res) {
+    // Verify capcha
+    let capchaVerify = false;
+
+    const param = new URLSearchParams({
+        secret: '6LeSdKMqAAAAAGqyEgnkFeztVSjClTIJvo6JXBah',
+        response: req.body['g-recaptcha-response']
+    });
+    const result = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        body: param.toString(),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+    const data = await result.json();
+    capchaVerify = data.success;
+
+    if (!capchaVerify) {
+        return res.render('vwAccount/login', {
+            err_message: 'Please verify you are not a robot.'
+        });
+    }
+
     const user = await accountService.findByEmail(req.body.email);
     if (!user) {
         return res.render('vwAccount/login', {

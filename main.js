@@ -291,7 +291,7 @@ app.get('/', async (req, res) => {
         }));
     };
     const featuredNewsTemporary = await newsService.featuredNews();
-    console.log(featuredNewsTemporary);
+    // console.log(featuredNewsTemporary);
     const featuredNews = processResults(featuredNewsTemporary);
     //console.log(featuredNews)
 
