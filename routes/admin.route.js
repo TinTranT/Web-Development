@@ -126,10 +126,6 @@ router.get('/articles/edit', async (req, res) => {
             tag.isSelected = selectedTagIds.has(tag.TagID);
         });
 
-        if(news.Status < 2){ 
-            res.redirect('/admin/articles/details?id=' + id);
-        }
-
         res.render('vwAdmin/articleEdit', {
             layout: 'user',
             category: category,
@@ -145,7 +141,7 @@ router.post('/articles/edit', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const formattedPublishDate = moment(req.body.pubdate).format('YYYY-MM-DD HH:mm:ss');
     const changes1 = {
-        PublishDate: req.body.status == 2 ? null : formattedPublishDate,
+        PublishDate: req.body.status <= 2 ? null : formattedPublishDate,
         Status: req.body.status,
         PremiumFlag: parseInt(req.body.premium),
     };
