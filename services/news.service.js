@@ -297,7 +297,6 @@ export default {
             .andWhere('news.Status', status)
             .andWhere('news.CatID', idCat) // Lọc theo Category ID
             .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
-
     },
     findPageForAllArticles(accountID, limit, offset, status) {
         return db('news')

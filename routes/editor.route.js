@@ -11,8 +11,9 @@ const router = express.Router();
 router.use(function (req, res, next) {
     //const account = req.session.authUser.Id;
     res.locals.items = [
-        { label: 'Draft Article', url: '/editor/draft-articles', icon: 'bi bi-archive', isDropdown: false },
+        { label: 'Draft Articles', url: '/editor/draft-articles', icon: 'bi bi-archive', isDropdown: false },
         { label: 'Pending Publication', url: '/editor/pending-publication', icon: 'bi bi-hourglass-split', isDropdown: false },
+        { label: 'Rejected Articles', url: '/editor/rejected', icon: 'bi bi-x-circle-fill', isDropdown: false },
     ]
     next();
 });
@@ -66,6 +67,7 @@ function PreviousUrl(req, res, next) {
 };
 router.get('/draft-articles/detail', async function (req, res){
     const id = parseInt(req.query.id) || 0;
+    const hide = parseInt(req.query.hide) || 0;
     const news = await newsService.findbyId(id);
     const category = await categoryService.findbyNewsId(id);
     const taglist = await tagService.findByNewsId(id);
@@ -79,6 +81,7 @@ router.get('/draft-articles/detail', async function (req, res){
         taglist: taglist,
         retUrl: retUrl,
         writer: writer,
+        hide: hide,
     });
 });
 router.get('/draft-articles/approve', async function (req, res){
@@ -146,9 +149,7 @@ router.post('/draft-articles/reject', async function (req, res){
 });
 router.get('/pending-publication', PreviousUrl, async function (req, res) {
     const accountID = req.session.authUser.Id;
-    // const cat = await newsService.findNewsofEditor(accountID);
     const catlist = await categoryService.findWithParentAndEditor(accountID);
-
     const id = parseInt(req.query.id) || 0;
     const limit = 4;
     const page = parseInt(req.query.page) || 1;
@@ -183,5 +184,42 @@ router.get('/pending-publication', PreviousUrl, async function (req, res) {
         previousPage: page > 1 ? page - 1 : 1,
         nextPage: page < nPages ? page + 1 : nPages,
     });
+});
+router.get('/rejected', async function (req, res) {
+    const accountID = req.session.authUser.Id;
+    const catlist = await categoryService.findWithParentAndEditor(accountID);
+    const id = parseInt(req.query.id) || 0;
+    const limit = 4;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    let nRows, news;
+    if (id === 0) {
+        nRows = await newsService.findCountAllArticles(accountID, 0); // Tổng số bài viết
+        news = await newsService.findPageForAllArticles(accountID, limit, offset, 0); // Lấy tất cả bài viết
+    } else {
+        nRows = await newsService.findCountArticlesByCat(id, accountID, 0); // Tổng số bài theo category
+        news = await newsService.findPageForArticlesByCat(id, limit, offset, accountID, 0); // Lấy bài theo category
+    }
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    res.render('vwEditor/rejected-list',{
+        layout: 'user',
+        news: news,
+        catList: catlist,
+        empty: news.length === 0,
+        page_items: page_items,
+        catId: id,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    })
 });
 export default router;

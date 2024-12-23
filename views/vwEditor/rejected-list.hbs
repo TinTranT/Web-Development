@@ -38,7 +38,7 @@
                 <select class="categoryDropDown form-select" id="categoryParent" name="categoryParent" onchange="redirectToCategory(this)">
                 <option value="0" {{#if (isEqual catId 0)}} selected {{/if}} data-link="/editor/draft-articles?id=0&page=1">All News</option>
                 {{#each this.catList}}
-                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/editor/pending-publication?id={{CatID}}&page=1">
+                <option value="{{CatID}}" {{#if (isEqual CatID ../catId)}} selected {{/if}} data-link="/editor/draft-articles?id={{CatID}}&page=1">
                     {{CatParentName}} > {{CatName}}
                 </option>
                 {{/each}}
