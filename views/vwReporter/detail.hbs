@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h4>{{this.news.Title}}</h4>
-        {{#if (isEqual this.news.is_premium 1)}}
+        {{#if (isEqual this.news.PremiumFlag 1)}}
             <span class="badge text-bg-success">Premium</span>
         {{else}}
             <span class="badge text-bg-danger">Non-Premium</span>

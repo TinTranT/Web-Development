@@ -16,7 +16,8 @@ router.use(function (req, res, next) {
     res.locals.items = [
         //{ label: 'Dashboard', url: '/reporter?account', icon: 'bi bi-file-earmark', isDropdown: false },
         { label: 'Add News', url: '/reporter/news', icon: 'bi bi-journal-text', isDropdown: false },
-        { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,}
+        { label: 'Category', url: '/reporter/category', icon: 'bi bi-person-check', isDropdown: false,},
+        { label: 'Status', url: '/reporter/status', icon: 'bi bi-bookmarks', isDropdown: false,}
     ]
     next();
 });
@@ -81,6 +82,60 @@ router.get('/category', PreviousUrl,async function (req, res) {
 
 
 })
+router.get('/status', PreviousUrl,async function (req, res) {
+    //console.log(req.session.PreviousUrl)
+    
+    //const account = parseInt(req.query.account) || 0;
+    const account = req.session.authUser.Id;
+    //account = writer.Id;
+    // const id = parseInt(req.query.id) || 4;
+    const id = req.query.id !== undefined && !isNaN(parseInt(req.query.id)) ? parseInt(req.query.id) : 4;
+    const writer = await accountService.findById(account);
+    const limit = 4;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    console.log(id)
+
+    let nRows, news;
+
+    if (id === 4) {
+        nRows = await newsService.findCountAllByAccount(account); // Tổng số bài viết
+        news = await newsService.findPageByAccount(account, limit, offset); // Lấy tất cả bài viết
+    } else {
+        nRows = await newsService.findCountNewsByStatusID(account,id);
+        news = await newsService.findPageNewsByStatusID(account, limit, offset,id); 
+
+        // nRows = await newsService.findCountCatNewsofWriter(id, account); // Tổng số bài theo category
+        // news = await newsService.findPageByCatId2(id, limit, offset, account); // Lấy bài theo category
+    }
+    console.log(news)
+    const nPages = Math.ceil(nRows.total / limit);
+    const page_items = [];
+    for (let i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i === page,
+        }
+        page_items.push(item);
+    }
+    res.render('vwReporter/groupstatus', {
+        layout: 'user',
+        account: account,
+        news: news,
+        writer: writer,
+        statusId:id,
+        empty: news.length === 0,
+        page_items: page_items,
+        isFirstPage: page === 1,
+        isLastPage: page === nPages,
+        previousPage: page > 1 ? page - 1 : 1,
+        nextPage: page < nPages ? page + 1 : nPages,
+    });
+
+
+
+})
+
 router.get('/detail', async function (req, res) {
     const id = parseInt(req.query.id) || 0;
     const news = await newsService.findbyId(id);
@@ -138,6 +193,9 @@ router.get('/editnews', async function (req, res) {
     //console.log(article.Thumbnail)
     //console.log(listTagArticle)
     //console.log(categoryArticle)
+    const previousPage =  req.session.PreviousUrl 
+    //req.session.PreviousUrl = null;
+    //console.log(previousPage)
     if (!article) res.redirect('/reporter/category')
     res.render('vwReporter/editnews', {
         layout: 'user',
@@ -145,7 +203,8 @@ router.get('/editnews', async function (req, res) {
         tags: listTag,
         tagsArticle: listTagArticle,
         categoryArticle: categoryArticle,
-        article: article    
+        article: article,
+        previousPage: previousPage    
     });
 });
 router.post('/editnews', async function (req, res) {
@@ -180,7 +239,7 @@ router.post('/editnews', async function (req, res) {
                 Content: req.body.content || article.Content,
                 Abstract: req.body.abstract || article.Abstract,
                 Thumbnail: nameThumnail || article.Thumbnail,
-                //PremiumFlag: req.body.premium,
+                PremiumFlag: req.body.premium,
                 CatID: req.body.categories || article.CatID,
                 Status: 1,
             }
@@ -248,7 +307,7 @@ router.post('/news', async function (req, res) {
                 Thumbnail: nameThumnail,
                 WriterId: account,
                 Status: 1,
-                //PremiumFlag: req.body.premium,
+                PremiumFlag: req.body.premium,
                 //PublishDate: formattedDate,
                 CatID: req.body.categories,
             }
