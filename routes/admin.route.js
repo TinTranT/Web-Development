@@ -14,6 +14,7 @@ const router = express.Router();
 
 router.use(function (req, res, next) {
     res.locals.items = [
+        { label: 'Dashboard', url: '/admin', icon: 'bi bi-house', isDropdown: false },
         { label: 'Articles', url: '/admin/articles?id=0&page=1', icon: 'bi bi-newspaper', isDropdown: false },
         { label: 'Categories', url: '/admin/categories', icon: 'bi bi-grid', isDropdown: false },
         { label: 'Tags', url: '/admin/tags', icon: 'bi bi-tags', isDropdown: false },
@@ -32,8 +33,12 @@ router.use(function (req, res, next) {
     next();
 });
 
+// ------------------ Dashboard ------------------
+
 router.get('/', (req, res) => {
-    res.redirect('/admin/articles?id=0&page=1');
+    res.render('vwAdmin/dashboard', {
+        layout: 'user',
+    });
 })
 
 // ------------------ Articles ------------------
@@ -121,10 +126,6 @@ router.get('/articles/edit', async (req, res) => {
             tag.isSelected = selectedTagIds.has(tag.TagID);
         });
 
-        if(news.Status < 2){ 
-            res.redirect('/admin/articles/details?id=' + id);
-        }
-
         res.render('vwAdmin/articleEdit', {
             layout: 'user',
             category: category,
@@ -140,7 +141,7 @@ router.post('/articles/edit', async (req, res) => {
     const id = parseInt(req.query.id) || 0;
     const formattedPublishDate = moment(req.body.pubdate).format('YYYY-MM-DD HH:mm:ss');
     const changes1 = {
-        PublishDate: req.body.status == 2 ? null : formattedPublishDate,
+        PublishDate: req.body.status <= 2 ? null : formattedPublishDate,
         Status: req.body.status,
         PremiumFlag: parseInt(req.body.premium),
     };

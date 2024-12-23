@@ -40,7 +40,7 @@
         var status = document.getElementById('status').value;
         var pubDateDiv = document.getElementById('pubDateDiv');
         var pubInput = document.getElementById('pubInput');
-        if (status == 2) {
+        if (status <= 2) {
             pubDateDiv.style.display = 'none';
             pubInput.required = false;
             pubInput.value = null;
@@ -55,8 +55,30 @@
         togglePubDate();
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const saveButton = document.querySelector('#saveButton');
+        saveButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Do you to update this article?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const frmEdit = document.querySelector('#frmEdit');
+                    frmEdit.submit();
+                }
+            });
+        });
+    });
+</script>
 {{/section}}
-<form action="" method="post">
+<form action="" method="post" id="frmEdit">
     <div class="card">
         <div class="card-header">
             <h4>Edit information</h4>
@@ -93,6 +115,10 @@
                                 <label for="status" class="mb-2">Status</label>
                                 <select name="status" id="status" class="form-select" size="1" required
                                     onchange="togglePubDate()">
+                                    <option value="0" {{#if (isEqual this.news.Status 0)}}selected{{/if}}>{{nameStatus
+                                        0}}</option>
+                                    <option value="1" {{#if (isEqual this.news.Status 1)}}selected{{/if}}>{{nameStatus
+                                        1}}</option>
                                     <option value="2" {{#if (isEqual this.news.Status 2)}}selected{{/if}}>{{nameStatus
                                         2}}</option>
                                     <option value="3" {{#if (isEqual this.news.Status 3)}}selected{{/if}}>{{nameStatus
@@ -108,7 +134,8 @@
                                 <select name="premium" id="premium" class="form-select" size="1">
                                     <option value="1" {{#if (isEqual this.news.PremiumFlag 1)}}selected{{/if}}>Premium
                                     </option>
-                                    <option value="0" {{#if (isEqual this.news.PremiumFlag 0)}}selected{{/if}}>Non-Premium
+                                    <option value="0" {{#if (isEqual this.news.PremiumFlag 0)}}selected{{/if}}>
+                                        Non-Premium
                                     </option>
                                 </select>
                             </div>
@@ -123,7 +150,10 @@
                 Go back
             </a>
             <div class="">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" id="saveButton">
+                    <i class="bi bi-floppy"></i>
+                    Save
+                </button>
             </div>
         </div>
     </div>
