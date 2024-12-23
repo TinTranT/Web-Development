@@ -8,8 +8,6 @@ import accountService from '../services/account.service.js';
 import { isAuth } from '../middleware/auth.mdw.js';
 import { ca } from 'date-fns/locale';
 
-const GOOGLE_CAPCHA_SECRET = process.env.GOOGLE_CAPCHA_SECRET;
-
 const router = express.Router();
 
 router.get('/register', function (req, res) {
