@@ -11,6 +11,7 @@
     // Đọc trạng thái "active" từ localStorage
     var activeUrl = localStorage.getItem('activeLink');
 
+    alert('hiiiii');
     // Đặt class 'active' cho liên kết được lưu trước đó
     if (activeUrl) {
       dropdownItems.forEach(function (item) {
@@ -39,6 +40,7 @@
     dropdownItems.forEach(function (item) {
       item.addEventListener('click', function (event) {
         // Lưu liên kết đang được chọn vào localStorage
+        //alert(item.href);
         localStorage.setItem('activeLink', item.href);
       });
     });

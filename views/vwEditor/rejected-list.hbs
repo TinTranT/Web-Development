@@ -85,7 +85,7 @@
                  <ul class="pagination justify-content-center">
                 <li class="page-item {{#if this.isFirstPage}}disabled{{/if}}">
                     <a class="page-link {{#ifNot this.isFirstPage}} notActiveRed {{/ifNot}}"
-                        href="{{#unless this.isFirstPage}}/editor/draft-articles?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
+                        href="{{#unless this.isFirstPage}}/editor/rejected?id={{this.catId}}&page={{this.previousPage}}{{/unless}}">
                         Previous
                     </a>
                 </li>
@@ -96,7 +96,7 @@
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link notActiveRed" href="/editor/draft-articles?id={{../catId}}&page={{value}}">
+                    <a class="page-link notActiveRed" href="/editor/rejected?id={{../catId}}&page={{value}}">
                         {{value}}
                     </a>
                 </li>
@@ -104,7 +104,7 @@
                 {{/each}}
                 <li class="page-item {{#if this.isLastPage}}disabled{{/if}}">
                     <a class="page-link {{#ifNot this.isLastPage}} notActiveRed {{/ifNot}}"
-                        href="{{#unless this.isLastPage}}/editor/draft-articles?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
+                        href="{{#unless this.isLastPage}}/editor/rejected?id={{this.catId}}&page={{this.nextPage}}{{/unless}}">Next</a>
                 </li>
             </ul>
         </div>
