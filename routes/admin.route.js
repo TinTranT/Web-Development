@@ -219,7 +219,7 @@ router.get('/readers', async (req, res) => {
         page_items.push(item);
     }
     const listReader = await accountService.findPageByRole(1, limit, offset);
-    // console.log(listReader);
+    console.log(listReader);
     res.render('vwAdmin/readers', {
         layout: 'user',
         listReader: listReader,
@@ -247,18 +247,6 @@ router.get('/readers/edit', async (req, res) => {
 
 router.post('/readers/edit', async (req, res) => {
     const id = parseInt(req.body.txtID);
-    var totalExpiredDate = null;
-    // Tính toán totalExpiredDate
-    if (req.body.txtSubExpiredDate != '__') {
-        const baseDate = moment(req.body.txtSubExpiredDate, 'DD/MM/YYYY');
-        const extendDays = parseInt(req.body.txtExtendExpiredDays, 10);
-
-        if (!baseDate.isValid() || isNaN(extendDays)) {
-            return res.status(400).send('Invalid date or extend days');
-        }
-
-        totalExpiredDate = baseDate.add(extendDays, 'days').format('DD/MM/YYYY');
-    }
 
     const changes = {
         Name: req.body.txtName,
@@ -266,7 +254,6 @@ router.post('/readers/edit', async (req, res) => {
         PenName: req.body.txtPenName,
         Dob: req.body.txtDOB,
         Role: parseInt(req.body.txtRole),
-        SubcribeExpireDate: moment(totalExpiredDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
     }
     await accountService.patch(id, changes);
     res.redirect('/admin/readers');
@@ -275,6 +262,31 @@ router.post('/readers/edit', async (req, res) => {
 router.post('/readers/del', async (req, res) => {
     await accountService.del(req.body.txtID);
     res.redirect('/admin/readers');
+});
+
+router.post('/readers/approve', async (req, res) => {
+    const id = parseInt(req.body.txtID);
+    const user = await accountService.findById(id);
+    const currentDate = moment();
+
+    let newExpireDate;
+    if (!user.SubcribeExpireDate) {
+        newExpireDate = currentDate.add(7, 'days');
+    } else {
+        const expireDate = moment(user.SubcribeExpireDate);
+
+        if (expireDate.isBefore(currentDate)) {
+            newExpireDate = currentDate.add(7, 'days');
+        } else {
+            newExpireDate = expireDate.add(7, 'days');
+        }
+    }
+
+    user.SubcribeExpireDate = newExpireDate.toDate();
+    user.SubcribeFlag = 0;
+    // console.log(user);
+    await accountService.update(user);
+    res.redirect('/admin/readers/edit?id=' + req.body.txtID);
 });
 
 // ------------------   Writers   ------------------
@@ -354,6 +366,15 @@ router.get('/editors', async (req, res) => {
         page_items.push(item);
     }
     const listEditor = await accountService.findPageByRole(3, limit, offset);
+
+    for (const editor of listEditor) {
+        const editorCategories = await editorcategoryService.findbyAccountID(editor.Id);
+        const categoryIds = editorCategories.map(ec => ec.CatID);
+        const categories = await Promise.all(categoryIds.map(id => categoryService.findById(id)));
+        editor.Categories = categories.map(c => c.CatName);
+    }
+
+    console.log(listEditor);
     res.render('vwAdmin/editors', {
         layout: 'user',
         listEditor: listEditor,

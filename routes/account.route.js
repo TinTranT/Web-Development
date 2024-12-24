@@ -224,6 +224,7 @@ router.post('/reset-password', async function (req, res) {
 });
 
 router.get('/profile', isAuth, function (req, res) {
+    console.log(req.session.authUser);
     res.render('vwAccount/profile', {
         user: req.session.authUser,
     });
@@ -265,6 +266,7 @@ router.post('/update-password', isAuth, async function (req, res) {
 });
 
 router.get('/payment-premium', isAuth, function (req, res) {
+    console.log(req.session.authUser);
     res.render('vwAccount/payment-premium', {
         user: req.session.authUser,
     });
@@ -272,22 +274,23 @@ router.get('/payment-premium', isAuth, function (req, res) {
 
 router.post('/payment-premium', isAuth, async function (req, res) {
     const user = await accountService.findByEmail(req.session.authUser.Email);
-    const currentDate = moment();
+    // const currentDate = moment();
 
-    let newExpireDate;
-    if (!user.SubcribeExpireDate) {
-        newExpireDate = currentDate.add(7, 'days');
-    } else {
-        const expireDate = moment(user.SubcribeExpireDate);
+    // let newExpireDate;
+    // if (!user.SubcribeExpireDate) {
+    //     newExpireDate = currentDate.add(7, 'days');
+    // } else {
+    //     const expireDate = moment(user.SubcribeExpireDate);
 
-        if (expireDate.isBefore(currentDate)) {
-            newExpireDate = currentDate.add(7, 'days');
-        } else {
-            newExpireDate = expireDate.add(7, 'days');
-        }
-    }
+    //     if (expireDate.isBefore(currentDate)) {
+    //         newExpireDate = currentDate.add(7, 'days');
+    //     } else {
+    //         newExpireDate = expireDate.add(7, 'days');
+    //     }
+    // }
 
-    user.SubcribeExpireDate = newExpireDate.toDate();
+    // user.SubcribeExpireDate = newExpireDate.toDate();
+    user.SubcribeFlag = 1;
     await accountService.update(user);
     req.session.authUser = user;
 

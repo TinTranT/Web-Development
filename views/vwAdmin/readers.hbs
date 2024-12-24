@@ -35,11 +35,13 @@
         font-weight: 500;
         color: #999999;
     }
-    .activeRed{
+
+    .activeRed {
         background-color: var(--color-red) !important;
         border-color: var(--color-red) !important;
     }
-    .notActiveRed{
+
+    .notActiveRed {
         color: var(--color-red) !important;
     }
 </style>
@@ -75,7 +77,8 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Name</th>
                                                                 <th scope="col">Email</th>
-                                                                <th scope="col">Expired Date</th>
+                                                                <th scope="col">Expired date</th>
+                                                                <th scope="col">Subscription Status</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -94,6 +97,18 @@
                                                                     {{formatDate SubcribeExpireDate}}
                                                                     {{else}}
                                                                     --
+                                                                    {{/if}}
+                                                                </td>
+                                                                <td>
+                                                                    {{#if (isEqual SubcribeFlag 0)}}
+                                                                    {{#if SubcribeExpireDate}}
+                                                                    <span class="badge bg-success">Active</span>
+                                                                    {{else}}
+                                                                    <span class="badge bg-danger">No Subscription</span>
+                                                                    {{/if}}
+                                                                    {{else}}
+                                                                    <span class="badge bg-warning">Waiting for
+                                                                        approval</span>
                                                                     {{/if}}
                                                                 </td>
                                                                 <td class="text-right">
