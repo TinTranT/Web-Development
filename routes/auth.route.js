@@ -19,7 +19,7 @@ const router = express.Router();
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5555/auth/google/callback"
+    callbackURL: "https://insightnews.onrender.com/auth/google/callback"
 },
     function (accessToken, refreshToken, profile, cb) {
         return cb(null, profile);
@@ -29,7 +29,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:5555/auth/github/callback"
+    callbackURL: "https://insightnews.onrender.com/auth/github/callback"
 },
     function (accessToken, refreshToken, profile, done) {
         return done(null, profile);
