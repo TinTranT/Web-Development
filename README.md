@@ -79,3 +79,9 @@ Run the code below to run the app
 ```
 npm run start
 ```
+
+# 5. Additional information
+
+In this project, we use `render.com` for hosting web app and `aiven.io` for MySQL database.
+
+However, database in `aiven` works at However, aiven's database operates in the French time zone and is 7 hours behind Vietnam time. Therefore, some time-related functions will be affected, such as loading the most recent news, news publication time, etc.
