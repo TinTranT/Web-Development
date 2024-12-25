@@ -365,7 +365,6 @@ router.get('/editors', async (req, res) => {
         editor.Categories = categories.map(c => c.CatName);
     }
 
-    console.log(listEditor);
     res.render('vwAdmin/editors', {
         layout: 'user',
         listEditor: listEditor,
@@ -397,7 +396,7 @@ router.get('/editors/edit', async (req, res) => {
 
 router.post('/editors/edit', async (req, res) => {
     const id = parseInt(req.body.txtID);
-    console.log(req.body);
+    // console.log(req.body);
     const changes = {
         Name: req.body.txtName,
         Email: req.body.txtEmail,
@@ -406,13 +405,21 @@ router.post('/editors/edit', async (req, res) => {
         Role: parseInt(req.body.txtRole),
     }
     if (req.body.txtCategories != null) {
-        const catList = req.body.txtCategories;
+        let catList = req.body.txtCategories;
+        
+        if (!Array.isArray(catList)) {
+            catList = [catList]; // Chuyển thành mảng nếu không phải mảng
+        }
+
+        console.log(catList);
+
         await editorcategoryService.del(id);
         for (let i = 0; i < catList.length; i++) {
             const entity = {
                 AccountID: id,
                 CatID: catList[i],
             }
+            console.log(entity);
             await editorcategoryService.add(entity);
         }
     }
@@ -527,11 +534,9 @@ router.get('/categories/add', async (req, res) => {
 });
 
 router.post('/categories/add', async (req, res) => {
-    const listCat = await categoryService.findNoParent();
-    // console.log(entity);
     const entity = {
         CatName: req.body.categoryName,
-        CatParentID: req.body.categoryParent,
+        CatParentID: req.body.categoryParent ? req.body.categoryParent : 0,
     }
     await categoryService.add(entity);
     res.redirect('/admin/categories/add');
