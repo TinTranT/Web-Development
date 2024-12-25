@@ -263,10 +263,10 @@ app.use(async (req, res, next) => {
     next();
 });
 
-app.use(async (req, res, next) => {
-    await newsService.turnOnEventScheduler();
-    next();
-});
+// app.use(async (req, res, next) => {
+//     await newsService.turnOnEventScheduler();
+//     next();
+// });
 // app.use(async function(req, res, next) {
 //     const categories = await categoriesService.findall();
 //     res.locals.lcCategories = categories;

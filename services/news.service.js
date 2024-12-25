@@ -111,8 +111,8 @@ export default {
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 14);
 
         return db('news')
-            .join('Category', 'news.CatID', 'Category.CatID')
-            .join('Category as ParentCat', 'Category.CatParentID', 'ParentCat.CatID')
+            .join('category', 'news.CatID', 'category.CatID')
+            .join('category as ParentCat', 'category.CatParentID', 'ParentCat.CatID')
             .select(
                 'ParentCat.CatID as ParentID',
                 'ParentCat.CatName as ParentName',
@@ -317,7 +317,7 @@ export default {
             .limit(limit)
             .offset(offset);
     },
-    findPageForAllRejectedArticles(accountID, limit, offset){
+    findPageForAllRejectedArticles(accountID, limit, offset) {
         return db('news')
             .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
@@ -325,7 +325,7 @@ export default {
             .limit(limit)
             .offset(offset);
     },
-    findPageForRejectedArticlesByCat(CatID, limit, offset, accountID){
+    findPageForRejectedArticlesByCat(CatID, limit, offset, accountID) {
         return db('news')
             .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
             .leftJoin('account', 'news.WriterID', 'account.Id')
@@ -334,7 +334,7 @@ export default {
             .limit(limit)
             .offset(offset);
     },
-    findCountNewsByStatusID(account, status){
+    findCountNewsByStatusID(account, status) {
         return db('news')
             .where('WriterID', account)
             .andWhere('Status', status)
@@ -342,7 +342,7 @@ export default {
             .first();
 
     },
-    findPageNewsByStatusID(account, limit, offset, status){
+    findPageNewsByStatusID(account, limit, offset, status) {
         return db('news')
             .where('Status', status)
             .andWhere('WriterID', account)
