@@ -11,6 +11,10 @@
         height: 250px;
         object-fit: cover;
     }
+
+    .card-footer * {
+        margin-left: 5px;
+    }
 </style>
 {{/section}}
 {{#section 'js'}}
@@ -40,7 +44,7 @@
         var status = document.getElementById('status').value;
         var pubDateDiv = document.getElementById('pubDateDiv');
         var pubInput = document.getElementById('pubInput');
-        if (status == 2) {
+        if (status <= 2) {
             pubDateDiv.style.display = 'none';
             pubInput.required = false;
             pubInput.value = null;
@@ -55,8 +59,62 @@
         togglePubDate();
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButton = document.querySelector('#deleteButton');
+        const saveButton = document.querySelector('#saveButton');
+        saveButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const pubInput = document.getElementById('pubInput');
+            const status = document.getElementById('status').value;
+            if (!pubInput.value && status == 3) {
+                Swal.fire({
+                    title: "Publishing date is required!",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+                return;
+            }
+            Swal.fire({
+                title: "Do you to update this article?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const frmEdit = document.querySelector('#frmEdit');
+                    frmEdit.submit();
+                }
+            });
+        });
+
+        deleteButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Do you to permanently delete this article ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const frmEdit = document.querySelector('#frmEdit');
+                    frmEdit.action = '/admin/articles/del';
+                    frmEdit.submit();
+                }
+            });
+        });
+    });
+</script>
 {{/section}}
-<form action="" method="post">
+<form action="" method="post" id="frmEdit">
+    <div style="display: none;">
+        <input type="text" id="newsId" name="newsId" value="{{this.news.NewsID}}">
+    </div>
     <div class="card">
         <div class="card-header">
             <h4>Edit information</h4>
@@ -88,11 +146,14 @@
                 <div class="col-sm-8 mb-3">
                     <div class="card" style="height: 500px">
                         <div class="card-body">
-
                             <div class="mb-5">
                                 <label for="status" class="mb-2">Status</label>
                                 <select name="status" id="status" class="form-select" size="1" required
-                                    onchange="togglePubDate()">
+                                    onchange="togglePubDate()" {{#if (isEqual this.news.Status 3)}}disabled{{/if}}>
+                                    <option value="0" {{#if (isEqual this.news.Status 0)}}selected{{/if}}>{{nameStatus
+                                        0}}</option>
+                                    <option value="1" {{#if (isEqual this.news.Status 1)}}selected{{/if}}>{{nameStatus
+                                        1}}</option>
                                     <option value="2" {{#if (isEqual this.news.Status 2)}}selected{{/if}}>{{nameStatus
                                         2}}</option>
                                     <option value="3" {{#if (isEqual this.news.Status 3)}}selected{{/if}}>{{nameStatus
@@ -102,29 +163,27 @@
                             <div class="mb-5" id="pubDateDiv">
                                 <label for="pubInput" class="mb-2">Set publishing date</label>
                                 <input type="datetime-local" id="pubInput" class="form-control" name="pubdate"
-                                    min="1900-01-01" value="{{formatDate4 this.news.PublishDate}}">
-                            </div>
-                            <div class="mb-5">
-                                <select name="premium" id="premium" class="form-select" size="1">
-                                    <option value="1" {{#if (isEqual this.news.PremiumFlag 1)}}selected{{/if}}>Premium
-                                    </option>
-                                    <option value="0" {{#if (isEqual this.news.PremiumFlag 0)}}selected{{/if}}>Non-Premium
-                                    </option>
-                                </select>
+                                    min="1900-01-01" value="{{formatDate4 this.news.PublishDate}}" {{#if (isEqual
+                                    this.news.Status 3)}}disabled{{/if}} required>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card-footer text-muted d-flex justify-content-between">
-            <a href="/admin/articles/details?id={{this.news.NewsID}}" class="btn btn-primary">
+        <div class="card-footer text-muted d-flex justify-content-end">
+            <button type="submit" class="btn btn-success" id="saveButton">
+                <i class="bi bi-floppy"></i>
+                Save
+            </button>
+            <button type="click" id="deleteButton" class="btn btn-danger" formaction="/admin/articles/del">
+                <i class="bi bi-trash"></i>
+                Delete
+            </button>
+            <a href="/admin/articles?id=0&page=1" class="btn btn-primary">
                 <i class="bi bi-arrow-left"></i>
                 Go back
             </a>
-            <div class="">
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
         </div>
     </div>
 </form>

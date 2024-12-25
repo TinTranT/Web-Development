@@ -39,6 +39,7 @@
     dropdownItems.forEach(function (item) {
       item.addEventListener('click', function (event) {
         // Lưu liên kết đang được chọn vào localStorage
+        //alert(item.href);
         localStorage.setItem('activeLink', item.href);
       });
     });

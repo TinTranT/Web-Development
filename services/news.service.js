@@ -297,7 +297,6 @@ export default {
             .andWhere('news.Status', status)
             .andWhere('news.CatID', idCat) // Lọc theo Category ID
             .count('* as total').first() // Đếm số lượng bản ghi (NewsID)
-
     },
     findPageForAllArticles(accountID, limit, offset, status) {
         return db('news')
@@ -315,6 +314,23 @@ export default {
             .where('editorcategory.AccountID', accountID)
             .andWhere('news.Status', status)
             .andWhere('news.CatID', CatID) // Lọc theo Category ID
+            .limit(limit)
+            .offset(offset);
+    },
+    findPageForAllRejectedArticles(accountID, limit, offset){
+        return db('news')
+            .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('rejectreason.EditorID', accountID)
+            .limit(limit)
+            .offset(offset);
+    },
+    findPageForRejectedArticlesByCat(CatID, limit, offset, accountID){
+        return db('news')
+            .leftJoin('rejectreason', 'news.NewsID', 'rejectreason.NewsID')
+            .leftJoin('account', 'news.WriterID', 'account.Id')
+            .where('rejectreason.EditorID', accountID)
+            .andWhere('news.CatID', CatID)
             .limit(limit)
             .offset(offset);
     },

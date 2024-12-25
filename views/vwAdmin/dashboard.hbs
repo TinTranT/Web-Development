@@ -1,0 +1,206 @@
+{{#section 'css'}}
+<style>
+    .card {
+        margin-bottom: 20px;
+        height: 100%;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover .card-title{
+        color: var(--color-red);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-body .row {
+        align-items: center;
+    }
+
+    .card-body .col-md-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-body .col-md-4 i {
+        font-size: 3rem;
+    }
+
+    .card-body .col-md-8 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        margin-top: 10px;
+    }
+</style>
+{{/section}}
+<div class="main">
+    <main class="content px-3 py-4">
+        <div class="container-fluid">
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-12">
+                        <section class="intro">
+                            <div class="h-100">
+                                <div class="mask d-flex align-items-center h-100">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <!-- Main Content -->
+                                                <div class="p-4" style="flex: 1;">
+                                                    <h2 class="mb-3">Newspaper Management</h2>
+                                                    <div class="row">
+                                                        <div class="col-md-4 mb-4">
+                                                            <a href="/admin/articles?id=0&page=1" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i
+                                                                                    class="bi bi-file-earmark-text-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Articles</h5>
+                                                                                <p class="card-text">Manage all article
+                                                                                    pages.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-4 mb-4">
+                                                            <a href="/admin/categories" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i class="bi bi-grid"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Categories</h5>
+                                                                                <p class="card-text">Manage category
+                                                                                    list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-4 mb-4">
+                                                            <a href="/admin/tags" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i class="bi bi-tags-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Tags</h5>
+                                                                                <p class="card-text">Manage tag list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <h2 class="mb-3">Users Management</h2>
+                                                    <div class="row">
+                                                        <div class="col-md-4 mb-3">
+                                                            <a href="/admin/readers" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i class="bi bi-people-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Readers</h5>
+                                                                                <p class="card-text">Manage reader
+                                                                                    account list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <a href="/admin/writers" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i
+                                                                                    class="bi bi-person-lines-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Writers</h5>
+                                                                                <p class="card-text">Manage writer
+                                                                                    account list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <a href="/admin/editors" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i
+                                                                                    class="bi bi-person-check-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Editors</h5>
+                                                                                <p class="card-text">Manage editor
+                                                                                    account list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
+                                                            <a href="/admin/admins" class="text-decoration-none">
+                                                                <div class="card">
+                                                                    <div class="card-body d-flex align-items-center">
+                                                                        <div class="row w-100">
+                                                                            <div class="col-md-4 text-center">
+                                                                                <i class="bi bi-gear-fill fs-1"></i>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <h5 class="card-title">Admin</h5>
+                                                                                <p class="card-text">Manage admin
+                                                                                    account list</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

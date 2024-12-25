@@ -57,6 +57,7 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/648/648270.png" alt="avatar"
                             class="rounded-circle img-fluid" style="width: 150px;">
                         <h2 class="my-3">{{user.Name}}</h2>
+                        {{#if (isEqual user.SubcribeFlag 0)}}
                         {{#if user.SubcribeExpireDate}}
                         {{#if (isExpired user.SubcribeExpireDate)}}
                         <h4 class="text-muted my-4">Your Premium has expired</h4>
@@ -72,6 +73,13 @@
                         <div class="d-flex justify-content-center mb-2">
                             <a href="/account/payment-premium" class="btn btn-danger btn-lg btn-block">Get PREMIUM right
                                 now!!!</a>
+                        </div>
+                        {{/if}}
+                        {{else}}
+                        <h4 class="text-muted my-4">Waiting for approval</h4>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href="/account/payment-premium" class="btn btn-danger btn-lg btn-block disabled">Extend your
+                                PREMIUM right now!!!</a>
                         </div>
                         {{/if}}
                     </div>
