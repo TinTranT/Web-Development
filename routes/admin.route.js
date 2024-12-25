@@ -143,7 +143,6 @@ router.post('/articles/edit', async (req, res) => {
     const changes1 = {
         PublishDate: req.body.status <= 2 ? null : formattedPublishDate,
         Status: req.body.status,
-        PremiumFlag: parseInt(req.body.premium),
     };
     console.log(changes1);
     await newsService.updateNews(id, changes1);
@@ -151,18 +150,10 @@ router.post('/articles/edit', async (req, res) => {
 });
 
 router.post('/articles/del', async (req, res) => {
+    // console.log(req.body);
     await newstagsService.del(req.body.newsId);
     await newsService.del(req.body.newsId);
     res.redirect('/admin/articles?id=0&page=1');
-});
-
-router.post('/articles/patch', async (req, res) => {
-    const id = parseInt(req.body.newsId);
-    const changes = {
-        Status: 3,
-    }
-    await newsService.patch(id, changes);
-    res.redirect('/admin/articles/details?id=' + id);
 });
 
 // ----------------- User Add -----------------
