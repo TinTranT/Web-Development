@@ -16,11 +16,36 @@ const GOOGLE_CAPCHA_SECRET = process.env.GOOGLE_CAPCHA_SECRET;
 const GOOGLE_CAPCHA_CLIENT = process.env.GOOGLE_CAPCHA_CLIENT;
 
 router.get('/register', function (req, res) {
-    res.render('vwAccount/register');
+    res.render('vwAccount/register', {
+        GOOGLE_CAPCHA_CLIENT: GOOGLE_CAPCHA_CLIENT,
+    });
 });
 
 
 router.post('/register', async function (req, res) {
+    // Verify capcha
+    let capchaVerify = false;
+
+    const param = new URLSearchParams({
+        secret: GOOGLE_CAPCHA_SECRET,
+        response: req.body['g-recaptcha-response']
+    });
+    const result = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        body: param.toString(),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+    const data = await result.json();
+    capchaVerify = data.success;
+
+    if (!capchaVerify) {
+        return res.render('vwAccount/login', {
+            err_message: 'Please verify you are not a robot.'
+        });
+    }
+
     const hash_password = bcrypt.hashSync(req.body.raw_password, 8);
     const entity = {
         Email: req.body.email,

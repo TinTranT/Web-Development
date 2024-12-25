@@ -2,6 +2,7 @@
 {{/section}}
 
 {{#section 'js'}}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -103,6 +104,11 @@
                     <label class="form-label" for="txtFullname">Fullname</label>
                     <input type="text" id="txtFullname" class="form-control" name="name" required>
                   </div>
+                </div>
+
+                {{!-- Capcha --}}
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <div class="g-recaptcha" data-sitekey="{{GOOGLE_CAPCHA_CLIENT}}"></div>
                 </div>
 
                 <!-- Submit button -->
