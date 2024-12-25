@@ -13,6 +13,21 @@ export default {
                 this.whereNull('CatParentID').orWhere('CatParentID', 0);
             });
     },
+    findByCatName(catName) {
+        const category = db('category').where('CatName', catName).first();
+        return category || null;
+    },
+    findByCatNameAndCatParent(catName, catParentId) {
+        const query = db('category').where('CatName', catName);
+    
+        if (catParentId !== undefined && !isNaN(catParentId)) {
+            query.where('CatParentID', catParentId);
+        } else {
+            query.whereNull('CatParentID'); // Kiểm tra NULL nếu không có giá trị
+        }
+    
+        return query.first().then(record => !!record);
+    },
     findWithParent() {
         return db('category as c1')
             .leftJoin('category as c2', 'c1.CatParentID', 'c2.CatID')

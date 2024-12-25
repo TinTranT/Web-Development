@@ -22,7 +22,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const frmEdit = document.getElementById('frmEdit');
         const deleteButton = document.querySelector('button[formaction="/admin/tags/del"]');
-        const saveButton = document.querySelector('button[formaction="/admin/tags/patch"]');
+        const saveButton = document.querySelector('#saveButton');
 
         deleteButton.addEventListener('click', async function (e) {
             e.preventDefault();
@@ -37,7 +37,7 @@
                     Swal.fire("ERROR", "This Tag is being used", "error");
                 } else {
                     Swal.fire({
-                        title: "Do you really want to continue?",
+                        title: "Do you want to permanently delete this tag?",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonText: "Yes",
@@ -56,9 +56,17 @@
             }
         });
 
-        saveButton.addEventListener('click', function (e) {
+        saveButton.addEventListener('click', async function (e) {
             e.preventDefault();
-            Swal.fire({
+            const tagName = document.getElementById('tagName').value;
+            try {
+                const response1 = await fetch(`/admin/tags/is-available?tagName=${tagName}`);
+                const data1 = await response1.json();
+
+                if (!data1) {
+                    Swal.fire("ERROR", "This tag already exists", "error");
+                } else {
+                    Swal.fire({
                         title: "Do you really want to continue?",
                         icon: "warning",
                         showCancelButton: true,
@@ -71,6 +79,11 @@
                             frmEdit.submit();
                         }
                     });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
         });
 
         frmEdit.addEventListener('submit', async function (e) {
@@ -130,7 +143,7 @@
                     </div>
                     <div class="row">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/tags/patch">
+                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/tags/patch" id="saveButton">
                                 <i class="bi bi-floppy"></i>
                                 Save
                             </button>

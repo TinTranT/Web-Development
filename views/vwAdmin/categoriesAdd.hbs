@@ -9,9 +9,70 @@
     }
 </style>
 {{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const frmEdit = document.getElementById('frmEdit');
+        const saveButton = document.querySelector('#saveButton');
+
+        saveButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const catName = document.getElementById('categoryName').value;
+            const CatParentID = document.getElementById('categoryParent').value;
+
+            try {
+                const response1 = await fetch(`/admin/categories/is-available?catName=${catName}&CatParentId=${CatParentID}`);
+                const data1 = await response1.json();
+
+                if (!data1) {
+                    Swal.fire("ERROR", "This category already exists", "error");
+                } else {
+                    Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/categories/add';
+                            frmEdit.submit();
+                        }
+                    });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+
+        frmEdit.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const catId = document.getElementById('categoryId').value;
+
+            try {
+                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const data = await response.json();
+                console.log(data);
+
+                if (!data) {
+                    Swal.fire("ERROR", "This category is being used", "error");
+                } else {
+                    frmEdit.submit();
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+    });
+</script>
+{{/section}}
 
 <div class="main">
-<form action="" method="post">
+<form action="" method="post" id="frmEdit">
     <main class="content px-3 py-4">
         <div class="container-fluid">
             <div class="mb-3">
@@ -27,17 +88,16 @@
                                 </td>
                                 <td class="col-8">
                                     <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                        placeholder="Enter category name">
+                                        placeholder="Enter category name" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-4">
-                                    <label for="categoryParent" class="form-label">Parent </label>
+                                    <label for="categoryParent" class="form-label">Select parent category</label>
                                 </td>
                                 <td class="col-8">
                                     <select class="form-select" id="categoryParent" name="categoryParent">
-                                        <option value="" disabled selected hidden>Select parent category</option>
-                                        <option value="Null">No Parent</option>
+                                        <option value="Null" selected>No Parent</option>
                                         {{#each this.listCat}}
                                         <option value="{{this.CatID}}">{{this.CatName}}</option>
                                         {{/each}}
@@ -49,7 +109,7 @@
                 </div>
                 <div class="row">
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary me-2">
+                        <button type="submit" class="btn btn-primary me-2" id="saveButton">
                         <i class="bi bi-floppy"></i>
                             Save    
                         </button>

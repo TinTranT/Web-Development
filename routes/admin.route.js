@@ -573,6 +573,16 @@ router.get('/categories/is-using', async (req, res) => {
     return res.json(true);
 });
 
+router.get('/categories/is-available', async (req, res) => {
+    const catName = req.query.catName;
+    const catParentId = parseInt(req.query.CatParentId);
+    const checkCat = await categoryService.findByCatNameAndCatParent(catName, catParentId);
+    if (!checkCat) {
+        return res.json(true);
+    }
+    return res.json(false);
+});
+
 //hàm xử lý update category - ko có giao diện
 router.post('/categories/patch', async (req, res) => {
     const id = parseInt(req.body.categoryId);
@@ -658,6 +668,15 @@ router.get('/tags/is-using', async (req, res) => {
         return res.json(false);
     }
     return res.json(true);
+});
+
+router.get('/tags/is-available', async (req, res) => {
+    const tagName = req.query.tagName;
+    const checkTag = await tagService.findByTagName(tagName);
+    if (!checkTag) {
+        return res.json(true);
+    }
+    return res.json(false);
 });
 
 router.post('/tags/patch', async (req, res) => {

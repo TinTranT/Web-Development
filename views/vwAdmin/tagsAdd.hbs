@@ -9,9 +9,48 @@
     }
 </style>
 {{/section}}
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const frmEdit = document.getElementById('frmEdit');
+        const saveButton = document.querySelector('#saveButton');
 
+        saveButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const tagName = document.getElementById('tagName').value;
+
+            try {
+                const response1 = await fetch(`/admin/tags/is-available?tagName=${tagName}`);
+                const data1 = await response1.json();
+
+                if (!data1) {
+                    Swal.fire("ERROR", "This tag already exists", "error");
+                } else {
+                    Swal.fire({
+                        title: "Do you really want to continue?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        reverseButtons: false,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            frmEdit.action = '/admin/tags/add';
+                            frmEdit.submit();
+                        }
+                    });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
+        });
+    });
+</script>
+{{/section}}
 <div class="main">
-<form action="" method="post">
+<form action="" method="post" id="frmEdit">
     <main class="content px-3 py-4">
         <div class="container-fluid">
             <div class="mb-3">
@@ -35,7 +74,7 @@
                 </div>
                 <div class="row">
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary me-2">
+                        <button type="submit" class="btn btn-primary me-2" id="saveButton">
                         <i class="bi bi-floppy"></i>
                             Save    
                         </button>
