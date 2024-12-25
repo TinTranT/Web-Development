@@ -6,6 +6,18 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    const message = document.getElementById('err_message').value;
+    if (message !== "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message,
+      });
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     // alert('Hello from vwAccount/register.hbs');
 
     // Initialize datepicker for txtDOB
@@ -51,6 +63,7 @@
 {{/section}}
 
 <div class="register-page">
+  <input type="text" id="err_message" value="{{ err_message }}" hidden>
   <!-- Section: Design Block -->
   <section class="text-center text-lg-start">
     <style>

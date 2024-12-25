@@ -41,7 +41,7 @@ router.post('/register', async function (req, res) {
     capchaVerify = data.success;
 
     if (!capchaVerify) {
-        return res.render('vwAccount/login', {
+        return res.render('vwAccount/register', {
             err_message: 'Please verify you are not a robot.'
         });
     }
