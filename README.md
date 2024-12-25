@@ -62,7 +62,7 @@ DB_PORT=
 
 ![image](https://github.com/user-attachments/assets/07177588-dde4-4ab9-91ac-4c9845441eb8)
 
-5. In the EXECUTE SQL File window, click on `...` and choose `onlinenewspaperdb.sql` in utils folder
+5. In the EXECUTE SQL File window, click on `...` and choose `onlinenewspaperdb.sql` in db.zip
 
 ![image](https://github.com/user-attachments/assets/1fd6ce1e-fc96-49e6-bc29-258767c1b7a8)
 
