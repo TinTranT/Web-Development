@@ -71,3 +71,11 @@ DB_PORT=
 ![image](https://github.com/user-attachments/assets/91f27145-a2e1-4026-b2a5-18c2950c9c2e)
 
 => successfully deploy database
+
+# 4. Start the project
+
+Run the code below to run the app
+
+```
+npm run start
+```
