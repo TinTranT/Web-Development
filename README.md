@@ -32,6 +32,26 @@ Go to `https://developers.google.com/recaptcha/intro` to create new capcha and t
 
 **Database (local host)**
 
+**Create file .env**
+
+Create file `.env` and paste all the value
+
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+GOOGLE_CAPCHA_SECRET=
+GOOGLE_CAPCHA_CLIENT=
+DB_HOST=
+DB_DBNAME=
+DB_USERNAME=
+DB_PASSWORD=
+DB_PORT=
+```
+
+# 3. Set up Database (local host)
+
 1. Open XAMPP Control Panel and turn on Module `MySQL`
 
 ![image](https://github.com/user-attachments/assets/a16f9c9d-4a2b-43bd-88e7-ab364035ac8b)
@@ -51,21 +71,3 @@ Go to `https://developers.google.com/recaptcha/intro` to create new capcha and t
 ![image](https://github.com/user-attachments/assets/91f27145-a2e1-4026-b2a5-18c2950c9c2e)
 
 => successfully deploy database
-
-**Create file .env**
-
-Create file `.env` and paste all the value
-
-```
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-GOOGLE_CAPCHA_SECRET=
-GOOGLE_CAPCHA_CLIENT=
-DB_HOST=
-DB_DBNAME=
-DB_USERNAME=
-DB_PASSWORD=
-DB_PORT=
-```
