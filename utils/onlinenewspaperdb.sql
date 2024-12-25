@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 23/12/2024 10:41:08
+ Date: 25/12/2024 17:31:47
 */
 
 SET NAMES utf8mb4;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for account
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
+CREATE TABLE `account`  (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -33,10 +33,9 @@ CREATE TABLE `account` (
   `EditorId` int NULL DEFAULT NULL,
   `OTP` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `OTP_CreatedAt` datetime NULL DEFAULT NULL,
-  `SubcribeFlag` TINYINT(1) NULL DEFAULT 0,
+  `SubcribeFlag` tinyint(1) NULL DEFAULT 0,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
 
 -- ----------------------------
 -- Records of account
@@ -64,8 +63,6 @@ INSERT INTO `account` VALUES (27, '$2a$08$RI/IXhQBqjwnKzi52i4Xsuw0cew4b9ybWkaBmN
 INSERT INTO `account` VALUES (28, '$2a$08$2xURyS00qnegRyIgNNBZAuf4Hjfhs6dL8fww5URuK.M5JVtdHRl7i', 'subscriber@gmail.com', '2021-01-05', 'subscriber Hoàng', '', 1, '2026-12-24 00:00:00', NULL, NULL, NULL, 0);
 INSERT INTO `account` VALUES (29, '$2a$10$U5ukhQP.5EHSw.DGcLiYiOWM4jDEDPpfpj92Ra.X/Sxta/YmsrypW', 'editor@gmail.com', '2018-02-05', 'Editor Hoàng', 'Editor hoang', 3, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `account` VALUES (30, '$2a$10$rH723ErZ5JsOcBj4/PyFGeMXspivPayfwQ22jzLbXXQQAofoyZupu', 'reporter2@gmail.com', '2020-02-03', 'Reporter An', 'AnReporter', 2, '2099-01-01 00:00:00', NULL, NULL, NULL, 0);
-
-
 
 -- ----------------------------
 -- Table structure for category

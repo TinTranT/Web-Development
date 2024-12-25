@@ -69,7 +69,7 @@ router.post('/login', async function (req, res) {
     let capchaVerify = false;
 
     const param = new URLSearchParams({
-        secret: '6LeSdKMqAAAAAGqyEgnkFeztVSjClTIJvo6JXBah',
+        secret: '6LeqjKUqAAAAAHW9Ktf6qolVocy8M3yBUW1jC70-',
         response: req.body['g-recaptcha-response']
     });
     const result = await fetch('https://www.google.com/recaptcha/api/siteverify', {
