@@ -7,8 +7,13 @@ import nodemailer from 'nodemailer'; // Add this line
 import accountService from '../services/account.service.js';
 import { isAuth } from '../middleware/auth.mdw.js';
 import { ca } from 'date-fns/locale';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
+const GOOGLE_CAPCHA_SECRET = process.env.GOOGLE_CAPCHA_SECRET;
+const GOOGLE_CAPCHA_CLIENT = process.env.GOOGLE_CAPCHA_CLIENT;
 
 router.get('/register', function (req, res) {
     res.render('vwAccount/register');
@@ -59,7 +64,9 @@ router.get('/is-available', async function (req, res) {
 });
 
 router.get('/login', function (req, res) {
-    res.render('vwAccount/login');
+    res.render('vwAccount/login', {
+        GOOGLE_CAPCHA_CLIENT: GOOGLE_CAPCHA_CLIENT,
+    });
 });
 
 router.post('/login', async function (req, res) {
@@ -67,7 +74,7 @@ router.post('/login', async function (req, res) {
     let capchaVerify = false;
 
     const param = new URLSearchParams({
-        secret: '6LeqjKUqAAAAAHW9Ktf6qolVocy8M3yBUW1jC70-',
+        secret: GOOGLE_CAPCHA_SECRET,
         response: req.body['g-recaptcha-response']
     });
     const result = await fetch('https://www.google.com/recaptcha/api/siteverify', {
