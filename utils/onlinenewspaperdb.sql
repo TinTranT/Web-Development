@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for account
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account`  (
+CREATE TABLE `account` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -33,35 +33,39 @@ CREATE TABLE `account`  (
   `EditorId` int NULL DEFAULT NULL,
   `OTP` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `OTP_CreatedAt` datetime NULL DEFAULT NULL,
+  `SubcribeFlag` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES (1, '$2a$12$9Bc6yZXWr/BYXgkgKJe6yOeTYzVT1p3f92ZiUJ7vPTMSP2zDiWMvq', 'john.doe@example.com', '1990-05-15', 'John Doe', 'JDWriter', 1, '2024-12-31 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (2, 'authorpass111', 'alice.brown@example.com', '1995-02-20', 'Alice Brown', 'AliceB', 1, '2025-06-30 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (3, '$2a$10$jRap3fRSaOyx.i0eBCHwaudRCVGydfJeEiy1wOJxFf5cP2ztTR.Ja', 'guest@example.com', '2000-10-01', 'Guest User', NULL, 1, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (4, '$2a$08$r9FSZX.ad7K7V8IVCCeaoOTX69G3jIET3aStkQy3M8hT22VJOh7HO', 'bob.writer@example.com', '1998-09-12', 'Bob Writer', 'BWriter', 1, '2024-09-15 00:00:00', 2, NULL, NULL);
-INSERT INTO `account` VALUES (5, 'subscribed444', 'susan.subscriber@example.com', '1993-01-30', 'Susan Subscriber', NULL, 1, '2025-01-01 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (6, 'securepass456', 'jane.smith@example.com', '1985-11-22', 'Jane Smith', 'JaneS', 2, NULL, 1, NULL, NULL);
-INSERT INTO `account` VALUES (7, 'adminpass789', 'admin@example.com', '1980-03-10', 'Admin User', '', 3, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (8, 'editorpass999', 'editor@example.com', '2005-04-20', 'Editor User', NULL, 4, NULL, 3, NULL, NULL);
-INSERT INTO `account` VALUES (15, '$2a$08$amIzqJxTXv6iecXOI3dFyOHnGv8bxGee.YmYyAZyMwYMqWenEymg.', '123123', '0000-00-00', '123123', NULL, 1, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (17, '$2a$08$Pk9Oa7ccgA3wID.pcQJgqextPhUymi4R.gvfruwQqUSjt6dwdMmJ.', 'guest2@gmail.com', '2000-05-15', 'Hello 2', 'Pen Name 22222', 1, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (18, '$2a$08$z8UIKOFpQqluXvk8cJhBuuroNZ8XcqrCk1hnUnLMYHB7kZ8LrJN.y', 'shadowlightpiro254@gmail.com', '1899-11-30', 'Shadow Light Piro', NULL, 1, '2024-12-24 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (19, '$2a$08$pks80kAfPEpJVH15iBXB3eFgeRBi/R4q.MtWVucAspcPzssoKipDq', 'trantrungtin254@gmail.com', '1899-11-30', 'Trung Tin', NULL, 1, '2024-12-24 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (20, '$2a$10$1ob/15JyxHs8ehPkRogrquolsUdWTdxvckWNzTmQL8Bl1phO/j8R6', 'tintran@gmail.com', '2004-05-14', 'Trần Trung Tín', '123', 3, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (21, '$2a$08$vptRHHI80YFkY2JP.US7HeE2AUyPyq.HnCpD/Xs7U28Npbd.N7jiS', '22110028@student.hcmute.edu.vn', '0000-00-00', 'Nguyễn Mai Huy Hoàng', NULL, 1, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (22, '$2a$08$rPdTuhsbPzecmlzkW.gBtemGVx5mNq7oJF2Zr7um1nD.7hR5sbCu2', 'admin', '2004-05-20', 'Hoàng Admin', NULL, 4, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (23, '$2a$10$jRap3fRSaOyx.i0eBCHwaudRCVGydfJeEiy1wOJxFf5cP2ztTR.Ja', 'tintran', '2003-06-12', 'tin tran trung', 'TinTran', 2, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (24, '$2a$08$jUBqhcH6aRng1pOUo7YJ2OEzmqRJw0lM7s0zxQvriNfw7nJSGiPku', 'tuanvu@gmail.com', '0000-00-00', 'Nguyễn Tuấn Vũ', NULL, 1, '2025-12-24 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (25, '$2a$08$2c6MyrSDYbfFEjz.umE6du6aYSqAg.erGJlyB6Gf1UL8xszuYytpG', 'nguyenmaihuyhoang156@gmail.com', NULL, 'NMHH', 'NMHH', 1, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (26, '$2a$08$RI/IXhQBqjwnKzi52i4Xsuw0cew4b9ybWkaBmNk2iBhkvMRjvRp1K', 'admin@gmail.com', '0000-00-00', 'admin', NULL, 4, '2099-01-01 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (27, '$2a$08$RI/IXhQBqjwnKzi52i4Xsuw0cew4b9ybWkaBmNk2iBhkvMRjvRp1K', 'reporter@gmail.com', '2018-06-08', 'reporter Hoàng', '', 2, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (28, '$2a$08$2xURyS00qnegRyIgNNBZAuf4Hjfhs6dL8fww5URuK.M5JVtdHRl7i', 'subscriber@gmail.com', '2021-01-05', 'subscriber Hoàng', '', 1, '2026-12-24 00:00:00', NULL, NULL, NULL);
-INSERT INTO `account` VALUES (29, '$2a$10$U5ukhQP.5EHSw.DGcLiYiOWM4jDEDPpfpj92Ra.X/Sxta/YmsrypW', 'editor@gmail.com', '2018-02-05', 'Editor Hoàng', 'Editor hoang', 3, NULL, NULL, NULL, NULL);
-INSERT INTO `account` VALUES (30, '$2a$10$rH723ErZ5JsOcBj4/PyFGeMXspivPayfwQ22jzLbXXQQAofoyZupu', 'reporter2@gmail.com', '2020-02-03', 'Reporter An', 'AnReporter', 2, '2099-01-01 00:00:00', NULL, NULL, NULL);
+INSERT INTO `account` VALUES (1, '$2a$12$9Bc6yZXWr/BYXgkgKJe6yOeTYzVT1p3f92ZiUJ7vPTMSP2zDiWMvq', 'john.doe@example.com', '1990-05-15', 'John Doe', 'JDWriter', 1, '2024-12-31 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (2, 'authorpass111', 'alice.brown@example.com', '1995-02-20', 'Alice Brown', 'AliceB', 1, '2025-06-30 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (3, '$2a$10$jRap3fRSaOyx.i0eBCHwaudRCVGydfJeEiy1wOJxFf5cP2ztTR.Ja', 'guest@example.com', '2000-10-01', 'Guest User', NULL, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (4, '$2a$08$r9FSZX.ad7K7V8IVCCeaoOTX69G3jIET3aStkQy3M8hT22VJOh7HO', 'bob.writer@example.com', '1998-09-12', 'Bob Writer', 'BWriter', 1, '2024-09-15 00:00:00', 2, NULL, NULL, 0);
+INSERT INTO `account` VALUES (5, 'subscribed444', 'susan.subscriber@example.com', '1993-01-30', 'Susan Subscriber', NULL, 1, '2025-01-01 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (6, 'securepass456', 'jane.smith@example.com', '1985-11-22', 'Jane Smith', 'JaneS', 2, NULL, 1, NULL, NULL, 0);
+INSERT INTO `account` VALUES (7, 'adminpass789', 'admin@example.com', '1980-03-10', 'Admin User', '', 3, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (8, 'editorpass999', 'editor@example.com', '2005-04-20', 'Editor User', NULL, 4, NULL, 3, NULL, NULL, 0);
+INSERT INTO `account` VALUES (15, '$2a$08$amIzqJxTXv6iecXOI3dFyOHnGv8bxGee.YmYyAZyMwYMqWenEymg.', '123123', '0000-00-00', '123123', NULL, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (17, '$2a$08$Pk9Oa7ccgA3wID.pcQJgqextPhUymi4R.gvfruwQqUSjt6dwdMmJ.', 'guest2@gmail.com', '2000-05-15', 'Hello 2', 'Pen Name 22222', 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (18, '$2a$08$z8UIKOFpQqluXvk8cJhBuuroNZ8XcqrCk1hnUnLMYHB7kZ8LrJN.y', 'shadowlightpiro254@gmail.com', '1899-11-30', 'Shadow Light Piro', NULL, 1, '2024-12-24 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (19, '$2a$08$pks80kAfPEpJVH15iBXB3eFgeRBi/R4q.MtWVucAspcPzssoKipDq', 'trantrungtin254@gmail.com', '1899-11-30', 'Trung Tin', NULL, 1, '2024-12-24 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (20, '$2a$10$1ob/15JyxHs8ehPkRogrquolsUdWTdxvckWNzTmQL8Bl1phO/j8R6', 'tintran@gmail.com', '2004-05-14', 'Trần Trung Tín', '123', 3, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (21, '$2a$08$vptRHHI80YFkY2JP.US7HeE2AUyPyq.HnCpD/Xs7U28Npbd.N7jiS', '22110028@student.hcmute.edu.vn', '0000-00-00', 'Nguyễn Mai Huy Hoàng', NULL, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (22, '$2a$08$rPdTuhsbPzecmlzkW.gBtemGVx5mNq7oJF2Zr7um1nD.7hR5sbCu2', 'admin', '2004-05-20', 'Hoàng Admin', NULL, 4, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (23, '$2a$10$jRap3fRSaOyx.i0eBCHwaudRCVGydfJeEiy1wOJxFf5cP2ztTR.Ja', 'tintran', '2003-06-12', 'tin tran trung', 'TinTran', 2, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (24, '$2a$08$jUBqhcH6aRng1pOUo7YJ2OEzmqRJw0lM7s0zxQvriNfw7nJSGiPku', 'tuanvu@gmail.com', '0000-00-00', 'Nguyễn Tuấn Vũ', NULL, 1, '2025-12-24 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (25, '$2a$08$2c6MyrSDYbfFEjz.umE6du6aYSqAg.erGJlyB6Gf1UL8xszuYytpG', 'nguyenmaihuyhoang156@gmail.com', NULL, 'NMHH', 'NMHH', 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (26, '$2a$08$RI/IXhQBqjwnKzi52i4Xsuw0cew4b9ybWkaBmNk2iBhkvMRjvRp1K', 'admin@gmail.com', '0000-00-00', 'admin', NULL, 4, '2099-01-01 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (27, '$2a$08$RI/IXhQBqjwnKzi52i4Xsuw0cew4b9ybWkaBmNk2iBhkvMRjvRp1K', 'reporter@gmail.com', '2018-06-08', 'reporter Hoàng', '', 2, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (28, '$2a$08$2xURyS00qnegRyIgNNBZAuf4Hjfhs6dL8fww5URuK.M5JVtdHRl7i', 'subscriber@gmail.com', '2021-01-05', 'subscriber Hoàng', '', 1, '2026-12-24 00:00:00', NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (29, '$2a$10$U5ukhQP.5EHSw.DGcLiYiOWM4jDEDPpfpj92Ra.X/Sxta/YmsrypW', 'editor@gmail.com', '2018-02-05', 'Editor Hoàng', 'Editor hoang', 3, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `account` VALUES (30, '$2a$10$rH723ErZ5JsOcBj4/PyFGeMXspivPayfwQ22jzLbXXQQAofoyZupu', 'reporter2@gmail.com', '2020-02-03', 'Reporter An', 'AnReporter', 2, '2099-01-01 00:00:00', NULL, NULL, NULL, 0);
+
+
 
 -- ----------------------------
 -- Table structure for category

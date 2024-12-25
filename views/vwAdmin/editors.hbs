@@ -35,11 +35,13 @@
         font-weight: 500;
         color: #999999;
     }
-    .activeRed{
+
+    .activeRed {
         background-color: var(--color-red) !important;
         border-color: var(--color-red) !important;
     }
-    .notActiveRed{
+
+    .notActiveRed {
         color: var(--color-red) !important;
     }
 </style>
@@ -74,7 +76,7 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Name</th>
                                                                 <th scope="col">Email</th>
-                                                                <th scope="col">Date of Birth</th>
+                                                                <th scope="col">Assigned Categories</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -89,7 +91,13 @@
                                                                     {{Email}}
                                                                 </td>
                                                                 <td>
-                                                                    {{formatDate Dob}}
+                                                                    {{#if Categories.length}}
+                                                                    {{#each Categories}}
+                                                                    <span class="badge bg-info">{{this}}</span>{{#unless @last}} {{/unless}}
+                                                                    {{/each}}
+                                                                    {{else}}
+                                                                    No categories assigned
+                                                                    {{/if}}
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <a class="btn btn-sm btn-outline-primary"

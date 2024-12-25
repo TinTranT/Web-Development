@@ -21,6 +21,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const deleteButton = document.querySelector('#deleteButton');
         const saveButton = document.querySelector('#saveButton');
+        const approveButton = document.querySelector('#approveButton');
         deleteButton.addEventListener('click', async function (e) {
             e.preventDefault();
             Swal.fire({
@@ -38,25 +39,42 @@
                 }
             });
         });
-    
+
         saveButton.addEventListener('click', async function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: "Do you want to continue?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes",
-                    cancelButtonText: "No",
-                    reverseButtons: false,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const frmEdit = document.querySelector('#frmEdit');
-                        frmEdit.action = '/admin/readers/edit';
-                        frmEdit.submit();
-                    }
-                });
+            e.preventDefault();
+            Swal.fire({
+                title: "Do you want to continue?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const frmEdit = document.querySelector('#frmEdit');
+                    frmEdit.action = '/admin/readers/edit';
+                    frmEdit.submit();
+                }
             });
-    
+        });
+        approveButton.addEventListener('click', async function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Do you want to approve subscription?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const frmEdit = document.querySelector('#frmEdit');
+                    frmEdit.action = '/admin/readers/approve';
+                    frmEdit.submit();
+                }
+            });
+        });
+
     });
 </script>
 <script>
@@ -169,28 +187,24 @@
                                         </select>
                                     </td>
                                 </tr>
-                                {{#if this.reader.SubcribeExpireDate}}
-                                <tr>
-                                    <td class="col-4">
-                                        <label for="txtExtendExpiredDays" class="form-label">Extend expired date</label>
-                                    </td>
-                                    <td class="col-8">
-                                        <select class="form-select" id="extendExpiredDays" name="txtExtendExpiredDays">
-                                            <option selected value="0">No Extension</option>
-                                            <option value="30">1 months</option>
-                                            <option value="90">3 months</option>
-                                            <option value="180">6 months</option>
-                                            <option value="365">12 months</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                {{/if}}
                             </tbody>
                         </table>
                     </div>
 
                     <div class="row">
                         <div class="d-flex justify-content-end">
+                            {{#if (isEqual this.reader.SubcribeFlag 1)}}
+                            <button type="submit" class="btn btn-success me-2" id="approveButton"
+                                formaction="/admin/readers/approve">
+                                <i class="bi bi-check-circle"></i>
+                                Approve Subscription
+                            </button>
+                            {{else}}
+                            <button type="submit" class="btn btn-secondary me-2" id="approveButton" disabled>
+                                <i class="bi bi-stopwatch"></i>
+                                No requests for additional subscription extensions are needed.
+                            </button>
+                            {{/if}}
                             <button type="submit" class="btn btn-primary me-2" id="saveButton">
                                 <i class="bi bi-floppy"></i>
                                 Save

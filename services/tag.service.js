@@ -33,6 +33,9 @@ export default {
     del(id) {
         return db('tag').where('TagID', id).del();
     },
+    findByTagName(tagName) {
+        return db('tag').where('TagName', tagName).first();
+    },
 
 
 }

@@ -22,22 +22,21 @@
     document.addEventListener('DOMContentLoaded', function () {
         const frmEdit = document.getElementById('frmEdit');
         const deleteButton = document.querySelector('button[formaction="/admin/categories/del"]');
-        const saveButton = document.querySelector('button[formaction="/admin/categories/patch"]');
+        const saveButton = document.querySelector('#saveButton');
 
         deleteButton.addEventListener('click', async function (e) {
             e.preventDefault();
             const catId = document.getElementById('categoryId').value;
 
             try {
-                const response = await fetch(`/admin/categories/is-using?catid=${catId}`);
-                const data = await response.json();
-                console.log(data);
+                const response2 = await fetch(`/admin/categories/is-using?catid=${catId}`);
+                const data2 = await response2.json();
 
-                if (!data) {
+                if (!data2) {
                     Swal.fire("ERROR", "This category is being used", "error");
                 } else {
                     Swal.fire({
-                        title: "Do you really want to continue?",
+                        title: "Do you want to permanently delete this category?",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonText: "Yes",
@@ -56,9 +55,19 @@
             }
         });
 
-        saveButton.addEventListener('click', function (e) {
+        saveButton.addEventListener('click', async function (e) {
             e.preventDefault();
-            Swal.fire({
+            const catName = document.getElementById('categoryName').value;
+            const CatParentID = document.getElementById('categoryParent').value;
+
+            try {
+                const response1 = await fetch(`/admin/categories/is-available?catName=${catName}&CatParentId=${CatParentID}`);
+                const data1 = await response1.json();
+
+                if (!data1) {
+                    Swal.fire("ERROR", "This category already exists", "error");
+                } else {
+                    Swal.fire({
                         title: "Do you really want to continue?",
                         icon: "warning",
                         showCancelButton: true,
@@ -71,6 +80,11 @@
                             frmEdit.submit();
                         }
                     });
+                }
+            } catch (error) {
+                Swal.fire("ERROR", error, "error");
+                console.error(error);
+            }
         });
 
         frmEdit.addEventListener('submit', async function (e) {
@@ -145,11 +159,11 @@
                     </div>
                     <div class="row">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/categories/patch">
+                            <button type="submit" class="btn btn-primary me-2" formaction="/admin/categories/patch" id="saveButton">
                                 <i class="bi bi-floppy"></i>
                                 Save
                             </button>
-                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/categories/del">
+                            <button type="submit" class="btn btn-danger me-2" formaction="/admin/categories/del" >
                                 <i class="bi bi-trash"></i>
                                 Delete
                             </button>
