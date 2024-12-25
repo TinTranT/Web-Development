@@ -17,13 +17,11 @@ router.get('/register', function (req, res) {
 
 router.post('/register', async function (req, res) {
     const hash_password = bcrypt.hashSync(req.body.raw_password, 8);
-    const ymd_dob = moment(req.body.raw_dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const entity = {
         Email: req.body.email,
         Password: hash_password,
         Name: req.body.name,
         PenName: req.body.pen_name,
-        Dob: ymd_dob,
         Role: 1
     }
     const ret = await accountService.add(entity);
