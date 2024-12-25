@@ -84,6 +84,12 @@
     createButton.addEventListener('click', async function (e) {
 
       e.preventDefault();
+      // Kiểm tra form có hợp lệ không
+      if (!frmCreate.checkValidity()) {
+        // Nếu không hợp lệ, hiển thị cảnh báo mặc định của trình duyệt
+        frmCreate.reportValidity();
+        return;
+      }
       try {
         Swal.fire({
           title: "Do you really want to continue?",
@@ -164,7 +170,7 @@
 
           <div class="form-group mb-3">
             <label for="fulMain" class="mb-2">Thumnail</label>
-            <input type="file" name="fulMain" id="fulMain" multiple>
+            <input type="file" name="fulMain" id="fulMain" multiple required>
           </div>
           <textarea id="summernote" name="content" class="h-100" required></textarea>
         </div>

@@ -118,6 +118,11 @@
         updateButton.addEventListener('click', async function (e) {
           
             e.preventDefault();
+            if (!frmEdit.checkValidity()) {
+            // Nếu không hợp lệ, hiển thị cảnh báo mặc định của trình duyệt
+            frmEdit.reportValidity();
+            return;
+          }
             try {
                     Swal.fire({
                         title: "Do you really want to continue?",
@@ -186,7 +191,7 @@
           </div> --}}
           <div class="form-group mt-3 mb-3">
             <label for="premium" class="mb-2">Premium</label>
-            <select name="premium" id="premium" class="form-select">
+            <select name="premium" id="premium" class="form-select" required>
               <option value="1"{{#if (isEqual this.article.PremiumFlag 1)}}selected{{/if}}>Yes</option>
               <option value="0" {{#if (isEqual this.article.PremiumFlag 0)}}selected{{/if}}>No</option>
             </select>
@@ -194,7 +199,7 @@
 
           <div class="form-group mb-3">
             <label for="fulMain" class="mb-2">Thumnail</label>
-            <input type="file" name="fulMain" id="fulMain" multiple>
+            <input type="file" name="fulMain" id="fulMain" multiple required>
           </div>
           <textarea id="summernote" name="content" class="h-100" required>{{{this.article.Content}}}</textarea>
         </div>
