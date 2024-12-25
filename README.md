@@ -82,6 +82,10 @@ npm run start
 
 # 5. Additional information
 
+`https://web-development-test-uzd8.onrender.com/`
+
 In this project, we use `render.com` for hosting web app and `aiven.io` for MySQL database.
+
+Because the website is hosted by `render`, after a certain period of time, the server will automatically close, so when visiting the website, please wait a moment for the server to restart.
 
 However, database in `aiven` works at However, aiven's database operates in the French time zone and is 7 hours behind Vietnam time. Therefore, some time-related functions will be affected, such as loading the most recent news, news publication time, etc.
